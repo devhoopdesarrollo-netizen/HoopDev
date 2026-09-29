@@ -1,0 +1,16 @@
+# Credenciales y variables de entorno privadas
+.env
+src/credenciales/credenciales.env
+
+# Dependencias
+node_modules/
+
+# Archivos de compilación generados
+dist/
+
+# Logs del sistema
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.DS_Store
+Thumbs.db
