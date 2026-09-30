@@ -93,398 +93,470 @@
 
         <!-- Contenido Principal (Grid de Publicaciones) -->
         <main class="md:col-span-3 space-y-6">
-           <section class="space-y-6">
-    <!-- Título de la sección con Botón para Abrir el Modal -->
-    <div class="flex justify-between items-center">
-        <h1 class="text-xl sm:text-2xl font-bold text-gray-800">Publicaciones Recientes</h1>
-        <button type="button" onclick="toggleModal(true)" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium text-xs sm:text-sm rounded-lg transition-colors flex items-center space-x-2 shadow-sm cursor-pointer">
-            <i class="ph ph-plus-circle text-base"></i>
-            <span>Nueva Publicación</span>
-        </button>
-    </div>
-
-    <!-- MODAL DE NUEVA PUBLICACIÓN (Estilo Post) -->
-    <div id="postModal" class="fixed inset-0 z-50 flex items-center justify-center bg-gray-900/50 backdrop-blur-xs p-4 hidden">
-        <div class="bg-white rounded-2xl shadow-xl border border-gray-200 w-full max-w-lg overflow-hidden transform transition-all animate-in fade-in zoom-in-95 duration-200">
-            
-            <!-- Cabecera del Modal -->
-            <div class="flex justify-between items-center px-6 py-4 border-b border-gray-100">
-                <h3 class="text-base font-bold text-gray-800">Crear Publicación</h3>
-                <button type="button" onclick="toggleModal(false)" class="h-8 w-8 rounded-lg bg-gray-50 hover:bg-gray-100 text-gray-500 flex items-center justify-center transition-colors cursor-pointer">
-                    <i class="ph ph-x text-lg"></i>
-                </button>
-            </div>
-
-            <!-- Cuerpo del Formulario / Post -->
-            <form id="formNewPost" class="p-6 space-y-4">
-                <!-- Perfil del usuario -->
-                <div class="flex items-center space-x-3">
-                    <div class="h-10 w-10 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center shrink-0 border border-blue-100 font-semibold text-xs">
-                        U1
-                    </div>
-                    <div>
-                        <h4 class="text-sm font-semibold text-gray-800 nameUser">Usuario 1</h4>
-                        <span class="text-xs text-gray-400">Público para la comunidad</span>
-                    </div>
-                </div>
-
-                <!-- Caja de Adjuntos (Imagen / Archivo) - AHORA EN GRANDE -->
-                <div>
-                    <label id="imagenDefault" class="flex flex-col items-center justify-center p-6 bg-gray-50/80 hover:bg-gray-50 border-2 border-dashed border-gray-300 hover:border-blue-500 rounded-xl transition-all cursor-pointer group">
-                        <div class="h-12 w-12 rounded-full bg-blue-50 group-hover:bg-blue-100 text-blue-600 flex items-center justify-center mb-2 transition-colors">
-                            <i class="ph ph-cloud-arrow-up text-2xl"></i>
-                        </div>
-                        <span class="text-xs font-semibold text-gray-700 group-hover:text-blue-600 transition-colors">Sube una imagen o archivo</span>
-                        <span class="text-[11px] text-gray-400 mt-0.5">PNG, JPG, PDF o DOCX (Máx. ver config)</span>
-                        
-                        <!-- Inputs ocultos para archivos -->
-                        <div class="flex items-center space-x-3 mt-3">
-                            <span class="inline-flex items-center text-xs text-gray-500 bg-white px-2.5 py-1 rounded-md border border-gray-200 shadow-2xs">
-                                <i class="ph ph-image mr-1 text-blue-500"></i> Imagen
-                            </span>
-                            <span class="inline-flex items-center text-xs text-gray-500 bg-white px-2.5 py-1 rounded-md border border-gray-200 shadow-2xs">
-                                <i class="ph ph-paperclip mr-1 text-green-500"></i> Documento
-                            </span>
-                        </div>
-                        
-                        <input type="file" class="hidden" accept="image/*,.pdf,.doc,.docx">
-                    </label>
-                </div>
-
-                <!-- Textarea para el contenido - AHORA EN PEQUEÑO -->
-                <div>
-                    <textarea rows="2" placeholder="Escribe un título o descripción breve..." class="w-full p-2.5 text-sm bg-gray-50/50 border border-gray-200 rounded-xl focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors resize-none"></textarea>
-                </div>
-
-                <!-- Botones de Acción inferior -->
-                <div class="flex justify-end space-x-2 pt-2 border-t border-gray-100">
-                    <button type="button" onclick="toggleModal(false)" class="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium text-xs rounded-lg transition-colors cursor-pointer">
-                        Cancelar
-                    </button>
-                    <button type="submit" class="px-5 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium text-xs rounded-lg transition-colors shadow-sm cursor-pointer">
-                        Publicar
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
-    <!-- CSS Grid Responsivo para las Publicaciones -->
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-
-        <!-- Tarjeta de Publicación 1 -->
-        <div class="bg-white rounded-xl shadow-md border border-gray-200 p-5 sm:p-6 flex flex-col justify-between space-y-4">
-            <div class="space-y-4">
-                <div class="flex items-center space-x-3">
-                    <div class="h-10 w-10 rounded-full bg-gray-200 overflow-hidden border border-gray-300 flex items-center justify-center shrink-0">
-                        <span class="text-xs text-gray-500 font-semibold">U1</span>
-                    </div>
-                    <div>
-                        <h3 class="text-sm font-semibold text-gray-800">Usuario 1</h3>
-                        <p class="text-xs text-gray-500">Hace 2 horas</p>
-                    </div>
-                </div>
-                <p class="text-sm text-gray-700">
-                    Publicación adaptada con iconos de Phosphor (Corazón y Chat) y un diseño totalmente responsivo.
-                </p>
-                <div class="rounded-lg overflow-hidden border border-gray-200 bg-gray-100 h-48 flex items-center justify-center">
-                    <span class="text-sm text-gray-400">Imagen de publicación 1</span>
-                </div>
-            </div>
-
-            <div class="border-t border-gray-100 pt-4 space-y-3">
-                <div class="flex justify-between text-xs text-gray-500 px-1">
-                    <span>14 Me gusta</span>
-                    <span>3 comentarios</span>
-                </div>
-                <div class="grid grid-cols-2 gap-2 border-y border-gray-100 py-1.5">
-                    <button class="w-full py-1.5 bg-gray-50 hover:bg-gray-100 text-gray-700 font-medium text-xs rounded-lg transition-colors flex items-center justify-center space-x-1.5 cursor-pointer">
-                        <i class="ph ph-heart text-base text-red-500"></i>
-                        <span>Me gusta</span>
-                    </button>
-                    <button class="w-full py-1.5 bg-gray-50 hover:bg-gray-100 text-gray-700 font-medium text-xs rounded-lg transition-colors flex items-center justify-center space-x-1.5 cursor-pointer">
-                        <i class="ph ph-chat-teardrop-text text-base text-blue-500"></i>
-                        <span>Comentar</span>
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Tarjeta de Publicación 2 -->
-        <div class="bg-white rounded-xl shadow-md border border-gray-200 p-5 sm:p-6 flex flex-col justify-between space-y-4">
-            <div class="space-y-4">
-                <div class="flex items-center space-x-3">
-                    <div class="h-10 w-10 rounded-full bg-gray-200 overflow-hidden border border-gray-300 flex items-center justify-center shrink-0">
-                        <span class="text-xs text-gray-500 font-semibold">U2</span>
-                    </div>
-                    <div>
-                        <h3 class="text-sm font-semibold text-gray-800">Usuario 2</h3>
-                        <p class="text-xs text-gray-500">Hace 4 horas</p>
-                    </div>
-                </div>
-                <p class="text-sm text-gray-700">
-                    Segundo cuadro demostrando la consistencia visual y la adaptación del grid en dispositivos móviles y de escritorio.
-                </p>
-                <div class="rounded-lg overflow-hidden border border-gray-200 bg-gray-100 h-48 flex items-center justify-center">
-                    <span class="text-sm text-gray-400">Imagen de publicación 2</span>
-                </div>
-            </div>
-
-            <div class="border-t border-gray-100 pt-4 space-y-3">
-                <div class="flex justify-between text-xs text-gray-500 px-1">
-                    <span>8 Me gusta</span>
-                    <span>1 comentario</span>
-                </div>
-                <div class="grid grid-cols-2 gap-2 border-y border-gray-100 py-1.5">
-                    <button class="w-full py-1.5 bg-gray-50 hover:bg-gray-100 text-gray-700 font-medium text-xs rounded-lg transition-colors flex items-center justify-center space-x-1.5 cursor-pointer">
-                        <i class="ph ph-heart text-base text-red-500"></i>
-                        <span>Me gusta</span>
-                    </button>
-                    <button class="w-full py-1.5 bg-gray-50 hover:bg-gray-100 text-gray-700 font-medium text-xs rounded-lg transition-colors flex items-center justify-center space-x-1.5 cursor-pointer">
-                        <i class="ph ph-chat-teardrop-text text-base text-blue-500"></i>
-                        <span>Comentar</span>
-                    </button>
-                </div>
-            </div>
-        </div>
-
-    </div>
-</section>
-
-<!-- Script simple para abrir y cerrar el modal -->
-<script>
-    function toggleModal(show) {
-        const modal = document.getElementById('postModal');
-        if (show) {
-            modal.classList.remove('hidden');
-        } else {
-            modal.classList.add('hidden');
-        }
-    }
-</script>
             <section class="space-y-6">
-    <!-- Título de la sección -->
-    <div class="flex justify-between items-center">
-        <h1 class="text-xl sm:text-2xl font-bold text-gray-800">Horarios</h1>
-    </div>
-
-    <!-- Contenedor / Tarjeta de Horarios -->
-    <div class="bg-white rounded-xl shadow-md border border-gray-200 p-6 space-y-6">
-        <div>
-            <span class="text-xs font-semibold text-green-600 bg-green-50 px-2.5 py-1 rounded-full uppercase tracking-wider">Disponibilidad</span>
-            <h2 class="text-lg font-semibold text-gray-800 mt-2">Horarios de Atención y Servicios</h2>
-            <p class="text-sm text-gray-500 mt-1">Consulta los horarios de apertura y disponibilidad de las diferentes áreas de la plataforma.</p>
-        </div>
-
-        <!-- Tabla o Lista de Horarios -->
-        <div class="overflow-x-auto">
-            <table class="w-full text-left border-collapse">
-                <thead>
-                    <tr class="border-b border-gray-200 text-xs font-semibold text-gray-500 uppercase tracking-wider">
-                        <th class="py-3 px-4">Día / Jornada</th>
-                        <th class="py-3 px-4">Área de Soporte</th>
-                        <th class="py-3 px-4">Estado</th>
-                    </tr>
-                </thead>
-                <tbody class="divide-y divide-gray-100 text-sm text-gray-700">
-                    <tr class="hover:bg-gray-50 transition-colors">
-                        <td class="py-3.5 px-4 font-medium text-gray-800">Lunes a Viernes</td>
-                        <td class="py-3.5 px-4 text-gray-600">08:00 AM - 06:00 PM</td>
-                        <td class="py-3.5 px-4">
-                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                                Abierto
-                            </span>
-                        </td>
-                    </tr>
-                    <tr class="hover:bg-gray-50 transition-colors">
-                        <td class="py-3.5 px-4 font-medium text-gray-800">Sábados</td>
-                        <td class="py-3.5 px-4 text-gray-600">09:00 AM - 02:00 PM</td>
-                        <td class="py-3.5 px-4">
-                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                                Abierto
-                            </span>
-                        </td>
-                    </tr>
-                    <tr class="hover:bg-gray-50 transition-colors">
-                        <td class="py-3.5 px-4 font-medium text-gray-800">Domingos y Festivos</td>
-                        <td class="py-3.5 px-4 text-gray-600">Cerrado</td>
-                        <td class="py-3.5 px-4">
-                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-600">
-                                No disponible
-                            </span>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-</section>
-<section class="space-y-6">
-    <!-- Título de la sección -->
-    <div class="flex justify-between items-center">
-        <h1 class="text-xl sm:text-2xl font-bold text-gray-800">Recursos</h1>
-    </div>
-
-    <!-- Contenedor / Tarjeta de Recursos -->
-    <div class="bg-white rounded-xl shadow-md border border-gray-200 p-6 space-y-6">
-        <div>
-            <span class="text-xs font-semibold text-blue-600 bg-blue-50 px-2.5 py-1 rounded-full uppercase tracking-wider">Biblioteca digital</span>
-            <h2 class="text-lg font-semibold text-gray-800 mt-2">Material de Estudio y Guías</h2>
-            <p class="text-sm text-gray-500 mt-1">Explora nuestra colección de libros, documentos y guías recomendadas para tu aprendizaje.</p>
-        </div>
-
-        <!-- Grid de Recursos (Libros / Archivos) -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            
-            <!-- Recurso 1: Libro -->
-            <div class="border border-gray-200 rounded-lg p-4 flex flex-col justify-between space-y-4 hover:border-gray-300 transition-colors">
-                <div class="space-y-2">
-                    <div class="h-10 w-10 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center">
-                        <i class="ph ph-book-open text-xl"></i>
-                    </div>
-                    <h3 class="text-sm font-semibold text-gray-800">Guía Definitiva de Tailwind CSS</h3>
-                    <p class="text-xs text-gray-500 line-clamp-2">Aprende a diseñar interfaces profesionales y modernas paso a paso desde cero.</p>
+                <!-- Título de la sección con Botón para Abrir el Modal -->
+                <div class="flex justify-between items-center">
+                    <h1 class="text-xl sm:text-2xl font-bold text-gray-800">Publicaciones Recientes</h1>
+                    <button type="button" onclick="toggleModal(true)"
+                        class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium text-xs sm:text-sm rounded-lg transition-colors flex items-center space-x-2 shadow-sm cursor-pointer">
+                        <i class="ph ph-plus-circle text-base"></i>
+                        <span>Nueva Publicación</span>
+                    </button>
                 </div>
-                <button class="w-full py-1.5 bg-gray-50 hover:bg-gray-100 text-gray-700 font-medium text-xs rounded-lg transition-colors flex items-center justify-center space-x-1.5 border border-gray-200">
-                    <i class="ph ph-download-simple text-sm"></i>
-                    <span>Descargar PDF</span>
-                </button>
-            </div>
 
-            <!-- Recurso 2: Documento -->
-            <div class="border border-gray-200 rounded-lg p-4 flex flex-col justify-between space-y-4 hover:border-gray-300 transition-colors">
-                <div class="space-y-2">
-                    <div class="h-10 w-10 rounded-lg bg-green-50 text-green-600 flex items-center justify-center">
-                        <i class="ph ph-file-text text-xl"></i>
+                <!-- MODAL DE NUEVA PUBLICACIÓN (Estilo Post) -->
+                <div id="postModal"
+                    class="fixed inset-0 z-50 flex items-center justify-center bg-gray-900/50 backdrop-blur-xs p-4 hidden">
+                    <div
+                        class="bg-white rounded-2xl shadow-xl border border-gray-200 w-full max-w-lg overflow-hidden transform transition-all animate-in fade-in zoom-in-95 duration-200">
+
+                        <!-- Cabecera del Modal -->
+                        <div class="flex justify-between items-center px-6 py-4 border-b border-gray-100">
+                            <h3 class="text-base font-bold text-gray-800">Crear Publicación</h3>
+                            <button type="button" onclick="toggleModal(false)"
+                                class="h-8 w-8 rounded-lg bg-gray-50 hover:bg-gray-100 text-gray-500 flex items-center justify-center transition-colors cursor-pointer">
+                                <i class="ph ph-x text-lg"></i>
+                            </button>
+                        </div>
+
+                        <!-- Cuerpo del Formulario / Post -->
+                        <form id="formNewPost" class="p-6 space-y-4">
+                            <!-- Perfil del usuario -->
+                            <div class="flex items-center space-x-3">
+                                <div
+                                    class="h-10 w-10 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center shrink-0 border border-blue-100 font-semibold text-xs">
+                                    U1
+                                </div>
+                                <div>
+                                    <h4 class="text-sm font-semibold text-gray-800 nameUser">Usuario 1</h4>
+                                    <span class="text-xs text-gray-400">Público para la comunidad</span>
+                                </div>
+                            </div>
+
+                            <!-- Caja de Adjuntos (Imagen / Archivo) - AHORA EN GRANDE -->
+                            <div>
+                                <!-- Dropzone para seleccionar archivo -->
+                                <label id="inputImagen"
+                                    class="flex flex-col items-center justify-center p-6 bg-gray-50/80 hover:bg-gray-50 border-2 border-dashed border-gray-300 hover:border-blue-500 rounded-xl transition-all cursor-pointer group">
+                                    <div
+                                        class="h-12 w-12 rounded-full bg-blue-50 group-hover:bg-blue-100 text-blue-600 flex items-center justify-center mb-2 transition-colors">
+                                        <i class="ph ph-cloud-arrow-up text-2xl"></i>
+                                    </div>
+                                    <span
+                                        class="text-xs font-semibold text-gray-700 group-hover:text-blue-600 transition-colors">Sube
+                                        una imagen o archivo</span>
+                                    <span class="text-[11px] text-gray-400 mt-0.5">PNG, JPG, PDF o DOCX (Máx. ver
+                                        config)</span>
+
+                                    <div class="flex items-center space-x-3 mt-3">
+                                        <span
+                                            class="inline-flex items-center text-xs text-gray-500 bg-white px-2.5 py-1 rounded-md border border-gray-200 shadow-2xs">
+                                            <i class="ph ph-image mr-1 text-blue-500"></i> Imagen
+                                        </span>
+                                        <span
+                                            class="inline-flex items-center text-xs text-gray-500 bg-white px-2.5 py-1 rounded-md border border-gray-200 shadow-2xs">
+                                            <i class="ph ph-paperclip mr-1 text-green-500"></i> Documento
+                                        </span>
+                                    </div>
+
+                                    <input type="file" id="fileInput" name="postImagen" class="hidden"
+                                        accept="image/*,.pdf,.doc,.docx">
+                                </label>
+
+                                <!-- Contenedor destino para inyectar la foto con JS -->
+                                <div id="imagenDefault" class="relative w-full hidden"></div>
+                            </div>
+
+                            <!-- Textarea para el contenido - AHORA EN PEQUEÑO -->
+                            <div>
+                                <textarea rows="2" placeholder="Escribe un título o descripción breve..." name="contenido"
+                                    class="w-full p-2.5 text-sm bg-gray-50/50 border border-gray-200 rounded-xl focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors resize-none"></textarea>
+                            </div>
+
+                            <!-- Botones de Acción inferior -->
+                            <div class="flex justify-end space-x-2 pt-2 border-t border-gray-100">
+                                <button type="button" onclick="toggleModal(false)"
+                                    class="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium text-xs rounded-lg transition-colors cursor-pointer">
+                                    Cancelar
+                                </button>
+                                <button type="submit"
+                                    class="px-5 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium text-xs rounded-lg transition-colors shadow-sm cursor-pointer">
+                                    Publicar
+                                </button>
+                            </div>
+                        </form>
                     </div>
-                    <h3 class="text-sm font-semibold text-gray-800">Manual de Buenas Prácticas Frontend</h3>
-                    <p class="text-xs text-gray-500 line-clamp-2">Estándares de código, arquitectura de componentes y tokens de diseño.</p>
                 </div>
-                <button class="w-full py-1.5 bg-gray-50 hover:bg-gray-100 text-gray-700 font-medium text-xs rounded-lg transition-colors flex items-center justify-center space-x-1.5 border border-gray-200">
-                    <i class="ph ph-download-simple text-sm"></i>
-                    <span>Descargar PDF</span>
-                </button>
-            </div>
+                <!-- CSS Grid Responsivo para las Publicaciones -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
 
-            <!-- Recurso 3: Enlace / Libro -->
-            <div class="border border-gray-200 rounded-lg p-4 flex flex-col justify-between space-y-4 hover:border-gray-300 transition-colors">
-                <div class="space-y-2">
-                    <div class="h-10 w-10 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center">
-                        <i class="ph ph-books text-xl"></i>
+                    <!-- Tarjeta de Publicación 1 -->
+                    <div
+                        class="bg-white rounded-xl shadow-md border border-gray-200 p-5 sm:p-6 flex flex-col justify-between space-y-4">
+                        <div class="space-y-4">
+                            <div class="flex items-center space-x-3">
+                                <div
+                                    class="h-10 w-10 rounded-full bg-gray-200 overflow-hidden border border-gray-300 flex items-center justify-center shrink-0">
+                                    <span class="text-xs text-gray-500 font-semibold">U1</span>
+                                </div>
+                                <div>
+                                    <h3 class="text-sm font-semibold text-gray-800">Usuario 1</h3>
+                                    <p class="text-xs text-gray-500">Hace 2 horas</p>
+                                </div>
+                            </div>
+                            <p class="text-sm text-gray-700">
+                                Publicación adaptada con iconos de Phosphor (Corazón y Chat) y un diseño totalmente
+                                responsivo.
+                            </p>
+                            <div
+                                class="rounded-lg overflow-hidden border border-gray-200 bg-gray-100 h-48 flex items-center justify-center">
+                                <span class="text-sm text-gray-400">Imagen de publicación 1</span>
+                            </div>
+                        </div>
+
+                        <div class="border-t border-gray-100 pt-4 space-y-3">
+                            <div class="flex justify-between text-xs text-gray-500 px-1">
+                                <span>14 Me gusta</span>
+                                <span>3 comentarios</span>
+                            </div>
+                            <div class="grid grid-cols-2 gap-2 border-y border-gray-100 py-1.5">
+                                <button
+                                    class="w-full py-1.5 bg-gray-50 hover:bg-gray-100 text-gray-700 font-medium text-xs rounded-lg transition-colors flex items-center justify-center space-x-1.5 cursor-pointer">
+                                    <i class="ph ph-heart text-base text-red-500"></i>
+                                    <span>Me gusta</span>
+                                </button>
+                                <button
+                                    class="w-full py-1.5 bg-gray-50 hover:bg-gray-100 text-gray-700 font-medium text-xs rounded-lg transition-colors flex items-center justify-center space-x-1.5 cursor-pointer">
+                                    <i class="ph ph-chat-teardrop-text text-base text-blue-500"></i>
+                                    <span>Comentar</span>
+                                </button>
+                            </div>
+                        </div>
                     </div>
-                    <h3 class="text-sm font-semibold text-gray-800">Patrones de Diseño UI/UX</h3>
-                    <p class="text-xs text-gray-500 line-clamp-2">Catálogo de referencias visuales para la creación de paneles de administración.</p>
+
+                    <!-- Tarjeta de Publicación 2 -->
+                    <div
+                        class="bg-white rounded-xl shadow-md border border-gray-200 p-5 sm:p-6 flex flex-col justify-between space-y-4">
+                        <div class="space-y-4">
+                            <div class="flex items-center space-x-3">
+                                <div
+                                    class="h-10 w-10 rounded-full bg-gray-200 overflow-hidden border border-gray-300 flex items-center justify-center shrink-0">
+                                    <span class="text-xs text-gray-500 font-semibold">U2</span>
+                                </div>
+                                <div>
+                                    <h3 class="text-sm font-semibold text-gray-800">Usuario 2</h3>
+                                    <p class="text-xs text-gray-500">Hace 4 horas</p>
+                                </div>
+                            </div>
+                            <p class="text-sm text-gray-700">
+                                Segundo cuadro demostrando la consistencia visual y la adaptación del grid en
+                                dispositivos móviles y de escritorio.
+                            </p>
+                            <div
+                                class="rounded-lg overflow-hidden border border-gray-200 bg-gray-100 h-48 flex items-center justify-center">
+                                <span class="text-sm text-gray-400">Imagen de publicación 2</span>
+                            </div>
+                        </div>
+
+                        <div class="border-t border-gray-100 pt-4 space-y-3">
+                            <div class="flex justify-between text-xs text-gray-500 px-1">
+                                <span>8 Me gusta</span>
+                                <span>1 comentario</span>
+                            </div>
+                            <div class="grid grid-cols-2 gap-2 border-y border-gray-100 py-1.5">
+                                <button
+                                    class="w-full py-1.5 bg-gray-50 hover:bg-gray-100 text-gray-700 font-medium text-xs rounded-lg transition-colors flex items-center justify-center space-x-1.5 cursor-pointer">
+                                    <i class="ph ph-heart text-base text-red-500"></i>
+                                    <span>Me gusta</span>
+                                </button>
+                                <button
+                                    class="w-full py-1.5 bg-gray-50 hover:bg-gray-100 text-gray-700 font-medium text-xs rounded-lg transition-colors flex items-center justify-center space-x-1.5 cursor-pointer">
+                                    <i class="ph ph-chat-teardrop-text text-base text-blue-500"></i>
+                                    <span>Comentar</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
-                <button class="w-full py-1.5 bg-gray-50 hover:bg-gray-100 text-gray-700 font-medium text-xs rounded-lg transition-colors flex items-center justify-center space-x-1.5 border border-gray-200">
-                    <i class="ph ph-download-simple text-sm"></i>
-                    <span>Descargar PDF</span>
-                </button>
-            </div>
-            <div class="border-2 border-dashed border-gray-300 rounded-lg p-4 flex flex-col justify-between space-y-4 hover:border-blue-500 hover:bg-blue-50/20 transition-all group">
-    <div class="space-y-2 text-center flex flex-col items-center">
-        <div class="h-10 w-10 rounded-lg bg-gray-100 group-hover:bg-blue-50 text-gray-500 group-hover:text-blue-600 flex items-center justify-center transition-colors">
-            <i class="ph ph-plus text-xl"></i>
-        </div>
-        <h3 class="text-sm font-semibold text-gray-700 group-hover:text-blue-600 transition-colors">Agregar nuevo archivo</h3>
-        <p class="text-xs text-gray-400 line-clamp-2">Sube un nuevo PDF o documento al sistema</p>
-    </div>
-    
-    <div class="flex items-center space-x-2 w-full">
-        <label class="flex-1 py-1.5 bg-white hover:bg-gray-50 text-gray-700 font-medium text-xs rounded-lg transition-colors flex items-center justify-center space-x-1.5 border border-gray-200 shadow-sm cursor-pointer truncate px-2">
-            <i class="ph ph-upload-simple text-sm shrink-0"></i>
-            <span class="truncate">Seleccionar</span>
-            <input type="file" class="hidden" accept=".pdf,.doc,.docx">
-        </label>
-        <button type="button" class="py-1.5 px-3 bg-blue-600 hover:bg-blue-700 text-white font-medium text-xs rounded-lg transition-colors flex items-center justify-center space-x-1 shadow-sm shrink-0">
-            <i class="ph ph-cloud-arrow-up text-sm"></i>
-            <span>Subir</span>
-        </button>
-    </div>
-</div>
+            </section>
 
-        </div>
-    </div>
-</section>
-<section class="space-y-6">
-    <!-- Título de la sección -->
-    <div class="flex justify-between items-center">
-        <h1 class="text-xl sm:text-2xl font-bold text-gray-800">Administración de Usuarios</h1>
-    </div>
+            <!-- Script simple para abrir y cerrar el modal -->
+            <script>
+                function toggleModal(show) {
+                    const modal = document.getElementById('postModal');
+                    if (show) {
+                        modal.classList.remove('hidden');
+                    } else {
+                        modal.classList.add('hidden');
+                        const form = document.getElementById('formNewPost');
+                        if (form) form.reset();
+                    }
+                }
+            </script>
+            <section class="space-y-6">
+                <!-- Título de la sección -->
+                <div class="flex justify-between items-center">
+                    <h1 class="text-xl sm:text-2xl font-bold text-gray-800">Horarios</h1>
+                </div>
 
-    <!-- Contenedor / Tarjeta del Formulario -->
-    <div class="bg-white rounded-xl shadow-md border border-gray-200 p-6 space-y-6">
-        <div>
-            <span class="text-xs font-semibold text-blue-600 bg-blue-50 px-2.5 py-1 rounded-full uppercase tracking-wider">Panel de control</span>
-            <h2 class="text-lg font-semibold text-gray-800 mt-2">Actualizar Datos de Usuario</h2>
-            <p class="text-sm text-gray-500 mt-1">Modifica los detalles del usuario, su rol, programa y estatus en el sistema.</p>
-        </div>
+                <!-- Contenedor / Tarjeta de Horarios -->
+                <div class="bg-white rounded-xl shadow-md border border-gray-200 p-6 space-y-6">
+                    <div>
+                        <span
+                            class="text-xs font-semibold text-green-600 bg-green-50 px-2.5 py-1 rounded-full uppercase tracking-wider">Disponibilidad</span>
+                        <h2 class="text-lg font-semibold text-gray-800 mt-2">Horarios de Atención y Servicios</h2>
+                        <p class="text-sm text-gray-500 mt-1">Consulta los horarios de apertura y disponibilidad de las
+                            diferentes áreas de la plataforma.</p>
+                    </div>
 
-        <!-- Formulario con Tailwind CSS -->
-        <form class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            
-            <!-- Nombre user -->
-            <div class="space-y-1.5">
-                <label for="nombre" class="block text-xs font-semibold text-gray-700 uppercase tracking-wider">Nombre user</label>
-                <input type="text" id="nombre" name="nombre" placeholder="Ej. Ana Pérez" required
-                    class="w-full px-3.5 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors bg-gray-50/50">
-            </div>
+                    <!-- Tabla o Lista de Horarios -->
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr
+                                    class="border-b border-gray-200 text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                                    <th class="py-3 px-4">Día / Jornada</th>
+                                    <th class="py-3 px-4">Área de Soporte</th>
+                                    <th class="py-3 px-4">Estado</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-100 text-sm text-gray-700">
+                                <tr class="hover:bg-gray-50 transition-colors">
+                                    <td class="py-3.5 px-4 font-medium text-gray-800">Lunes a Viernes</td>
+                                    <td class="py-3.5 px-4 text-gray-600">08:00 AM - 06:00 PM</td>
+                                    <td class="py-3.5 px-4">
+                                        <span
+                                            class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                            Abierto
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-gray-50 transition-colors">
+                                    <td class="py-3.5 px-4 font-medium text-gray-800">Sábados</td>
+                                    <td class="py-3.5 px-4 text-gray-600">09:00 AM - 02:00 PM</td>
+                                    <td class="py-3.5 px-4">
+                                        <span
+                                            class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                            Abierto
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-gray-50 transition-colors">
+                                    <td class="py-3.5 px-4 font-medium text-gray-800">Domingos y Festivos</td>
+                                    <td class="py-3.5 px-4 text-gray-600">Cerrado</td>
+                                    <td class="py-3.5 px-4">
+                                        <span
+                                            class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-600">
+                                            No disponible
+                                        </span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+            <section class="space-y-6">
+                <!-- Título de la sección -->
+                <div class="flex justify-between items-center">
+                    <h1 class="text-xl sm:text-2xl font-bold text-gray-800">Recursos</h1>
+                </div>
 
-            <!-- Especialización -->
-            <div class="space-y-1.5">
-                <label for="especializacion" class="block text-xs font-semibold text-gray-700 uppercase tracking-wider">Especialización</label>
-                <input type="text" id="especializacion" name="especializacion" placeholder="Ej. Desarrollo Web"
-                    class="w-full px-3.5 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors bg-gray-50/50">
-            </div>
+                <!-- Contenedor / Tarjeta de Recursos -->
+                <div class="bg-white rounded-xl shadow-md border border-gray-200 p-6 space-y-6">
+                    <div>
+                        <span
+                            class="text-xs font-semibold text-blue-600 bg-blue-50 px-2.5 py-1 rounded-full uppercase tracking-wider">Biblioteca
+                            digital</span>
+                        <h2 class="text-lg font-semibold text-gray-800 mt-2">Material de Estudio y Guías</h2>
+                        <p class="text-sm text-gray-500 mt-1">Explora nuestra colección de libros, documentos y guías
+                            recomendadas para tu aprendizaje.</p>
+                    </div>
 
-            <!-- Programa -->
-            <div class="space-y-1.5">
-                <label for="programa" class="block text-xs font-semibold text-gray-700 uppercase tracking-wider">Programa</label>
-                <select id="programa" name="programa" required
-                    class="w-full px-3.5 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors bg-gray-50/50 text-gray-700">
-                    <option value="" disabled selected>Seleccione un programa</option>
-                    <option value="ingenieria">Ingeniería de Software</option>
-                    <option value="diseno">Diseño Gráfico</option>
-                    <option value="marketing">Marketing Digital</option>
-                </select>
-            </div>
+                    <!-- Grid de Recursos (Libros / Archivos) -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
 
-            <!-- Cargo -->
-            <div class="space-y-1.5">
-                <label for="cargo" class="block text-xs font-semibold text-gray-700 uppercase tracking-wider">Cargo</label>
-                <select id="cargo" name="cargo" required
-                    class="w-full px-3.5 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors bg-gray-50/50 text-gray-700">
-                    <option value="" disabled selected>Seleccione un cargo</option>
-                    <option value="administrador">Administrador</option>
-                    <option value="docente">Docente / Tutor</option>
-                    <option value="estudiante">Estudiante</option>
-                </select>
-            </div>
+                        <!-- Recurso 1: Libro -->
+                        <div
+                            class="border border-gray-200 rounded-lg p-4 flex flex-col justify-between space-y-4 hover:border-gray-300 transition-colors">
+                            <div class="space-y-2">
+                                <div
+                                    class="h-10 w-10 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center">
+                                    <i class="ph ph-book-open text-xl"></i>
+                                </div>
+                                <h3 class="text-sm font-semibold text-gray-800">Guía Definitiva de Tailwind CSS</h3>
+                                <p class="text-xs text-gray-500 line-clamp-2">Aprende a diseñar interfaces profesionales
+                                    y modernas paso a paso desde cero.</p>
+                            </div>
+                            <button
+                                class="w-full py-1.5 bg-gray-50 hover:bg-gray-100 text-gray-700 font-medium text-xs rounded-lg transition-colors flex items-center justify-center space-x-1.5 border border-gray-200">
+                                <i class="ph ph-download-simple text-sm"></i>
+                                <span>Descargar PDF</span>
+                            </button>
+                        </div>
 
-            <!-- Estatus (Ocupa todo el ancho en pantallas medianas o se mantiene en grid) -->
-            <div class="space-y-1.5 sm:col-span-2">
-                <label for="estatus" class="block text-xs font-semibold text-gray-700 uppercase tracking-wider">Estatus</label>
-                <select id="estatus" name="estatus" required
-                    class="w-full px-3.5 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors bg-gray-50/50 text-gray-700">
-                    <option value="" disabled selected>Seleccione el estatus</option>
-                    <option value="activo">Activo</option>
-                    <option value="inactivo">Inactivo</option>
-                    <option value="suspendido">Suspendido</option>
-                </select>
-            </div>
+                        <!-- Recurso 2: Documento -->
+                        <div
+                            class="border border-gray-200 rounded-lg p-4 flex flex-col justify-between space-y-4 hover:border-gray-300 transition-colors">
+                            <div class="space-y-2">
+                                <div
+                                    class="h-10 w-10 rounded-lg bg-green-50 text-green-600 flex items-center justify-center">
+                                    <i class="ph ph-file-text text-xl"></i>
+                                </div>
+                                <h3 class="text-sm font-semibold text-gray-800">Manual de Buenas Prácticas Frontend</h3>
+                                <p class="text-xs text-gray-500 line-clamp-2">Estándares de código, arquitectura de
+                                    componentes y tokens de diseño.</p>
+                            </div>
+                            <button
+                                class="w-full py-1.5 bg-gray-50 hover:bg-gray-100 text-gray-700 font-medium text-xs rounded-lg transition-colors flex items-center justify-center space-x-1.5 border border-gray-200">
+                                <i class="ph ph-download-simple text-sm"></i>
+                                <span>Descargar PDF</span>
+                            </button>
+                        </div>
 
-            <!-- Botón de Actualizar -->
-            <div class="sm:col-span-2 pt-2 flex justify-end">
-                <button type="submit" class="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-medium text-xs rounded-lg transition-colors flex items-center justify-center space-x-1.5 shadow-sm active:scale-[0.98]">
-                    <i class="ph ph-check text-sm"></i>
-                    <span>Actualizar</span>
-                </button>
-            </div>
+                        <!-- Recurso 3: Enlace / Libro -->
+                        <div
+                            class="border border-gray-200 rounded-lg p-4 flex flex-col justify-between space-y-4 hover:border-gray-300 transition-colors">
+                            <div class="space-y-2">
+                                <div
+                                    class="h-10 w-10 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center">
+                                    <i class="ph ph-books text-xl"></i>
+                                </div>
+                                <h3 class="text-sm font-semibold text-gray-800">Patrones de Diseño UI/UX</h3>
+                                <p class="text-xs text-gray-500 line-clamp-2">Catálogo de referencias visuales para la
+                                    creación de paneles de administración.</p>
+                            </div>
+                            <button
+                                class="w-full py-1.5 bg-gray-50 hover:bg-gray-100 text-gray-700 font-medium text-xs rounded-lg transition-colors flex items-center justify-center space-x-1.5 border border-gray-200">
+                                <i class="ph ph-download-simple text-sm"></i>
+                                <span>Descargar PDF</span>
+                            </button>
+                        </div>
+                        <div
+                            class="border-2 border-dashed border-gray-300 rounded-lg p-4 flex flex-col justify-between space-y-4 hover:border-blue-500 hover:bg-blue-50/20 transition-all group">
+                            <div class="space-y-2 text-center flex flex-col items-center">
+                                <div
+                                    class="h-10 w-10 rounded-lg bg-gray-100 group-hover:bg-blue-50 text-gray-500 group-hover:text-blue-600 flex items-center justify-center transition-colors">
+                                    <i class="ph ph-plus text-xl"></i>
+                                </div>
+                                <h3
+                                    class="text-sm font-semibold text-gray-700 group-hover:text-blue-600 transition-colors">
+                                    Agregar nuevo archivo</h3>
+                                <p class="text-xs text-gray-400 line-clamp-2">Sube un nuevo PDF o documento al sistema
+                                </p>
+                            </div>
 
-        </form>
-    </div>
-</section>
+                            <div class="flex items-center space-x-2 w-full">
+                                <label
+                                    class="flex-1 py-1.5 bg-white hover:bg-gray-50 text-gray-700 font-medium text-xs rounded-lg transition-colors flex items-center justify-center space-x-1.5 border border-gray-200 shadow-sm cursor-pointer truncate px-2">
+                                    <i class="ph ph-upload-simple text-sm shrink-0"></i>
+                                    <span class="truncate">Seleccionar</span>
+                                    <input type="file" class="hidden" accept=".pdf,.doc,.docx">
+                                </label>
+                                <button type="button"
+                                    class="py-1.5 px-3 bg-blue-600 hover:bg-blue-700 text-white font-medium text-xs rounded-lg transition-colors flex items-center justify-center space-x-1 shadow-sm shrink-0">
+                                    <i class="ph ph-cloud-arrow-up text-sm"></i>
+                                    <span>Subir</span>
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+            <section class="space-y-6">
+                <!-- Título de la sección -->
+                <div class="flex justify-between items-center">
+                    <h1 class="text-xl sm:text-2xl font-bold text-gray-800">Administración de Usuarios</h1>
+                </div>
+
+                <!-- Contenedor / Tarjeta del Formulario -->
+                <div class="bg-white rounded-xl shadow-md border border-gray-200 p-6 space-y-6">
+                    <div>
+                        <span
+                            class="text-xs font-semibold text-blue-600 bg-blue-50 px-2.5 py-1 rounded-full uppercase tracking-wider">Panel
+                            de control</span>
+                        <h2 class="text-lg font-semibold text-gray-800 mt-2">Actualizar Datos de Usuario</h2>
+                        <p class="text-sm text-gray-500 mt-1">Modifica los detalles del usuario, su rol, programa y
+                            estatus en el sistema.</p>
+                    </div>
+
+                    <!-- Formulario con Tailwind CSS -->
+                    <form class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+                        <!-- Nombre user -->
+                        <div class="space-y-1.5">
+                            <label for="nombre"
+                                class="block text-xs font-semibold text-gray-700 uppercase tracking-wider">Nombre
+                                user</label>
+                            <input type="text" id="nombre" name="nombre" placeholder="Ej. Ana Pérez" required
+                                class="w-full px-3.5 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors bg-gray-50/50">
+                        </div>
+
+                        <!-- Especialización -->
+                        <div class="space-y-1.5">
+                            <label for="especializacion"
+                                class="block text-xs font-semibold text-gray-700 uppercase tracking-wider">Especialización</label>
+                            <input type="text" id="especializacion" name="especializacion"
+                                placeholder="Ej. Desarrollo Web"
+                                class="w-full px-3.5 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors bg-gray-50/50">
+                        </div>
+
+                        <!-- Programa -->
+                        <div class="space-y-1.5">
+                            <label for="programa"
+                                class="block text-xs font-semibold text-gray-700 uppercase tracking-wider">Programa</label>
+                            <select id="programa" name="programa" required
+                                class="w-full px-3.5 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors bg-gray-50/50 text-gray-700">
+                                <option value="" disabled selected>Seleccione un programa</option>
+                                <option value="ingenieria">Ingeniería de Software</option>
+                                <option value="diseno">Diseño Gráfico</option>
+                                <option value="marketing">Marketing Digital</option>
+                            </select>
+                        </div>
+
+                        <!-- Cargo -->
+                        <div class="space-y-1.5">
+                            <label for="cargo"
+                                class="block text-xs font-semibold text-gray-700 uppercase tracking-wider">Cargo</label>
+                            <select id="cargo" name="cargo" required
+                                class="w-full px-3.5 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors bg-gray-50/50 text-gray-700">
+                                <option value="" disabled selected>Seleccione un cargo</option>
+                                <option value="administrador">Administrador</option>
+                                <option value="docente">Docente / Tutor</option>
+                                <option value="estudiante">Estudiante</option>
+                            </select>
+                        </div>
+
+                        <!-- Estatus (Ocupa todo el ancho en pantallas medianas o se mantiene en grid) -->
+                        <div class="space-y-1.5 sm:col-span-2">
+                            <label for="estatus"
+                                class="block text-xs font-semibold text-gray-700 uppercase tracking-wider">Estatus</label>
+                            <select id="estatus" name="estatus" required
+                                class="w-full px-3.5 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors bg-gray-50/50 text-gray-700">
+                                <option value="" disabled selected>Seleccione el estatus</option>
+                                <option value="activo">Activo</option>
+                                <option value="inactivo">Inactivo</option>
+                                <option value="suspendido">Suspendido</option>
+                            </select>
+                        </div>
+
+                        <!-- Botón de Actualizar -->
+                        <div class="sm:col-span-2 pt-2 flex justify-end">
+                            <button type="submit"
+                                class="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-medium text-xs rounded-lg transition-colors flex items-center justify-center space-x-1.5 shadow-sm active:scale-[0.98]">
+                                <i class="ph ph-check text-sm"></i>
+                                <span>Actualizar</span>
+                            </button>
+                        </div>
+
+                    </form>
+                </div>
+            </section>
 
         </main>
-        
+
     </div>
 
     <!-- Footer -->
@@ -495,5 +567,6 @@
     </footer>
 
 </body>
-    <script src="../dist/bundle.js"></script>
+<script src="../dist/bundle.js"></script>
+
 </html>

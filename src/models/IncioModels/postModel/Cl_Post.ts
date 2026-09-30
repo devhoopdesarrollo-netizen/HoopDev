@@ -20,7 +20,7 @@ export default class Cl_mPost {
     }
 
     set img_direccion(img_direccion: string) {
-        this._img_direccion = img_direccion;
+        this._img_direccion = img_direccion || "";
     }
 
     get img_direccion(): string {

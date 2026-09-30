@@ -1,6 +1,6 @@
 import Cl_directory from "../config/Cl_directory.js";
 import Cl_mMUserController from "../models/UserModules/Cl_mMUserController.js";
-import { iLoginDTO, iUsuarioNew } from "../types/types.js";
+import { iLoginDTO, iPostNew, iUsuarioNew } from "../types/types.js";
 import Cl_vLogingUser from "../views/CL_vLoginUser.js";
 import Cl_vRegisterUser from "../views/Cl_vRegisterUser.js";
 import Cl_vUserInicio from "../views/views_users/Cl_vUserInicio.js";
@@ -21,6 +21,7 @@ export default class Controller {
     
         console.log("🏀 HoopPeru Controller iniciado.");
     }
+     nameUser=()=>{return this.UsermMController.nameUser}
 
     async userRegister(datos: iUsuarioNew): Promise<boolean> {
         return await this.UsermMController.agregarUser(datos);
@@ -29,7 +30,16 @@ export default class Controller {
         const informacion = await this.UsermMController.ValidarUserSeccion(datos)
        
     }
-    nameUser=()=>{return this.UsermMController.nameUser}
+    //Funcion para la subida de los archivos PDF entre otros
+    async direccionStorage(file:File):Promise<string>{
+        const direccion = await this.UsermMController.direccionImange(file)
+        return direccion
+    }
+    //
+    async newPost(date:iPostNew, file:File){ 
+        const Post = await this.UsermMController.newPost(date,file)
+    }
+   
     
   
 }
