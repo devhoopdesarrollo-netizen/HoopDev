@@ -1,14 +1,16 @@
-import { iPostNew } from "../../../types/types"
+import { iPostNew } from "../../../types/types.js"
 
 export default class Cl_mPost {
     private _fk_user: string = ""
     private _img_direccion: string = ""
     private _contenido: string = ""
+    private _fechaCreacion: string = ""
 
-    constructor({ fk_user, img_direccion, contenido }: iPostNew) {
+    constructor({ fk_user, img_direccion, contenido,fechaCreacion }: iPostNew) {
         this.fk_user = fk_user
-        this.img_direccion != img_direccion
+        this.img_direccion = img_direccion || ""
         this.contenido = contenido
+        this.fechaCreacion = fechaCreacion
     }
 
     set fk_user(fk_user: string) {
@@ -34,12 +36,19 @@ export default class Cl_mPost {
     get contenido(): string {
         return this._contenido;
     }
+    set fechaCreacion(fechaCreacion: string) {
+         this._fechaCreacion = fechaCreacion;
+    }
+    get fechaCreacion(): string {
+        return this._fechaCreacion;
+    }
 
     toJSON() {
         return {
             fk_user: this.fk_user,
             img_direccion: this.img_direccion,
-            contenido: this.contenido
+            contenido: this.contenido,
+            fechaCreacion: this.fechaCreacion
         }
     }
 }

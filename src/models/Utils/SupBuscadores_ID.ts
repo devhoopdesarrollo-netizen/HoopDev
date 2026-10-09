@@ -1,5 +1,5 @@
-import supabaseService from "../../config/supabase";
-import supabase from "../../config/supabase";
+import supabaseService from "../../config/supabase.js";
+import supabase from "../../config/supabase.js";
 
 export default class SupBuscadores_ID {
     private nameUser:string = ""

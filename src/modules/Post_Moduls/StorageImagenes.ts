@@ -1,23 +1,23 @@
+import { SupabaseClient } from "@supabase/supabase-js";
 import supabaseService from "../../config/supabase.js";
-import supabase from "../../config/supabase.js";
 
 export default class StorageImagen {
    
 
-    async uploadPostImagen(file: File): Promise<string> {
+    async uploadPostImagen(file: File,clienteAuth?:SupabaseClient): Promise<string> {
         try {
-            // Cambié la coma por un punto y coma aquí
+            const client = clienteAuth || supabaseService.client;
             const fileExt = file.name.split(".").pop();
             const fileName = `${Date.now()}_${Math.random().toString(36).substring(2)}.${fileExt}`;
             const filePath = `User_img_post/${fileName}`;
 
-            const { error } = await supabaseService.client.storage
+            const { error } = await client.storage
                 .from("Multimedia")
                 .upload(filePath, file);
 
             if (error) throw error;
 
-            const { data: publicUrlData } = supabaseService.client.storage
+            const { data: publicUrlData } = client.storage
                 .from("Multimedia")
                 .getPublicUrl(filePath);
 

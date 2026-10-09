@@ -1,6 +1,7 @@
 
-import { iUsuarioNew } from "../../types/types"
+
 import bcrypt from "bcryptjs";
+import { iUsuarioNew } from "../../types/types.js";
 export default class Cl_mNewUser {
     private _Nombre!: string;
     private _Password!: string;

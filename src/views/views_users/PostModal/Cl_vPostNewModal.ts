@@ -1,3 +1,4 @@
+
 import Controller from "../../../controllers/Controller.js";
 import { iPostNew } from "../../../types/types.js";
 
@@ -5,6 +6,7 @@ export default class Cl_PostNewModal {
     private form: HTMLFormElement | null = null;
     private ImagenTem: HTMLElement | null = null;
     private inputImagen: HTMLElement | null = null;
+    private modalSeccion: HTMLElement | null = null;
     private inputFileInput: HTMLInputElement | null = null;
     private currentObjectUrl: string | null = null;
     public controlador: Controller | null = null;
@@ -14,35 +16,46 @@ export default class Cl_PostNewModal {
         this.form = document.getElementById("formNewPost") as HTMLFormElement | null;
         this.ImagenTem = document.getElementById("imagenDefault") as HTMLElement | null;
         this.inputImagen = document.getElementById("inputImagen") as HTMLElement | null;
+        this.modalSeccion = document.getElementById("postModal") as HTMLElement | null;
 
         if (this.form) {
-            this.inputFileInput = (this.form.elements.namedItem("postImagen") as HTMLInputElement) 
+            this.inputFileInput = (this.form.elements.namedItem("postImagen") as HTMLInputElement)
                 || document.getElementById("fileInput") as HTMLInputElement;
 
             this.inicializarEventos();
         }
-        this.form?.addEventListener("submit", e =>{
+        this.form?.addEventListener("submit", e => {
             e.preventDefault();
-            if(this.inputFileInput){
+            if (this.inputFileInput) {
                 this.newPost()
+                this.modalSeccion?.classList.add("hidden");
+               
+              
+                    this.limpiarPreview();
+              
+                setTimeout(() => {
+                    this.controlador?.actualizarPost()
+                }, 1500);
             }
-            
-            
+
+
         })
-    } 
-    private newPost(){
+    }
+    private newPost() {
         const contenido = this.form!.elements.namedItem("contenido") as HTMLInputElement;
-        const date:iPostNew ={
-            fk_user:this.controlador?.UsermMController.fk_user || "Error",
-            contenido:contenido.value || "",
+        const date: iPostNew = {
+            fk_user: this.controlador?.UsermMController.fk_user || "Error",
+            contenido: contenido.value || "",
+            fechaCreacion: new Date().toISOString()
+
 
         }
         const file = this.fileObjet();
-        this.controlador?.newPost(date,file!)
+        this.controlador?.newPost(date, file!)
 
     }
-    private fileObjet(){
-     return   this.inputFileInput?.files?.[0];
+    private fileObjet() {
+        return this.inputFileInput?.files?.[0];
 
     }
 

@@ -1,6 +1,6 @@
 import Cl_directory from "../config/Cl_directory.js";
 import Cl_mMUserController from "../models/UserModules/Cl_mMUserController.js";
-import { iLoginDTO, iPostNew, iUsuarioNew } from "../types/types.js";
+import { iEncuesta, iLoginDTO, iPostNew, iPreguntas, iUsuarioNew } from "../types/types.js";
 import Cl_vLogingUser from "../views/CL_vLoginUser.js";
 import Cl_vRegisterUser from "../views/Cl_vRegisterUser.js";
 import Cl_vUserInicio from "../views/views_users/Cl_vUserInicio.js";
@@ -22,8 +22,15 @@ export default class Controller {
         console.log("🏀 HoopPeru Controller iniciado.");
     }
      nameUser=()=>{return this.UsermMController.nameUser}
-
-    async userRegister(datos: iUsuarioNew): Promise<boolean> {
+    cargarPregunta =(pregunta:string)=>{this.UsermMController.cargarNuevaPregunta(pregunta)}
+    borrar =(index:iPreguntas)=>{this.UsermMController.borrarPreguntaa(index)}
+    mostrarPregunta =()=>{ return this.UsermMController.mostrarPreguntasFrom()}
+    reiniciar =()=>{this.UsermMController.reinciarPreguntas()}
+    
+    
+    
+    
+     async userRegister(datos: iUsuarioNew): Promise<boolean> {
         return await this.UsermMController.agregarUser(datos);
     }
     async UserLong(datos:iLoginDTO){
@@ -39,7 +46,24 @@ export default class Controller {
     async newPost(date:iPostNew, file:File){ 
         const Post = await this.UsermMController.newPost(date,file)
     }
-   
+    async postResponse():Promise<any>{
+        const postResponse = await this.UsermMController.postResponse()
+        return postResponse
+    }
+    async likePost(id_post: string): Promise<any> {
+        const likeResponse = await this.UsermMController.likePost(id_post)
+        return likeResponse
+    }
+    //funcion desde vista para recargar las publicaciones
+    actualizarPost = async () => {
+        this.UserInicio.postResponse()
+    } 
+    //Secciones 
+    //Encuestas
+    async crearEncuetas(Tematica:iEncuesta,preguntas:iPreguntas[]){
+       await this.UsermMController.newEncuetas(Tematica,preguntas)
+    }
+
     
   
 }
