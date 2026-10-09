@@ -22,10 +22,11 @@ export interface user {
     nombre: string;
 }
 export interface iEncuesta {
+    id_tematica?: string;
     nombre_tematica: string;
 
 }
-export interface iPreguntas{
+export interface iPreguntas {
     texto_pregunta: string;
 }
 export interface iPostResponse {

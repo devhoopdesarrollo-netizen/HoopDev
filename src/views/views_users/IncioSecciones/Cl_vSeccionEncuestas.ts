@@ -16,7 +16,7 @@ export default class Cl_vSeccionEncuestas {
                 this.crearNuevaEncuesta()
         })
         this.btnAgregarPregunta.addEventListener("click", () => {
-            
+
             this.agregarPregunta();
         });
     }
@@ -24,8 +24,8 @@ export default class Cl_vSeccionEncuestas {
         const formPregunt = this.secionesEncuestaForm.elements.namedItem("preguntasEncuesta") as HTMLInputElement;
         this.preguntasActuales.innerHTML = ""
         this.controlador.cargarPregunta(formPregunt.value)
-        const datActual = this.controlador.mostrarPregunta()
-        datActual.forEach(element => {
+        const dataActuales = this.controlador.mostrarPregunta()
+        dataActuales.forEach(element => {
             this.preguntasActuales.innerHTML += `<div class="flex items-center justify-between p-3.5 bg-slate-50/80 hover:bg-slate-100/80 border border-slate-200/80 hover:border-slate-300 rounded-xl transition-all duration-200 group">
     <div class="flex items-center gap-3 min-w-0 pr-3">
         <!-- Badge de número -->
