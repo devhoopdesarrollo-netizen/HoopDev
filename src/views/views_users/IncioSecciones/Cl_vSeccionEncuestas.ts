@@ -39,7 +39,7 @@ export default class Cl_vSeccionEncuestas {
     </div>
     
     <!-- Botón de eliminar con microinteracción -->
-    <button type="button"  class="btn-eliminar p-1.5 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-all shrink-0 active:scale-95 opacity-80 group-hover:opacity-100" title="Eliminar pregunta">
+    <button type="button" id="btnEliminar_" class="btn-eliminar p-1.5 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-all shrink-0 active:scale-95 opacity-80 group-hover:opacity-100" title="Eliminar pregunta">
         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
         </svg>
@@ -48,7 +48,9 @@ export default class Cl_vSeccionEncuestas {
 
         });
 
+    dataActuales.forEach((element, index)=>{
 
+    })
 
 
 
