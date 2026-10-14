@@ -2,11 +2,13 @@ import Controller from "../../controllers/Controller.js";
 import Cl_Tools from "../../models/Utils/Cl_Tools.js";
 import { iPostNew, iPostResponse } from "../../types/types.js";
 import Cl_vSeccionEncuestas from "./IncioSecciones/Cl_vSeccionEncuestas.js";
+import Cl_vSeccionHorarios from "./IncioSecciones/Cl_vSeccionHorarios.js";
 import Cl_PostNewModal from "./PostModal/Cl_vPostNewModal.js";
 
 export default class Cl_vUserInicio {
     private VpostModal: Cl_PostNewModal;
     private vEncuestas: Cl_vSeccionEncuestas;
+    private vHorarios:Cl_vSeccionHorarios;
     private seccionPost_publicacion:HTMLElement;
     private seccionPost:HTMLElement;
     private seccionEncuestas:HTMLElement;
@@ -27,6 +29,7 @@ export default class Cl_vUserInicio {
         this.nameUser = document.querySelectorAll("#NameUser, .nameUser");
         this.VpostModal = new Cl_PostNewModal(this.controlador)
         this.vEncuestas = new Cl_vSeccionEncuestas(this.controlador);
+        this.vHorarios = new Cl_vSeccionHorarios(this.controlador)
         this.seccionPost_publicacion = document.getElementById("PostResponse") as HTMLElement;
         this.seccionPost = document.getElementById("Post") as HTMLElement;
         this.seccionEncuestas = document.getElementById("Encuestas") as HTMLElement;
@@ -98,8 +101,13 @@ export default class Cl_vUserInicio {
     async postResponse() {
         const data =await this.controlador.postResponse();
         this.seccionPost_publicacion.innerHTML = "";
+
+        const frame = document.createDocumentFragment();
+        const tempContainer = document.createElement('div');
+
+
         data.forEach((element:iPostResponse,index:number) => {
-             this.seccionPost_publicacion.innerHTML +=`  <div
+             const htmlPost =`  <div
                         class="bg-white rounded-xl shadow-md border border-gray-200 p-5 sm:p-6 flex flex-col justify-between space-y-4">
                         <div class="space-y-4">
                             <div class="flex items-center space-x-3">
@@ -135,12 +143,20 @@ export default class Cl_vUserInicio {
                                     <span>Me gusta</span>
                                 </button>
                                 
+                                
                             </div>
                         </div>
                     </div>
                     `
+                    tempContainer.innerHTML = htmlPost.trim();
+                    const postElement = tempContainer.firstChild;
+
+                    if(postElement){
+                        frame.appendChild(postElement);
+                    }
             
         });
+        this.seccionPost_publicacion.appendChild(frame)
         //Crear un estado para los likes de manera que puedan ser persistentes en la interfaz de usuario, y no solo visuales. Esto podría implicar almacenar los likes en el backend y actualizar la interfaz de usuario en consecuencia.
         data.forEach((element:iPostResponse,index:number) => {
             const btnLikePost = document.querySelector(`#btnLikePost[data-index="${index}"]`) as HTMLButtonElement | null;

@@ -284,37 +284,12 @@
                                 <tr
                                     class="border-b border-gray-200 text-xs font-semibold text-gray-500 uppercase tracking-wider">
                                     <th class="py-3 px-4">Nombre de la Encuesta</th>
-                                    <th class="py-3 px-4">Categoría</th>
-                                    <th class="py-3 px-4">Preguntas</th>
                                     <th class="py-3 px-4 text-right">Acciones</th>
                                 </tr>
                             </thead>
                             <tbody id="listaEncuestas" class="divide-y divide-gray-100 text-sm text-gray-700">
                                 <!-- Fila de Ejemplo -->
-                                <tr class="hover:bg-gray-50 transition-colors">
-                                    <td class="py-3.5 px-4 font-medium text-gray-800">
-                                        Satisfacción del Servicio
-                                    </td>
-                                    <td class="py-3.5 px-4">
-                                        <span
-                                            class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-indigo-100 text-indigo-800">
-                                            Soporte
-                                        </span>
-                                    </td>
-                                    <td class="py-3.5 px-4 text-gray-600">
-                                        ¿Cómo calificarías la atención?, ¿Qué mejorarías?
-                                    </td>
-                                    <td class="py-3.5 px-4 text-right space-x-2">
-                                        <button
-                                            class="btn-ver-respuestas inline-flex items-center px-3 py-1.5 rounded-md text-xs font-medium bg-blue-50 text-blue-700 hover:bg-blue-100 transition-colors border border-blue-200">
-                                            Ver Respuestas
-                                        </button>
-                                        <button
-                                            class="btn-borrar inline-flex items-center px-3 py-1.5 rounded-md text-xs font-medium bg-red-50 text-red-700 hover:bg-red-100 transition-colors border border-red-200">
-                                            Borrar
-                                        </button>
-                                    </td>
-                                </tr>
+
                             </tbody>
                         </table>
                     </div>
@@ -322,117 +297,480 @@
             </section>
 
             <!-- MODAL 1: CREAR ENCUESTA (Diseño con cuadrícula) -->
-          <div id="modalCrearEncuesta"
-    class="fixed inset-0 z-50 flex items-center justify-center bg-gray-900/60 backdrop-blur-sm p-3 sm:p-4 hidden">
-    
-    <!-- Modal principal flexible con altura máxima del viewport -->
-    <div class="bg-white rounded-2xl shadow-2xl border border-gray-100 max-w-2xl w-full max-h-[90vh] flex flex-col overflow-hidden">
+            <div id="modalCrearEncuesta"
+                class="fixed inset-0 z-50 flex items-center justify-center bg-gray-900/60 backdrop-blur-sm p-3 sm:p-4 hidden">
 
-        <!-- Header compacto -->
-        <div class="bg-gradient-to-r from-indigo-600 to-violet-600 px-5 py-4 text-white relative shrink-0">
-            <button id="btnCerrarCrear" type="button"
-                class="absolute top-3.5 right-4 text-white/80 hover:text-white bg-white/10 hover:bg-white/20 rounded-full w-8 h-8 flex items-center justify-center transition-colors text-lg">
-                &times;
-            </button>
-            <div class="flex items-center space-x-3">
-                <div class="p-2 bg-white/20 rounded-xl backdrop-blur-md shrink-0">
-                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 002-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01">
-                        </path>
-                    </svg>
-                </div>
-                <div>
-                    <h3 class="text-lg font-bold leading-tight">Nueva Encuesta</h3>
-                    <p class="text-indigo-100 text-xs mt-0.5">Crea y gestiona las preguntas para tus usuarios</p>
+                <!-- Modal principal flexible con altura máxima del viewport -->
+                <div
+                    class="bg-white rounded-2xl shadow-2xl border border-gray-100 max-w-2xl w-full max-h-[90vh] flex flex-col overflow-hidden">
+
+                    <!-- Header compacto -->
+                    <div class="bg-gradient-to-r from-indigo-600 to-violet-600 px-5 py-4 text-white relative shrink-0">
+                        <button id="btnCerrarCrear" type="button"
+                            class="absolute top-3.5 right-4 text-white/80 hover:text-white bg-white/10 hover:bg-white/20 rounded-full w-8 h-8 flex items-center justify-center transition-colors text-lg">
+                            &times;
+                        </button>
+                        <div class="flex items-center space-x-3">
+                            <div class="p-2 bg-white/20 rounded-xl backdrop-blur-md shrink-0">
+                                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 002-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01">
+                                    </path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-bold leading-tight">Nueva Encuesta</h3>
+                                <p class="text-indigo-100 text-xs mt-0.5">Crea y gestiona las preguntas para tus
+                                    usuarios</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Formulario de Creación -->
+                    <form id="formEncuesta" class="p-4 sm:p-6 space-y-4 overflow-y-auto flex-1">
+
+                        <!-- Título de la Encuesta -->
+                        <div>
+                            <label for="nombreEncuesta"
+                                class="block text-xs font-semibold text-gray-600 uppercase tracking-wider mb-1.5">
+                                Título de la Encuesta
+                            </label>
+                            <input type="text" id="nombreEncuesta" name="nombreEncuesta"
+                                placeholder="Ej. Encuesta de Clima Laboral"
+                                class="w-full px-3.5 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all text-gray-800 placeholder:text-gray-400"
+                                required />
+                        </div>
+
+                        <!-- Sección de Preguntas -->
+                        <div class="space-y-2.5">
+                            <label for="preguntasEncuesta"
+                                class="block text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                Escribe una Pregunta
+                            </label>
+
+                            <textarea id="preguntasEncuesta" name="preguntasEncuesta" rows="2"
+                                placeholder="Escribe la pregunta aquí..."
+                                class="w-full px-3.5 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all text-gray-800 resize-none placeholder:text-gray-400"></textarea>
+
+                            <div class="flex justify-end">
+                                <button type="button" id="btnAgregarPregunta"
+                                    class="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-semibold transition-colors shadow-sm active:scale-95">
+                                    <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M12 4v16m8-8H4" />
+                                    </svg>
+                                    Agregar Pregunta
+                                </button>
+                            </div>
+
+                            <!-- Contenedor dinámico de Preguntas con Scroll Vertical (Límite amplio ~224px) -->
+                            <div id="Preguntas"
+                                class="max-h-56 overflow-y-auto pr-1 space-y-2 scrollbar-thin scrollbar-thumb-gray-200">
+                            </div>
+                        </div>
+
+                        <!-- Acciones del Formulario -->
+                        <div
+                            class="flex flex-col-reverse sm:flex-row items-stretch sm:items-center justify-end gap-2 sm:gap-3 pt-3 border-t border-gray-100 mt-auto">
+                            <button type="button" id="btnCancelarCrear"
+                                class="w-full sm:w-auto px-5 py-2.5 rounded-xl text-xs font-semibold text-gray-600 hover:bg-gray-100 text-center transition-colors">
+                                Cancelar
+                            </button>
+                            <button type="submit"
+                                class="w-full sm:w-auto px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-semibold transition-all shadow-md shadow-indigo-200 hover:shadow-indigo-300 active:scale-95 text-center">
+                                Subir
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
-        </div>
-
-        <!-- Formulario de Creación -->
-        <form id="formEncuesta" class="p-4 sm:p-6 space-y-4 overflow-y-auto flex-1">
-
-            <!-- Título de la Encuesta -->
-            <div>
-                <label for="nombreEncuesta"
-                    class="block text-xs font-semibold text-gray-600 uppercase tracking-wider mb-1.5">
-                    Título de la Encuesta
-                </label>
-                <input type="text" id="nombreEncuesta" name="nombreEncuesta"
-                    placeholder="Ej. Encuesta de Clima Laboral"
-                    class="w-full px-3.5 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all text-gray-800 placeholder:text-gray-400"
-                    required />
-            </div>
-
-            <!-- Sección de Preguntas -->
-            <div class="space-y-2.5">
-                <label for="preguntasEncuesta"
-                    class="block text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                    Escribe una Pregunta
-                </label>
-
-                <textarea id="preguntasEncuesta" name="preguntasEncuesta" rows="2"
-                    placeholder="Escribe la pregunta aquí..."
-                    class="w-full px-3.5 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all text-gray-800 resize-none placeholder:text-gray-400"
-                ></textarea>
-
-                <div class="flex justify-end">
-                    <button type="button" id="btnAgregarPregunta"
-                        class="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-semibold transition-colors shadow-sm active:scale-95">
-                        <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
-                        </svg>
-                        Agregar Pregunta
-                    </button>
-                </div>
-
-                <!-- Contenedor dinámico de Preguntas con Scroll Vertical (Límite amplio ~224px) -->
-                <div id="Preguntas" 
-                    class="max-h-56 overflow-y-auto pr-1 space-y-2 scrollbar-thin scrollbar-thumb-gray-200">
-                </div>
-            </div>
-
-            <!-- Acciones del Formulario -->
-            <div class="flex flex-col-reverse sm:flex-row items-stretch sm:items-center justify-end gap-2 sm:gap-3 pt-3 border-t border-gray-100 mt-auto">
-                <button type="button" id="btnCancelarCrear"
-                    class="w-full sm:w-auto px-5 py-2.5 rounded-xl text-xs font-semibold text-gray-600 hover:bg-gray-100 text-center transition-colors">
-                    Cancelar
-                </button>
-                <button type="submit"
-                    class="w-full sm:w-auto px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-semibold transition-all shadow-md shadow-indigo-200 hover:shadow-indigo-300 active:scale-95 text-center">
-                    Subir
-                </button>
-            </div>
-        </form>
-    </div>
-</div>
 
             <!-- MODAL 2: VER RESPUESTAS -->
             <div id="modalVerRespuestas"
                 class="fixed inset-0 z-50 flex items-center justify-center bg-gray-900/60 backdrop-blur-sm p-4 hidden">
-                <div class="bg-white rounded-2xl shadow-2xl border border-gray-100 max-w-2xl w-full p-6 space-y-5">
+                <div class="bg-white rounded-2xl shadow-2xl border border-gray-100 max-w-3xl w-full p-6 space-y-5">
+                    <!-- Cabecera -->
                     <div class="flex justify-between items-center border-b border-gray-100 pb-3">
                         <div>
                             <h3 id="tituloEncuestaRespuestas" class="text-lg font-bold text-gray-800">Respuestas
                                 Recibidas</h3>
-                            <p class="text-xs text-gray-500 mt-0.5">Respuestas enviadas por los usuarios</p>
+                            <p class="text-xs text-gray-500 mt-0.5">Respuestas enviadas por los usuarios (14 registros)
+                            </p>
                         </div>
                         <button id="btnCerrarRespuestas"
                             class="text-gray-400 hover:text-gray-600 text-xl font-bold">&times;</button>
                     </div>
 
-                    <div id="contenedorRespuestas" class="max-h-80 overflow-y-auto space-y-3 pr-1">
-                        <!-- Ejemplo de tarjeta de respuesta -->
-                        <div class="p-4 bg-gray-50 rounded-xl border border-gray-200/80 space-y-2">
-                            <div class="flex justify-between items-center text-xs text-gray-500">
+                    <!-- Contenedor de Respuestas (Scroll vertical con los 14 usuarios) -->
+                    <div id="contenedorRespuestas" class="max-h-[60vh] overflow-y-auto space-y-4 pr-2">
+
+                        <!-- Usuario #1024 -->
+                        <div class="p-4 bg-gray-50 rounded-xl border border-gray-200/80 space-y-3">
+                            <div
+                                class="flex justify-between items-center text-xs text-gray-500 border-b border-gray-200/50 pb-2">
                                 <span class="font-semibold text-indigo-600">Usuario #1024</span>
                                 <span>Hace 15 min</span>
                             </div>
-                            <p class="text-sm text-gray-700"><strong>1.</strong> Excelente atención.</p>
-                            <p class="text-sm text-gray-700"><strong>2.</strong> Todo bien por el momento.</p>
+                            <div class="space-y-2 text-sm text-gray-700">
+                                <div>
+                                    <p class="font-semibold text-xs uppercase tracking-wider text-gray-500">¿Cómo
+                                        calificarías la atención?</p>
+                                    <p
+                                        class="mt-1 bg-white p-3 rounded-lg border border-gray-200/60 text-gray-600 whitespace-normal break-words">
+                                        Excelente atención en general. Me ayudaron a resolver mis dudas con mucha
+                                        paciencia.</p>
+                                </div>
+                                <div>
+                                    <p class="font-semibold text-xs uppercase tracking-wider text-gray-500">¿Qué
+                                        mejorarías?</p>
+                                    <p
+                                        class="mt-1 bg-white p-3 rounded-lg border border-gray-200/60 text-gray-600 whitespace-normal break-words">
+                                        Me gustaría un canal de chat en vivo integrado.</p>
+                                </div>
+                            </div>
                         </div>
+
+                        <!-- Usuario #1025 -->
+                        <div class="p-4 bg-gray-50 rounded-xl border border-gray-200/80 space-y-3">
+                            <div
+                                class="flex justify-between items-center text-xs text-gray-500 border-b border-gray-200/50 pb-2">
+                                <span class="font-semibold text-indigo-600">Usuario #1025</span>
+                                <span>Hace 1 hora</span>
+                            </div>
+                            <div class="space-y-2 text-sm text-gray-700">
+                                <div>
+                                    <p class="font-semibold text-xs uppercase tracking-wider text-gray-500">¿Cómo
+                                        calificarías la atención?</p>
+                                    <p
+                                        class="mt-1 bg-white p-3 rounded-lg border border-gray-200/60 text-gray-600 whitespace-normal break-words">
+                                        Buena, pero demoraron un poco en contestar.</p>
+                                </div>
+                                <div>
+                                    <p class="font-semibold text-xs uppercase tracking-wider text-gray-500">¿Qué
+                                        mejorarías?</p>
+                                    <p
+                                        class="mt-1 bg-white p-3 rounded-lg border border-gray-200/60 text-gray-600 whitespace-normal break-words">
+                                        Nada, todo correcto.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Usuario #1026 (Respuesta Larga) -->
+                        <div class="p-4 bg-gray-50 rounded-xl border border-gray-200/80 space-y-3">
+                            <div
+                                class="flex justify-between items-center text-xs text-gray-500 border-b border-gray-200/50 pb-2">
+                                <span class="font-semibold text-indigo-600">Usuario #1026</span>
+                                <span>Hace 3 horas</span>
+                            </div>
+                            <div class="space-y-2 text-sm text-gray-700">
+                                <div>
+                                    <p class="font-semibold text-xs uppercase tracking-wider text-gray-500">¿Cómo
+                                        calificarías la atención?</p>
+                                    <p
+                                        class="mt-1 bg-white p-3 rounded-lg border border-gray-200/60 text-gray-600 whitespace-normal break-words">
+                                        El soporte técnico fue increíblemente resolutivo. Tuve un problema complejo con
+                                        la configuración inicial de la plataforma y el agente que me atendió se quedó
+                                        conmigo por más de 45 minutos en una videollamada compartiendo pantalla hasta
+                                        dejar todo funcionando al 100%. ¡Muy agradecido con el servicio prestado!</p>
+                                </div>
+                                <div>
+                                    <p class="font-semibold text-xs uppercase tracking-wider text-gray-500">¿Qué
+                                        mejorarías?</p>
+                                    <p
+                                        class="mt-1 bg-white p-3 rounded-lg border border-gray-200/60 text-gray-600 whitespace-normal break-words">
+                                        Deberían crear una sección de base de conocimientos o tutoriales en video más
+                                        detallados dentro del mismo panel de control para no tener que depender siempre
+                                        del soporte humano en cosas básicas.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Usuario #1027 -->
+                        <div class="p-4 bg-gray-50 rounded-xl border border-gray-200/80 space-y-3">
+                            <div
+                                class="flex justify-between items-center text-xs text-gray-500 border-b border-gray-200/50 pb-2">
+                                <span class="font-semibold text-indigo-600">Usuario #1027</span>
+                                <span>Hace 5 horas</span>
+                            </div>
+                            <div class="space-y-2 text-sm text-gray-700">
+                                <div>
+                                    <p class="font-semibold text-xs uppercase tracking-wider text-gray-500">¿Cómo
+                                        calificarías la atención?</p>
+                                    <p
+                                        class="mt-1 bg-white p-3 rounded-lg border border-gray-200/60 text-gray-600 whitespace-normal break-words">
+                                        Regular. Me pasaron con tres personas diferentes antes de solucionar mi
+                                        problema.</p>
+                                </div>
+                                <div>
+                                    <p class="font-semibold text-xs uppercase tracking-wider text-gray-500">¿Qué
+                                        mejorarías?</p>
+                                    <p
+                                        class="mt-1 bg-white p-3 rounded-lg border border-gray-200/60 text-gray-600 whitespace-normal break-words">
+                                        Mejorar la comunicación interna entre departamentos.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Usuario #1028 -->
+                        <div class="p-4 bg-gray-50 rounded-xl border border-gray-200/80 space-y-3">
+                            <div
+                                class="flex justify-between items-center text-xs text-gray-500 border-b border-gray-200/50 pb-2">
+                                <span class="font-semibold text-indigo-600">Usuario #1028</span>
+                                <span>Hace 6 horas</span>
+                            </div>
+                            <div class="space-y-2 text-sm text-gray-700">
+                                <div>
+                                    <p class="font-semibold text-xs uppercase tracking-wider text-gray-500">¿Cómo
+                                        calificarías la atención?</p>
+                                    <p
+                                        class="mt-1 bg-white p-3 rounded-lg border border-gray-200/60 text-gray-600 whitespace-normal break-words">
+                                        Muy rápida y eficiente.</p>
+                                </div>
+                                <div>
+                                    <p class="font-semibold text-xs uppercase tracking-wider text-gray-500">¿Qué
+                                        mejorarías?</p>
+                                    <p
+                                        class="mt-1 bg-white p-3 rounded-lg border border-gray-200/60 text-gray-600 whitespace-normal break-words">
+                                        El diseño de la interfaz en dispositivos móviles.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Usuario #1029 -->
+                        <div class="p-4 bg-gray-50 rounded-xl border border-gray-200/80 space-y-3">
+                            <div
+                                class="flex justify-between items-center text-xs text-gray-500 border-b border-gray-200/50 pb-2">
+                                <span class="font-semibold text-indigo-600">Usuario #1029</span>
+                                <span>Hace 8 horas</span>
+                            </div>
+                            <div class="space-y-2 text-sm text-gray-700">
+                                <div>
+                                    <p class="font-semibold text-xs uppercase tracking-wider text-gray-500">¿Cómo
+                                        calificarías la atención?</p>
+                                    <p
+                                        class="mt-1 bg-white p-3 rounded-lg border border-gray-200/60 text-gray-600 whitespace-normal break-words">
+                                        Excepcional. Muy amables desde el primer momento.</p>
+                                </div>
+                                <div>
+                                    <p class="font-semibold text-xs uppercase tracking-wider text-gray-500">¿Qué
+                                        mejorarías?</p>
+                                    <p
+                                        class="mt-1 bg-white p-3 rounded-lg border border-gray-200/60 text-gray-600 whitespace-normal break-words">
+                                        Que amplíen el horario de atención los fines de semana.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Usuario #1030 -->
+                        <div class="p-4 bg-gray-50 rounded-xl border border-gray-200/80 space-y-3">
+                            <div
+                                class="flex justify-between items-center text-xs text-gray-500 border-b border-gray-200/50 pb-2">
+                                <span class="font-semibold text-indigo-600">Usuario #1030</span>
+                                <span>Hace 10 horas</span>
+                            </div>
+                            <div class="space-y-2 text-sm text-gray-700">
+                                <div>
+                                    <p class="font-semibold text-xs uppercase tracking-wider text-gray-500">¿Cómo
+                                        calificarías la atención?</p>
+                                    <p
+                                        class="mt-1 bg-white p-3 rounded-lg border border-gray-200/60 text-gray-600 whitespace-normal break-words">
+                                        No quedé muy satisfecho, la respuesta tardó más de 24 horas y el problema
+                                        principal no quedó del todo claro.</p>
+                                </div>
+                                <div>
+                                    <p class="font-semibold text-xs uppercase tracking-wider text-gray-500">¿Qué
+                                        mejorarías?</p>
+                                    <p
+                                        class="mt-1 bg-white p-3 rounded-lg border border-gray-200/60 text-gray-600 whitespace-normal break-words">
+                                        Los tiempos de respuesta por correo electrónico y tener notificaciones push en
+                                        la app.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Usuario #1031 -->
+                        <div class="p-4 bg-gray-50 rounded-xl border border-gray-200/80 space-y-3">
+                            <div
+                                class="flex justify-between items-center text-xs text-gray-500 border-b border-gray-200/50 pb-2">
+                                <span class="font-semibold text-indigo-600">Usuario #1031</span>
+                                <span>Ayer</span>
+                            </div>
+                            <div class="space-y-2 text-sm text-gray-700">
+                                <div>
+                                    <p class="font-semibold text-xs uppercase tracking-wider text-gray-500">¿Cómo
+                                        calificarías la atención?</p>
+                                    <p
+                                        class="mt-1 bg-white p-3 rounded-lg border border-gray-200/60 text-gray-600 whitespace-normal break-words">
+                                        Todo excelente.</p>
+                                </div>
+                                <div>
+                                    <p class="font-semibold text-xs uppercase tracking-wider text-gray-500">¿Qué
+                                        mejorarías?</p>
+                                    <p
+                                        class="mt-1 bg-white p-3 rounded-lg border border-gray-200/60 text-gray-600 whitespace-normal break-words">
+                                        Sigan así.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Usuario #1032 -->
+                        <div class="p-4 bg-gray-50 rounded-xl border border-gray-200/80 space-y-3">
+                            <div
+                                class="flex justify-between items-center text-xs text-gray-500 border-b border-gray-200/50 pb-2">
+                                <span class="font-semibold text-indigo-600">Usuario #1032</span>
+                                <span>Ayer</span>
+                            </div>
+                            <div class="space-y-2 text-sm text-gray-700">
+                                <div>
+                                    <p class="font-semibold text-xs uppercase tracking-wider text-gray-500">¿Cómo
+                                        calificarías la atención?</p>
+                                    <p
+                                        class="mt-1 bg-white p-3 rounded-lg border border-gray-200/60 text-gray-600 whitespace-normal break-words">
+                                        Muy buena predisposición por parte del equipo técnico.</p>
+                                </div>
+                                <div>
+                                    <p class="font-semibold text-xs uppercase tracking-wider text-gray-500">¿Qué
+                                        mejorarías?</p>
+                                    <p
+                                        class="mt-1 bg-white p-3 rounded-lg border border-gray-200/60 text-gray-600 whitespace-normal break-words">
+                                        Más opciones de exportación de datos a Excel o PDF.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Usuario #1033 -->
+                        <div class="p-4 bg-gray-50 rounded-xl border border-gray-200/80 space-y-3">
+                            <div
+                                class="flex justify-between items-center text-xs text-gray-500 border-b border-gray-200/50 pb-2">
+                                <span class="font-semibold text-indigo-600">Usuario #1033</span>
+                                <span>Ayer</span>
+                            </div>
+                            <div class="space-y-2 text-sm text-gray-700">
+                                <div>
+                                    <p class="font-semibold text-xs uppercase tracking-wider text-gray-500">¿Cómo
+                                        calificarías la atención?</p>
+                                    <p
+                                        class="mt-1 bg-white p-3 rounded-lg border border-gray-200/60 text-gray-600 whitespace-normal break-words">
+                                        Fantástica.</p>
+                                </div>
+                                <div>
+                                    <p class="font-semibold text-xs uppercase tracking-wider text-gray-500">¿Qué
+                                        mejorarías?</p>
+                                    <p
+                                        class="mt-1 bg-white p-3 rounded-lg border border-gray-200/60 text-gray-600 whitespace-normal break-words">
+                                        Ninguna queja.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Usuario #1034 (Respuesta Larga) -->
+                        <div class="p-4 bg-gray-50 rounded-xl border border-gray-200/80 space-y-3">
+                            <div
+                                class="flex justify-between items-center text-xs text-gray-500 border-b border-gray-200/50 pb-2">
+                                <span class="font-semibold text-indigo-600">Usuario #1034</span>
+                                <span>Hace 2 días</span>
+                            </div>
+                            <div class="space-y-2 text-sm text-gray-700">
+                                <div>
+                                    <p class="font-semibold text-xs uppercase tracking-wider text-gray-500">¿Cómo
+                                        calificarías la atención?</p>
+                                    <p
+                                        class="mt-1 bg-white p-3 rounded-lg border border-gray-200/60 text-gray-600 whitespace-normal break-words">
+                                        La atención telefónica fue un poco confusa al principio porque la línea se
+                                        escuchaba con interferencia, pero el asesor tuvo la amabilidad de colgar y
+                                        llamarme por otro medio para continuar la asistencia sin perder el hilo de lo
+                                        que estábamos conversando.</p>
+                                </div>
+                                <div>
+                                    <p class="font-semibold text-xs uppercase tracking-wider text-gray-500">¿Qué
+                                        mejorarías?</p>
+                                    <p
+                                        class="mt-1 bg-white p-3 rounded-lg border border-gray-200/60 text-gray-600 whitespace-normal break-words">
+                                        Actualizar sus equipos de comunicación o implementar llamadas directamente
+                                        mediante VoIP a través del navegador web.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Usuario #1035 -->
+                        <div class="p-4 bg-gray-50 rounded-xl border border-gray-200/80 space-y-3">
+                            <div
+                                class="flex justify-between items-center text-xs text-gray-500 border-b border-gray-200/50 pb-2">
+                                <span class="font-semibold text-indigo-600">Usuario #1035</span>
+                                <span>Hace 2 días</span>
+                            </div>
+                            <div class="space-y-2 text-sm text-gray-700">
+                                <div>
+                                    <p class="font-semibold text-xs uppercase tracking-wider text-gray-500">¿Cómo
+                                        calificarías la atención?</p>
+                                    <p
+                                        class="mt-1 bg-white p-3 rounded-lg border border-gray-200/60 text-gray-600 whitespace-normal break-words">
+                                        Correcta y profesional.</p>
+                                </div>
+                                <div>
+                                    <p class="font-semibold text-xs uppercase tracking-wider text-gray-500">¿Qué
+                                        mejorarías?</p>
+                                    <p
+                                        class="mt-1 bg-white p-3 rounded-lg border border-gray-200/60 text-gray-600 whitespace-normal break-words">
+                                        Nada que agregar.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Usuario #1036 -->
+                        <div class="p-4 bg-gray-50 rounded-xl border border-gray-200/80 space-y-3">
+                            <div
+                                class="flex justify-between items-center text-xs text-gray-500 border-b border-gray-200/50 pb-2">
+                                <span class="font-semibold text-indigo-600">Usuario #1036</span>
+                                <span>Hace 3 días</span>
+                            </div>
+                            <div class="space-y-2 text-sm text-gray-700">
+                                <div>
+                                    <p class="font-semibold text-xs uppercase tracking-wider text-gray-500">¿Cómo
+                                        calificarías la atención?</p>
+                                    <p
+                                        class="mt-1 bg-white p-3 rounded-lg border border-gray-200/60 text-gray-600 whitespace-normal break-words">
+                                        Muy buena.</p>
+                                </div>
+                                <div>
+                                    <p class="font-semibold text-xs uppercase tracking-wider text-gray-500">¿Qué
+                                        mejorarías?</p>
+                                    <p
+                                        class="mt-1 bg-white p-3 rounded-lg border border-gray-200/60 text-gray-600 whitespace-normal break-words">
+                                        Mayor velocidad en la carga general del sistema.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Usuario #1037 -->
+                        <div class="p-4 bg-gray-50 rounded-xl border border-gray-200/80 space-y-3">
+                            <div
+                                class="flex justify-between items-center text-xs text-gray-500 border-b border-gray-200/50 pb-2">
+                                <span class="font-semibold text-indigo-600">Usuario #1037</span>
+                                <span>Hace 3 días</span>
+                            </div>
+                            <div class="space-y-2 text-sm text-gray-700">
+                                <div>
+                                    <p class="font-semibold text-xs uppercase tracking-wider text-gray-500">¿Cómo
+                                        calificarías la atención?</p>
+                                    <p
+                                        class="mt-1 bg-white p-3 rounded-lg border border-gray-200/60 text-gray-600 whitespace-normal break-words">
+                                        Superaron mis expectativas por completo. Me resolvieron una urgencia un domingo
+                                        por la noche.</p>
+                                </div>
+                                <div>
+                                    <p class="font-semibold text-xs uppercase tracking-wider text-gray-500">¿Qué
+                                        mejorarías?</p>
+                                    <p
+                                        class="mt-1 bg-white p-3 rounded-lg border border-gray-200/60 text-gray-600 whitespace-normal break-words">
+                                        Poner un botón visible para calificar la atención justo al terminar el chat.</p>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
 
+                    <!-- Pie de la Modal -->
                     <div class="flex justify-end pt-3 border-t border-gray-100">
                         <button type="button" id="btnCerrarRespuestasFooter"
                             class="px-5 py-2.5 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-xl text-xs font-semibold transition-colors">
@@ -450,59 +788,179 @@
                 </div>
 
                 <!-- Contenedor / Tarjeta de Horarios -->
-                <div class="bg-white rounded-xl shadow-md border border-gray-200 p-6 space-y-6">
+                <div
+                    class="bg-white rounded-3xl shadow-xl border border-gray-100 p-6 sm:p-8 space-y-8 max-w-3xl mx-auto">
                     <div>
                         <span
                             class="text-xs font-semibold text-green-600 bg-green-50 px-2.5 py-1 rounded-full uppercase tracking-wider">Disponibilidad</span>
-                        <h2 class="text-lg font-semibold text-gray-800 mt-2">Horarios de Atención y Servicios</h2>
-                        <p class="text-sm text-gray-500 mt-1">Consulta los horarios de apertura y disponibilidad de las
-                            diferentes áreas de la plataforma.</p>
+                        <h2 class="text-lg font-semibold text-gray-800 mt-2">Gestión de Horarios y Anuncios</h2>
+                        <p class="text-sm text-gray-500 mt-1">Selecciona un usuario, administra sus registros semanales
+                            de la tabla <code
+                                class="bg-gray-100 text-gray-700 px-1 py-0.5 rounded font-mono text-[11px]">Horarios</code>
+                            y publica anuncios para fechas específicas.</p>
                     </div>
 
-                    <!-- Tabla o Lista de Horarios -->
-                    <div class="overflow-x-auto">
-                        <table class="w-full text-left border-collapse">
-                            <thead>
-                                <tr
-                                    class="border-b border-gray-200 text-xs font-semibold text-gray-500 uppercase tracking-wider">
-                                    <th class="py-3 px-4">Día / Jornada</th>
-                                    <th class="py-3 px-4">Área de Soporte</th>
-                                    <th class="py-3 px-4">Estado</th>
-                                </tr>
-                            </thead>
-                            <tbody class="divide-y divide-gray-100 text-sm text-gray-700">
-                                <tr class="hover:bg-gray-50 transition-colors">
-                                    <td class="py-3.5 px-4 font-medium text-gray-800">Lunes a Viernes</td>
-                                    <td class="py-3.5 px-4 text-gray-600">08:00 AM - 06:00 PM</td>
-                                    <td class="py-3.5 px-4">
-                                        <span
-                                            class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                                            Abierto
-                                        </span>
-                                    </td>
-                                </tr>
-                                <tr class="hover:bg-gray-50 transition-colors">
-                                    <td class="py-3.5 px-4 font-medium text-gray-800">Sábados</td>
-                                    <td class="py-3.5 px-4 text-gray-600">09:00 AM - 02:00 PM</td>
-                                    <td class="py-3.5 px-4">
-                                        <span
-                                            class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                                            Abierto
-                                        </span>
-                                    </td>
-                                </tr>
-                                <tr class="hover:bg-gray-50 transition-colors">
-                                    <td class="py-3.5 px-4 font-medium text-gray-800">Domingos y Festivos</td>
-                                    <td class="py-3.5 px-4 text-gray-600">Cerrado</td>
-                                    <td class="py-3.5 px-4">
-                                        <span
-                                            class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-600">
-                                            No disponible
-                                        </span>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <!-- Sección Combinada: Usuario y Horarios -->
+                    <div
+                        class="bg-gradient-to-br from-slate-50 via-white to-gray-50/50 p-6 rounded-2xl border border-gray-100 shadow-sm space-y-6">
+
+                        <!-- Selector de Usuario -->
+                        <div class="flex flex-col sm:flex-row items-center gap-3 w-full">
+                            <!-- Contenedor del Select y su flecha -->
+                            <div class="relative w-full">
+                                <select id="userSelect"
+                                    class="w-full px-4 py-3 pr-10 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm text-gray-700 shadow-sm transition-all appearance-none cursor-pointer">
+                                    <option value="" disabled selected>-- Seleccione un usuario --</option>
+                                </select>
+                                <!-- Icono de flecha desplegable -->
+                                <div
+                                    class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-gray-400">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M19 9l-7 7-7-7"></path>
+                                    </svg>
+                                </div>
+                            </div>
+
+                            <!-- Botón con estilos profesionales de Tailwind -->
+                            <button type="button" id="ButtonBuscarUserHorarios"
+                                class="w-full sm:w-auto px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-xl shadow-sm transition-all cursor-pointer whitespace-nowrap">
+                                Buscar
+                            </button>
+                        </div>
+
+                        <hr class="border-gray-100">
+
+                        <!-- Lista de Días Existentes -->
+                        <div class="space-y-3">
+                            <span class="text-xs font-semibold text-gray-700 block"></span>Días y horarios asignados
+                            <div
+                                class="border border-gray-200/80 bg-white rounded-2xl overflow-hidden shadow-sm max-h-44 overflow-y-auto">
+                                <table class="w-full text-left border-collapse text-xs">
+                                    <thead class="bg-gray-50/80 sticky top-0 border-b border-gray-100">
+                                        <tr>
+                                            <th class="py-3 px-4 text-gray-600 font-semibold">Día</th>
+                                            <th class="py-3 px-4 text-gray-600 font-semibold">Horario</th>
+                                            <th class="py-3 px-4 text-right text-gray-600 font-semibold">Acción</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="seccionHoariosActivo" class="divide-y divide-gray-50 text-gray-700">
+                                        <tr>
+                                            <!-- Cambia colspan="4" según el número total de columnas de tu tabla -->
+                                            <td colspan="4" class="px-6 py-12 text-center text-gray-400">
+                                                <div class="flex flex-col items-center justify-center gap-2">
+                                                    <!-- Ícono opcional SVG -->
+                                                    <svg class="w-10 h-10 text-gray-300" fill="none"
+                                                        stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            stroke-width="1.5"
+                                                            d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                                    </svg>
+                                                    <span class="text-sm font-medium">Selecciona una opción para ver los
+                                                        horarios</span>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Formulario para Agregar Nuevo Día -->
+                        <div class="pt-2 space-y-3">
+                            <span class="text-xs font-semibold text-gray-700 block">Agregar nuevo registro
+                                semanal</span>
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+                                <div class="relative">
+                                    <select id="selecDia"
+                                        class="w-full px-3 py-2.5 bg-white border border-gray-200 rounded-xl text-xs text-gray-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 shadow-sm appearance-none cursor-pointer">
+                                        <option value="" disabled selected>Seleccionar día...</option>
+                                        <option value="Lunes">Lunes</option>
+                                        <option value="Martes">Martes</option>
+                                        <option value="Miércoles">Miércoles</option>
+                                        <option value="Jueves">Jueves</option>
+                                        <option value="Viernes">Viernes</option>
+                                        <option value="Sábado">Sábado</option>
+                                        <option value="Domingo">Domingo</option>
+                                    </select>
+                                    <div
+                                        class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-gray-400">
+                                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <input type="time" value="08:00" id="timesInicio"
+                                    class="px-3 py-2.5 border border-gray-200 rounded-xl text-xs bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500 shadow-sm">
+                                <input type="time" value="16:00" id="timesFinal"
+                                    class="px-3 py-2.5 border border-gray-200 rounded-xl text-xs bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500 shadow-sm">
+                            </div>
+                            <button type="button" id="UserNewday"
+                                class="w-full mt-2 bg-emerald-600 hover:bg-emerald-700 text-white py-3 rounded-xl text-xs font-semibold shadow-md shadow-emerald-600/20 transition-all">
+                                Guardar Nuevo Día
+                            </button>
+                        </div>
+
+                        <hr class="border-gray-200/80 my-4">
+
+                        <!-- Subsección: Anuncios de Días en Específico -->
+                        <div class="space-y-4">
+                            <div>
+                                <h3 class="text-sm font-bold text-gray-800">Anuncios para Días Específicos</h3>
+                                <p class="text-xs text-gray-500">Programa eventos o excepciones en fechas concretas con
+                                    su respectivo horario.</p>
+                            </div>
+
+                            <!-- Lista de Anuncios Existentes -->
+                            <div
+                                class="border border-gray-200/80 bg-white rounded-2xl overflow-hidden shadow-sm max-h-40 overflow-y-auto">
+                                <table class="w-full text-left border-collapse text-xs">
+                                    <thead class="bg-gray-50/80 sticky top-0 border-b border-gray-100">
+                                        <tr>
+                                            <th class="py-2.5 px-3 text-gray-600 font-semibold">Fecha</th>
+                                            <th class="py-2.5 px-3 text-gray-600 font-semibold">Anuncio / Evento</th>
+                                            <th class="py-2.5 px-3 text-gray-600 font-semibold">Horario</th>
+                                            <th class="py-2.5 px-3 text-right text-gray-600 font-semibold">Acción</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="divide-y divide-gray-50 text-gray-700">
+                                        <tr class="hover:bg-gray-50/80 transition-colors">
+                                            <td class="py-2.5 px-3 font-medium text-gray-800">12/10/2026</td>
+                                            <td class="py-2.5 px-3 text-gray-700 font-medium">Reunión de Hoop</td>
+                                            <td class="py-2.5 px-3 text-gray-500 font-mono text-[11px]">15:00 - 17:00
+                                            </td>
+                                            <td class="py-2.5 px-3 text-right">
+                                                <button type="button"
+                                                    class="text-red-600 hover:text-red-700 font-medium bg-red-50 hover:bg-red-100 px-2.5 py-1 rounded-lg transition-colors">Borrar</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <!-- Formulario para Cargar Nuevo Anuncio -->
+                            <div class="space-y-2.5">
+                                <span class="text-xs font-semibold text-gray-700 block">Publicar nuevo anuncio de fecha
+                                    específica</span>
+                                <div class="grid grid-cols-1 sm:grid-cols-4 gap-2">
+                                    <input type="date" id="fechaEvent" value="2026-10-12"
+                                        class="px-3 py-2 border border-gray-200 rounded-xl text-xs bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm">
+                                    <input type="text" id="anuncioEvent" placeholder="Título (ej. Reunión de Hoop)"
+                                        value="Reunión de Hoop"
+                                        class="px-3 py-2 border border-gray-200 rounded-xl text-xs bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm">
+                                    <input type="time" id="hora_inicio" value="15:00"
+                                        class="px-2 py-2 border border-gray-200 rounded-xl text-xs bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm">
+                                    <input type="time" id="hora_final" value="17:00"
+                                        class="px-2 py-2 border border-gray-200 rounded-xl text-xs bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm">
+                                </div>
+                                <button type="button" id="buttonAnuncio"
+                                    class="w-full mt-1 bg-blue-600 hover:bg-blue-700 text-white py-2.5 rounded-xl text-xs font-semibold shadow-md shadow-blue-600/20 transition-all">
+                                    Guardar Anuncio E específico
+                                </button>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </section>

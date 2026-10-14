@@ -6,6 +6,28 @@ export interface iUsuarioNew {
     especializacion: string;
     fecha_nacimiento: Date;
 }
+export interface iHorario{
+    id_horarios?:string;
+    fk_user?:string,
+    fk_programa?:string,
+    dia:string,
+    horainicio:string,
+    horafinal:string
+}
+export interface iAnuncios{
+    id_reunion?: string; 
+    fecha: string;      
+    anuncio: string;
+    hora_inicio: string; 
+    hora_final: string;  
+}
+
+
+export interface iUserList{
+    id_user:string,
+    nombre:string
+    fk_programas:string
+}
 export interface iLoginDTO {
     correo_electronico: string;
     password: string;

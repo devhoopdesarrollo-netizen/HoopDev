@@ -1,12 +1,16 @@
 import Controller from "../../controllers/Controller.js";
 import Encuenta_New from "../../modules/Encuentas_Moduls/Encuenta_New.js";
+import Encuetas_load from "../../modules/Encuentas_Moduls/Encuetas_load.js";
+import Horarios_load from "../../modules/Horarios_Moduls/Horarios_load.js";
+import Horarios_New from "../../modules/Horarios_Moduls/Horarios_New.js";
 import Post_Load from "../../modules/Post_Moduls/Post_load.js";
 import Post_New from "../../modules/Post_Moduls/Post_new.js";
 import StorageImagen from "../../modules/Post_Moduls/StorageImagenes.js";
 import MD_UserLogin from "../../modules/User_Moduls/UserLogin.js";
 import MD_NewUser from "../../modules/User_Moduls/userRegistro.js";
-import { iEncuesta, iLoginDTO, iPostNew, iPreguntas, iUsuarioNew } from "../../types/types.js";
+import { iEncuesta, iHorario, iLoginDTO, iPostNew, iPreguntas, iUserList, iUsuarioNew } from "../../types/types.js";
 import Cl_mPost from "../IncioModels/postModel/Cl_Post.js";
+import userList_moduls from "../Utils/userList_moduls.js";
 import Cl_mNewUser from "./Cl_mNewUser.js";
 
 export default class Cl_mMUserController {
@@ -16,6 +20,10 @@ export default class Cl_mMUserController {
     private _postNew: Post_New;
     private _postLoad: Post_Load;
     private _Encuesta:Encuenta_New;
+    private _Encuesta_load:Encuetas_load;
+    private _horario_new:Horarios_New;
+    private _horarios_load:Horarios_load;
+    private _toolsUser:userList_moduls;
     private EncuestaPreguntas:iPreguntas[] = []
     public controller: Controller;
     public nameUser: string = "";
@@ -29,6 +37,10 @@ export default class Cl_mMUserController {
         this._postNew = new Post_New();
         this._postLoad = new Post_Load();
         this._Encuesta = new Encuenta_New();
+        this._Encuesta_load = new Encuetas_load();
+        this._horario_new = new Horarios_New();
+        this._horarios_load = new Horarios_load();
+        this._toolsUser = new userList_moduls();
         
         const datosGuardados = localStorage.getItem("userSeccion")
         if (datosGuardados) {
@@ -42,8 +54,11 @@ export default class Cl_mMUserController {
             }
         }
         this.postResponse()
+        
 
     }   
+    
+
     cargarNuevaPregunta(pregunta:string){
         const preguntas:iPreguntas={
             texto_pregunta:pregunta
@@ -64,7 +79,11 @@ export default class Cl_mMUserController {
     mostrarPreguntasFrom(){
         return this.EncuestaPreguntas
     }
-
+    async cargarListaUser():Promise<iUserList[]>{
+        const nomres = this._toolsUser.cargarUser()
+        return nomres
+    }  
+    
     async agregarUser(datos: iUsuarioNew): Promise<boolean> {
         const datosPreparados = new Cl_mNewUser(datos);
         return await this._UserAccion.createUser(datosPreparados.toJSON());
@@ -92,5 +111,22 @@ export default class Cl_mMUserController {
     async newEncuetas(Tematica:iEncuesta,Preguntas:iPreguntas[]){
         const NewEncuetas = await this._Encuesta.crearTematica(Tematica,Preguntas)
         this.reinciarPreguntas
+    }
+    async cargarEncuetas_name(){
+        const EncuentasName = await this._Encuesta_load.MostrarEncuetasActuales()
+        return EncuentasName
+
+    }
+    async crearHorario(date:iHorario){
+        const infUser = await this._horario_new.crearHorarioUser(date)
+        return infUser
+    }
+    async buscarHorarios(id:string){
+        const infUser = await this._horarios_load.cargarHorarios(id)
+        return infUser 
+    }
+    async borrarDia(id:string){
+        const deletday = await this._horarios_load.deleteDay(id)
+        return deletday
     }
 }

@@ -13,11 +13,13 @@ export default class Encuenta_New {
             throw new Error("Seccion no valida o expirada");
         }
         const authcliente = supabaseService.UserAuntentiked_Token(token);
+        const fecha_creacion =  new Date().toISOString();
         try {
             const { data, error } = await authcliente
                 .from("tematicas")
                 .insert([{
-                    nombre_tematica: nombre.nombre_tematica
+                    nombre_tematica: nombre.nombre_tematica,
+                    fecha_creacion: fecha_creacion
                 }])
                 .select("*")
             if (data && data.length > 0) {
@@ -63,8 +65,6 @@ export default class Encuenta_New {
         }
 
     }
-    async MostrarEncuetasActuales() {
-
-    }
+   
 
 }

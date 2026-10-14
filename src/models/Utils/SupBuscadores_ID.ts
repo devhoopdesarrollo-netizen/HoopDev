@@ -1,6 +1,6 @@
 import supabaseService from "../../config/supabase.js";
 import supabase from "../../config/supabase.js";
-
+//refactorizar esta seccion
 export default class SupBuscadores_ID {
     private nameUser:string = ""
     constructor(){

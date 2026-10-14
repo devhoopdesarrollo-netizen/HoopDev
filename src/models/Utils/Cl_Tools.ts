@@ -8,7 +8,7 @@ export default class Cl_Tools {
         const minutos = Math.floor(segundos / 60);
         const horas = Math.floor(minutos / 60);
         const dias = Math.floor(horas / 24);
-        
+
         if (segundos < 60) {
             return "Hace unos segundos";
         } else if (minutos < 60) {
@@ -23,6 +23,7 @@ export default class Cl_Tools {
         }
 
     }
+    //revisar esta funcion
     conteadorLikes(likes: number, estado: boolean): number {
         if (likes == 0 && estado == false) {
             return 1
@@ -31,6 +32,19 @@ export default class Cl_Tools {
         } else {
             return (likes + 1)
         }
-        }
-
     }
+    //
+    ConversorTimes(horas: string) {
+        const [horasStr, minutoStr] = horas.split(":");
+        let hora = parseInt(horasStr, 10);
+
+        const ampm = hora >= 12 ? "PM" : "AM";
+        hora = hora % 12;
+        hora = hora ? hora : 12;
+
+
+        const minutos = minutoStr ? minutoStr : "00";
+        return `${hora}:${minutos} ${ampm}`;
+    }
+
+}

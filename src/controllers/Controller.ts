@@ -1,6 +1,6 @@
 import Cl_directory from "../config/Cl_directory.js";
 import Cl_mMUserController from "../models/UserModules/Cl_mMUserController.js";
-import { iEncuesta, iLoginDTO, iPostNew, iPreguntas, iUsuarioNew } from "../types/types.js";
+import { iEncuesta, iHorario, iLoginDTO, iPostNew, iPreguntas, iUserList, iUsuarioNew } from "../types/types.js";
 import Cl_vLogingUser from "../views/CL_vLoginUser.js";
 import Cl_vRegisterUser from "../views/Cl_vRegisterUser.js";
 import Cl_vUserInicio from "../views/views_users/Cl_vUserInicio.js";
@@ -21,7 +21,7 @@ export default class Controller {
     
         console.log("🏀 HoopPeru Controller iniciado.");
     }
-     nameUser=()=>{return this.UsermMController.nameUser}
+    nameUser=()=>{return this.UsermMController.nameUser}
     cargarPregunta =(pregunta:string)=>{this.UsermMController.cargarNuevaPregunta(pregunta)}
     borrar =(index:iPreguntas)=>{this.UsermMController.borrarPreguntaa(index)}
     mostrarPregunta =()=>{ return this.UsermMController.mostrarPreguntasFrom()}
@@ -29,8 +29,11 @@ export default class Controller {
     
     
     
-    
-     async userRegister(datos: iUsuarioNew): Promise<boolean> {
+    async listUser():Promise<iUserList[]>{
+        const listname = await this.UsermMController.cargarListaUser()
+        return listname
+    }
+    async userRegister(datos: iUsuarioNew): Promise<boolean> {
         return await this.UsermMController.agregarUser(datos);
     }
     async UserLong(datos:iLoginDTO){
@@ -62,6 +65,23 @@ export default class Controller {
     //Encuestas
     async crearEncuetas(Tematica:iEncuesta,preguntas:iPreguntas[]){
        await this.UsermMController.newEncuetas(Tematica,preguntas)
+    }
+    async cargarEncuetas():Promise<any>{
+       const EncuetasExistentes = await this.UsermMController.cargarEncuetas_name();
+       return EncuetasExistentes
+    }
+    //Secciones Horarios
+     async crearHorario(date:iHorario){
+            const infUser = await this.UsermMController.crearHorario(date)
+            return infUser
+        }
+    async informacionHorarios(id:string){
+        const informacionUser = await this.UsermMController.buscarHorarios(id)
+        return informacionUser
+    }
+    async deleteDay(id:string){
+        const infUser = await this.UsermMController.borrarDia(id);
+        return infUser
     }
 
     

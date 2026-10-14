@@ -4,25 +4,40 @@ import { iEncuesta, iPreguntas } from "../../../types/types.js";
 export default class Cl_vSeccionEncuestas {
     private controlador: Controller;
     private secionesEncuestaForm: HTMLFormElement;
+    private seccion_encuetas: HTMLElement;
     private preguntasActuales: HTMLElement;
     private btnAgregarPregunta: HTMLElement;
+    private botonCancelarFom: HTMLButtonElement;
     constructor(controller: any) {
         this.controlador = controller;
         this.secionesEncuestaForm = document.getElementById("formEncuesta") as HTMLFormElement;
+        this.seccion_encuetas = document.getElementById("listaEncuestas") as HTMLElement
         this.preguntasActuales = document.getElementById("Preguntas") as HTMLSpanElement;
         this.btnAgregarPregunta = document.getElementById("btnAgregarPregunta") as HTMLElement;
+        this.botonCancelarFom = document.getElementById("btnCancelarCrear") as HTMLButtonElement,
+            this.mostrarEncuentas()
         this.secionesEncuestaForm.addEventListener("submit", e => {
             e.preventDefault(),
                 this.crearNuevaEncuesta()
+            this.reinicarFormulario()
+
         })
         this.btnAgregarPregunta.addEventListener("click", () => {
 
             this.agregarPregunta();
+            const pregunta = this.secionesEncuestaForm.elements.namedItem("preguntasEncuesta") as HTMLButtonElement;
+            pregunta.value = ""
+
         });
+
+    }
+    actulizarPreguntas() {
+        this.preguntasActuales.innerHTML = ""
+
     }
     agregarPregunta() {
         const formPregunt = this.secionesEncuestaForm.elements.namedItem("preguntasEncuesta") as HTMLInputElement;
-        this.preguntasActuales.innerHTML = ""
+        this.actulizarPreguntas()
         this.controlador.cargarPregunta(formPregunt.value)
         const dataActuales = this.controlador.mostrarPregunta()
         dataActuales.forEach(element => {
@@ -48,11 +63,45 @@ export default class Cl_vSeccionEncuestas {
 
         });
 
-    dataActuales.forEach((element, index)=>{
 
-    })
+    }
+    async mostrarEncuentas() {
 
 
+        const data = await this.controlador.cargarEncuetas();
+        if (data) {
+            this.seccion_encuetas.innerHTML = ""
+            data.forEach((element: iEncuesta, index: number) => {
+                this.seccion_encuetas.innerHTML += `
+      
+                        
+                                <tr class="hover:bg-gray-50 transition-colors">
+                                    <td class="py-3.5 px-4 font-medium text-gray-800">
+                                        ${element.nombre_tematica}
+                                    </td>
+                                    <td class="py-3.5 px-4 text-right space-x-2">
+                                        <button
+                                            class="btn-ver-respuestas inline-flex items-center px-3 py-1.5 rounded-md text-xs font-medium bg-blue-50 text-blue-700 hover:bg-blue-100 transition-colors border border-blue-200">
+                                            Ver Respuestas
+                                        </button>
+                                        <button
+                                            class="btn-borrar inline-flex items-center px-3 py-1.5 rounded-md text-xs font-medium bg-red-50 text-red-700 hover:bg-red-100 transition-colors border border-red-200">
+                                            Borrar
+                                        </button>
+                                    </td>
+                                </tr>
+                            `
+
+            });
+        }
+
+
+
+    }
+    reinicarFormulario() {
+        this.secionesEncuestaForm.reset()
+        this.botonCancelarFom.click()
+        this.actulizarPreguntas()
 
     }
     crearNuevaEncuesta() {
