@@ -1,6 +1,8 @@
 import Controller from "../../controllers/Controller.js";
 import Encuenta_New from "../../modules/Encuentas_Moduls/Encuenta_New.js";
 import Encuetas_load from "../../modules/Encuentas_Moduls/Encuetas_load.js";
+import Anuncios_load from "../../modules/Horarios_Moduls/Anuncios_load.js";
+import anuncios_new from "../../modules/Horarios_Moduls/Anuncios_New.js";
 import Horarios_load from "../../modules/Horarios_Moduls/Horarios_load.js";
 import Horarios_New from "../../modules/Horarios_Moduls/Horarios_New.js";
 import Post_Load from "../../modules/Post_Moduls/Post_load.js";
@@ -8,7 +10,7 @@ import Post_New from "../../modules/Post_Moduls/Post_new.js";
 import StorageImagen from "../../modules/Post_Moduls/StorageImagenes.js";
 import MD_UserLogin from "../../modules/User_Moduls/UserLogin.js";
 import MD_NewUser from "../../modules/User_Moduls/userRegistro.js";
-import { iEncuesta, iHorario, iLoginDTO, iPostNew, iPreguntas, iUserList, iUsuarioNew } from "../../types/types.js";
+import { iAnuncios, iEncuesta, iHorario, iLoginDTO, iPostNew, iPreguntas, iUserList, iUsuarioNew } from "../../types/types.js";
 import Cl_mPost from "../IncioModels/postModel/Cl_Post.js";
 import userList_moduls from "../Utils/userList_moduls.js";
 import Cl_mNewUser from "./Cl_mNewUser.js";
@@ -23,6 +25,8 @@ export default class Cl_mMUserController {
     private _Encuesta_load:Encuetas_load;
     private _horario_new:Horarios_New;
     private _horarios_load:Horarios_load;
+    private _anuncios_new:anuncios_new;
+      private _anuncios_load:Anuncios_load;
     private _toolsUser:userList_moduls;
     private EncuestaPreguntas:iPreguntas[] = []
     public controller: Controller;
@@ -40,6 +44,8 @@ export default class Cl_mMUserController {
         this._Encuesta_load = new Encuetas_load();
         this._horario_new = new Horarios_New();
         this._horarios_load = new Horarios_load();
+        this._anuncios_new = new anuncios_new();
+        this._anuncios_load = new Anuncios_load();
         this._toolsUser = new userList_moduls();
         
         const datosGuardados = localStorage.getItem("userSeccion")
@@ -128,5 +134,17 @@ export default class Cl_mMUserController {
     async borrarDia(id:string){
         const deletday = await this._horarios_load.deleteDay(id)
         return deletday
+    }
+    async crearAnuncio(dat:iAnuncios){
+        const NewAnuncio = await this._anuncios_new.newAnuncio(dat)
+        return NewAnuncio
+    }
+    async cargarAnuncio(){
+        const loadAnuncio = await this._anuncios_load.cargarAnuncios()
+        return loadAnuncio
+    }
+    async deleteAnuncio(id:string){
+        const deletAnuncio =  await this._anuncios_load.delectAnuncio(id)
+        return deletAnuncio
     }
 }

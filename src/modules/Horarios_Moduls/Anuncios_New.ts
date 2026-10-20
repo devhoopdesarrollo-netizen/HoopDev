@@ -3,7 +3,7 @@ import Cl_mAnuncios from "../../models/IncioModels/horiosModel/Cl_mAnuncios.js";
 import { iAnuncios } from "../../types/types.js";
 
 export default class anuncios_new {
-    async crearHorarioUser(date: iAnuncios): Promise<any> {
+    async newAnuncio(date: iAnuncios): Promise<any> {
         const anuncioNormalizado = new Cl_mAnuncios(date)
 
         const token = localStorage.getItem("user_token");
@@ -18,10 +18,10 @@ export default class anuncios_new {
                 .from("reuniones")
                 .insert([
                     {
-                        fecha: anuncioNormalizado.fecha,
-                        anuncio: anuncioNormalizado.AnuncioName,
-                        hora_inicio: anuncioNormalizado.hora_inicio,
-                        hora_final: anuncioNormalizado.hora_final
+                            fecha: anuncioNormalizado.fecha,
+                            anuncio: anuncioNormalizado.AnuncioName,
+                            hora_inicio: anuncioNormalizado.hora_inicio,
+                            hora_final: anuncioNormalizado.hora_final
                     }
                 ])
                 .select();

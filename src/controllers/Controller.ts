@@ -1,6 +1,6 @@
 import Cl_directory from "../config/Cl_directory.js";
 import Cl_mMUserController from "../models/UserModules/Cl_mMUserController.js";
-import { iEncuesta, iHorario, iLoginDTO, iPostNew, iPreguntas, iUserList, iUsuarioNew } from "../types/types.js";
+import { iAnuncios, iEncuesta, iHorario, iLoginDTO, iPostNew, iPreguntas, iUserList, iUsuarioNew } from "../types/types.js";
 import Cl_vLogingUser from "../views/CL_vLoginUser.js";
 import Cl_vRegisterUser from "../views/Cl_vRegisterUser.js";
 import Cl_vUserInicio from "../views/views_users/Cl_vUserInicio.js";
@@ -82,6 +82,19 @@ export default class Controller {
     async deleteDay(id:string){
         const infUser = await this.UsermMController.borrarDia(id);
         return infUser
+    }
+    //Anuncios
+    async newAnuncio(dat:iAnuncios){
+        const NewAnuncio = await this.UsermMController.crearAnuncio(dat)
+        return NewAnuncio
+    }
+    async loadAnuncio(){
+        const LoadAnuncio = await this.UsermMController.cargarAnuncio()
+        return LoadAnuncio
+    }
+    async deletAnuncio(id:string){
+        const deletAnuncio = await this.UsermMController.deleteAnuncio(id)
+        return deletAnuncio
     }
 
     

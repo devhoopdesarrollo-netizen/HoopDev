@@ -8,6 +8,8 @@ export default class Cl_vSeccionEncuestas {
     private preguntasActuales: HTMLElement;
     private btnAgregarPregunta: HTMLElement;
     private botonCancelarFom: HTMLButtonElement;
+
+    
     constructor(controller: any) {
         this.controlador = controller;
         this.secionesEncuestaForm = document.getElementById("formEncuesta") as HTMLFormElement;

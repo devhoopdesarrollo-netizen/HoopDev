@@ -12,11 +12,11 @@ export default class Cl_vSeccionHorarios {
     private horafinal: HTMLInputElement;
     private buttonNewday: HTMLButtonElement;
 
-    private fechaEvent:HTMLInputElement;
-    private anuncionEvent:HTMLInputElement;
-    private hora_inicio:HTMLInputElement;
-    private hora_final:HTMLInputElement;
-    private buttonEvent:HTMLButtonElement;   
+    private fechaEvent: HTMLInputElement;
+    private anuncionEvent: HTMLInputElement;
+    private hora_inicio: HTMLInputElement;
+    private hora_final: HTMLInputElement;
+    private buttonEvent: HTMLButtonElement;
     constructor(controller: Controller) {
         this.controller = controller;
         this.userList = document.getElementById("userSelect") as HTMLSelectElement
@@ -28,8 +28,8 @@ export default class Cl_vSeccionHorarios {
         this.buttonNewday = document.getElementById("UserNewday") as HTMLButtonElement;
 
         this.fechaEvent = document.getElementById("fechaEvent") as HTMLInputElement;
-        this.anuncionEvent =document.getElementById("anuncioEvent") as HTMLInputElement;
-        this.hora_inicio = document.getElementById("hora_inicio")as HTMLInputElement;
+        this.anuncionEvent = document.getElementById("anuncioEvent") as HTMLInputElement;
+        this.hora_inicio = document.getElementById("hora_inicio") as HTMLInputElement;
         this.hora_final = document.getElementById("hora_final") as HTMLInputElement;
         this.buttonEvent = document.getElementById("buttonAnuncio") as HTMLButtonElement;
 

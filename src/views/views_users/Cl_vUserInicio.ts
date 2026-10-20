@@ -1,6 +1,7 @@
 import Controller from "../../controllers/Controller.js";
 import Cl_Tools from "../../models/Utils/Cl_Tools.js";
 import { iPostNew, iPostResponse } from "../../types/types.js";
+import Cl_vSeccionAnuncios from "./IncioSecciones/Cl_vSeccionAnuncios.js";
 import Cl_vSeccionEncuestas from "./IncioSecciones/Cl_vSeccionEncuestas.js";
 import Cl_vSeccionHorarios from "./IncioSecciones/Cl_vSeccionHorarios.js";
 import Cl_PostNewModal from "./PostModal/Cl_vPostNewModal.js";
@@ -9,6 +10,7 @@ export default class Cl_vUserInicio {
     private VpostModal: Cl_PostNewModal;
     private vEncuestas: Cl_vSeccionEncuestas;
     private vHorarios:Cl_vSeccionHorarios;
+     private vAnuncios:Cl_vSeccionAnuncios;
     private seccionPost_publicacion:HTMLElement;
     private seccionPost:HTMLElement;
     private seccionEncuestas:HTMLElement;
@@ -27,9 +29,10 @@ export default class Cl_vUserInicio {
         this.controlador = controller;
         this.tools = new Cl_Tools();
         this.nameUser = document.querySelectorAll("#NameUser, .nameUser");
-        this.VpostModal = new Cl_PostNewModal(this.controlador)
+        this.VpostModal = new Cl_PostNewModal(this.controlador);
         this.vEncuestas = new Cl_vSeccionEncuestas(this.controlador);
-        this.vHorarios = new Cl_vSeccionHorarios(this.controlador)
+        this.vHorarios = new Cl_vSeccionHorarios(this.controlador);
+        this.vAnuncios = new Cl_vSeccionAnuncios(this.controlador);
         this.seccionPost_publicacion = document.getElementById("PostResponse") as HTMLElement;
         this.seccionPost = document.getElementById("Post") as HTMLElement;
         this.seccionEncuestas = document.getElementById("Encuestas") as HTMLElement;
