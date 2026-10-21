@@ -1,4 +1,4 @@
-
+ 
 import supabaseService from "../../config/supabase.js";
 
 export default class Anuncios_load {

@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio - HoopPeru</title>
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- Phosphor Icons CDN -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+
+<body class="bg-gray-50 text-gray-800 min-h-screen flex flex-col">
+
+    <!-- Header Superior (Estructura idéntica a inicio_Administracion.html) -->
+    <header
+        class="bg-white border-b border-gray-200 px-4 sm:px-6 py-4 flex justify-between items-center shadow-sm sticky top-0 z-50">
+        <div class="flex items-center space-x-3">
+            <img src="../resources/navbar-logo.webp" alt="Logo" class="h-8 w-auto">
+            <span class="text-xs font-semibold bg-gray-100 text-gray-600 px-2 py-0.5 rounded-md border border-gray-200 hidden sm:inline">
+                Portal Informativo
+            </span>
+        </div>
+        <div class="flex items-center space-x-3 sm:space-x-4">
+            <!-- Campana de Notificaciones y Modificaciones -->
+            <button type="button" id="btnCampanaNotificaciones"
+                class="relative p-2 text-gray-500 hover:text-blue-600 hover:bg-gray-100 rounded-xl transition-colors cursor-pointer"
+                title="Notificaciones y avisos">
+                <i class="ph ph-bell text-xl"></i>
+                <!-- Badge animado indicador de modificación -->
+                <span class="absolute top-1 right-1 flex h-2.5 w-2.5">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-red-500"></span>
+                </span>
+            </button>
+
+            <!-- Separador vertical -->
+            <div class="h-6 w-px bg-gray-200"></div>
+
+            <span class="text-sm font-medium text-gray-700 hidden sm:inline" id="NameUser">Mi Usuario</span>
+            <div
+                class="h-10 w-10 rounded-full bg-blue-50 border border-blue-200 text-blue-600 flex items-center justify-center shrink-0">
+                <span class="text-xs font-semibold">U</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Menú de Navegación Móvil (Visible solo en pantallas pequeñas) -->
+    <nav class="md:hidden bg-white border-b border-gray-200 px-4 py-2.5 overflow-x-auto shadow-xs">
+        <ul class="flex space-x-3 whitespace-nowrap">
+            <li>
+                <a id="ButtonMenuInicio"
+                    class="px-3 py-1.5 rounded-lg text-xs font-semibold text-blue-600 bg-blue-50 inline-block cursor-pointer">Inicio</a>
+            </li>
+            <li>
+                <a id="ButtonMenuEncuesta"
+                    class="px-3 py-1.5 rounded-lg text-xs font-medium text-gray-600 hover:bg-gray-100 inline-block cursor-pointer">Encuestas</a>
+            </li>
+            <li>
+                <a id="ButtonMenuHorarios"
+                    class="px-3 py-1.5 rounded-lg text-xs font-medium text-gray-600 hover:bg-gray-100 inline-block cursor-pointer">Horarios</a>
+            </li>
+            <li>
+                <a id="ButtonMenuRecursos"
+                    class="px-3 py-1.5 rounded-lg text-xs font-medium text-gray-600 hover:bg-gray-100 inline-block cursor-pointer">Recursos</a>
+            </li>
+            <li>
+                <a id="ButtonMenuPerfiles"
+                    class="px-3 py-1.5 rounded-lg text-xs font-medium text-gray-600 hover:bg-gray-100 inline-block cursor-pointer">Perfil</a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Layout Principal (Misma estructura de 4 columnas que inicio_Administracion.html) -->
+    <div class="max-w-7xl mx-auto px-4 py-6 sm:py-8 w-full flex-grow grid grid-cols-1 md:grid-cols-4 gap-6">
+
+        <!-- Navegación Lateral (Aside - Visible en Tablet/Desktop) -->
+        <aside
+            class="hidden md:block md:col-span-1 bg-white rounded-xl shadow-sm border border-gray-200 p-4 h-fit md:sticky md:top-24">
+            <nav>
+                <h3 class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3 px-3">Menú Principal</h3>
+                <ul class="space-y-1">
+                    <li>
+                        <a id="ButtonMenuInicio"
+                            class="flex items-center space-x-3 px-3 py-2 rounded-lg text-sm font-semibold text-blue-600 bg-blue-50 transition-colors cursor-pointer">
+                            <i class="ph ph-house text-lg"></i>
+                            <span>Inicio</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a id="ButtonMenuEncuesta"
+                            class="flex items-center space-x-3 px-3 py-2 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-100 hover:text-gray-900 transition-colors cursor-pointer">
+                            <i class="ph ph-clipboard-text text-lg"></i>
+                            <span>Encuestas</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a id="ButtonMenuHorarios"
+                            class="flex items-center space-x-3 px-3 py-2 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-100 hover:text-gray-900 transition-colors cursor-pointer">
+                            <i class="ph ph-calendar text-lg"></i>
+                            <span>Horarios</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a id="ButtonMenuRecursos"
+                            class="flex items-center space-x-3 px-3 py-2 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-100 hover:text-gray-900 transition-colors cursor-pointer">
+                            <i class="ph ph-folder-open text-lg"></i>
+                            <span>Recursos</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a id="ButtonMenuPerfiles"
+                            class="flex items-center space-x-3 px-3 py-2 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-100 hover:text-gray-900 transition-colors cursor-pointer">
+                            <i class="ph ph-user text-lg"></i>
+                            <span>Perfil</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Contenido Principal -->
+        <main class="md:col-span-3 space-y-6">
+
+            <!-- ============================================================== -->
+            <!-- SECCIÓN 1: POSTS / PUBLICACIONES INFORMATIVAS (SIN BOTÓN CREAR) -->
+            <!-- ============================================================== -->
+            <section id="Post" class="space-y-6">
+                <!-- Título de la sección (Limpio, sin el botón de 'Nueva Publicación') -->
+                <div class="flex justify-between items-center">
+                    <div>
+                        <h1 class="text-xl sm:text-2xl font-bold text-gray-800">Publicaciones Recientes</h1>
+                        <p class="text-xs text-gray-500 mt-0.5">Noticias, avisos oficiales y novedades de la comunidad HoopPeru.</p>
+                    </div>
+                </div>
+
+                <!-- CSS Grid Responsivo para las Publicaciones (id="PostResponse" para TypeScript) -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6" id="PostResponse">
+
+                    <!-- Tarjeta de Publicación 1 -->
+                    <div
+                        class="bg-white rounded-xl shadow-md border border-gray-200 p-5 sm:p-6 flex flex-col justify-between space-y-4">
+                        <div class="space-y-4">
+                            <!-- Cabecera de la publicación -->
+                            <div class="flex items-center space-x-3">
+                                <div
+                                    class="h-10 w-10 rounded-full bg-blue-100 border border-blue-200 flex items-center justify-center shrink-0">
+                                    <span class="text-xs text-blue-700 font-bold">HP</span>
+                                </div>
+                                <div>
+                                    <h3 class="text-sm font-semibold text-gray-800">HoopPeru Directiva</h3>
+                                    <p class="text-xs text-gray-500">Hace 2 horas</p>
+                                </div>
+                            </div>
+                            <!-- Texto -->
+                            <p class="text-sm text-gray-700 leading-relaxed">
+                                Comunicado Oficial: Se da inicio al cronograma de entrenamientos para la presente temporada. Les recordamos consultar la sección de Horarios para conocer la disponibilidad de las canchas.
+                            </p>
+                            <!-- Imagen -->
+                            <div
+                                class="rounded-lg overflow-hidden border border-gray-200 bg-gray-100 h-48 flex items-center justify-center">
+                                <img src="https://images.unsplash.com/photo-1546519638-68e109498ffc?auto=format&fit=crop&w=1000&q=80"
+                                    alt="Baloncesto HoopPeru" class="w-full h-full object-cover">
+                            </div>
+                        </div>
+
+                        <!-- Footer con Likes y Botón Interactivo -->
+                        <div class="border-t border-gray-100 pt-4 space-y-3">
+                            <div class="flex justify-between text-xs text-gray-500 px-1">
+                                <span class="font-semibold_0">14 Me gusta</span>
+                                <span>2 comentarios</span>
+                            </div>
+                            <div class="grid grid-cols-2 gap-2 border-y border-gray-100 py-1.5">
+                                <button type="button" id="btnLikePost" data-index="0"
+                                    class="w-full py-1.5 bg-gray-50 hover:bg-gray-100 text-gray-700 font-medium text-xs rounded-lg transition-colors flex items-center justify-center space-x-1.5 cursor-pointer">
+                                    <i class="hear-icono ph ph-heart text-base text-red-500"></i>
+                                    <span>Me gusta</span>
+                                </button>
+                                <button type="button"
+                                    class="w-full py-1.5 bg-gray-50 hover:bg-gray-100 text-gray-700 font-medium text-xs rounded-lg transition-colors flex items-center justify-center space-x-1.5 cursor-pointer">
+                                    <i class="ph ph-chat-teardrop-text text-base text-blue-500"></i>
+                                    <span>Comentar</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tarjeta de Publicación 2 -->
+                    <div
+                        class="bg-white rounded-xl shadow-md border border-gray-200 p-5 sm:p-6 flex flex-col justify-between space-y-4">
+                        <div class="space-y-4">
+                            <div class="flex items-center space-x-3">
+                                <div
+                                    class="h-10 w-10 rounded-full bg-gray-200 overflow-hidden border border-gray-300 flex items-center justify-center shrink-0">
+                                    <span class="text-xs text-gray-500 font-semibold">CT</span>
+                                </div>
+                                <div>
+                                    <h3 class="text-sm font-semibold text-gray-800">Cuerpo Técnico</h3>
+                                    <p class="text-xs text-gray-500">Hace 4 horas</p>
+                                </div>
+                            </div>
+                            <p class="text-sm text-gray-700 leading-relaxed">
+                                Se han publicado nuevos recursos y guías de acondicionamiento físico en la biblioteca digital. Recomendamos a todos los participantes revisarlos y descargarlos en formato PDF.
+                            </p>
+                            <div
+                                class="rounded-lg overflow-hidden border border-gray-200 bg-gray-100 h-48 flex items-center justify-center">
+                                <img src="https://images.unsplash.com/photo-1519766304817-4f37bda74a29?auto=format&fit=crop&w=1000&q=80"
+                                    alt="Entrenamientos" class="w-full h-full object-cover">
+                            </div>
+                        </div>
+
+                        <div class="border-t border-gray-100 pt-4 space-y-3">
+                            <div class="flex justify-between text-xs text-gray-500 px-1">
+                                <span class="font-semibold_1">8 Me gusta</span>
+                                <span>1 comentario</span>
+                            </div>
+                            <div class="grid grid-cols-2 gap-2 border-y border-gray-100 py-1.5">
+                                <button type="button" id="btnLikePost" data-index="1"
+                                    class="w-full py-1.5 bg-gray-50 hover:bg-gray-100 text-gray-700 font-medium text-xs rounded-lg transition-colors flex items-center justify-center space-x-1.5 cursor-pointer">
+                                    <i class="hear-icono ph ph-heart text-base text-red-500"></i>
+                                    <span>Me gusta</span>
+                                </button>
+                                <button type="button"
+                                    class="w-full py-1.5 bg-gray-50 hover:bg-gray-100 text-gray-700 font-medium text-xs rounded-lg transition-colors flex items-center justify-center space-x-1.5 cursor-pointer">
+                                    <i class="ph ph-chat-teardrop-text text-base text-blue-500"></i>
+                                    <span>Comentar</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- ============================================================== -->
+            <!-- SECCIÓN 2: ENCUESTAS (CONSULTA Y PARTICIPACIÓN - SIN CREAR)   -->
+            <!-- ============================================================== -->
+            <section id="Encuestas" class="space-y-6 hidden">
+                <div class="flex justify-between items-center">
+                    <div>
+                        <h1 class="text-xl sm:text-2xl font-bold text-gray-800">Encuestas</h1>
+                        <p class="text-xs text-gray-500 mt-0.5">Participa en las consultas y sondeos organizados por HoopPeru.</p>
+                    </div>
+                </div>
+
+                <!-- Contenedor / Tarjeta de Encuestas (Mismo estilo que inicio_Administracion.html) -->
+                <div class="bg-white rounded-xl shadow-md border border-gray-200 p-6 space-y-6">
+                    <div>
+                        <span
+                            class="text-xs font-semibold text-indigo-600 bg-indigo-50 px-2.5 py-1 rounded-full uppercase tracking-wider">
+                            Participación
+                        </span>
+                        <h2 class="text-lg font-semibold text-gray-800 mt-2">Encuestas Disponibles</h2>
+                        <p class="text-sm text-gray-500 mt-1">
+                            Revisa el listado de encuestas activas y emite tu opinión.
+                        </p>
+                    </div>
+
+                    <!-- Tabla de Encuestas para el Usuario -->
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr
+                                    class="border-b border-gray-200 text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                                    <th class="py-3 px-4">Nombre de la Encuesta</th>
+                                    <th class="py-3 px-4">Estado</th>
+                                    <th class="py-3 px-4 text-right">Acción</th>
+                                </tr>
+                            </thead>
+                            <tbody id="listaEncuestas" class="divide-y divide-gray-100 text-sm text-gray-700">
+                                <tr class="hover:bg-gray-50/50 transition-colors">
+                                    <td class="py-3.5 px-4 font-medium text-gray-800">
+                                        Encuesta sobre Disponibilidad y Horarios de Verano
+                                    </td>
+                                    <td class="py-3.5 px-4">
+                                        <span class="px-2.5 py-1 text-xs font-semibold rounded-full bg-green-50 text-green-700">
+                                            Activa
+                                        </span>
+                                    </td>
+                                    <td class="py-3.5 px-4 text-right">
+                                        <button type="button" onclick="document.getElementById('modalResponderEncuesta').classList.remove('hidden')"
+                                            class="px-3.5 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white font-medium text-xs rounded-lg transition-colors shadow-xs cursor-pointer">
+                                            Responder
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-gray-50/50 transition-colors">
+                                    <td class="py-3.5 px-4 font-medium text-gray-800">
+                                        Evaluación del Torneo Apertura y Sedes
+                                    </td>
+                                    <td class="py-3.5 px-4">
+                                        <span class="px-2.5 py-1 text-xs font-semibold rounded-full bg-green-50 text-green-700">
+                                            Activa
+                                        </span>
+                                    </td>
+                                    <td class="py-3.5 px-4 text-right">
+                                        <button type="button" onclick="document.getElementById('modalResponderEncuesta').classList.remove('hidden')"
+                                            class="px-3.5 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white font-medium text-xs rounded-lg transition-colors shadow-xs cursor-pointer">
+                                            Responder
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- MODAL PARA RESPONDER ENCUESTA -->
+                <div id="modalResponderEncuesta"
+                    class="fixed inset-0 z-50 flex items-center justify-center bg-gray-900/60 backdrop-blur-xs p-3 sm:p-4 hidden">
+                    <div class="bg-white rounded-2xl shadow-xl border border-gray-100 max-w-lg w-full overflow-hidden">
+                        <div class="bg-indigo-600 px-5 py-4 text-white flex justify-between items-center">
+                            <h3 class="text-base font-bold">Responder Encuesta</h3>
+                            <button type="button" onclick="document.getElementById('modalResponderEncuesta').classList.add('hidden')"
+                                class="text-white/80 hover:text-white text-xl cursor-pointer">&times;</button>
+                        </div>
+                        <form class="p-6 space-y-4" onsubmit="event.preventDefault(); alert('¡Gracias por enviar tus respuestas!'); document.getElementById('modalResponderEncuesta').classList.add('hidden');">
+                            <div>
+                                <h4 class="text-sm font-semibold text-gray-800 mb-1">Encuesta de Horarios</h4>
+                                <p class="text-xs text-gray-500">¿Qué turno consideras más conveniente para entrenamientos adicionales?</p>
+                            </div>
+                            <div class="space-y-2 text-sm text-gray-700">
+                                <label class="flex items-center space-x-2.5 p-2.5 border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer">
+                                    <input type="radio" name="turno" class="text-indigo-600" checked>
+                                    <span>Turno Tarde (16:00 - 18:00)</span>
+                                </label>
+                                <label class="flex items-center space-x-2.5 p-2.5 border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer">
+                                    <input type="radio" name="turno" class="text-indigo-600">
+                                    <span>Turno Noche (18:30 - 20:30)</span>
+                                </label>
+                            </div>
+                            <div class="flex justify-end space-x-3 pt-2">
+                                <button type="button" onclick="document.getElementById('modalResponderEncuesta').classList.add('hidden')"
+                                    class="px-4 py-2 border border-gray-200 rounded-lg text-xs font-medium text-gray-600 hover:bg-gray-100 cursor-pointer">
+                                    Cancelar
+                                </button>
+                                <button type="submit"
+                                    class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg text-xs font-semibold shadow-xs cursor-pointer">
+                                    Enviar Respuesta
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============================================================== -->
+            <!-- SECCIÓN 3: HORARIOS (CONSULTA Y ANUNCIOS - SIN CREAR/EDITAR)   -->
+            <!-- ============================================================== -->
+            <section id="Horarios" class="space-y-6 hidden">
+                <div class="flex justify-between items-center">
+                    <h1 class="text-xl sm:text-2xl font-bold text-gray-800">Horarios</h1>
+                </div>
+
+                <!-- Contenedor / Tarjeta de Horarios (Misma estructura que inicio_Administracion.html) -->
+                <div class="bg-white rounded-3xl shadow-xl border border-gray-100 p-6 sm:p-8 space-y-8 max-w-3xl mx-auto">
+                    <div>
+                        <span
+                            class="text-xs font-semibold text-green-600 bg-green-50 px-2.5 py-1 rounded-full uppercase tracking-wider">Disponibilidad</span>
+                        <h2 class="text-lg font-semibold text-gray-800 mt-2">Consulta de Horarios y Anuncios</h2>
+                        <p class="text-sm text-gray-500 mt-1">Revisa el cronograma semanal asignado y los anuncios informativos publicados por la administración.</p>
+                    </div>
+
+                    <!-- Panel Informativo de Anuncios -->
+                    <div class="bg-blue-50 border border-blue-200 rounded-2xl p-4 sm:p-5 flex items-start space-x-3">
+                        <i class="ph ph-info text-2xl text-blue-600 shrink-0 mt-0.5"></i>
+                        <div class="space-y-1">
+                            <h4 class="text-sm font-bold text-blue-900">Anuncio Oficial del Club</h4>
+                            <p class="text-xs text-blue-700 leading-relaxed">
+                                Los entrenamientos de los días miércoles se desarrollarán en el Coliseo Principal. Favor de llegar 10 minutos antes para el calentamiento preventivo.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Lista de Días y Horarios Asignados -->
+                    <div class="bg-gradient-to-br from-slate-50 via-white to-gray-50/50 p-6 rounded-2xl border border-gray-100 shadow-sm space-y-4">
+                        <div class="space-y-3">
+                            <span class="text-xs font-semibold text-gray-700 block">Días y horarios asignados para tu grupo</span>
+                            <div
+                                class="border border-gray-200/80 bg-white rounded-2xl overflow-hidden shadow-sm max-h-56 overflow-y-auto">
+                                <table class="w-full text-left border-collapse text-xs">
+                                    <thead class="bg-gray-50/80 sticky top-0 border-b border-gray-100">
+                                        <tr>
+                                            <th class="py-3 px-4 text-gray-600 font-semibold">Día</th>
+                                            <th class="py-3 px-4 text-gray-600 font-semibold">Horario</th>
+                                            <th class="py-3 px-4 text-gray-600 font-semibold">Cancha / Sede</th>
+                                            <th class="py-3 px-4 text-right text-gray-600 font-semibold">Estado</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="seccionHoariosActivo" class="divide-y divide-gray-50 text-gray-700">
+                                        <tr>
+                                            <td class="py-3 px-4 font-medium text-gray-900">Lunes</td>
+                                            <td class="py-3 px-4 font-mono text-gray-600">17:00 - 19:00</td>
+                                            <td class="py-3 px-4 text-gray-500">Cancha 1 (Techada)</td>
+                                            <td class="py-3 px-4 text-right">
+                                                <span class="px-2 py-0.5 text-[11px] font-semibold bg-green-50 text-green-700 rounded-full">Confirmado</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="py-3 px-4 font-medium text-gray-900">Miércoles</td>
+                                            <td class="py-3 px-4 font-mono text-gray-600">19:00 - 21:00</td>
+                                            <td class="py-3 px-4 text-gray-500">Coliseo Principal</td>
+                                            <td class="py-3 px-4 text-right">
+                                                <span class="px-2 py-0.5 text-[11px] font-semibold bg-green-50 text-green-700 rounded-full">Confirmado</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="py-3 px-4 font-medium text-gray-900">Viernes</td>
+                                            <td class="py-3 px-4 font-mono text-gray-600">18:00 - 20:00</td>
+                                            <td class="py-3 px-4 text-gray-500">Cancha 2</td>
+                                            <td class="py-3 px-4 text-right">
+                                                <span class="px-2 py-0.5 text-[11px] font-semibold bg-blue-50 text-blue-700 rounded-full">En Horario</span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============================================================== -->
+            <!-- SECCIÓN 4: RECURSOS (BIBLIOTECA DIGITAL - SIN BOTÓN SUBIR)     -->
+            <!-- ============================================================== -->
+            <section id="Recursos" class="space-y-6 hidden">
+                <div class="flex justify-between items-center">
+                    <h1 class="text-xl sm:text-2xl font-bold text-gray-800">Recursos</h1>
+                </div>
+
+                <!-- Contenedor / Tarjeta de Recursos (Idéntico a inicio_Administracion.html) -->
+                <div class="bg-white rounded-xl shadow-md border border-gray-200 p-6 space-y-6">
+                    <div>
+                        <span
+                            class="text-xs font-semibold text-blue-600 bg-blue-50 px-2.5 py-1 rounded-full uppercase tracking-wider">Biblioteca
+                            digital</span>
+                        <h2 class="text-lg font-semibold text-gray-800 mt-2">Material Informativo y Guías</h2>
+                        <p class="text-sm text-gray-500 mt-1">Explora nuestra colección de documentos, reglamentos y guías
+                            oficiales para tu consulta y descarga.</p>
+                    </div>
+
+                    <!-- Grid de Recursos (Libros / Archivos descargables) -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+
+                        <!-- Recurso 1: Reglamento -->
+                        <div
+                            class="border border-gray-200 rounded-lg p-4 flex flex-col justify-between space-y-4 hover:border-gray-300 transition-colors">
+                            <div class="space-y-2">
+                                <div
+                                    class="h-10 w-10 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center">
+                                    <i class="ph ph-book-open text-xl"></i>
+                                </div>
+                                <h3 class="text-sm font-semibold text-gray-800">Reglamento Oficial FIBA</h3>
+                                <p class="text-xs text-gray-500 line-clamp-2">Normas y directrices oficiales vigentes para los partidos y torneos.</p>
+                            </div>
+                            <button type="button"
+                                class="w-full py-1.5 bg-gray-50 hover:bg-gray-100 text-gray-700 font-medium text-xs rounded-lg transition-colors flex items-center justify-center space-x-1.5 border border-gray-200 cursor-pointer">
+                                <i class="ph ph-download-simple text-sm"></i>
+                                <span>Descargar PDF</span>
+                            </button>
+                        </div>
+
+                        <!-- Recurso 2: Documento de Prácticas -->
+                        <div
+                            class="border border-gray-200 rounded-lg p-4 flex flex-col justify-between space-y-4 hover:border-gray-300 transition-colors">
+                            <div class="space-y-2">
+                                <div
+                                    class="h-10 w-10 rounded-lg bg-green-50 text-green-600 flex items-center justify-center">
+                                    <i class="ph ph-file-text text-xl"></i>
+                                </div>
+                                <h3 class="text-sm font-semibold text-gray-800">Manual de Acondicionamiento Físico</h3>
+                                <p class="text-xs text-gray-500 line-clamp-2">Plan de entrenamiento, nutrición y prevención de lesiones deportivas.</p>
+                            </div>
+                            <button type="button"
+                                class="w-full py-1.5 bg-gray-50 hover:bg-gray-100 text-gray-700 font-medium text-xs rounded-lg transition-colors flex items-center justify-center space-x-1.5 border border-gray-200 cursor-pointer">
+                                <i class="ph ph-download-simple text-sm"></i>
+                                <span>Descargar PDF</span>
+                            </button>
+                        </div>
+
+                        <!-- Recurso 3: Fixture -->
+                        <div
+                            class="border border-gray-200 rounded-lg p-4 flex flex-col justify-between space-y-4 hover:border-gray-300 transition-colors">
+                            <div class="space-y-2">
+                                <div
+                                    class="h-10 w-10 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center">
+                                    <i class="ph ph-books text-xl"></i>
+                                </div>
+                                <h3 class="text-sm font-semibold text-gray-800">Fixture de Partidos Temporada</h3>
+                                <p class="text-xs text-gray-500 line-clamp-2">Calendario de fechas, rivales y sedes de la competencia.</p>
+                            </div>
+                            <button type="button"
+                                class="w-full py-1.5 bg-gray-50 hover:bg-gray-100 text-gray-700 font-medium text-xs rounded-lg transition-colors flex items-center justify-center space-x-1.5 border border-gray-200 cursor-pointer">
+                                <i class="ph ph-download-simple text-sm"></i>
+                                <span>Descargar PDF</span>
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============================================================== -->
+            <!-- SECCIÓN 5: PERFIL (INFORMACIÓN DEL USUARIO)                    -->
+            <!-- ============================================================== -->
+            <section id="Perfiles" class="space-y-6 hidden">
+                <div class="flex justify-between items-center">
+                    <h1 class="text-xl sm:text-2xl font-bold text-gray-800">Mi Perfil</h1>
+                </div>
+
+                <!-- Contenedor / Tarjeta de Perfil -->
+                <div class="bg-white rounded-xl shadow-md border border-gray-200 p-6 space-y-6">
+                    <div>
+                        <span
+                            class="text-xs font-semibold text-blue-600 bg-blue-50 px-2.5 py-1 rounded-full uppercase tracking-wider">Datos Personales</span>
+                        <h2 class="text-lg font-semibold text-gray-800 mt-2">Información del Usuario</h2>
+                        <p class="text-sm text-gray-500 mt-1">Detalles de tu cuenta registrados en la plataforma HoopPeru.</p>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row items-center sm:items-start space-y-4 sm:space-y-0 sm:space-x-6 pt-2">
+                        <!-- Avatar -->
+                        <div class="relative shrink-0">
+                            <div class="h-24 w-24 rounded-full bg-gray-100 border-2 border-blue-100 overflow-hidden flex items-center justify-center shadow-inner">
+                                <i class="ph ph-user text-4xl text-gray-400"></i>
+                            </div>
+                            <span class="absolute bottom-1 right-1 h-5 w-5 bg-green-500 border-2 border-white rounded-full" title="Activo"></span>
+                        </div>
+
+                        <!-- Datos del usuario -->
+                        <div class="flex-1 w-full space-y-3 text-sm">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div class="bg-gray-50 p-3.5 rounded-lg border border-gray-100">
+                                    <span class="text-xs font-medium text-gray-500 block">Nombre de Usuario:</span>
+                                    <span class="font-semibold text-gray-800 nameUser">Carlos Mendoza</span>
+                                </div>
+                                <div class="bg-gray-50 p-3.5 rounded-lg border border-gray-100">
+                                    <span class="text-xs font-medium text-gray-500 block">Correo Electrónico:</span>
+                                    <span class="font-semibold text-gray-800 text-xs">carlos.mendoza@hooppperu.pe</span>
+                                </div>
+                                <div class="bg-gray-50 p-3.5 rounded-lg border border-gray-100">
+                                    <span class="text-xs font-medium text-gray-500 block">Estado:</span>
+                                    <span class="px-2 py-0.5 text-xs font-semibold bg-green-50 text-green-700 rounded-full inline-block mt-0.5">ACTIVO</span>
+                                </div>
+                                <div class="bg-gray-50 p-3.5 rounded-lg border border-gray-100">
+                                    <span class="text-xs font-medium text-gray-500 block">Rol en la plataforma:</span>
+                                    <span class="font-semibold text-gray-800">Usuario / Deportista</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+    </div>
+
+    <!-- Footer (Idéntico a inicio_Administracion.html) -->
+    <footer class="bg-white border-t border-gray-200 py-4 text-center mt-auto">
+        <div>
+            <p class="text-sm text-gray-500">&copy; 2026 HoopPeru. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- ============================================================== -->
+    <!-- MODAL DE NOTIFICACIONES Y MODIFICACIONES                       -->
+    <!-- ============================================================== -->
+    <div id="modalNotificaciones"
+        class="fixed inset-0 z-50 flex items-center justify-center bg-gray-900/50 backdrop-blur-xs p-4 hidden">
+        <div
+            class="bg-white rounded-2xl shadow-2xl border border-gray-200 w-full max-w-md overflow-hidden transform transition-all animate-in fade-in zoom-in-95 duration-200">
+            
+            <!-- Cabecera del Modal -->
+            <div class="flex justify-between items-center px-6 py-4 border-b border-gray-100 bg-gray-50/80">
+                <div class="flex items-center space-x-2.5">
+                    <div class="p-2 bg-blue-50 text-blue-600 rounded-xl">
+                        <i class="ph ph-bell-ringing text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-base font-bold text-gray-800">Avisos y Modificaciones</h3>
+                        <p class="text-xs text-gray-500">Notificaciones oficiales de HoopPeru</p>
+                    </div>
+                </div>
+                <button type="button" id="btnCerrarNotificaciones"
+                    class="h-8 w-8 rounded-lg bg-white hover:bg-gray-100 text-gray-400 hover:text-gray-600 flex items-center justify-center border border-gray-200 transition-colors cursor-pointer text-lg">
+                    &times;
+                </button>
+            </div>
+
+            <!-- Cuerpo del Modal: Tarjeta de la Notificación con los datos solicitados -->
+            <div class="p-6 space-y-4">
+                <div class="bg-gradient-to-br from-blue-50/70 via-white to-gray-50 border border-blue-100 rounded-2xl p-4.5 space-y-3.5 shadow-xs">
+                    <div class="flex items-center justify-between">
+                        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-blue-100 text-blue-700">
+                            <span class="w-1.5 h-1.5 rounded-full bg-blue-600"></span>
+                            Convocatoria Oficial
+                        </span>
+                        <span class="text-xs font-mono font-medium text-gray-500 flex items-center gap-1">
+                            <i class="ph ph-calendar text-sm text-gray-400"></i>
+                            2026-10-12
+                        </span>
+                    </div>
+
+                    <div>
+                        <h4 class="text-base font-bold text-gray-900">Reunión de Hoop</h4>
+                    </div>
+
+                    <!-- Datos Específicos: Hora Inicio y Hora Final -->
+                    <div class="grid grid-cols-2 gap-2 pt-2 border-t border-blue-100/80 text-xs">
+                        <div class="bg-white p-2.5 rounded-xl border border-gray-100">
+                            <span class="text-gray-400 block text-[11px]">Hora de Inicio:</span>
+                            <span class="font-bold text-gray-800 font-mono text-sm">15:00:00</span>
+                        </div>
+                        <div class="bg-white p-2.5 rounded-xl border border-gray-100">
+                            <span class="text-gray-400 block text-[11px]">Hora Final:</span>
+                            <span class="font-bold text-gray-800 font-mono text-sm">17:00:00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer del Modal -->
+            <div class="px-6 py-3.5 bg-gray-50 border-t border-gray-100 flex justify-end">
+                <button type="button" id="btnEntendidoNotificaciones"
+                    class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium text-xs rounded-xl shadow-xs transition-colors cursor-pointer">
+                    Entendido
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===================== SCRIPTS INTERACTIVOS ===================== -->
+    <script>
+        // Mapeo de secciones idéntico al controlador Cl_vUserInicio.ts
+        const seccionPost = document.getElementById("Post");
+        const seccionEncuestas = document.getElementById("Encuestas");
+        const seccionHorarios = document.getElementById("Horarios");
+        const seccionRecursos = document.getElementById("Recursos");
+        const seccionPerfiles = document.getElementById("Perfiles");
+
+        const btnMenuInicio = document.querySelectorAll("#ButtonMenuInicio");
+        const btnMenuEncuesta = document.querySelectorAll("#ButtonMenuEncuesta");
+        const btnMenuHorarios = document.querySelectorAll("#ButtonMenuHorarios");
+        const btnMenuRecursos = document.querySelectorAll("#ButtonMenuRecursos");
+        const btnMenuPerfiles = document.querySelectorAll("#ButtonMenuPerfiles");
+
+        function estadoSeccion(seccion) {
+            seccionPost.classList.add("hidden");
+            seccionEncuestas.classList.add("hidden");
+            seccionHorarios.classList.add("hidden");
+            seccionRecursos.classList.add("hidden");
+            seccionPerfiles.classList.add("hidden");
+
+            const allButtons = [
+                { btns: btnMenuInicio, key: 'post' },
+                { btns: btnMenuEncuesta, key: 'encuestas' },
+                { btns: btnMenuHorarios, key: 'horarios' },
+                { btns: btnMenuRecursos, key: 'recursos' },
+                { btns: btnMenuPerfiles, key: 'perfiles' },
+            ];
+
+            allButtons.forEach(item => {
+                item.btns.forEach(b => {
+                    if (item.key === seccion) {
+                        b.classList.add("text-blue-600", "bg-blue-50", "font-semibold");
+                        b.classList.remove("text-gray-600", "hover:bg-gray-100");
+                    } else {
+                        b.classList.remove("text-blue-600", "bg-blue-50", "font-semibold");
+                        b.classList.add("text-gray-600", "hover:bg-gray-100");
+                    }
+                });
+            });
+
+            switch (seccion) {
+                case "post":
+                    seccionPost.classList.remove("hidden");
+                    break;
+                case "encuestas":
+                    seccionEncuestas.classList.remove("hidden");
+                    break;
+                case "horarios":
+                    seccionHorarios.classList.remove("hidden");
+                    break;
+                case "recursos":
+                    seccionRecursos.classList.remove("hidden");
+                    break;
+                case "perfiles":
+                    seccionPerfiles.classList.remove("hidden");
+                    break;
+            }
+        }
+
+        btnMenuInicio.forEach(b => b.addEventListener("click", () => estadoSeccion("post")));
+        btnMenuEncuesta.forEach(b => b.addEventListener("click", () => estadoSeccion("encuestas")));
+        btnMenuHorarios.forEach(b => b.addEventListener("click", () => estadoSeccion("horarios")));
+        btnMenuRecursos.forEach(b => b.addEventListener("click", () => estadoSeccion("recursos")));
+        btnMenuPerfiles.forEach(b => b.addEventListener("click", () => estadoSeccion("perfiles")));
+
+        // Control del Modal de Notificaciones y Modificaciones
+        const modalNotificaciones = document.getElementById("modalNotificaciones");
+        const btnCampana = document.getElementById("btnCampanaNotificaciones");
+        const btnCerrarNotif = document.getElementById("btnCerrarNotificaciones");
+        const btnEntendidoNotif = document.getElementById("btnEntendidoNotificaciones");
+
+        const toggleNotificaciones = (show) => {
+            if (show) {
+                modalNotificaciones.classList.remove("hidden");
+            } else {
+                modalNotificaciones.classList.add("hidden");
+            }
+        };
+
+        if (btnCampana) btnCampana.addEventListener("click", () => toggleNotificaciones(true));
+        if (btnCerrarNotif) btnCerrarNotif.addEventListener("click", () => toggleNotificaciones(false));
+        if (btnEntendidoNotif) btnEntendidoNotif.addEventListener("click", () => toggleNotificaciones(false));
+
+        // Cerrar modal al hacer clic en el backdrop oscuro
+        if (modalNotificaciones) {
+            modalNotificaciones.addEventListener("click", (e) => {
+                if (e.target === modalNotificaciones) {
+                    toggleNotificaciones(false);
+                }
+            });
+        }
+
+        // Interacción visual básica de Likes para la maqueta
+        document.querySelectorAll('#btnLikePost').forEach(btn => {
+            btn.addEventListener("click", () => {
+                const heart = btn.querySelector(".hear-icono");
+                const idx = btn.getAttribute("data-index");
+                const counter = document.querySelector(`.font-semibold_${idx}`);
+                if (heart) {
+                    const isLiked = heart.classList.toggle("ph-fill");
+                    if (counter) {
+                        let num = parseInt(counter.textContent) || 0;
+                        counter.textContent = `${isLiked ? num + 1 : Math.max(0, num - 1)} Me gusta`;
+                    }
+                }
+            });
+        });
+    </script>
+
+</body>
+
+</html>

@@ -1070,87 +1070,166 @@
                 </div>
 
                 <!-- Contenedor / Tarjeta del Formulario -->
-                <div class="bg-white rounded-xl shadow-md border border-gray-200 p-6 space-y-6">
-                    <div>
-                        <span
-                            class="text-xs font-semibold text-blue-600 bg-blue-50 px-2.5 py-1 rounded-full uppercase tracking-wider">Panel
-                            de control</span>
-                        <h2 class="text-lg font-semibold text-gray-800 mt-2">Actualizar Datos de Usuario</h2>
-                        <p class="text-sm text-gray-500 mt-1">Modifica los detalles del usuario, su rol, programa y
-                            estatus en el sistema.</p>
-                    </div>
+                <div class="space-y-8">
+    
+    <!-- 1. SECCIÓN PRINCIPAL: Actualizar Datos de Usuario -->
+    <div class="bg-white rounded-xl shadow-md border border-gray-200 p-6 space-y-6">
+        <div>
+            <span class="text-xs font-semibold text-blue-600 bg-blue-50 px-2.5 py-1 rounded-full uppercase tracking-wider">Panel de control</span>
+            <h2 class="text-lg font-semibold text-gray-800 mt-2">Actualizar Datos de Usuario</h2>
+            <p class="text-sm text-gray-500 mt-1">Modifica los detalles del usuario, su rol, programa y estatus en el sistema.</p>
+        </div>
 
-                    <!-- Formulario con Tailwind CSS -->
-                    <form class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <form class="grid grid-cols-1 sm:grid-cols-2 gap-4">
 
-                        <!-- Nombre user -->
-                        <div class="space-y-1.5">
-                            <label for="nombre"
-                                class="block text-xs font-semibold text-gray-700 uppercase tracking-wider">Nombre
-                                user</label>
-                            <input type="text" id="nombre" name="nombre" placeholder="Ej. Ana Pérez" required
-                                class="w-full px-3.5 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors bg-gray-50/50">
-                        </div>
+            <!-- Nombre user -->
+            <div class="space-y-1.5">
+                <label for="nombre" class="block text-xs font-semibold text-gray-700 uppercase tracking-wider">Nombre user</label>
+                <input type="text" id="nombre" name="nombre" placeholder="Ej. Ana Pérez" required
+                    class="w-full px-3.5 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors bg-gray-50/50">
+            </div>
 
-                        <!-- Especialización -->
-                        <div class="space-y-1.5">
-                            <label for="especializacion"
-                                class="block text-xs font-semibold text-gray-700 uppercase tracking-wider">Especialización</label>
-                            <input type="text" id="especializacion" name="especializacion"
-                                placeholder="Ej. Desarrollo Web"
-                                class="w-full px-3.5 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors bg-gray-50/50">
-                        </div>
+            <!-- Especialización -->
+            <div class="space-y-1.5">
+                <label for="especializacion" class="block text-xs font-semibold text-gray-700 uppercase tracking-wider">Especialización</label>
+                <input type="text" id="especializacion" name="especializacion" placeholder="Ej. Desarrollo Web"
+                    class="w-full px-3.5 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors bg-gray-50/50">
+            </div>
 
-                        <!-- Programa -->
-                        <div class="space-y-1.5">
-                            <label for="programa"
-                                class="block text-xs font-semibold text-gray-700 uppercase tracking-wider">Programa</label>
-                            <select id="programa" name="programa" required
-                                class="w-full px-3.5 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors bg-gray-50/50 text-gray-700">
-                                <option value="" disabled selected>Seleccione un programa</option>
-                                <option value="ingenieria">Ingeniería de Software</option>
-                                <option value="diseno">Diseño Gráfico</option>
-                                <option value="marketing">Marketing Digital</option>
-                            </select>
-                        </div>
+            <!-- Programa (Cargado dinámicamente) -->
+            <div class="space-y-1.5">
+                <label for="programa" class="block text-xs font-semibold text-gray-700 uppercase tracking-wider">Programa</label>
+                <select id="programa" name="programa" required
+                    class="w-full px-3.5 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors bg-gray-50/50 text-gray-700">
+                    <option value="" disabled selected>Seleccione un programa</option>
+                    <option value="ingenieria">Ingeniería de Software</option>
+                    <option value="diseno">Diseño Gráfico</option>
+                    <option value="marketing">Marketing Digital</option>
+                </select>
+            </div>
 
-                        <!-- Cargo -->
-                        <div class="space-y-1.5">
-                            <label for="cargo"
-                                class="block text-xs font-semibold text-gray-700 uppercase tracking-wider">Cargo</label>
-                            <select id="cargo" name="cargo" required
-                                class="w-full px-3.5 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors bg-gray-50/50 text-gray-700">
-                                <option value="" disabled selected>Seleccione un cargo</option>
-                                <option value="administrador">Administrador</option>
-                                <option value="docente">Docente / Tutor</option>
-                                <option value="estudiante">Estudiante</option>
-                            </select>
-                        </div>
+            <!-- Cargo (Cargado dinámicamente) -->
+            <div class="space-y-1.5">
+                <label for="cargo" class="block text-xs font-semibold text-gray-700 uppercase tracking-wider">Cargo</label>
+                <select id="cargo" name="cargo" required
+                    class="w-full px-3.5 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors bg-gray-50/50 text-gray-700">
+                    <option value="" disabled selected>Seleccione un cargo</option>
+                    <option value="administrador">Administrador</option>
+                    <option value="docente">Docente / Tutor</option>
+                    <option value="estudiante">Estudiante</option>
+                </select>
+            </div>
 
-                        <!-- Estatus (Ocupa todo el ancho en pantallas medianas o se mantiene en grid) -->
-                        <div class="space-y-1.5 sm:col-span-2">
-                            <label for="estatus"
-                                class="block text-xs font-semibold text-gray-700 uppercase tracking-wider">Estatus</label>
-                            <select id="estatus" name="estatus" required
-                                class="w-full px-3.5 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors bg-gray-50/50 text-gray-700">
-                                <option value="" disabled selected>Seleccione el estatus</option>
-                                <option value="activo">Activo</option>
-                                <option value="inactivo">Inactivo</option>
-                                <option value="suspendido">Suspendido</option>
-                            </select>
-                        </div>
+            <!-- Estatus -->
+            <div class="space-y-1.5 sm:col-span-2">
+                <label for="estatus" class="block text-xs font-semibold text-gray-700 uppercase tracking-wider">Estatus</label>
+                <select id="estatus" name="estatus" required
+                    class="w-full px-3.5 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors bg-gray-50/50 text-gray-700">
+                    <option value="" disabled selected>Seleccione el estatus</option>
+                    <option value="activo">Activo</option>
+                    <option value="inactivo">Inactivo</option>
+                    <option value="suspendido">Suspendido</option>
+                </select>
+            </div>
 
-                        <!-- Botón de Actualizar -->
-                        <div class="sm:col-span-2 pt-2 flex justify-end">
-                            <button type="submit"
-                                class="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-medium text-xs rounded-lg transition-colors flex items-center justify-center space-x-1.5 shadow-sm active:scale-[0.98]">
-                                <i class="ph ph-check text-sm"></i>
-                                <span>Actualizar</span>
-                            </button>
-                        </div>
+            <!-- Botón de Actualizar -->
+            <div class="sm:col-span-2 pt-2 flex justify-end">
+                <button type="submit"
+                    class="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-medium text-xs rounded-lg transition-colors flex items-center justify-center space-x-1.5 shadow-sm active:scale-[0.98]">
+                    <i class="ph ph-check text-sm"></i>
+                    <span>Actualizar</span>
+                </button>
+            </div>
 
-                    </form>
+        </form>
+    </div>
+
+    <!-- 2. SUBSECCIONES DE GESTIÓN DE CATÁLOGOS -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+        <!-- Gestión de Programas -->
+        <div class="bg-white rounded-xl shadow-md border border-gray-200 p-6 space-y-4">
+            <div>
+                <span class="text-xs font-semibold text-purple-600 bg-purple-50 px-2.5 py-1 rounded-full uppercase tracking-wider">Catálogo</span>
+                <h3 class="text-base font-semibold text-gray-800 mt-2">Gestionar Programas</h3>
+                <p class="text-xs text-gray-500 mt-0.5">Agrega o elimina los programas disponibles en los selectores.</p>
+            </div>
+
+            <!-- Input para agregar -->
+            <form class="flex gap-2">
+                <input type="text" placeholder="Nuevo programa..." required
+                    class="w-full px-3.5 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-colors bg-gray-50/50">
+                <button type="submit" class="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white font-medium text-xs rounded-lg transition-colors whitespace-nowrap shadow-sm">
+                    Agregar
+                </button>
+            </form>
+
+            <!-- Lista de existentes con opción de borrar -->
+            <div class="border border-gray-100 rounded-lg divide-y divide-gray-100 max-h-48 overflow-y-auto">
+                <div class="flex items-center justify-between px-3.5 py-2.5 text-sm text-gray-700 hover:bg-gray-50">
+                    <span>Ingeniería de Software</span>
+                    <button type="button" class="text-gray-400 hover:text-red-600 transition-colors" title="Eliminar">
+                        <i class="ph ph-trash text-base"></i>
+                    </button>
                 </div>
+                <div class="flex items-center justify-between px-3.5 py-2.5 text-sm text-gray-700 hover:bg-gray-50">
+                    <span>Diseño Gráfico</span>
+                    <button type="button" class="text-gray-400 hover:text-red-600 transition-colors" title="Eliminar">
+                        <i class="ph ph-trash text-base"></i>
+                    </button>
+                </div>
+                <div class="flex items-center justify-between px-3.5 py-2.5 text-sm text-gray-700 hover:bg-gray-50">
+                    <span>Marketing Digital</span>
+                    <button type="button" class="text-gray-400 hover:text-red-600 transition-colors" title="Eliminar">
+                        <i class="ph ph-trash text-base"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Gestión de Cargos -->
+        <div class="bg-white rounded-xl shadow-md border border-gray-200 p-6 space-y-4">
+            <div>
+                <span class="text-xs font-semibold text-amber-600 bg-amber-50 px-2.5 py-1 rounded-full uppercase tracking-wider">Catálogo</span>
+                <h3 class="text-base font-semibold text-gray-800 mt-2">Gestionar Cargos</h3>
+                <p class="text-xs text-gray-500 mt-0.5">Agrega o elimina los cargos disponibles en el sistema.</p>
+            </div>
+
+            <!-- Input para agregar -->
+            <form class="flex gap-2">
+                <input type="text" placeholder="Nuevo cargo..." required
+                    class="w-full px-3.5 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-colors bg-gray-50/50">
+                <button type="submit" class="px-4 py-2 bg-amber-600 hover:bg-amber-700 text-white font-medium text-xs rounded-lg transition-colors whitespace-nowrap shadow-sm">
+                    Agregar
+                </button>
+            </form>
+
+            <!-- Lista de existentes con opción de borrar -->
+            <div class="border border-gray-100 rounded-lg divide-y divide-gray-100 max-h-48 overflow-y-auto">
+                <div class="flex items-center justify-between px-3.5 py-2.5 text-sm text-gray-700 hover:bg-gray-50">
+                    <span>Administrador</span>
+                    <button type="button" class="text-gray-400 hover:text-red-600 transition-colors" title="Eliminar">
+                        <i class="ph ph-trash text-base"></i>
+                    </button>
+                </div>
+                <div class="flex items-center justify-between px-3.5 py-2.5 text-sm text-gray-700 hover:bg-gray-50">
+                    <span>Docente / Tutor</span>
+                    <button type="button" class="text-gray-400 hover:text-red-600 transition-colors" title="Eliminar">
+                        <i class="ph ph-trash text-base"></i>
+                    </button>
+                </div>
+                <div class="flex items-center justify-between px-3.5 py-2.5 text-sm text-gray-700 hover:bg-gray-50">
+                    <span>Estudiante</span>
+                    <button type="button" class="text-gray-400 hover:text-red-600 transition-colors" title="Eliminar">
+                        <i class="ph ph-trash text-base"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
             </section>
 
         </main>

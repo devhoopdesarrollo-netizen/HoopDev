@@ -15,7 +15,7 @@ export default class Cl_directory {
                 break;
 
             default:
-                window.location.href = "./ventanas/inicio.html";
+                window.location.href = "./ventanas/inicio_usuario.html";
                 break;
         }
     }
