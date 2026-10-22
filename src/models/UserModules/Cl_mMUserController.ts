@@ -1,4 +1,9 @@
 import Controller from "../../controllers/Controller.js";
+import Cargo_New from "../../modules/ControlerUserModel/Cargos_new.js";
+import Programas_load from "../../modules/ControlerUserModel/Programas_Load.js";
+import Programas_New from "../../modules/ControlerUserModel/Programas_new.js";
+import User_control_load from "../../modules/ControlerUserModel/User_control_Load.js";
+import Cargos_load from "../../modules/ControlerUserModel/User_control_Load.js";
 import Encuenta_New from "../../modules/Encuentas_Moduls/Encuenta_New.js";
 import Encuetas_load from "../../modules/Encuentas_Moduls/Encuetas_load.js";
 import Anuncios_load from "../../modules/Horarios_Moduls/Anuncios_load.js";
@@ -21,14 +26,19 @@ export default class Cl_mMUserController {
     private _storage: StorageImagen;
     private _postNew: Post_New;
     private _postLoad: Post_Load;
-    private _Encuesta:Encuenta_New;
-    private _Encuesta_load:Encuetas_load;
-    private _horario_new:Horarios_New;
-    private _horarios_load:Horarios_load;
-    private _anuncios_new:anuncios_new;
-      private _anuncios_load:Anuncios_load;
-    private _toolsUser:userList_moduls;
-    private EncuestaPreguntas:iPreguntas[] = []
+    private _Encuesta: Encuenta_New;
+    private _Encuesta_load: Encuetas_load;
+    private _horario_new: Horarios_New;
+    private _horarios_load: Horarios_load;
+    private _anuncios_new: anuncios_new;
+    private _anuncios_load: Anuncios_load;
+    private _toolsUser: userList_moduls;
+    private _cargo_load:Cargos_load;
+    private _cargo_new:Cargo_New;
+    private _programa_load:Programas_load;
+    private _programas_new:Programas_New;
+    private _User_Controller: User_control_load;
+    private EncuestaPreguntas: iPreguntas[] = []
     public controller: Controller;
     public nameUser: string = "";
     public fk_user: string = "";
@@ -46,8 +56,9 @@ export default class Cl_mMUserController {
         this._horarios_load = new Horarios_load();
         this._anuncios_new = new anuncios_new();
         this._anuncios_load = new Anuncios_load();
+
         this._toolsUser = new userList_moduls();
-        
+
         const datosGuardados = localStorage.getItem("userSeccion")
         if (datosGuardados) {
             try {
@@ -60,36 +71,36 @@ export default class Cl_mMUserController {
             }
         }
         this.postResponse()
-        
 
-    }   
-    
 
-    cargarNuevaPregunta(pregunta:string){
-        const preguntas:iPreguntas={
-            texto_pregunta:pregunta
+    }
+
+
+    cargarNuevaPregunta(pregunta: string) {
+        const preguntas: iPreguntas = {
+            texto_pregunta: pregunta
         }
         this.EncuestaPreguntas.push(preguntas)
 
     }
-    borrarPreguntaa(preguntaSelecionada:iPreguntas){
+    borrarPreguntaa(preguntaSelecionada: iPreguntas) {
         const index = this.EncuestaPreguntas.indexOf(preguntaSelecionada)
-        if(index !== -1){
-            this.EncuestaPreguntas.splice(index,1)
+        if (index !== -1) {
+            this.EncuestaPreguntas.splice(index, 1)
         }
 
     }
-    reinciarPreguntas(){
+    reinciarPreguntas() {
         this.EncuestaPreguntas = []
     }
-    mostrarPreguntasFrom(){
+    mostrarPreguntasFrom() {
         return this.EncuestaPreguntas
     }
-    async cargarListaUser():Promise<iUserList[]>{
+    async cargarListaUser(): Promise<iUserList[]> {
         const nomres = this._toolsUser.cargarUser()
         return nomres
-    }  
-    
+    }
+
     async agregarUser(datos: iUsuarioNew): Promise<boolean> {
         const datosPreparados = new Cl_mNewUser(datos);
         return await this._UserAccion.createUser(datosPreparados.toJSON());
@@ -114,37 +125,37 @@ export default class Cl_mMUserController {
         const likeResponse = await this._postNew.likePost(id_post)
         return likeResponse
     }
-    async newEncuetas(Tematica:iEncuesta,Preguntas:iPreguntas[]){
-        const NewEncuetas = await this._Encuesta.crearTematica(Tematica,Preguntas)
+    async newEncuetas(Tematica: iEncuesta, Preguntas: iPreguntas[]) {
+        const NewEncuetas = await this._Encuesta.crearTematica(Tematica, Preguntas)
         this.reinciarPreguntas
     }
-    async cargarEncuetas_name(){
+    async cargarEncuetas_name() {
         const EncuentasName = await this._Encuesta_load.MostrarEncuetasActuales()
         return EncuentasName
 
     }
-    async crearHorario(date:iHorario){
+    async crearHorario(date: iHorario) {
         const infUser = await this._horario_new.crearHorarioUser(date)
         return infUser
     }
-    async buscarHorarios(id:string){
+    async buscarHorarios(id: string) {
         const infUser = await this._horarios_load.cargarHorarios(id)
-        return infUser 
+        return infUser
     }
-    async borrarDia(id:string){
+    async borrarDia(id: string) {
         const deletday = await this._horarios_load.deleteDay(id)
         return deletday
     }
-    async crearAnuncio(dat:iAnuncios){
+    async crearAnuncio(dat: iAnuncios) {
         const NewAnuncio = await this._anuncios_new.newAnuncio(dat)
         return NewAnuncio
     }
-    async cargarAnuncio(){
+    async cargarAnuncio() {
         const loadAnuncio = await this._anuncios_load.cargarAnuncios()
         return loadAnuncio
     }
-    async deleteAnuncio(id:string){
-        const deletAnuncio =  await this._anuncios_load.delectAnuncio(id)
+    async deleteAnuncio(id: string) {
+        const deletAnuncio = await this._anuncios_load.delectAnuncio(id)
         return deletAnuncio
     }
 }

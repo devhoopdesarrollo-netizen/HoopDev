@@ -33,23 +33,23 @@
         <ul class="flex space-x-3 whitespace-nowrap">
             <li>
                 <a id="ButtonMenuInicio"
-                    class="px-3 py-1.5 rounded-lg text-xs font-semibold text-blue-600 bg-blue-50 inline-block">Inicio</a>
+                    class="px-3 py-1.5 rounded-lg text-xs font-semibold text-blue-600 bg-blue-50 inline-block cursor-pointer">Inicio</a>
             </li>
             <li>
                 <a id="ButtonMenuEncuesta"
-                    class="px-3 py-1.5 rounded-lg text-xs font-medium text-gray-600 hover:bg-gray-100 inline-block">Encuestas</a>
+                    class="px-3 py-1.5 rounded-lg text-xs font-medium text-gray-600 hover:bg-gray-100 inline-block cursor-pointer">Encuestas</a>
             </li>
             <li>
                 <a id="ButtonMenuHorarios"
-                    class="px-3 py-1.5 rounded-lg text-xs font-medium text-gray-600 hover:bg-gray-100 inline-block">Horarios</a>
+                    class="px-3 py-1.5 rounded-lg text-xs font-medium text-gray-600 hover:bg-gray-100 inline-block cursor-pointer">Horarios</a>
             </li>
             <li>
                 <a id="ButtonMenuRecursos"
-                    class="px-3 py-1.5 rounded-lg text-xs font-medium text-gray-600 hover:bg-gray-100 inline-block">Recursos</a>
+                    class="px-3 py-1.5 rounded-lg text-xs font-medium text-gray-600 hover:bg-gray-100 inline-block cursor-pointer">Recursos</a>
             </li>
             <li>
-                <a id="ButtonMenuPerfiles" w
-                    class="px-3 py-1.5 rounded-lg text-xs font-medium text-gray-600 hover:bg-gray-100 inline-block">Perfiles</a>
+                <a id="ButtonMenuPerfiles"
+                    class="px-3 py-1.5 rounded-lg text-xs font-medium text-gray-600 hover:bg-gray-100 inline-block cursor-pointer">Administración</a>
             </li>
         </ul>
     </nav>
@@ -65,37 +65,37 @@
                 <ul class="space-y-1">
                     <li>
                         <a id="ButtonMenuInicio"
-                            class="flex items-center space-x-3 px-3 py-2 rounded-lg text-sm font-semibold text-blue-600 bg-blue-50 transition-colors">
+                            class="flex items-center space-x-3 px-3 py-2 rounded-lg text-sm font-semibold text-blue-600 bg-blue-50 transition-colors cursor-pointer">
                             <i class="ph ph-house text-lg"></i>
                             <span>Inicio</span>
                         </a>
                     </li>
                     <li>
                         <a id="ButtonMenuEncuesta"
-                            class="flex items-center space-x-3 px-3 py-2 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-100 hover:text-gray-900 transition-colors">
+                            class="flex items-center space-x-3 px-3 py-2 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-100 hover:text-gray-900 transition-colors cursor-pointer">
                             <i class="ph ph-clipboard-text text-lg"></i>
                             <span>Encuestas</span>
                         </a>
                     </li>
                     <li>
                         <a id="ButtonMenuHorarios"
-                            class="flex items-center space-x-3 px-3 py-2 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-100 hover:text-gray-900 transition-colors">
+                            class="flex items-center space-x-3 px-3 py-2 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-100 hover:text-gray-900 transition-colors cursor-pointer">
                             <i class="ph ph-calendar text-lg"></i>
                             <span>Horarios</span>
                         </a>
                     </li>
                     <li>
                         <a id="ButtonMenuRecursos"
-                            class="flex items-center space-x-3 px-3 py-2 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-100 hover:text-gray-900 transition-colors">
+                            class="flex items-center space-x-3 px-3 py-2 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-100 hover:text-gray-900 transition-colors cursor-pointer">
                             <i class="ph ph-folder-open text-lg"></i>
                             <span>Recursos</span>
                         </a>
                     </li>
                     <li>
                         <a id="ButtonMenuPerfiles"
-                            class="flex items-center space-x-3 px-3 py-2 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-100 hover:text-gray-900 transition-colors">
+                            class="flex items-center space-x-3 px-3 py-2 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-100 hover:text-gray-900 transition-colors cursor-pointer">
                             <i class="ph ph-user-gear text-lg"></i>
-                            <span>Perfiles</span>
+                            <span>Administración</span>
                         </a>
                     </li>
                 </ul>
@@ -1065,171 +1065,236 @@
             </section>
             <section id="Perfiles" class="space-y-6">
                 <!-- Título de la sección -->
-                <div class="flex justify-between items-center">
-                    <h1 class="text-xl sm:text-2xl font-bold text-gray-800">Administración de Usuarios</h1>
+                <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                    <div>
+                        <h1 class="text-xl sm:text-2xl font-bold text-gray-800">Administración de Usuarios</h1>
+                        <p class="text-xs text-gray-500 mt-0.5">Gestión de datos de usuarios, roles, programas académicos y catálogo del sistema.</p>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-blue-50 text-blue-700 border border-blue-100">
+                            <i class="ph ph-shield-check text-sm text-blue-600"></i>
+                            <span>Panel Administrativo</span>
+                        </span>
+                    </div>
                 </div>
 
                 <!-- Contenedor / Tarjeta del Formulario -->
-                <div class="space-y-8">
+                <div class="space-y-6">
     
-    <!-- 1. SECCIÓN PRINCIPAL: Actualizar Datos de Usuario -->
-    <div class="bg-white rounded-xl shadow-md border border-gray-200 p-6 space-y-6">
-        <div>
-            <span class="text-xs font-semibold text-blue-600 bg-blue-50 px-2.5 py-1 rounded-full uppercase tracking-wider">Panel de control</span>
-            <h2 class="text-lg font-semibold text-gray-800 mt-2">Actualizar Datos de Usuario</h2>
-            <p class="text-sm text-gray-500 mt-1">Modifica los detalles del usuario, su rol, programa y estatus en el sistema.</p>
-        </div>
+                    <!-- 1. SECCIÓN PRINCIPAL: Actualizar Datos de Usuario -->
+                    <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 space-y-6">
+                        <div class="flex items-start justify-between border-b border-gray-100 pb-4">
+                            <div>
+                                <span class="text-xs font-semibold text-blue-600 bg-blue-50 px-2.5 py-1 rounded-full uppercase tracking-wider">Gestión de usuarios</span>
+                                <h2 class="text-lg font-semibold text-gray-800 mt-2">Actualizar Datos de Usuario</h2>
+                                <p class="text-xs sm:text-sm text-gray-500 mt-0.5">Modifica los detalles del usuario, su rol, programa y estatus en el sistema.</p>
+                            </div>
+                            <div class="hidden sm:flex h-10 w-10 rounded-xl bg-blue-50 text-blue-600 items-center justify-center shrink-0 border border-blue-100">
+                                <i class="ph ph-user-gear text-xl"></i>
+                            </div>
+                        </div>
 
-        <form class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <form class="grid grid-cols-1 sm:grid-cols-2 gap-5">
 
-            <!-- Nombre user -->
-            <div class="space-y-1.5">
-                <label for="nombre" class="block text-xs font-semibold text-gray-700 uppercase tracking-wider">Nombre user</label>
-                <input type="text" id="nombre" name="nombre" placeholder="Ej. Ana Pérez" required
-                    class="w-full px-3.5 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors bg-gray-50/50">
-            </div>
+                            <!-- Nombre user -->
+                            <div class="space-y-1.5">
+                                <label for="nombre" class="block text-xs font-semibold text-gray-600 uppercase tracking-wider">Nombre de Usuario</label>
+                                <div class="relative">
+                                    <input type="text" id="nombre" name="nombre" placeholder="Ej. Ana Pérez" required
+                                        class="w-full px-3.5 py-2.5 text-sm bg-gray-50/70 border border-gray-200 rounded-xl focus:bg-white focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all text-gray-800 placeholder:text-gray-400">
+                                </div>
+                            </div>
 
-            <!-- Especialización -->
-            <div class="space-y-1.5">
-                <label for="especializacion" class="block text-xs font-semibold text-gray-700 uppercase tracking-wider">Especialización</label>
-                <input type="text" id="especializacion" name="especializacion" placeholder="Ej. Desarrollo Web"
-                    class="w-full px-3.5 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors bg-gray-50/50">
-            </div>
+                            <!-- Especialización -->
+                            <div class="space-y-1.5">
+                                <label for="especializacion" class="block text-xs font-semibold text-gray-600 uppercase tracking-wider">Especialización</label>
+                                <div class="relative">
+                                    <input type="text" id="especializacion" name="especializacion" placeholder="Ej. Desarrollo Web"
+                                        class="w-full px-3.5 py-2.5 text-sm bg-gray-50/70 border border-gray-200 rounded-xl focus:bg-white focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all text-gray-800 placeholder:text-gray-400">
+                                </div>
+                            </div>
 
-            <!-- Programa (Cargado dinámicamente) -->
-            <div class="space-y-1.5">
-                <label for="programa" class="block text-xs font-semibold text-gray-700 uppercase tracking-wider">Programa</label>
-                <select id="programa" name="programa" required
-                    class="w-full px-3.5 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors bg-gray-50/50 text-gray-700">
-                    <option value="" disabled selected>Seleccione un programa</option>
-                    <option value="ingenieria">Ingeniería de Software</option>
-                    <option value="diseno">Diseño Gráfico</option>
-                    <option value="marketing">Marketing Digital</option>
-                </select>
-            </div>
+                            <!-- Programa (Cargado dinámicamente) -->
+                            <div class="space-y-1.5">
+                                <label for="programa" class="block text-xs font-semibold text-gray-600 uppercase tracking-wider">Programa Académico</label>
+                                <div class="relative">
+                                    <select id="programa" name="programa" required
+                                        class="w-full px-3.5 py-2.5 pr-10 text-sm bg-gray-50/70 border border-gray-200 rounded-xl focus:bg-white focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all text-gray-700 appearance-none cursor-pointer">
+                                        <option value="" disabled selected>Seleccione un programa</option>
+                                        <option value="ingenieria">Ingeniería de Software</option>
+                                        <option value="diseno">Diseño Gráfico</option>
+                                        <option value="marketing">Marketing Digital</option>
+                                    </select>
+                                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3.5 text-gray-400">
+                                        <i class="ph ph-caret-down text-base"></i>
+                                    </div>
+                                </div>
+                            </div>
 
-            <!-- Cargo (Cargado dinámicamente) -->
-            <div class="space-y-1.5">
-                <label for="cargo" class="block text-xs font-semibold text-gray-700 uppercase tracking-wider">Cargo</label>
-                <select id="cargo" name="cargo" required
-                    class="w-full px-3.5 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors bg-gray-50/50 text-gray-700">
-                    <option value="" disabled selected>Seleccione un cargo</option>
-                    <option value="administrador">Administrador</option>
-                    <option value="docente">Docente / Tutor</option>
-                    <option value="estudiante">Estudiante</option>
-                </select>
-            </div>
+                            <!-- Cargo (Cargado dinámicamente) -->
+                            <div class="space-y-1.5">
+                                <label for="cargo" class="block text-xs font-semibold text-gray-600 uppercase tracking-wider">Cargo / Rol</label>
+                                <div class="relative">
+                                    <select id="cargo" name="cargo" required
+                                        class="w-full px-3.5 py-2.5 pr-10 text-sm bg-gray-50/70 border border-gray-200 rounded-xl focus:bg-white focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all text-gray-700 appearance-none cursor-pointer">
+                                        <option value="" disabled selected>Seleccione un cargo</option>
+                                        <option value="administrador">Administrador</option>
+                                        <option value="docente">Docente / Tutor</option>
+                                        <option value="estudiante">Estudiante</option>
+                                    </select>
+                                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3.5 text-gray-400">
+                                        <i class="ph ph-caret-down text-base"></i>
+                                    </div>
+                                </div>
+                            </div>
 
-            <!-- Estatus -->
-            <div class="space-y-1.5 sm:col-span-2">
-                <label for="estatus" class="block text-xs font-semibold text-gray-700 uppercase tracking-wider">Estatus</label>
-                <select id="estatus" name="estatus" required
-                    class="w-full px-3.5 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors bg-gray-50/50 text-gray-700">
-                    <option value="" disabled selected>Seleccione el estatus</option>
-                    <option value="activo">Activo</option>
-                    <option value="inactivo">Inactivo</option>
-                    <option value="suspendido">Suspendido</option>
-                </select>
-            </div>
+                            <!-- Estatus -->
+                            <div class="space-y-1.5 sm:col-span-2">
+                                <label for="estatus" class="block text-xs font-semibold text-gray-600 uppercase tracking-wider">Estatus del Usuario</label>
+                                <div class="relative">
+                                    <select id="estatus" name="estatus" required
+                                        class="w-full px-3.5 py-2.5 pr-10 text-sm bg-gray-50/70 border border-gray-200 rounded-xl focus:bg-white focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all text-gray-700 appearance-none cursor-pointer">
+                                        <option value="" disabled selected>Seleccione el estatus</option>
+                                        <option value="activo">Activo</option>
+                                        <option value="inactivo">Inactivo</option>
+                                        <option value="suspendido">Suspendido</option>
+                                    </select>
+                                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3.5 text-gray-400">
+                                        <i class="ph ph-caret-down text-base"></i>
+                                    </div>
+                                </div>
+                            </div>
 
-            <!-- Botón de Actualizar -->
-            <div class="sm:col-span-2 pt-2 flex justify-end">
-                <button type="submit"
-                    class="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-medium text-xs rounded-lg transition-colors flex items-center justify-center space-x-1.5 shadow-sm active:scale-[0.98]">
-                    <i class="ph ph-check text-sm"></i>
-                    <span>Actualizar</span>
-                </button>
-            </div>
+                            <!-- Botón de Actualizar -->
+                            <div class="sm:col-span-2 pt-3 flex justify-end border-t border-gray-100">
+                                <button type="submit"
+                                    class="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-medium text-xs sm:text-sm rounded-lg transition-colors flex items-center justify-center space-x-2 shadow-sm cursor-pointer active:scale-[0.98]">
+                                    <i class="ph ph-check-circle text-base"></i>
+                                    <span>Actualizar Datos</span>
+                                </button>
+                            </div>
 
-        </form>
-    </div>
+                        </form>
+                    </div>
 
-    <!-- 2. SUBSECCIONES DE GESTIÓN DE CATÁLOGOS -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- 2. SUBSECCIONES DE GESTIÓN DE CATÁLOGOS -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
-        <!-- Gestión de Programas -->
-        <div class="bg-white rounded-xl shadow-md border border-gray-200 p-6 space-y-4">
-            <div>
-                <span class="text-xs font-semibold text-purple-600 bg-purple-50 px-2.5 py-1 rounded-full uppercase tracking-wider">Catálogo</span>
-                <h3 class="text-base font-semibold text-gray-800 mt-2">Gestionar Programas</h3>
-                <p class="text-xs text-gray-500 mt-0.5">Agrega o elimina los programas disponibles en los selectores.</p>
-            </div>
+                        <!-- Gestión de Programas -->
+                        <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 space-y-5 flex flex-col justify-between">
+                            <div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-xs font-semibold text-blue-600 bg-blue-50 px-2.5 py-1 rounded-full uppercase tracking-wider">Catálogo</span>
+                                    <div class="h-8 w-8 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center">
+                                        <i class="ph ph-graduation-cap text-lg"></i>
+                                    </div>
+                                </div>
+                                <h3 class="text-base font-semibold text-gray-800 mt-2.5">Gestionar Programas</h3>
+                                <p class="text-xs text-gray-500 mt-0.5">Agrega o elimina los programas disponibles en los selectores.</p>
+                            </div>
 
-            <!-- Input para agregar -->
-            <form class="flex gap-2">
-                <input type="text" placeholder="Nuevo programa..." required
-                    class="w-full px-3.5 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-colors bg-gray-50/50">
-                <button type="submit" class="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white font-medium text-xs rounded-lg transition-colors whitespace-nowrap shadow-sm">
-                    Agregar
-                </button>
-            </form>
+                            <!-- Input para agregar -->
+                            <form class="flex gap-2">
+                                <input type="text" placeholder="Nuevo programa..." required
+                                    class="flex-1 px-3.5 py-2 text-sm bg-gray-50/70 border border-gray-200 rounded-lg focus:bg-white focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all text-gray-800 placeholder:text-gray-400">
+                                <button type="submit"
+                                    class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium text-xs rounded-lg transition-colors whitespace-nowrap shadow-sm flex items-center space-x-1.5 cursor-pointer active:scale-95">
+                                    <i class="ph ph-plus text-sm"></i>
+                                    <span>Agregar</span>
+                                </button>
+                            </form>
 
-            <!-- Lista de existentes con opción de borrar -->
-            <div class="border border-gray-100 rounded-lg divide-y divide-gray-100 max-h-48 overflow-y-auto">
-                <div class="flex items-center justify-between px-3.5 py-2.5 text-sm text-gray-700 hover:bg-gray-50">
-                    <span>Ingeniería de Software</span>
-                    <button type="button" class="text-gray-400 hover:text-red-600 transition-colors" title="Eliminar">
-                        <i class="ph ph-trash text-base"></i>
-                    </button>
+                            <!-- Lista de existentes con opción de borrar -->
+                            <div class="border border-gray-200 rounded-xl divide-y divide-gray-100 max-h-48 overflow-y-auto bg-gray-50/30">
+                                <div class="flex items-center justify-between px-3.5 py-2.5 text-sm text-gray-700 hover:bg-white transition-colors">
+                                    <div class="flex items-center space-x-2.5">
+                                        <div class="h-2 w-2 rounded-full bg-blue-500"></div>
+                                        <span class="font-medium text-xs sm:text-sm">Ingeniería de Software</span>
+                                    </div>
+                                    <button type="button" class="h-7 w-7 rounded-lg text-gray-400 hover:text-red-600 hover:bg-red-50 flex items-center justify-center transition-all cursor-pointer" title="Eliminar">
+                                        <i class="ph ph-trash text-sm"></i>
+                                    </button>
+                                </div>
+                                <div class="flex items-center justify-between px-3.5 py-2.5 text-sm text-gray-700 hover:bg-white transition-colors">
+                                    <div class="flex items-center space-x-2.5">
+                                        <div class="h-2 w-2 rounded-full bg-blue-500"></div>
+                                        <span class="font-medium text-xs sm:text-sm">Diseño Gráfico</span>
+                                    </div>
+                                    <button type="button" class="h-7 w-7 rounded-lg text-gray-400 hover:text-red-600 hover:bg-red-50 flex items-center justify-center transition-all cursor-pointer" title="Eliminar">
+                                        <i class="ph ph-trash text-sm"></i>
+                                    </button>
+                                </div>
+                                <div class="flex items-center justify-between px-3.5 py-2.5 text-sm text-gray-700 hover:bg-white transition-colors">
+                                    <div class="flex items-center space-x-2.5">
+                                        <div class="h-2 w-2 rounded-full bg-blue-500"></div>
+                                        <span class="font-medium text-xs sm:text-sm">Marketing Digital</span>
+                                    </div>
+                                    <button type="button" class="h-7 w-7 rounded-lg text-gray-400 hover:text-red-600 hover:bg-red-50 flex items-center justify-center transition-all cursor-pointer" title="Eliminar">
+                                        <i class="ph ph-trash text-sm"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Gestión de Cargos -->
+                        <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 space-y-5 flex flex-col justify-between">
+                            <div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-xs font-semibold text-blue-600 bg-blue-50 px-2.5 py-1 rounded-full uppercase tracking-wider">Catálogo</span>
+                                    <div class="h-8 w-8 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center">
+                                        <i class="ph ph-briefcase text-lg"></i>
+                                    </div>
+                                </div>
+                                <h3 class="text-base font-semibold text-gray-800 mt-2.5">Gestionar Cargos</h3>
+                                <p class="text-xs text-gray-500 mt-0.5">Agrega o elimina los cargos disponibles en el sistema.</p>
+                            </div>
+
+                            <!-- Input para agregar -->
+                            <form class="flex gap-2">
+                                <input type="text" placeholder="Nuevo cargo..." required
+                                    class="flex-1 px-3.5 py-2 text-sm bg-gray-50/70 border border-gray-200 rounded-lg focus:bg-white focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all text-gray-800 placeholder:text-gray-400">
+                                <button type="submit"
+                                    class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium text-xs rounded-lg transition-colors whitespace-nowrap shadow-sm flex items-center space-x-1.5 cursor-pointer active:scale-95">
+                                    <i class="ph ph-plus text-sm"></i>
+                                    <span>Agregar</span>
+                                </button>
+                            </form>
+
+                            <!-- Lista de existentes con opción de borrar -->
+                            <div class="border border-gray-200 rounded-xl divide-y divide-gray-100 max-h-48 overflow-y-auto bg-gray-50/30">
+                                <div class="flex items-center justify-between px-3.5 py-2.5 text-sm text-gray-700 hover:bg-white transition-colors">
+                                    <div class="flex items-center space-x-2.5">
+                                        <div class="h-2 w-2 rounded-full bg-blue-500"></div>
+                                        <span class="font-medium text-xs sm:text-sm">Administrador</span>
+                                    </div>
+                                    <button type="button" class="h-7 w-7 rounded-lg text-gray-400 hover:text-red-600 hover:bg-red-50 flex items-center justify-center transition-all cursor-pointer" title="Eliminar">
+                                        <i class="ph ph-trash text-sm"></i>
+                                    </button>
+                                </div>
+                                <div class="flex items-center justify-between px-3.5 py-2.5 text-sm text-gray-700 hover:bg-white transition-colors">
+                                    <div class="flex items-center space-x-2.5">
+                                        <div class="h-2 w-2 rounded-full bg-blue-500"></div>
+                                        <span class="font-medium text-xs sm:text-sm">Docente / Tutor</span>
+                                    </div>
+                                    <button type="button" class="h-7 w-7 rounded-lg text-gray-400 hover:text-red-600 hover:bg-red-50 flex items-center justify-center transition-all cursor-pointer" title="Eliminar">
+                                        <i class="ph ph-trash text-sm"></i>
+                                    </button>
+                                </div>
+                                <div class="flex items-center justify-between px-3.5 py-2.5 text-sm text-gray-700 hover:bg-white transition-colors">
+                                    <div class="flex items-center space-x-2.5">
+                                        <div class="h-2 w-2 rounded-full bg-blue-500"></div>
+                                        <span class="font-medium text-xs sm:text-sm">Estudiante</span>
+                                    </div>
+                                    <button type="button" class="h-7 w-7 rounded-lg text-gray-400 hover:text-red-600 hover:bg-red-50 flex items-center justify-center transition-all cursor-pointer" title="Eliminar">
+                                        <i class="ph ph-trash text-sm"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
                 </div>
-                <div class="flex items-center justify-between px-3.5 py-2.5 text-sm text-gray-700 hover:bg-gray-50">
-                    <span>Diseño Gráfico</span>
-                    <button type="button" class="text-gray-400 hover:text-red-600 transition-colors" title="Eliminar">
-                        <i class="ph ph-trash text-base"></i>
-                    </button>
-                </div>
-                <div class="flex items-center justify-between px-3.5 py-2.5 text-sm text-gray-700 hover:bg-gray-50">
-                    <span>Marketing Digital</span>
-                    <button type="button" class="text-gray-400 hover:text-red-600 transition-colors" title="Eliminar">
-                        <i class="ph ph-trash text-base"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Gestión de Cargos -->
-        <div class="bg-white rounded-xl shadow-md border border-gray-200 p-6 space-y-4">
-            <div>
-                <span class="text-xs font-semibold text-amber-600 bg-amber-50 px-2.5 py-1 rounded-full uppercase tracking-wider">Catálogo</span>
-                <h3 class="text-base font-semibold text-gray-800 mt-2">Gestionar Cargos</h3>
-                <p class="text-xs text-gray-500 mt-0.5">Agrega o elimina los cargos disponibles en el sistema.</p>
-            </div>
-
-            <!-- Input para agregar -->
-            <form class="flex gap-2">
-                <input type="text" placeholder="Nuevo cargo..." required
-                    class="w-full px-3.5 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-colors bg-gray-50/50">
-                <button type="submit" class="px-4 py-2 bg-amber-600 hover:bg-amber-700 text-white font-medium text-xs rounded-lg transition-colors whitespace-nowrap shadow-sm">
-                    Agregar
-                </button>
-            </form>
-
-            <!-- Lista de existentes con opción de borrar -->
-            <div class="border border-gray-100 rounded-lg divide-y divide-gray-100 max-h-48 overflow-y-auto">
-                <div class="flex items-center justify-between px-3.5 py-2.5 text-sm text-gray-700 hover:bg-gray-50">
-                    <span>Administrador</span>
-                    <button type="button" class="text-gray-400 hover:text-red-600 transition-colors" title="Eliminar">
-                        <i class="ph ph-trash text-base"></i>
-                    </button>
-                </div>
-                <div class="flex items-center justify-between px-3.5 py-2.5 text-sm text-gray-700 hover:bg-gray-50">
-                    <span>Docente / Tutor</span>
-                    <button type="button" class="text-gray-400 hover:text-red-600 transition-colors" title="Eliminar">
-                        <i class="ph ph-trash text-base"></i>
-                    </button>
-                </div>
-                <div class="flex items-center justify-between px-3.5 py-2.5 text-sm text-gray-700 hover:bg-gray-50">
-                    <span>Estudiante</span>
-                    <button type="button" class="text-gray-400 hover:text-red-600 transition-colors" title="Eliminar">
-                        <i class="ph ph-trash text-base"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-
-    </div>
-
-</div>
             </section>
 
         </main>

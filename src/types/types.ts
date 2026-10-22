@@ -51,6 +51,10 @@ export interface iEncuesta {
 export interface iPreguntas {
     texto_pregunta: string;
 }
+export interface iTemplateCargo_Programa{
+    id?:string;
+    nombre:string
+}
 export interface iPostResponse {
     id_post: string;
     User: user;
