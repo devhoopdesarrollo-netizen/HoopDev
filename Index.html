@@ -7,6 +7,8 @@
     <title>HoopPeru - Iniciar Sesión / Registro</title>
     <!-- Script de Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Phosphor Icons CDN -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
 </head>
 
 <body class="bg-gray-100 min-h-screen flex items-center justify-center p-4">
@@ -22,11 +24,11 @@
             <!-- Botones de Pestañas (Tab Switcher) -->
             <div class="flex w-full bg-gray-100 p-1 rounded-xl">
                 <button type="button" id="tab-login"
-                    class="w-1/2 py-2 text-sm font-semibold rounded-lg bg-white text-blue-600 shadow-sm transition">
+                    class="w-1/2 py-2 text-sm font-semibold rounded-lg bg-white text-blue-600 shadow-sm transition cursor-pointer">
                     Iniciar Sesión
                 </button>
                 <button type="button" id="tab-register"
-                    class="w-1/2 py-2 text-sm font-semibold rounded-lg text-gray-600 hover:text-gray-900 transition">
+                    class="w-1/2 py-2 text-sm font-semibold rounded-lg text-gray-600 hover:text-gray-900 transition cursor-pointer">
                     Registrarse
                 </button>
             </div>
@@ -34,21 +36,27 @@
             <!-- Formulario de Inicio de Sesión -->
             <div class="w-full" id="login-container">
                 <form id="formLogin" class="flex flex-col space-y-4">
-                    <div class="flex flex-col space-y-1">
-                        <label for="login-user"  class="text-sm font-medium text-gray-700">Usuario / Correo</label>
-                        <input type="text" name="login-user" id="login-user" placeholder="ejemplo@correo.com"
-                            class="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-                       </div>
+                    <!-- Contenedor de Alerta de Error de Login (Sin alert) -->
+                    <div id="login-alert" class="hidden p-3 rounded-xl bg-red-50 border border-red-200 text-red-700 text-xs flex items-center space-x-2 transition-all">
+                        <i class="ph ph-warning-circle text-lg text-red-600 shrink-0"></i>
+                        <span id="login-alert-text"></span>
+                    </div>
 
                     <div class="flex flex-col space-y-1">
-                        <label for="login-pass"  class="text-sm font-medium text-gray-700">Contraseña</label>
-                        <input type="password" name="login-pass" id="login-pass" placeholder="••••••••"
+                        <label for="login-user" class="text-sm font-medium text-gray-700">Usuario / Correo</label>
+                        <input type="text" name="login-user" id="login-user" required placeholder="ejemplo@correo.com"
+                            class="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+
+                    <div class="flex flex-col space-y-1">
+                        <label for="login-pass" class="text-sm font-medium text-gray-700">Contraseña</label>
+                        <input type="password" name="login-pass" id="login-pass" required placeholder="••••••••"
                             class="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
                     </div>
 
                     <button type="submit"
-                        class="w-full py-2.5 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition duration-200">
-                        Iniciar sesión
+                        class="w-full py-2.5 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition duration-200 cursor-pointer flex items-center justify-center space-x-2 shadow-sm">
+                        <span>Iniciar sesión</span>
                     </button>
                 </form>
             </div>
@@ -56,10 +64,15 @@
             <!-- Formulario de Registro -->
             <div class="w-full hidden" id="register-container">
                 <form id="registroNewUser" class="flex flex-col space-y-3">
+                    <!-- Contenedor de Alerta de Registro (Sin alert) -->
+                    <div id="register-alert" class="hidden p-3 rounded-xl text-xs flex items-center space-x-2 transition-all">
+                        <i class="alert-icon text-lg shrink-0"></i>
+                        <span id="register-alert-text"></span>
+                    </div>
                     
                     <div class="flex flex-col space-y-1">
                         <label for="reg-name" class="text-sm font-medium text-gray-700">Nombre completo</label>
-                        <input type="text" id="reg-name" name="reg-name" required placeholder="Tu nombre"
+                        <input type="text" id="reg-name" name="reg-name" required placeholder="Tu nombre y apellido"
                             class="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
                     </div>
 
@@ -82,27 +95,41 @@
                     </div>
 
                     <div class="flex flex-col space-y-1">
-                        <label for="reg-spec" class="text-sm font-medium text-gray-700">Especialización / Posición</label>
-                        <input type="text" id="reg-spec" name="reg-spec" placeholder="Ej: Base, Alero, Pivot, Entrenador"
+                        <label for="reg-spec" class="text-sm font-medium text-gray-700">Especialización / Área de Interés</label>
+                        <input type="text" id="reg-spec" name="reg-spec" placeholder="Ej: Estudiante, Docente, Robótica, Idiomas"
                             class="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
                     </div>
 
                     <div class="flex flex-col space-y-1">
                         <label for="reg-country" class="text-sm font-medium text-gray-700">País</label>
-                        <select id="reg-country" name="reg-country"
-                            class="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white">
-                            <option value="Perú">Perú</option>
+                        <select id="reg-country" name="reg-country" required
+                            class="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white cursor-pointer">
+                            <option value="Perú" selected>Perú</option>
                             <option value="Argentina">Argentina</option>
+                            <option value="Bolivia">Bolivia</option>
+                            <option value="Brasil">Brasil</option>
                             <option value="Chile">Chile</option>
                             <option value="Colombia">Colombia</option>
-                            <option value="México">México</option>
+                            <option value="Costa Rica">Costa Rica</option>
+                            <option value="Ecuador">Ecuador</option>
+                            <option value="El Salvador">El Salvador</option>
                             <option value="España">España</option>
-                            <option value="Otro">Otro</option>
+                            <option value="Estados Unidos">Estados Unidos</option>
+                            <option value="Guatemala">Guatemala</option>
+                            <option value="Honduras">Honduras</option>
+                            <option value="México">México</option>
+                            <option value="Nicaragua">Nicaragua</option>
+                            <option value="Panamá">Panamá</option>
+                            <option value="Paraguay">Paraguay</option>
+                            <option value="República Dominicana">República Dominicana</option>
+                            <option value="Uruguay">Uruguay</option>
+                            <option value="Venezuela">Venezuela</option>
+                            <option value="Otro">Otro país</option>
                         </select>
                     </div>
 
                     <button type="submit"
-                        class="w-full py-2.5 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition duration-200">
+                        class="w-full py-2.5 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition duration-200 cursor-pointer shadow-sm">
                         Completar Registro
                     </button>
                 </form>

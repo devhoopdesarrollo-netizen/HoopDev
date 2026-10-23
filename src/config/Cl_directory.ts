@@ -1,4 +1,4 @@
-import Controller from "../controllers/Controller";
+import Controller from "../controllers/Controller.js";
 
 
 export default class Cl_directory {

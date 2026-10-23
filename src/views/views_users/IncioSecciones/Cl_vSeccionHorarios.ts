@@ -34,23 +34,31 @@ export default class Cl_vSeccionHorarios {
         this.buttonEvent = document.getElementById("buttonAnuncio") as HTMLButtonElement;
 
 
-        this.cargarlistUser()
-        this.buttonUserList.addEventListener("click", e => {
+        if (!this.userList && !this.seccionHoarariosAct && !this.buttonUserList) {
+            return;
+        }
 
-            const [userID, UserPrograma] = this.userList.value.split("_")
-            this.buscarInformacionUser(userID)
+        if (this.userList) {
+            this.cargarlistUser();
+        }
 
+        if (this.buttonUserList && this.userList) {
+            this.buttonUserList.addEventListener("click", e => {
+                const [userID, UserPrograma] = this.userList.value.split("_");
+                if (userID) this.buscarInformacionUser(userID);
+            });
+        }
 
-
-        });
-        this.buttonNewday.addEventListener("click", e => {
-            this.crearRegistro()
-            setTimeout(() => {
-                this.buttonUserList.click()
-            }, 1500);
-        })
-
+        if (this.buttonNewday) {
+            this.buttonNewday.addEventListener("click", e => {
+                this.crearRegistro();
+                setTimeout(() => {
+                    this.buttonUserList?.click();
+                }, 1500);
+            });
+        }
     }
+
     async cargarlistUser() {
         this.userList.innerHTML = ` <option value="" disabled>-- Seleccione un usuario --</option>`
         const datUser = await this.controller.listUser()

@@ -1,6 +1,6 @@
 import Cl_directory from "../config/Cl_directory.js";
 import Cl_mMUserController from "../models/UserModules/Cl_mMUserController.js";
-import { iAnuncios, iEncuesta, iHorario, iLoginDTO, iPostNew, iPreguntas, iUserList, iUsuarioNew } from "../types/types.js";
+import { iAnuncios, iEncuesta, iHorario, iLoginDTO, iPostNew, iPreguntas, iTemplateCargo_Programa, iUserList, iUsuarioNew } from "../types/types.js";
 import Cl_vLogingUser from "../views/CL_vLoginUser.js";
 import Cl_vRegisterUser from "../views/Cl_vRegisterUser.js";
 import Cl_vUserInicio from "../views/views_users/Cl_vUserInicio.js";
@@ -36,9 +36,8 @@ export default class Controller {
     async userRegister(datos: iUsuarioNew): Promise<boolean> {
         return await this.UsermMController.agregarUser(datos);
     }
-    async UserLong(datos:iLoginDTO){
-        const informacion = await this.UsermMController.ValidarUserSeccion(datos)
-       
+    async UserLong(datos: iLoginDTO) {
+        return await this.UsermMController.ValidarUserSeccion(datos);
     }
     //Funcion para la subida de los archivos PDF entre otros
     async direccionStorage(file:File):Promise<string>{
@@ -97,6 +96,33 @@ export default class Controller {
         return deletAnuncio
     }
 
-    
-  
+    // ==========================================
+    // SECCIÓN ADMINISTRACIÓN
+    // ==========================================
+    async cargarCargos(): Promise<any[]> {
+        return await this.UsermMController.cargarCargos();
+    }
+    async crearCargo(cargo: iTemplateCargo_Programa): Promise<any> {
+        return await this.UsermMController.crearCargo(cargo);
+    }
+    async deleteCargo(id: string): Promise<boolean> {
+        return await this.UsermMController.deleteCargo(id);
+    }
+
+    async cargarProgramas(): Promise<any[]> {
+        return await this.UsermMController.cargarProgramas();
+    }
+    async crearPrograma(programa: iTemplateCargo_Programa): Promise<any> {
+        return await this.UsermMController.crearPrograma(programa);
+    }
+    async deletePrograma(id: string): Promise<boolean> {
+        return await this.UsermMController.deletePrograma(id);
+    }
+
+    async cargarUsuariosControl(): Promise<any[]> {
+        return await this.UsermMController.cargarUsuariosControl();
+    }
+    async actualizarUsuario(idUser: string, datos: { nombre?: string; especializacion?: string; fk_programas?: string; fk_cargo?: string; estatus?: boolean; password?: string }): Promise<any> {
+        return await this.UsermMController.actualizarUsuario(idUser, datos);
+    }
 }

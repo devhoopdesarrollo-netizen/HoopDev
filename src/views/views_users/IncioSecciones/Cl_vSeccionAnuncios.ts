@@ -11,18 +11,27 @@ export default class Cl_vSeccionAnuncios {
         this.controlador = controller;
         this.formAnuncio = document.getElementById("formAnuncio") as HTMLFormElement
         this.contAnuncios = document.getElementById("conAnuncios") as HTMLElement
-        this.toolsFormant = new Cl_Tools()
-        this.formAnuncio.addEventListener("submit", e => {
-            e.preventDefault()
-            this.obtenerInformacionAnucion()
-           setTimeout(() => {
-             this.cargarInformacionUser()
-           }, 2000);
-            
-        })
-        this.cargarInformacionUser()
+        this.toolsFormant = new Cl_Tools();
 
+        if (!this.formAnuncio && !this.contAnuncios) {
+            return;
+        }
+
+        if (this.formAnuncio) {
+            this.formAnuncio.addEventListener("submit", e => {
+                e.preventDefault();
+                this.obtenerInformacionAnucion();
+                setTimeout(() => {
+                    this.cargarInformacionUser();
+                }, 2000);
+            });
+        }
+
+        if (this.contAnuncios) {
+            this.cargarInformacionUser();
+        }
     }
+
     async cargarInformacionUser(){
         this.contAnuncios.innerHTML = ""
 

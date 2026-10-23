@@ -16,23 +16,32 @@ export default class Cl_vSeccionEncuestas {
         this.seccion_encuetas = document.getElementById("listaEncuestas") as HTMLElement
         this.preguntasActuales = document.getElementById("Preguntas") as HTMLSpanElement;
         this.btnAgregarPregunta = document.getElementById("btnAgregarPregunta") as HTMLElement;
-        this.botonCancelarFom = document.getElementById("btnCancelarCrear") as HTMLButtonElement,
-            this.mostrarEncuentas()
-        this.secionesEncuestaForm.addEventListener("submit", e => {
-            e.preventDefault(),
-                this.crearNuevaEncuesta()
-            this.reinicarFormulario()
+        this.botonCancelarFom = document.getElementById("btnCancelarCrear") as HTMLButtonElement;
+        if (!this.secionesEncuestaForm && !this.seccion_encuetas) {
+            return;
+        }
 
-        })
-        this.btnAgregarPregunta.addEventListener("click", () => {
+        if (this.seccion_encuetas) {
+            this.mostrarEncuentas();
+        }
 
-            this.agregarPregunta();
-            const pregunta = this.secionesEncuestaForm.elements.namedItem("preguntasEncuesta") as HTMLButtonElement;
-            pregunta.value = ""
+        if (this.secionesEncuestaForm) {
+            this.secionesEncuestaForm.addEventListener("submit", e => {
+                e.preventDefault();
+                this.crearNuevaEncuesta();
+                this.reinicarFormulario();
+            });
+        }
 
-        });
-
+        if (this.btnAgregarPregunta && this.secionesEncuestaForm) {
+            this.btnAgregarPregunta.addEventListener("click", () => {
+                this.agregarPregunta();
+                const pregunta = this.secionesEncuestaForm.elements.namedItem("preguntasEncuesta") as HTMLInputElement;
+                if (pregunta) pregunta.value = "";
+            });
+        }
     }
+
     actulizarPreguntas() {
         this.preguntasActuales.innerHTML = ""
 

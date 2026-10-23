@@ -3,7 +3,7 @@ export default class Cl_Tools {
         const ahora = new Date();
         const fecha_psot = new Date(fechaPost);
 
-        const diferencia = ahora - fecha_psot;
+        const diferencia = ahora.getTime() - fecha_psot.getTime();
         const segundos = Math.floor(diferencia / 1000);
         const minutos = Math.floor(segundos / 60);
         const horas = Math.floor(minutos / 60);
