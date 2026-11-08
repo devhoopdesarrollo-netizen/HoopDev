@@ -352,10 +352,10 @@ export default class Cl_vUserInicio {
     }
     async obtenerLikes(id: string): Promise<number> {
         const likesCount = await this.controlador.obtenerLikes(id);
-       console.log("Likes obtenidos para el post con ID:", id, ":", likesCount);
+        console.log("Likes obtenidos para el post con ID:", id, ":", likesCount);
         return likesCount || 0; // Devuelve el conteo de likes o 0 si no hay datos
     }
-   async darLikes(id:string){
+    async darLikes(id: string) {
         const dat = await this.obtenerLikes(id)
         console.log("Likes obtenidos para el post datacon ID:", id, ":", dat);
         return dat
@@ -364,9 +364,9 @@ export default class Cl_vUserInicio {
     async postResponse() {
         if (!this.seccionPost_publicacion) return;
         const data = await this.controlador.postResponse();
-     
-        
-      
+
+
+
         if (!data || !Array.isArray(data)) {
             this.seccionPost_publicacion.innerHTML = `
                 <div class="col-span-full text-center py-16">
@@ -382,14 +382,16 @@ export default class Cl_vUserInicio {
 
         const frame = document.createDocumentFragment();
         const tempContainer = document.createElement('div');
-        
-        data.forEach(  (element: iPostResponse, index: number) => {
-        
-          
+
+        data.forEach((element: iPostResponse, index: number) => {
+
+
             const authorName = element.User?.nombre || "HoopPeru";
             const initials = authorName.split(" ").map((n: string) => n[0]).join("").substring(0, 2).toUpperCase();
-           
-            const htmlPost = `<div
+
+            if (element.User.id_user === this.userId) {
+
+                const htmlPost = `<div
                 class="bg-white rounded-2xl shadow-sm hover:shadow-md border border-gray-100 hover:border-gray-200 p-5 sm:p-6 flex flex-col justify-between space-y-4 transition-all duration-200">
                 <div class="space-y-4">
                     <div class="flex items-center space-x-3">
@@ -429,20 +431,85 @@ export default class Cl_vUserInicio {
                             <span class="inline-flex items-center justify-center h-5 w-5 rounded-full bg-gradient-to-br from-red-400 to-pink-500">
                                 <i class="ph ph-heart-fill text-[9px] text-white"></i>
                             </span>
-                            <span class="font-semibold_${index} font-medium">${this.darLikes(element.id_post)} Me gusta</span>
+                            <span class="font-semibold_${index} font-medium">${element.likes ?? 0} Me gusta</span>
                         </div>
                     </div>
                     <div class="grid grid-cols-1 gap-2">
-                        <button id="btnLikePost" data-idpost="${element.id_post}" data-index="${index}"
-                            class="w-full py-2 bg-gray-50 hover:bg-gradient-to-r hover:from-red-50 hover:to-pink-50 text-gray-600 hover:text-red-600 font-semibold text-xs rounded-xl transition-all flex items-center justify-center space-x-2 cursor-pointer active:scale-[0.98]">
-                            <i class="hear-icono ph ph-heart text-base text-red-500"></i>
-                            <span>Me gusta</span>
-                        </button>
+                       <button class="btnLikePost flex-1 py-2 bg-gray-50 hover:bg-gradient-to-r hover:from-red-50 hover:to-pink-50 text-gray-600 hover:text-red-600 font-semibold text-xs rounded-xl transition-all flex items-center justify-center space-x-2 cursor-pointer active:scale-[0.98]"
+        data-idpost="${element.id_post}" data-index="${index}">
+        <i class="hear-icono ph ph-heart ${element.user_liked ? 'ph-fill' : ''} text-base text-red-500"></i>
+        <span class="btn-like-text">${element.user_liked ? 'Te gusta' : 'Me gusta'}</span>
+    </button>
+
+    <!-- Botón de Borrar estilizado -->
+    <button  data-index_clean="${index}" class="btnDeletePost px-4 py-2 bg-gray-50 hover:bg-red-50 text-gray-500 hover:text-red-600 font-semibold text-xs rounded-xl transition-all flex items-center justify-center space-x-1 cursor-pointer active:scale-[0.98]"
+        data-idpost="${element.id_post}">
+        <i class="ph ph-trash text-base"></i>
+        <span>Borrar</span>
+    </button>
+                        
                     </div>
                 </div>
             </div>`;
 
-            tempContainer.innerHTML = htmlPost.trim();
+                tempContainer.innerHTML = htmlPost.trim();
+            } else {
+                const htmlPost = `<div
+                class="bg-white rounded-2xl shadow-sm hover:shadow-md border border-gray-100 hover:border-gray-200 p-5 sm:p-6 flex flex-col justify-between space-y-4 transition-all duration-200">
+                <div class="space-y-4">
+                    <div class="flex items-center space-x-3">
+                        <div
+                            class="h-11 w-11 rounded-full bg-gradient-to-br from-blue-500 to-indigo-500 flex items-center justify-center shrink-0 shadow-md shadow-blue-200/30">
+                            <span class="text-xs text-white font-bold">${initials}</span>
+                        </div>
+                        <div>
+                            <h3 class="text-sm font-bold text-gray-900">${authorName}</h3>
+                            <p class="text-[11px] text-gray-400 flex items-center space-x-1">
+                                <i class="ph ph-clock text-xs"></i>
+                                <span>${this.tools.TimePost(element.fecha_post)}</span>
+                            </p>
+                        </div>
+                    </div>
+                    <p class="text-sm text-gray-700 leading-relaxed">
+                        ${element.contenido}
+                    </p>
+                    ${element.img_direccion ? `<div
+                        class="post-image-trigger group/img relative rounded-xl overflow-hidden border border-gray-100 bg-gray-900/5 h-56 sm:h-64 flex items-center justify-center cursor-zoom-in transition-all duration-200 hover:border-blue-300 hover:shadow-md"
+                        data-img="${element.img_direccion}"
+                        data-author="${authorName}"
+                        data-time="${this.tools.TimePost(element.fecha_post)}"
+                        data-caption="${encodeURIComponent(element.contenido || '')}">
+                        <img src="${element.img_direccion}" alt="Imagen de publicación" class="max-h-full max-w-full object-contain transition-transform duration-300 group-hover/img:scale-[1.03]">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover/img:opacity-100 transition-opacity duration-200 pointer-events-none"></div>
+                        <div class="absolute bottom-2.5 right-2.5 bg-gray-950/80 hover:bg-gray-950 text-white backdrop-blur-md px-3 py-1.5 rounded-xl text-xs font-medium flex items-center space-x-1.5 opacity-90 sm:opacity-0 sm:group-hover/img:opacity-100 transition-all duration-200 shadow-lg pointer-events-none transform translate-y-1 sm:translate-y-2 group-hover/img:translate-y-0">
+                            <i class="ph ph-magnifying-glass-plus text-sm text-blue-300"></i>
+                            <span>Ver grande</span>
+                        </div>
+                    </div>` : ''}
+                </div>
+
+                <div class="border-t border-gray-100 pt-3.5 space-y-2.5">
+                    <div class="flex items-center text-xs text-gray-500 px-1">
+                        <div class="flex items-center space-x-1.5">
+                            <span class="inline-flex items-center justify-center h-5 w-5 rounded-full bg-gradient-to-br from-red-400 to-pink-500">
+                                <i class="ph ph-heart-fill text-[9px] text-white"></i>
+                            </span>
+                            <span class="font-semibold_${index} font-medium">${element.likes ?? 0} Me gusta</span>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 gap-2">
+                        <button class="btnLikePost w-full py-2 bg-gray-50 hover:bg-gradient-to-r hover:from-red-50 hover:to-pink-50 text-gray-600 hover:text-red-600 font-semibold text-xs rounded-xl transition-all flex items-center justify-center space-x-2 cursor-pointer active:scale-[0.98]"
+                            data-idpost="${element.id_post}" data-index="${index}">
+                            <i class="hear-icono ph ph-heart ${element.user_liked ? 'ph-fill' : ''} text-base text-red-500"></i>
+                            <span class="btn-like-text">${element.user_liked ? 'Te gusta' : 'Me gusta'}</span>
+                        </button>
+                        
+                    </div>
+                </div>
+            </div>`;
+
+                tempContainer.innerHTML = htmlPost.trim();
+            }
             const postElement = tempContainer.firstChild;
             if (postElement) {
                 frame.appendChild(postElement);
@@ -450,22 +517,51 @@ export default class Cl_vUserInicio {
         });
 
         this.seccionPost_publicacion.appendChild(frame);
-
+        data.forEach((element: iPostResponse, index: number) => {
+            const btnDeletePost = this.seccionPost_publicacion?.querySelector(`.btnDeletePost[data-index_clean="${index}"]`) as HTMLButtonElement | null;
+            btnDeletePost?.addEventListener("click", async () => {
+                const confirmDelete = confirm("¿Estás seguro de que deseas eliminar esta publicación?");
+                if (confirmDelete) {
+                    try {
+                        console.log("Eliminando publicación con ID:", element.id_post);
+                        // Eliminar el post del DOM
+                        const postToRemove = btnDeletePost?.closest("div.bg-white");
+                        if (postToRemove && postToRemove.parentNode) {
+                            postToRemove.parentNode.removeChild(postToRemove);
+                        }
+                    } catch (err) {
+                        console.error("Error al eliminar la publicación:", err);
+                    }
+                }
+            });
+        });
         // Asignar eventos de likes
         data.forEach((element: iPostResponse, index: number) => {
-            const btnLikePost = document.querySelector(`#btnLikePost[data-index="${index}"]`) as HTMLButtonElement | null;
+            const btnLikePost = this.seccionPost_publicacion?.querySelector(`.btnLikePost[data-index="${index}"]`) as HTMLButtonElement | null;
             btnLikePost?.addEventListener("click", async () => {
-              
                 const heartIcon = btnLikePost.querySelector(".hear-icono") as HTMLElement | null;
-                if (heartIcon) {
-                    heartIcon.classList.toggle("ph-fill");
-                    const likesElement = document.querySelector(`.font-semibold_${index}`) as HTMLElement | null;
-                    if (likesElement) {
-                        likesElement.textContent = `${element.likes} Me gusta`;
+                const textSpan = btnLikePost.querySelector(".btn-like-text") as HTMLElement | null;
+                const likesElement = this.seccionPost_publicacion?.querySelector(`.font-semibold_${index}`) as HTMLElement | null;
+
+                if (heartIcon && likesElement) {
+                    const isNowLiked = heartIcon.classList.toggle("ph-fill");
+                    if (textSpan) {
+                        textSpan.textContent = isNowLiked ? "Te gusta" : "Me gusta";
                     }
-                  
-                    
-                    await this.controlador.likePost(element.id_post, this.userId);
+
+                    // Actualización optimista del contador
+                    let currentCount = Number(element.likes) || 0;
+                    currentCount = isNowLiked ? currentCount + 1 : Math.max(0, currentCount - 1);
+                    element.likes = currentCount;
+                    element.user_liked = isNowLiked;
+                    likesElement.textContent = `${currentCount} Me gusta`;
+
+                    // Enviar like al backend
+                    try {
+                        await this.controlador.likePost(element.id_post, this.userId);
+                    } catch (err) {
+                        console.error("Error al actualizar like en base de datos:", err);
+                    }
                 }
             });
         });

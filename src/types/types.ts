@@ -65,5 +65,6 @@ export interface iPostResponse {
     img_direccion: string;
     contenido: string;
     likes: number;
+    user_liked?: boolean;
     fecha_post: Date;
 }

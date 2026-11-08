@@ -669,22 +669,6 @@
                 }
             });
         }
-
-        // Interacción visual básica de Likes para la maqueta
-        document.querySelectorAll('#btnLikePost').forEach(btn => {
-            btn.addEventListener("click", () => {
-                const heart = btn.querySelector(".hear-icono");
-                const idx = btn.getAttribute("data-index");
-                const counter = document.querySelector(`.font-semibold_${idx}`);
-                if (heart) {
-                    const isLiked = heart.classList.toggle("ph-fill");
-                    if (counter) {
-                        let num = parseInt(counter.textContent) || 0;
-                        counter.textContent = `${isLiked ? num + 1 : Math.max(0, num - 1)} Me gusta`;
-                    }
-                }
-            });
-        });
     </script>
 
     <!-- Script de la aplicación empaquetada -->
