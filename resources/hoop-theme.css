@@ -1,0 +1,215 @@
+/**
+ * ==============================================================================
+ * GUÍA DE ESTILOS Y PALETA DE COLORES CORPORATIVA - HOOP PERÚ
+ * ==============================================================================
+ * 
+ * Jerarquía y Roles de Color:
+ * 1. Familia de Azules:
+ *    - #1d3854: Fondos oscuros, títulos y textos de alta jerarquía (WCAG AAA 12:1)
+ *    - #006eae: Color Primario de Marca, botones de acción principal (WCAG AA 5.47:1)
+ *    - #299ad3: Acento activo, anillos de enfoque (focus-ring) y bordes interactivos
+ *    - #80c8e4: Bordes secundarios, detalles decorativos e iconos suaves
+ *    - #b8e1f1: Fondos suaves para tabs activos, chips y tarjetas informativas
+ * 
+ * 2. Familia de Verde Azulado / Teal:
+ *    - #146460: Acción secundaria oscura, texto de estados de éxito (WCAG AAA 6.95:1)
+ *    - #00aea5: Acento Teal, botones secundarios de éxito/registro y toggles
+ *    - #57ddcd: Resaltados de frescura, barras de progreso y acentos dinámicos
+ *    - #b5f4eb: Fondo de badges de confirmación y tags de éxito
+ *    - #dbf5f0: Fondos tenues para tarjetas de éxito y contenedores secundarios
+ * 
+ * 3. Familia de Magenta / Morado:
+ *    - #751c5a: Acento oscuro especial, textos destacados en tarjetas temáticas (WCAG AAA 10.14:1)
+ *    - #9f1074: Acento Magenta vibrante, llamadas secundarias y avisos urgentes (WCAG AAA 7.50:1)
+ *    - #af3a91: Insignias de encuestas, tags de participación y roles
+ *    - #d392c6: Bordes de elementos destacados y sombras sutiles
+ *    - #e6cbe1: Fondos de badges magenta y tarjetas de eventos especiales
+ * ==============================================================================
+ */
+
+:root {
+  /* --- 1. PALETA CORPORATIVA BASE --- */
+  /* Azules */
+  --hoop-blue-900: #1d3854;
+  --hoop-blue-700: #006eae;
+  --hoop-blue-500: #299ad3;
+  --hoop-blue-300: #80c8e4;
+  --hoop-blue-100: #b8e1f1;
+
+  /* Teal / Verde Azulado */
+  --hoop-teal-900: #146460;
+  --hoop-teal-600: #00aea5;
+  --hoop-teal-400: #57ddcd;
+  --hoop-teal-200: #b5f4eb;
+  --hoop-teal-50:  #dbf5f0;
+
+  /* Magenta / Morado */
+  --hoop-magenta-900: #751c5a;
+  --hoop-magenta-700: #9f1074;
+  --hoop-magenta-500: #af3a91;
+  --hoop-magenta-300: #d392c6;
+  --hoop-magenta-100: #e6cbe1;
+
+  /* --- 2. ROLES SEMÁNTICOS (Variables requeridas por la guía) --- */
+  --primary-dark: var(--hoop-blue-900);
+  --primary: var(--hoop-blue-700);
+  --primary-light: var(--hoop-blue-500);
+  --primary-soft: var(--hoop-blue-300);
+  --primary-tint: var(--hoop-blue-100);
+
+  --teal-dark: var(--hoop-teal-900);
+  --teal-accent: var(--hoop-teal-600);
+  --teal-light: var(--hoop-teal-400);
+  --teal-soft: var(--hoop-teal-200);
+  --teal-tint: var(--hoop-teal-50);
+
+  --magenta-dark: var(--hoop-magenta-900);
+  --magenta-accent: var(--hoop-magenta-700);
+  --magenta-medium: var(--hoop-magenta-500);
+  --magenta-soft: var(--hoop-magenta-300);
+  --magenta-tint: var(--hoop-magenta-100);
+
+  /* Roles de UI y Tipografía (WCAG Compliant) */
+  --text-primary: var(--hoop-blue-900);
+  --text-muted: #536471;
+  --bg-page: #f8fafc;
+  --bg-surface: #ffffff;
+  --border-subtle: #e2e8f0;
+}
+
+/* ==========================================================================
+   CONFIGURACIÓN PARA TAILWIND CSS V4 (@theme)
+   ========================================================================== */
+@theme {
+  --color-hoop-blue-900: #1d3854;
+  --color-hoop-blue-700: #006eae;
+  --color-hoop-blue-500: #299ad3;
+  --color-hoop-blue-300: #80c8e4;
+  --color-hoop-blue-100: #b8e1f1;
+
+  --color-hoop-teal-900: #146460;
+  --color-hoop-teal-600: #00aea5;
+  --color-hoop-teal-400: #57ddcd;
+  --color-hoop-teal-200: #b5f4eb;
+  --color-hoop-teal-50:  #dbf5f0;
+
+  --color-hoop-magenta-900: #751c5a;
+  --color-hoop-magenta-700: #9f1074;
+  --color-hoop-magenta-500: #af3a91;
+  --color-hoop-magenta-300: #d392c6;
+  --color-hoop-magenta-100: #e6cbe1;
+
+  /* Aliasing directo para clases existentes de Tailwind */
+  --color-blue-900: #1d3854;
+  --color-blue-700: #005a8e;
+  --color-blue-600: #006eae;
+  --color-blue-500: #299ad3;
+  --color-blue-300: #80c8e4;
+  --color-blue-100: #b8e1f1;
+  --color-blue-50:  #eaf5fb;
+
+  --color-emerald-900: #146460;
+  --color-emerald-700: #115753;
+  --color-emerald-600: #00aea5;
+  --color-emerald-400: #57ddcd;
+  --color-emerald-200: #b5f4eb;
+  --color-emerald-100: #cbf6ef;
+  --color-emerald-50:  #dbf5f0;
+
+  --color-teal-900: #146460;
+  --color-teal-600: #00aea5;
+  --color-teal-400: #57ddcd;
+  --color-teal-200: #b5f4eb;
+  --color-teal-50:  #dbf5f0;
+
+  --color-green-900: #146460;
+  --color-green-700: #146460;
+  --color-green-600: #00aea5;
+  --color-green-500: #00aea5;
+  --color-green-400: #57ddcd;
+  --color-green-200: #b5f4eb;
+  --color-green-100: #cbf6ef;
+  --color-green-50:  #dbf5f0;
+
+  --color-indigo-900: #751c5a;
+  --color-indigo-700: #9f1074;
+  --color-indigo-600: #af3a91;
+  --color-indigo-400: #d392c6;
+  --color-indigo-100: #e6cbe1;
+  --color-indigo-50:  #fbf5fa;
+
+  --color-purple-900: #751c5a;
+  --color-purple-700: #9f1074;
+  --color-purple-600: #af3a91;
+  --color-purple-300: #d392c6;
+  --color-purple-100: #e6cbe1;
+  --color-purple-50:  #fbf5fa;
+}
+
+/* ==========================================================================
+   COMPONENTES Y CLASES DE UTILIDAD CORPORATIVAS
+   ========================================================================== */
+
+/* Botón Primario Corporativo (Azul) */
+.hoop-btn-primary {
+  background-color: var(--hoop-blue-700);
+  color: #ffffff;
+  transition: all 0.2s ease-in-out;
+}
+.hoop-btn-primary:hover {
+  background-color: var(--hoop-blue-900);
+}
+
+/* Botón Secundario / Registro / Acción de Éxito (Teal) */
+.hoop-btn-secondary {
+  background-color: var(--hoop-teal-600);
+  color: #ffffff;
+  transition: all 0.2s ease-in-out;
+}
+.hoop-btn-secondary:hover {
+  background-color: var(--hoop-teal-900);
+}
+
+/* Botón de Acento Especial / Votación Prioritaria (Magenta) */
+.hoop-btn-accent {
+  background-color: var(--hoop-magenta-700);
+  color: #ffffff;
+  transition: all 0.2s ease-in-out;
+}
+.hoop-btn-accent:hover {
+  background-color: var(--hoop-magenta-900);
+}
+
+/* Pestaña / Tab Activo */
+.hoop-tab-active {
+  background-color: #ffffff !important;
+  color: var(--hoop-blue-700) !important;
+  font-weight: 600;
+}
+
+/* Badges e Insignias Accesibles */
+.hoop-badge-blue {
+  background-color: var(--hoop-blue-100);
+  color: var(--hoop-blue-900);
+  border: 1px solid var(--hoop-blue-300);
+}
+
+.hoop-badge-teal {
+  background-color: var(--hoop-teal-50);
+  color: var(--hoop-teal-900);
+  border: 1px solid var(--hoop-teal-200);
+}
+
+.hoop-badge-magenta {
+  background-color: var(--hoop-magenta-100);
+  color: var(--hoop-magenta-900);
+  border: 1px solid var(--hoop-magenta-300);
+}
+
+/* Inputs con foco corporativo */
+.hoop-input:focus {
+  outline: none;
+  border-color: var(--hoop-blue-500);
+  box-shadow: 0 0 0 3px rgba(41, 154, 211, 0.25);
+}
+

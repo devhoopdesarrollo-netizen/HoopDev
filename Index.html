@@ -5,8 +5,62 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HoopPeru - Iniciar Sesión / Registro</title>
+    <!-- Estilos Corporativos HoopPeru -->
+    <link rel="stylesheet" href="resources/hoop-theme.css">
     <!-- Script de Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        hoop: {
+                            blue: {
+                                900: '#1d3854',
+                                700: '#006eae',
+                                500: '#299ad3',
+                                300: '#80c8e4',
+                                100: '#b8e1f1'
+                            },
+                            teal: {
+                                900: '#146460',
+                                600: '#00aea5',
+                                400: '#57ddcd',
+                                200: '#b5f4eb',
+                                50:  '#dbf5f0'
+                            },
+                            magenta: {
+                                900: '#751c5a',
+                                700: '#9f1074',
+                                500: '#af3a91',
+                                300: '#d392c6',
+                                100: '#e6cbe1'
+                            }
+                        },
+                        // Mapeo corporativo para clases existentes de Tailwind
+                        blue: {
+                            50: '#eaf5fb',
+                            100: '#b8e1f1',
+                            300: '#80c8e4',
+                            500: '#299ad3',
+                            600: '#006eae',
+                            700: '#1d3854',
+                            900: '#1d3854'
+                        },
+                        green: {
+                            50: '#dbf5f0',
+                            100: '#cbf6ef',
+                            200: '#b5f4eb',
+                            400: '#57ddcd',
+                            600: '#00aea5',
+                            700: '#146460',
+                            900: '#146460'
+                        }
+                    }
+                }
+            }
+        };
+    </script>
     <!-- Phosphor Icons CDN -->
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
 </head>

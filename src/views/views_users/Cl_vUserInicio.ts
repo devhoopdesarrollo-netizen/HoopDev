@@ -1,6 +1,6 @@
 import Controller from "../../controllers/Controller.js";
 import Cl_Tools from "../../models/Utils/Cl_Tools.js";
-import { iPostResponse, iHorario, iAnuncios } from "../../types/types.js";
+import { iPostResponse, iHorario, iAnuncios, PostLike } from "../../types/types.js";
 import Cl_vSeccionAnuncios from "./IncioSecciones/Cl_vSeccionAnuncios.js";
 import Cl_vSeccionEncuestas from "./IncioSecciones/Cl_vSeccionEncuestas.js";
 import Cl_vSeccionHorarios from "./IncioSecciones/Cl_vSeccionHorarios.js";
@@ -29,6 +29,7 @@ export default class Cl_vUserInicio {
     private nameUser: NodeListOf<HTMLElement>;
     private userSeccion: any = null;
     private isUsuarioPage: boolean = false;
+    private userId: string | null = null;
 
     constructor(controller: any) {
         this.controlador = controller;
@@ -39,7 +40,7 @@ export default class Cl_vUserInicio {
         this.vHorarios = new Cl_vSeccionHorarios(this.controlador);
         this.vAnuncios = new Cl_vSeccionAnuncios(this.controlador);
         this.vAdministracion = new Cl_vSeccionesAdministracion(this.controlador);
-
+        this.userId = this.controlador.UsermMController.fk_user || null;
         this.seccionPost_publicacion = document.getElementById("PostResponse");
         this.seccionPost = document.getElementById("Post");
         this.seccionEncuestas = document.getElementById("Encuestas");
@@ -51,7 +52,7 @@ export default class Cl_vUserInicio {
         this.buttonMenuHorarios = document.querySelectorAll("#ButtonMenuHorarios") as NodeListOf<HTMLElement>;
         this.buttonMenuRecursos = document.querySelectorAll("#ButtonMenuRecursos") as NodeListOf<HTMLElement>;
         this.buttonMenuPerfiles = document.querySelectorAll("#ButtonMenuPerfiles") as NodeListOf<HTMLElement>;
-
+        console.log(this.userId)
         // Detectar si estamos en la página de usuario (no admin)
         this.isUsuarioPage = window.location.pathname.includes("inicio_usuario");
 
@@ -118,6 +119,9 @@ export default class Cl_vUserInicio {
      * - Si no tiene programa asignado, muestra mensaje "perfil en revisión"
      * - Si tiene programa, carga datos personalizados (horarios, anuncios, perfil)
      */
+    idUSer() {
+        return this.userId
+    }
     private async inicializarPortalUsuario(): Promise<void> {
         const bannerRevision = document.getElementById("bannerPerfilRevision");
         const contenidoPrincipal = document.getElementById("contenidoPrincipalUsuario");
@@ -346,10 +350,23 @@ export default class Cl_vUserInicio {
                 break;
         }
     }
+    async obtenerLikes(id: string): Promise<number> {
+        const likesCount = await this.controlador.obtenerLikes(id);
+       console.log("Likes obtenidos para el post con ID:", id, ":", likesCount);
+        return likesCount || 0; // Devuelve el conteo de likes o 0 si no hay datos
+    }
+   async darLikes(id:string){
+        const dat = await this.obtenerLikes(id)
+        console.log("Likes obtenidos para el post datacon ID:", id, ":", dat);
+        return dat
+    }
 
     async postResponse() {
         if (!this.seccionPost_publicacion) return;
         const data = await this.controlador.postResponse();
+     
+        
+      
         if (!data || !Array.isArray(data)) {
             this.seccionPost_publicacion.innerHTML = `
                 <div class="col-span-full text-center py-16">
@@ -365,11 +382,13 @@ export default class Cl_vUserInicio {
 
         const frame = document.createDocumentFragment();
         const tempContainer = document.createElement('div');
-
-        data.forEach((element: iPostResponse, index: number) => {
+        
+        data.forEach(  (element: iPostResponse, index: number) => {
+        
+          
             const authorName = element.User?.nombre || "HoopPeru";
             const initials = authorName.split(" ").map((n: string) => n[0]).join("").substring(0, 2).toUpperCase();
-
+           
             const htmlPost = `<div
                 class="bg-white rounded-2xl shadow-sm hover:shadow-md border border-gray-100 hover:border-gray-200 p-5 sm:p-6 flex flex-col justify-between space-y-4 transition-all duration-200">
                 <div class="space-y-4">
@@ -410,7 +429,7 @@ export default class Cl_vUserInicio {
                             <span class="inline-flex items-center justify-center h-5 w-5 rounded-full bg-gradient-to-br from-red-400 to-pink-500">
                                 <i class="ph ph-heart-fill text-[9px] text-white"></i>
                             </span>
-                            <span class="font-semibold_${index} font-medium">${element.likes} Me gusta</span>
+                            <span class="font-semibold_${index} font-medium">${this.darLikes(element.id_post)} Me gusta</span>
                         </div>
                     </div>
                     <div class="grid grid-cols-1 gap-2">
@@ -436,6 +455,7 @@ export default class Cl_vUserInicio {
         data.forEach((element: iPostResponse, index: number) => {
             const btnLikePost = document.querySelector(`#btnLikePost[data-index="${index}"]`) as HTMLButtonElement | null;
             btnLikePost?.addEventListener("click", async () => {
+              
                 const heartIcon = btnLikePost.querySelector(".hear-icono") as HTMLElement | null;
                 if (heartIcon) {
                     heartIcon.classList.toggle("ph-fill");
@@ -443,7 +463,9 @@ export default class Cl_vUserInicio {
                     if (likesElement) {
                         likesElement.textContent = `${element.likes} Me gusta`;
                     }
-                    await this.controlador.likePost(element.id_post);
+                  
+                    
+                    await this.controlador.likePost(element.id_post, this.userId);
                 }
             });
         });

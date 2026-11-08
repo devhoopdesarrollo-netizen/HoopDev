@@ -130,8 +130,14 @@ export default class Cl_mMUserController {
         return postResponse;
     }
 
-    async likePost(id_post: string): Promise<any> {
-        const likeResponse = await this._postNew.likePost(id_post);
+    async likePost(id_post: string, userFk: string | null): Promise<any> {
+       
+        const likeResponse = await this._postNew.likePost(id_post, userFk);
+        return likeResponse;
+    }
+    async likeCarga(id: string): Promise<any> {
+        const likeResponse = await this._postLoad.LikeCarga(id);
+       
         return likeResponse;
     }
 

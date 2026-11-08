@@ -1,6 +1,5 @@
 import Controller from "../../../controllers/Controller.js";
 import { iTemplateCargo_Programa } from "../../../types/types.js";
-import Cl_UtilidadesLogin from "../../../models/Utils/Cl_Utils.js";
 
 export default class Cl_vSeccionesAdministracion {
     public controlador: Controller;
@@ -13,8 +12,6 @@ export default class Cl_vSeccionesAdministracion {
     private selectPrograma: HTMLSelectElement | null;
     private selectCargo: HTMLSelectElement | null;
     private selectEstatus: HTMLSelectElement | null;
-    private inputNuevaPassword: HTMLInputElement | null;
-    private btnTogglePasswordAdmin: HTMLButtonElement | null;
 
     // Elementos de Programas
     private formNuevoPrograma: HTMLFormElement | null;
@@ -39,8 +36,6 @@ export default class Cl_vSeccionesAdministracion {
         this.selectPrograma = document.getElementById("programa") as HTMLSelectElement | null;
         this.selectCargo = document.getElementById("cargo") as HTMLSelectElement | null;
         this.selectEstatus = document.getElementById("estatus") as HTMLSelectElement | null;
-        this.inputNuevaPassword = document.getElementById("nuevaPassword") as HTMLInputElement | null;
-        this.btnTogglePasswordAdmin = document.getElementById("btnTogglePasswordAdmin") as HTMLButtonElement | null;
 
         this.formNuevoPrograma = document.getElementById("formNuevoPrograma") as HTMLFormElement | null;
         this.inputNuevoPrograma = document.getElementById("inputNuevoPrograma") as HTMLInputElement | null;
@@ -84,18 +79,6 @@ export default class Cl_vSeccionesAdministracion {
             this.formActualizarUsuario.addEventListener("submit", async (e) => {
                 e.preventDefault();
                 await this.actualizarUsuario();
-            });
-        }
-
-        // Evento toggle visibilidad de contraseña
-        if (this.btnTogglePasswordAdmin && this.inputNuevaPassword) {
-            this.btnTogglePasswordAdmin.addEventListener("click", () => {
-                const isPassword = this.inputNuevaPassword!.type === "password";
-                this.inputNuevaPassword!.type = isPassword ? "text" : "password";
-                const icon = this.btnTogglePasswordAdmin!.querySelector("i");
-                if (icon) {
-                    icon.className = isPassword ? "ph ph-eye-slash text-base text-blue-600" : "ph ph-eye text-base";
-                }
             });
         }
 
@@ -340,12 +323,16 @@ export default class Cl_vSeccionesAdministracion {
         if (this.selectCargo && usuario.fk_cargo) {
             this.selectCargo.value = usuario.fk_cargo;
         }
-        if (this.inputNuevaPassword) {
-            this.inputNuevaPassword.value = "";
-        }
         if (this.selectEstatus) {
-            const isActivo = usuario.estatus === true || usuario.estatus === "activo" || usuario.estatus === "true" || usuario.estatus === 1;
-            this.selectEstatus.value = isActivo ? "activo" : "inactivo";
+            if (usuario.estatus === true || usuario.estatus === "activo") {
+                this.selectEstatus.value = "activo";
+            } else if (usuario.estatus === false || usuario.estatus === "inactivo") {
+                this.selectEstatus.value = "inactivo";
+            } else if (usuario.estatus === "suspendido") {
+                this.selectEstatus.value = "suspendido";
+            } else {
+                this.selectEstatus.value = "activo";
+            }
         }
     }
 
@@ -361,9 +348,12 @@ export default class Cl_vSeccionesAdministracion {
         const fk_programas = this.selectPrograma?.value || undefined;
         const fk_cargo = this.selectCargo?.value || undefined;
         const estatusVal = this.selectEstatus?.value;
-        
-        // El estatus debe ser True o False (Activo / Inactivo)
-        const estatus: boolean = (estatusVal === "activo" || estatusVal === "true");
+        let estatus = false;
+        if (estatusVal == "Inactivo" || estatusVal == "Suspendido") {
+            estatus = false;
+        } else if (estatusVal == "Activo") {
+            estatus = true;
+        }
 
         if (!nombre) {
             alert("⚠️ El nombre de usuario no puede estar vacío.");
@@ -378,23 +368,6 @@ export default class Cl_vSeccionesAdministracion {
         if (fk_programas) datosActualizar.fk_programas = fk_programas;
         if (fk_cargo) datosActualizar.fk_cargo = fk_cargo;
 
-        // Si se especificó una nueva contraseña, validarla y cifrarla con bcrypt
-        const nuevaPassword = this.inputNuevaPassword?.value.trim() || "";
-        if (nuevaPassword) {
-            if (nuevaPassword.length < 6) {
-                alert("⚠️ La nueva contraseña debe tener al menos 6 caracteres.");
-                return;
-            }
-            try {
-                const hashedPassword = await Cl_UtilidadesLogin.cifrarPassword(nuevaPassword);
-                datosActualizar.password = hashedPassword;
-            } catch (err) {
-                console.error("Error cifrando contraseña:", err);
-                alert("❌ Error al procesar la nueva contraseña.");
-                return;
-            }
-        }
-
         const submitBtn = this.formActualizarUsuario?.querySelector('button[type="submit"]') as HTMLButtonElement | null;
         if (submitBtn) {
             submitBtn.disabled = true;
@@ -407,19 +380,16 @@ export default class Cl_vSeccionesAdministracion {
         try {
             const resp = await this.controlador.actualizarUsuario(userId, datosActualizar);
             if (resp && resp.exito) {
-                alert(`✅ ¡Datos del usuario actualizados exitosamente!${nuevaPassword ? " (Contraseña modificada)" : ""}`);
-                if (this.inputNuevaPassword) this.inputNuevaPassword.value = "";
+                alert("✅ ¡Datos del usuario actualizados exitosamente!");
                 await this.cargarUsuarios();
                 if (this.selectUsuarioAdmin) {
                     this.selectUsuarioAdmin.value = userId;
-                    this.seleccionarUsuario(userId);
                 }
             } else {
                 if (resp?.error?.code === '42501') {
-                    alert("❌ Error 42501 (Permiso denegado por PostgreSQL):\n\nLa base de datos Supabase tiene bloqueado el UPDATE en la tabla 'User'.\n\nDebes ejecutar en Supabase SQL Editor:\n\nGRANT UPDATE, SELECT ON public.\"User\" TO authenticated, anon;\n\nCREATE POLICY \"Permitir update a authenticated\" ON public.\"User\" FOR UPDATE TO authenticated USING (true) WITH CHECK (true);");
+                    alert("❌ Error 42501 (Permiso denegado): La base de datos requiere ejecutar en Supabase SQL Editor:\n\nGRANT UPDATE ON public.\"User\" TO authenticated;\n\nY verificar la política RLS de UPDATE.");
                 } else {
-                    const mensaje = resp?.error?.message || "Revisa la consola para más detalles.";
-                    alert(`❌ No se pudieron actualizar los datos del usuario: ${mensaje}`);
+                    alert("❌ No se pudieron actualizar los datos del usuario. Revisa la consola.");
                 }
             }
         } catch (error) {

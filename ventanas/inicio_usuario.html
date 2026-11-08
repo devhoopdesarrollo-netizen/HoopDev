@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio - HoopPeru</title>
+    <!-- Estilos Corporativos HoopPeru -->
+    <link rel="stylesheet" href="../resources/hoop-theme.css">
     <!-- Tailwind CSS via CDN -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <!-- Phosphor Icons CDN -->
@@ -29,11 +31,11 @@
                 class="relative p-2 text-gray-500 hover:text-blue-600 hover:bg-gray-100 rounded-xl transition-colors cursor-pointer"
                 title="Notificaciones y avisos">
                 <i class="ph ph-bell text-xl"></i>
-                <!-- Badge animado indicador de modificación -->
+                <!-- Badge animado indicador de modificación (Magenta Corporativo #9f1074) -->
                 <span class="absolute top-1 right-1 flex h-2.5 w-2.5">
                     <span
-                        class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-                    <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-red-500"></span>
+                        class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#af3a91] opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#9f1074]"></span>
                 </span>
             </button>
 
@@ -158,7 +160,7 @@
                 <div
                     class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 sm:p-6 flex items-center space-x-4">
                     <div
-                        class="p-3 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl shadow-lg shadow-blue-200/50 shrink-0">
+                        class="p-3 bg-gradient-to-br from-[#006eae] to-[#1d3854] rounded-xl shadow-lg shadow-[#006eae]/20 shrink-0">
                         <i class="ph ph-newspaper text-xl text-white"></i>
                     </div>
                     <div>
@@ -217,7 +219,7 @@
                 <div class="bg-white rounded-xl shadow-md border border-gray-200 p-6 space-y-6">
                     <div>
                         <span
-                            class="text-xs font-semibold text-indigo-600 bg-indigo-50 px-2.5 py-1 rounded-full uppercase tracking-wider">Participación</span>
+                            class="text-xs font-semibold text-[#751c5a] bg-[#e6cbe1] border border-[#d392c6] px-2.5 py-1 rounded-full uppercase tracking-wider">Participación</span>
                         <h2 class="text-lg font-semibold text-gray-800 mt-2">Encuestas Disponibles</h2>
                         <p class="text-sm text-gray-500 mt-1">Revisa el listado de encuestas activas y emite tu opinión.
                         </p>
@@ -257,7 +259,7 @@
                     class="bg-white rounded-3xl shadow-xl border border-gray-100 p-6 sm:p-8 space-y-8 max-w-3xl mx-auto">
                     <div>
                         <span
-                            class="text-xs font-semibold text-green-600 bg-green-50 px-2.5 py-1 rounded-full uppercase tracking-wider">Mi
+                            class="text-xs font-semibold text-[#146460] bg-[#dbf5f0] border border-[#b5f4eb] px-2.5 py-1 rounded-full uppercase tracking-wider">Mi
                             Horario</span>
                         <h2 class="text-lg font-semibold text-gray-800 mt-2">Horarios Asignados y Anuncios</h2>
                         <p class="text-sm text-gray-500 mt-1">Consulta tu horario semanal y los anuncios publicados por
@@ -313,7 +315,7 @@
                 <div class="bg-white rounded-xl shadow-md border border-gray-200 p-6 space-y-6">
                     <div>
                         <span
-                            class="text-xs font-semibold text-blue-600 bg-blue-50 px-2.5 py-1 rounded-full uppercase tracking-wider">Biblioteca
+                            class="text-xs font-semibold text-[#1d3854] bg-[#b8e1f1] border border-[#80c8e4] px-2.5 py-1 rounded-full uppercase tracking-wider">Biblioteca
                             Digital</span>
                         <h2 class="text-lg font-semibold text-gray-800 mt-2">Material Informativo y Guías</h2>
                         <p class="text-sm text-gray-500 mt-1">Explora documentos, guías y material publicado por la
@@ -322,10 +324,10 @@
 
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                         <div
-                            class="border border-gray-200 rounded-lg p-4 flex flex-col justify-between space-y-4 hover:border-gray-300 transition-colors">
+                            class="border border-gray-200 rounded-lg p-4 flex flex-col justify-between space-y-4 hover:border-[#80c8e4] transition-colors">
                             <div class="space-y-2">
                                 <div
-                                    class="h-10 w-10 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center">
+                                    class="h-10 w-10 rounded-lg bg-[#b8e1f1]/50 text-[#006eae] flex items-center justify-center">
                                     <i class="ph ph-book-open text-xl"></i>
                                 </div>
                                 <h3 class="text-sm font-semibold text-gray-800">Reglamento Institucional</h3>
@@ -333,17 +335,17 @@
                                     HoopPeru.</p>
                             </div>
                             <button type="button"
-                                class="w-full py-1.5 bg-gray-50 hover:bg-gray-100 text-gray-700 font-medium text-xs rounded-lg transition-colors flex items-center justify-center space-x-1.5 border border-gray-200 cursor-pointer">
+                                class="w-full py-1.5 bg-gray-50 hover:bg-[#b8e1f1]/30 text-[#1d3854] font-medium text-xs rounded-lg transition-colors flex items-center justify-center space-x-1.5 border border-gray-200 cursor-pointer">
                                 <i class="ph ph-download-simple text-sm"></i>
                                 <span>Descargar PDF</span>
                             </button>
                         </div>
 
                         <div
-                            class="border border-gray-200 rounded-lg p-4 flex flex-col justify-between space-y-4 hover:border-gray-300 transition-colors">
+                            class="border border-gray-200 rounded-lg p-4 flex flex-col justify-between space-y-4 hover:border-[#57ddcd] transition-colors">
                             <div class="space-y-2">
                                 <div
-                                    class="h-10 w-10 rounded-lg bg-green-50 text-green-600 flex items-center justify-center">
+                                    class="h-10 w-10 rounded-lg bg-[#dbf5f0] text-[#146460] flex items-center justify-center">
                                     <i class="ph ph-file-text text-xl"></i>
                                 </div>
                                 <h3 class="text-sm font-semibold text-gray-800">Guía de Programas</h3>
@@ -351,17 +353,17 @@
                                     disponibles (Inglés, Robótica, etc).</p>
                             </div>
                             <button type="button"
-                                class="w-full py-1.5 bg-gray-50 hover:bg-gray-100 text-gray-700 font-medium text-xs rounded-lg transition-colors flex items-center justify-center space-x-1.5 border border-gray-200 cursor-pointer">
+                                class="w-full py-1.5 bg-gray-50 hover:bg-[#dbf5f0] text-[#146460] font-medium text-xs rounded-lg transition-colors flex items-center justify-center space-x-1.5 border border-gray-200 cursor-pointer">
                                 <i class="ph ph-download-simple text-sm"></i>
                                 <span>Descargar PDF</span>
                             </button>
                         </div>
 
                         <div
-                            class="border border-gray-200 rounded-lg p-4 flex flex-col justify-between space-y-4 hover:border-gray-300 transition-colors">
+                            class="border border-gray-200 rounded-lg p-4 flex flex-col justify-between space-y-4 hover:border-[#d392c6] transition-colors">
                             <div class="space-y-2">
                                 <div
-                                    class="h-10 w-10 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center">
+                                    class="h-10 w-10 rounded-lg bg-[#e6cbe1] text-[#751c5a] flex items-center justify-center">
                                     <i class="ph ph-calendar text-xl"></i>
                                 </div>
                                 <h3 class="text-sm font-semibold text-gray-800">Calendario Académico</h3>
@@ -369,7 +371,7 @@
                                     período actual.</p>
                             </div>
                             <button type="button"
-                                class="w-full py-1.5 bg-gray-50 hover:bg-gray-100 text-gray-700 font-medium text-xs rounded-lg transition-colors flex items-center justify-center space-x-1.5 border border-gray-200 cursor-pointer">
+                                class="w-full py-1.5 bg-gray-50 hover:bg-[#e6cbe1]/50 text-[#751c5a] font-medium text-xs rounded-lg transition-colors flex items-center justify-center space-x-1.5 border border-gray-200 cursor-pointer">
                                 <i class="ph ph-download-simple text-sm"></i>
                                 <span>Descargar PDF</span>
                             </button>
@@ -386,11 +388,11 @@
                 <div
                     class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 sm:p-6 flex items-center space-x-4">
                     <div
-                        class="p-3 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl shadow-lg shadow-blue-200/50 shrink-0">
+                        class="p-3 bg-gradient-to-br from-[#006eae] to-[#1d3854] rounded-xl shadow-lg shadow-[#006eae]/20 shrink-0">
                         <i class="ph ph-user-circle text-xl text-white"></i>
                     </div>
                     <div>
-                        <h1 class="text-xl sm:text-2xl font-bold text-gray-900 tracking-tight">Mi Perfil</h1>
+                        <h1 class="text-xl sm:text-2xl font-bold text-[#1d3854] tracking-tight">Mi Perfil</h1>
                         <p class="text-xs text-gray-500 mt-0.5 leading-relaxed">Consulta la información de tu cuenta y
                             el programa asignado en HoopPeru.</p>
                     </div>
@@ -403,22 +405,22 @@
                         class="flex flex-col sm:flex-row items-center sm:items-start gap-5 pb-6 border-b border-gray-100">
                         <div class="relative shrink-0">
                             <div id="perfilAvatar"
-                                class="h-20 w-20 rounded-2xl bg-gradient-to-br from-blue-600 to-indigo-600 text-white font-bold text-2xl flex items-center justify-center shadow-lg shadow-blue-200/40">
+                                class="h-20 w-20 rounded-2xl bg-gradient-to-br from-[#006eae] to-[#1d3854] text-white font-bold text-2xl flex items-center justify-center shadow-lg shadow-[#006eae]/25">
                                 U
                             </div>
                             <span
-                                class="absolute -bottom-1 -right-1 h-5 w-5 bg-emerald-500 border-2 border-white rounded-full flex items-center justify-center shadow-xs"
+                                class="absolute -bottom-1 -right-1 h-5 w-5 bg-[#00aea5] border-2 border-white rounded-full flex items-center justify-center shadow-xs"
                                 title="Cuenta Activa">
                                 <span class="h-1.5 w-1.5 bg-white rounded-full"></span>
                             </span>
                         </div>
                         <div class="text-center sm:text-left space-y-1.5 flex-1">
                             <div class="flex flex-col sm:flex-row sm:items-center gap-2">
-                                <h2 class="text-lg sm:text-xl font-bold text-gray-900" id="perfilNombre">—</h2>
+                                <h2 class="text-lg sm:text-xl font-bold text-[#1d3854]" id="perfilNombre">—</h2>
                                 <span
-                                    class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200/60 self-center sm:self-auto"
+                                    class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-[#dbf5f0] text-[#146460] border border-[#b5f4eb] self-center sm:self-auto"
                                     id="perfilEstadoBadge">
-                                    <i class="ph ph-check-circle text-xs"></i>
+                                    <i class="ph ph-check-circle text-xs text-[#00aea5]"></i>
                                     <span id="perfilEstado">ACTIVO</span>
                                 </span>
                             </div>
@@ -431,22 +433,22 @@
 
                     <!-- TARJETA DESTACADA: PROGRAMA ASIGNADO -->
                     <div
-                        class="bg-gradient-to-br from-indigo-50/90 via-blue-50/40 to-white rounded-2xl border border-indigo-100 p-5 sm:p-6 space-y-3 shadow-xs">
+                        class="bg-gradient-to-br from-[#e6cbe1]/30 via-[#b8e1f1]/20 to-white rounded-2xl border border-[#b8e1f1] p-5 sm:p-6 space-y-3 shadow-xs">
                         <div class="flex items-center justify-between">
                             <span
-                                class="text-xs font-bold text-indigo-700 uppercase tracking-wider flex items-center gap-1.5">
-                                <i class="ph ph-graduation-cap text-base"></i>
+                                class="text-xs font-bold text-[#751c5a] uppercase tracking-wider flex items-center gap-1.5">
+                                <i class="ph ph-graduation-cap text-base text-[#af3a91]"></i>
                                 <span>Programa Asignado</span>
                             </span>
                             <span
-                                class="text-[11px] font-medium text-indigo-600 bg-white/90 border border-indigo-100 px-2.5 py-0.5 rounded-full shadow-2xs">
+                                class="text-[11px] font-medium text-[#751c5a] bg-white/90 border border-[#d392c6]/60 px-2.5 py-0.5 rounded-full shadow-2xs">
                                 Formación HoopPeru
                             </span>
                         </div>
 
                         <div class="pt-1">
                             <div id="perfilPrograma" class="space-y-1">
-                                <span class="inline-flex items-center gap-2 text-indigo-600 text-sm font-medium">
+                                <span class="inline-flex items-center gap-2 text-[#006eae] text-sm font-medium">
                                     <i class="ph ph-spinner animate-spin text-base"></i>
                                     <span>Cargando programa...</span>
                                 </span>
@@ -484,10 +486,10 @@
                             <div
                                 class="bg-gray-50/80 hover:bg-gray-50 p-4 rounded-xl border border-gray-100 transition-colors">
                                 <span class="text-xs font-medium text-gray-400 flex items-center gap-1.5">
-                                    <i class="ph ph-shield-check text-emerald-600 text-sm"></i> Estado de Cuenta:
+                                    <i class="ph ph-shield-check text-[#00aea5] text-sm"></i> Estado de Cuenta:
                                 </span>
-                                <span class="font-semibold text-emerald-700 text-sm block mt-1 flex items-center gap-1">
-                                    <i class="ph ph-check text-xs"></i> Habilitada
+                                <span class="font-semibold text-[#146460] text-sm block mt-1 flex items-center gap-1">
+                                    <i class="ph ph-check text-xs text-[#00aea5]"></i> Habilitada
                                 </span>
                             </div>
                         </div>
@@ -509,18 +511,18 @@
     <!-- MODAL DE NOTIFICACIONES Y MODIFICACIONES                       -->
     <!-- ============================================================== -->
     <div id="modalNotificaciones"
-        class="fixed inset-0 z-50 flex items-center justify-center bg-gray-900/50 backdrop-blur-xs p-4 hidden">
+        class="fixed inset-0 z-50 flex items-center justify-center bg-[#1d3854]/50 backdrop-blur-xs p-4 hidden">
         <div
             class="bg-white rounded-2xl shadow-2xl border border-gray-200 w-full max-w-md overflow-hidden transform transition-all animate-in fade-in zoom-in-95 duration-200">
 
             <!-- Cabecera del Modal -->
             <div class="flex justify-between items-center px-6 py-4 border-b border-gray-100 bg-gray-50/80">
                 <div class="flex items-center space-x-2.5">
-                    <div class="p-2 bg-blue-50 text-blue-600 rounded-xl">
+                    <div class="p-2 bg-[#b8e1f1]/40 text-[#006eae] rounded-xl">
                         <i class="ph ph-bell-ringing text-xl"></i>
                     </div>
                     <div>
-                        <h3 class="text-base font-bold text-gray-800">Avisos y Modificaciones</h3>
+                        <h3 class="text-base font-bold text-[#1d3854]">Avisos y Modificaciones</h3>
                         <p class="text-xs text-gray-500">Notificaciones oficiales de HoopPeru</p>
                     </div>
                 </div>
@@ -533,32 +535,32 @@
             <!-- Cuerpo del Modal: Tarjeta de la Notificación con los datos solicitados -->
             <div class="p-6 space-y-4">
                 <div
-                    class="bg-gradient-to-br from-blue-50/70 via-white to-gray-50 border border-blue-100 rounded-2xl p-4.5 space-y-3.5 shadow-xs">
+                    class="bg-gradient-to-br from-[#b8e1f1]/30 via-white to-gray-50 border border-[#80c8e4]/40 rounded-2xl p-4.5 space-y-3.5 shadow-xs">
                     <div class="flex items-center justify-between">
                         <span
-                            class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-blue-100 text-blue-700">
-                            <span class="w-1.5 h-1.5 rounded-full bg-blue-600"></span>
+                            class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-[#b8e1f1] text-[#1d3854]">
+                            <span class="w-1.5 h-1.5 rounded-full bg-[#006eae]"></span>
                             Convocatoria Oficial
                         </span>
                         <span class="text-xs font-mono font-medium text-gray-500 flex items-center gap-1">
-                            <i class="ph ph-calendar text-sm text-gray-400"></i>
+                            <i class="ph ph-calendar text-sm text-[#006eae]"></i>
                             2026-10-12
                         </span>
                     </div>
 
                     <div>
-                        <h4 class="text-base font-bold text-gray-900">Reunión de Hoop</h4>
+                        <h4 class="text-base font-bold text-[#1d3854]">Reunión de Hoop</h4>
                     </div>
 
                     <!-- Datos Específicos: Hora Inicio y Hora Final -->
-                    <div class="grid grid-cols-2 gap-2 pt-2 border-t border-blue-100/80 text-xs">
+                    <div class="grid grid-cols-2 gap-2 pt-2 border-t border-[#80c8e4]/30 text-xs">
                         <div class="bg-white p-2.5 rounded-xl border border-gray-100">
                             <span class="text-gray-400 block text-[11px]">Hora de Inicio:</span>
-                            <span class="font-bold text-gray-800 font-mono text-sm">15:00:00</span>
+                            <span class="font-bold text-[#1d3854] font-mono text-sm">15:00:00</span>
                         </div>
                         <div class="bg-white p-2.5 rounded-xl border border-gray-100">
                             <span class="text-gray-400 block text-[11px]">Hora Final:</span>
-                            <span class="font-bold text-gray-800 font-mono text-sm">17:00:00</span>
+                            <span class="font-bold text-[#1d3854] font-mono text-sm">17:00:00</span>
                         </div>
                     </div>
                 </div>
@@ -567,7 +569,7 @@
             <!-- Footer del Modal -->
             <div class="px-6 py-3.5 bg-gray-50 border-t border-gray-100 flex justify-end">
                 <button type="button" id="btnEntendidoNotificaciones"
-                    class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium text-xs rounded-xl shadow-xs transition-colors cursor-pointer">
+                    class="px-4 py-2 bg-[#006eae] hover:bg-[#1d3854] text-white font-semibold text-xs rounded-xl shadow-xs transition-colors cursor-pointer">
                     Entendido
                 </button>
             </div>

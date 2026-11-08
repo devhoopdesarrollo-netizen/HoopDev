@@ -1,6 +1,6 @@
 import Cl_directory from "../config/Cl_directory.js";
 import Cl_mMUserController from "../models/UserModules/Cl_mMUserController.js";
-import { iAnuncios, iEncuesta, iHorario, iLoginDTO, iPostNew, iPreguntas, iTemplateCargo_Programa, iUserList, iUsuarioNew } from "../types/types.js";
+import { iAnuncios, iEncuesta, iHorario, iLoginDTO, iPostNew, iPreguntas, iTemplateCargo_Programa, iUserList, iUsuarioNew, PostLike } from "../types/types.js";
 import Cl_vLogingUser from "../views/CL_vLoginUser.js";
 import Cl_vRegisterUser from "../views/Cl_vRegisterUser.js";
 import Cl_vUserInicio from "../views/views_users/Cl_vUserInicio.js";
@@ -52,9 +52,18 @@ export default class Controller {
         const postResponse = await this.UsermMController.postResponse()
         return postResponse
     }
-    async likePost(id_post: string): Promise<any> {
-        const likeResponse = await this.UsermMController.likePost(id_post)
+    async likePost(id_post: string, fk_user: string | null): Promise<any> {
+
+        const likeResponse = await this.UsermMController.likePost(id_post, fk_user)
+      
         return likeResponse
+    }
+    async obtenerLikes(id:string):Promise<any>{
+        const likeResponse = await this.UsermMController.likeCarga(id)
+       
+        return likeResponse[0]?.likes_count ; 
+        // Devuelve el conteo de likes o 0 si no hay datos
+        
     }
     //funcion desde vista para recargar las publicaciones
     actualizarPost = async () => {

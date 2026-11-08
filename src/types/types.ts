@@ -32,6 +32,10 @@ export interface iLoginDTO {
     correo_electronico: string;
     password: string;
 }
+export interface PostLike {
+  id_post: string;      // UUID de la publicación
+  likes_count: number;  // Conteo total de likes
+}
 export interface iPostNew {
     fk_user: string;
     img_direccion?: string;
