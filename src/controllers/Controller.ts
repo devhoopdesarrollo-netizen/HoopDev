@@ -65,6 +65,10 @@ export default class Controller {
         // Devuelve el conteo de likes o 0 si no hay datos
         
     }
+    async deletePost(estado:boolean,id:string){
+        const deleteResponse = await this.UsermMController.deletePost(estado,id)
+   
+    }
     //funcion desde vista para recargar las publicaciones
     actualizarPost = async () => {
         this.UserInicio.postResponse()

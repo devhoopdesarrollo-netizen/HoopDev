@@ -68,3 +68,7 @@ export interface iPostResponse {
     user_liked?: boolean;
     fecha_post: Date;
 }
+export interface DetalleInfo {
+    InfoPrincipal: string;
+  
+}

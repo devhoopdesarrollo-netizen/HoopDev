@@ -46,5 +46,6 @@ export default class Cl_Tools {
         const minutos = minutoStr ? minutoStr : "00";
         return `${hora}:${minutos} ${ampm}`;
     }
+    //confirmacion de estados para acciones
 
 }

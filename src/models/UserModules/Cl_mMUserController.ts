@@ -181,6 +181,10 @@ export default class Cl_mMUserController {
         const deletAnuncio = await this._anuncios_load.delectAnuncio(id);
         return deletAnuncio;
     }
+    async deletePost(estado:boolean,id: string) {
+        const deletePost = await this._postLoad.preparadoDeletePost(estado,id);
+        
+    }
 
     // ==========================================
     // SECCIÓN ADMINISTRACIÓN (Cargos, Programas, Usuarios)

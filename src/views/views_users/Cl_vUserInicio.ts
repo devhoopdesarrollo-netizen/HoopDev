@@ -1,6 +1,7 @@
 import Controller from "../../controllers/Controller.js";
 import Cl_Tools from "../../models/Utils/Cl_Tools.js";
-import { iPostResponse, iHorario, iAnuncios, PostLike } from "../../types/types.js";
+import { iPostResponse, iHorario, iAnuncios, PostLike, DetalleInfo } from "../../types/types.js";
+import modal_confirmacion from "../views_resours/modal_confirmacion.js";
 import Cl_vSeccionAnuncios from "./IncioSecciones/Cl_vSeccionAnuncios.js";
 import Cl_vSeccionEncuestas from "./IncioSecciones/Cl_vSeccionEncuestas.js";
 import Cl_vSeccionHorarios from "./IncioSecciones/Cl_vSeccionHorarios.js";
@@ -25,13 +26,19 @@ export default class Cl_vUserInicio {
     private buttonMenuPerfiles: NodeListOf<HTMLElement>;
     private buttonMenuInicio: NodeListOf<HTMLElement>;
     private controlador: Controller;
+
     private tools: Cl_Tools;
     private nameUser: NodeListOf<HTMLElement>;
     private userSeccion: any = null;
     private isUsuarioPage: boolean = false;
     private userId: string | null = null;
+    private modalConfirmacion: modal_confirmacion;
 
     constructor(controller: any) {
+        const informacion: DetalleInfo = {
+            InfoPrincipal: `¿Estás seguro de eliminar esta publicación? `,
+
+        }
         this.controlador = controller;
         this.tools = new Cl_Tools();
         this.nameUser = document.querySelectorAll("#NameUser, .nameUser");
@@ -52,6 +59,8 @@ export default class Cl_vUserInicio {
         this.buttonMenuHorarios = document.querySelectorAll("#ButtonMenuHorarios") as NodeListOf<HTMLElement>;
         this.buttonMenuRecursos = document.querySelectorAll("#ButtonMenuRecursos") as NodeListOf<HTMLElement>;
         this.buttonMenuPerfiles = document.querySelectorAll("#ButtonMenuPerfiles") as NodeListOf<HTMLElement>;
+
+
         console.log(this.userId)
         // Detectar si estamos en la página de usuario (no admin)
         this.isUsuarioPage = window.location.pathname.includes("inicio_usuario");
@@ -112,6 +121,7 @@ export default class Cl_vUserInicio {
                 this.estadoSeccion("perfiles");
             });
         });
+        this.modalConfirmacion = new modal_confirmacion(informacion)
     }
 
     /**
@@ -399,6 +409,7 @@ export default class Cl_vUserInicio {
                             class="h-11 w-11 rounded-full bg-gradient-to-br from-blue-500 to-indigo-500 flex items-center justify-center shrink-0 shadow-md shadow-blue-200/30">
                             <span class="text-xs text-white font-bold">${initials}</span>
                         </div>
+                        
                         <div>
                             <h3 class="text-sm font-bold text-gray-900">${authorName}</h3>
                             <p class="text-[11px] text-gray-400 flex items-center space-x-1">
@@ -434,6 +445,7 @@ export default class Cl_vUserInicio {
                             <span class="font-semibold_${index} font-medium">${element.likes ?? 0} Me gusta</span>
                         </div>
                     </div>
+                    <div id="moldaDelete"></div>
                     <div class="grid grid-cols-1 gap-2">
                        <button class="btnLikePost flex-1 py-2 bg-gray-50 hover:bg-gradient-to-r hover:from-red-50 hover:to-pink-50 text-gray-600 hover:text-red-600 font-semibold text-xs rounded-xl transition-all flex items-center justify-center space-x-2 cursor-pointer active:scale-[0.98]"
         data-idpost="${element.id_post}" data-index="${index}">
@@ -520,19 +532,8 @@ export default class Cl_vUserInicio {
         data.forEach((element: iPostResponse, index: number) => {
             const btnDeletePost = this.seccionPost_publicacion?.querySelector(`.btnDeletePost[data-index_clean="${index}"]`) as HTMLButtonElement | null;
             btnDeletePost?.addEventListener("click", async () => {
-                const confirmDelete = confirm("¿Estás seguro de que deseas eliminar esta publicación?");
-                if (confirmDelete) {
-                    try {
-                        console.log("Eliminando publicación con ID:", element.id_post);
-                        // Eliminar el post del DOM
-                        const postToRemove = btnDeletePost?.closest("div.bg-white");
-                        if (postToRemove && postToRemove.parentNode) {
-                            postToRemove.parentNode.removeChild(postToRemove);
-                        }
-                    } catch (err) {
-                        console.error("Error al eliminar la publicación:", err);
-                    }
-                }
+                this.modalConfirmacion.modalConfirmacionAction()
+                this.controlador.deletePost(this.modalConfirmacion.estadoElecion(),element.id_post)
             });
         });
         // Asignar eventos de likes
