@@ -1,5 +1,5 @@
 import Controller from "../../../controllers/Controller.js";
-import { mRecursos } from "../../../types/types.js";
+import { iRecursos } from "../../../types/types.js";
 
 export default class Cl_vSeccionRecursos{
     public controllerSources:Controller;
@@ -24,7 +24,7 @@ export default class Cl_vSeccionRecursos{
     }
     newDocument(){
         const dataForm = new FormData(this.formNewDocument);
-        const empaquetadoDocument:mRecursos = {
+        const empaquetadoDocument:iRecursos = {
             nameFiles: dataForm.get("nameFiles") as string,
             programa:dataForm.get("programa") as string,
             description:dataForm.get("description") as string,
@@ -32,6 +32,10 @@ export default class Cl_vSeccionRecursos{
 
             
         }
-        console.log(dataForm.get("documentDirecciontion"))
+        //revisar esto no puede llevar string
+        this.controllerSources.newPost(empaquetadoDocument,empaquetadoDocument.documentDirecciontion)
+       
+       
     }
+
 }

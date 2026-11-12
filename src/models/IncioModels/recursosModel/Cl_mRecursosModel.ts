@@ -1,4 +1,4 @@
-import { mRecursos } from "../../../types/types.js"
+import { iRecursos } from "../../../types/types.js"
 
 export default class Cl_mRecursosModel {
     private _nameFiles: string = ""
@@ -6,7 +6,7 @@ export default class Cl_mRecursosModel {
     private _programa: string = ""
     private _documentDirecciontion: string = ""
 
-    constructor({ nameFiles, description, programa, documentDirecciontion }: mRecursos) {
+    constructor({ nameFiles, description, programa, documentDirecciontion }: iRecursos) {
         this.nameFiles = nameFiles;
         this.description = description;
         this.programa = programa;
@@ -40,7 +40,7 @@ export default class Cl_mRecursosModel {
     get documentDirecciontion(): string {
         return this._documentDirecciontion
     }
-    toJSON(): mRecursos {
+    toJSON(): iRecursos {
         return {
             nameFiles: this.nameFiles,
             description: this.description,

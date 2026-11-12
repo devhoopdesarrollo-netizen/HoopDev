@@ -72,10 +72,11 @@ export interface DetalleInfo {
     InfoPrincipal: string;
   
 }
-export interface mRecursos{
+export interface iRecursos{
     id?:string,
     nameFiles:string,
     description:string,
     programa:string
     documentDirecciontion:string;
+    fecha_load?:string
 }
