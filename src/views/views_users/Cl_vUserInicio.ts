@@ -5,6 +5,7 @@ import modal_confirmacion from "../views_resours/modal_confirmacion.js";
 import Cl_vSeccionAnuncios from "./IncioSecciones/Cl_vSeccionAnuncios.js";
 import Cl_vSeccionEncuestas from "./IncioSecciones/Cl_vSeccionEncuestas.js";
 import Cl_vSeccionHorarios from "./IncioSecciones/Cl_vSeccionHorarios.js";
+import Cl_vSeccionRecursos from "./IncioSecciones/Cl_vSeccionRecursos.js";
 import Cl_vSeccionesAdministracion from "./IncioSecciones/Cl_vSeccionesAdministracion.js";
 import Cl_PostNewModal from "./PostModal/Cl_vPostNewModal.js";
 
@@ -14,6 +15,7 @@ export default class Cl_vUserInicio {
     private vHorarios: Cl_vSeccionHorarios;
     private vAnuncios: Cl_vSeccionAnuncios;
     private vAdministracion: Cl_vSeccionesAdministracion;
+    private vRecursos:Cl_vSeccionRecursos;
     private seccionPost_publicacion: HTMLElement | null;
     private seccionPost: HTMLElement | null;
     private seccionEncuestas: HTMLElement | null;
@@ -47,6 +49,7 @@ export default class Cl_vUserInicio {
         this.vHorarios = new Cl_vSeccionHorarios(this.controlador);
         this.vAnuncios = new Cl_vSeccionAnuncios(this.controlador);
         this.vAdministracion = new Cl_vSeccionesAdministracion(this.controlador);
+        this.vRecursos = new Cl_vSeccionRecursos(this.controlador)
         this.userId = this.controlador.UsermMController.fk_user || null;
         this.seccionPost_publicacion = document.getElementById("PostResponse");
         this.seccionPost = document.getElementById("Post");
@@ -533,7 +536,15 @@ export default class Cl_vUserInicio {
             const btnDeletePost = this.seccionPost_publicacion?.querySelector(`.btnDeletePost[data-index_clean="${index}"]`) as HTMLButtonElement | null;
             btnDeletePost?.addEventListener("click", async () => {
                 this.modalConfirmacion.modalConfirmacionAction()
-                this.controlador.deletePost(this.modalConfirmacion.estadoElecion(),element.id_post)
+                
+                setTimeout(() => {
+                     this.controlador.deletePost(this.modalConfirmacion.estadoElecion(),element.id_post)
+                     if(this.modalConfirmacion.estadoElecion()){
+                        const postCard = btnDeletePost.closest('.bg-white.rounded-2xl');
+                        postCard?.remove()
+                     }
+                }, 1500);
+               
             });
         });
         // Asignar eventos de likes

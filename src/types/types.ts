@@ -72,3 +72,10 @@ export interface DetalleInfo {
     InfoPrincipal: string;
   
 }
+export interface mRecursos{
+    id?:string,
+    nameFiles:string,
+    description:string,
+    programa:string
+    documentDirecciontion:string;
+}

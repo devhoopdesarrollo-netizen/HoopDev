@@ -47,5 +47,6 @@ export default class Cl_Tools {
         return `${hora}:${minutos} ${ampm}`;
     }
     //confirmacion de estados para acciones
+  
 
 }

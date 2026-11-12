@@ -55,27 +55,15 @@ export default class modal_confirmacion {
 
     const modal = document.getElementById("confirmModal") as HTMLDialogElement;
     modal.showModal()
-
         const buttonBtnConfirmar = document.getElementById(`btnConfirm`) as HTMLButtonElement;
         buttonBtnConfirmar.addEventListener("click", e => {
             this.Estado = !this.Estado
-          
             modal.close()
-           
-           
-         
-
         })
-
-
-
         const buttoncancelar = document.getElementById(`btnCancel`) as HTMLButtonElement;
         buttoncancelar.addEventListener("click", e => {
             this.Estado = false
-         
             modal.close()
-           
-
         })
              return this.estadoElecion()
     }
