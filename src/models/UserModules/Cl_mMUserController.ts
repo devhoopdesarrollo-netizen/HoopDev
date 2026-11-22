@@ -13,9 +13,11 @@ import Horarios_New from "../../modules/Horarios_Moduls/Horarios_New.js";
 import Post_Load from "../../modules/Post_Moduls/Post_load.js";
 import Post_New from "../../modules/Post_Moduls/Post_new.js";
 import StorageImagen from "../../modules/Post_Moduls/StorageImagenes.js";
+import Recursos_laod from "../../modules/Recursos_Moduls/Recursos_load.js";
+import Recursos_New from "../../modules/Recursos_Moduls/Recursos_New.js";
 import MD_UserLogin from "../../modules/User_Moduls/UserLogin.js";
 import MD_NewUser from "../../modules/User_Moduls/userRegistro.js";
-import { iAnuncios, iEncuesta, iHorario, iLoginDTO, iPostNew, iPreguntas, iTemplateCargo_Programa, iUserList, iUsuarioNew } from "../../types/types.js";
+import { iAnuncios, iEncuesta, iHorario, iLoginDTO, iPostNew, iPreguntas, iRecursos, iTemplateCargo_Programa, iUserList, iUsuarioNew } from "../../types/types.js";
 import Cl_mPost from "../IncioModels/postModel/Cl_Post.js";
 import userList_moduls from "../Utils/userList_moduls.js";
 import Cl_mNewUser from "./Cl_mNewUser.js";
@@ -37,6 +39,8 @@ export default class Cl_mMUserController {
     private _cargo_new: Cargo_New;
     private _programa_load: Programas_load;
     private _programas_new: Programas_New;
+    private _newDocument:Recursos_New;
+    private _loadDocument:Recursos_laod;
     private _User_Controller: User_control_load;
     private EncuestaPreguntas: iPreguntas[] = [];
     public controller: Controller;
@@ -56,7 +60,8 @@ export default class Cl_mMUserController {
         this._horarios_load = new Horarios_load();
         this._anuncios_new = new anuncios_new();
         this._anuncios_load = new Anuncios_load();
-
+        this._newDocument = new Recursos_New();
+        this._loadDocument = new Recursos_laod();
         this._toolsUser = new userList_moduls();
         this._cargo_load = new Cargos_load();
         this._cargo_new = new Cargo_New();
@@ -185,6 +190,15 @@ export default class Cl_mMUserController {
         const deletePost = await this._postLoad.preparadoDeletePost(estado,id);
         
     }
+    async loadDocument(document:iRecursos,file:File){
+        const documento = await this._newDocument.NewDocument(document,file)
+    }
+    
+    async cargaDocument():Promise<any>{
+        const document = await this._loadDocument.loadDocument()
+        return document
+    }
+    
 
     // ==========================================
     // SECCIÓN ADMINISTRACIÓN (Cargos, Programas, Usuarios)

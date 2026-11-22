@@ -1,6 +1,6 @@
 import Cl_directory from "../config/Cl_directory.js";
 import Cl_mMUserController from "../models/UserModules/Cl_mMUserController.js";
-import { iAnuncios, iEncuesta, iHorario, iLoginDTO, iPostNew, iPreguntas, iTemplateCargo_Programa, iUserList, iUsuarioNew, PostLike } from "../types/types.js";
+import { iAnuncios, iEncuesta, iHorario, iLoginDTO, iPostNew, iPreguntas, iRecursos, iTemplateCargo_Programa, iUserList, iUsuarioNew, PostLike } from "../types/types.js";
 import Cl_vLogingUser from "../views/CL_vLoginUser.js";
 import Cl_vRegisterUser from "../views/Cl_vRegisterUser.js";
 import Cl_vUserInicio from "../views/views_users/Cl_vUserInicio.js";
@@ -74,6 +74,15 @@ export default class Controller {
         this.UserInicio.postResponse()
     } 
     //Secciones 
+    //Documento
+    async loadDocument(informacion:iRecursos,document:File){
+        const documento = await this.UsermMController.loadDocument(informacion,document)
+    }
+    async cargaDocument():Promise<any>{
+        const document = await this.UsermMController.cargaDocument()
+       return document
+    }
+
     //Encuestas
     async crearEncuetas(Tematica:iEncuesta,preguntas:iPreguntas[]){
        await this.UsermMController.newEncuetas(Tematica,preguntas)

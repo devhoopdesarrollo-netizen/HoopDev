@@ -34,7 +34,7 @@ export default class Cl_mRecursosModel {
         return this._programa
     }
     set documentDirecciontion(documentDirecciontion: string) {
-        this._documentDirecciontion = documentDirecciontion.trim().toLocaleUpperCase()
+        this._documentDirecciontion = documentDirecciontion
 
     }
     get documentDirecciontion(): string {

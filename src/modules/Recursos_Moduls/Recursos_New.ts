@@ -4,7 +4,7 @@ import { iRecursos, } from "../../types/types.js";
 import StorageDocs from "./StorageDocs.js";
 
 export default class Recursos_New{
-      async crearPostNew(date: iRecursos, file: File): Promise<any> {
+      async NewDocument(date: iRecursos, file: File): Promise<any> {
         const documentFormtt = new Cl_mRecursosModel(date)
 
         const token = localStorage.getItem("user_token");
