@@ -15,6 +15,7 @@ import Post_New from "../../modules/Post_Moduls/Post_new.js";
 import StorageImagen from "../../modules/Post_Moduls/StorageImagenes.js";
 import Recursos_laod from "../../modules/Recursos_Moduls/Recursos_load.js";
 import Recursos_New from "../../modules/Recursos_Moduls/Recursos_New.js";
+import StorageFotoPerfil from "../../modules/User_Moduls/StorageFotoPerfil.js";
 import MD_UserLogin from "../../modules/User_Moduls/UserLogin.js";
 import MD_NewUser from "../../modules/User_Moduls/userRegistro.js";
 import { iAnuncios, iEncuesta, iHorario, iLoginDTO, iPostNew, iPreguntas, iRecursos, iTemplateCargo_Programa, iUserList, iUsuarioNew } from "../../types/types.js";
@@ -39,9 +40,10 @@ export default class Cl_mMUserController {
     private _cargo_new: Cargo_New;
     private _programa_load: Programas_load;
     private _programas_new: Programas_New;
-    private _newDocument:Recursos_New;
-    private _loadDocument:Recursos_laod;
+    private _newDocument: Recursos_New;
+    private _loadDocument: Recursos_laod;
     private _User_Controller: User_control_load;
+    private _storageFotoPerfil: StorageFotoPerfil;
     private EncuestaPreguntas: iPreguntas[] = [];
     public controller: Controller;
     public nameUser: string = "";
@@ -68,6 +70,7 @@ export default class Cl_mMUserController {
         this._programa_load = new Programas_load();
         this._programas_new = new Programas_New();
         this._User_Controller = new User_control_load();
+        this._storageFotoPerfil = new StorageFotoPerfil();
 
         const datosGuardados = localStorage.getItem("userSeccion");
         if (datosGuardados) {
@@ -136,13 +139,13 @@ export default class Cl_mMUserController {
     }
 
     async likePost(id_post: string, userFk: string | null): Promise<any> {
-       
+
         const likeResponse = await this._postNew.likePost(id_post, userFk);
         return likeResponse;
     }
     async likeCarga(id: string): Promise<any> {
         const likeResponse = await this._postLoad.LikeCarga(id);
-       
+
         return likeResponse;
     }
 
@@ -155,6 +158,26 @@ export default class Cl_mMUserController {
     async cargarEncuetas_name() {
         const EncuentasName = await this._Encuesta_load.MostrarEncuetasActuales();
         return EncuentasName;
+    }
+
+    async guardarRespuestasEncuesta(respuestas: Array<{ fk_pregunta: string, fk_user: string, respuesta: string, descripcion_reporte?: string }>): Promise<boolean> {
+        return await this._Encuesta.guardarRespuestas(respuestas);
+    }
+
+    async eliminarEncuesta(id_tematica: string): Promise<boolean> {
+        return await this._Encuesta.eliminarEncuesta(id_tematica);
+    }
+
+    async cargarPreguntasEncuesta(id_tematica: string): Promise<iPreguntas[]> {
+        return await this._Encuesta_load.cargarPreguntas(id_tematica);
+    }
+
+    async cargarRespuestasPorTematica(id_tematica: string): Promise<{ preguntas: any[]; reportes: any[] }> {
+        return await this._Encuesta_load.cargarRespuestasPorTematica(id_tematica);
+    }
+
+    async obtenerEncuestasConEstado(id_user: string): Promise<Array<iEncuesta & { respondida: boolean }>> {
+        return await this._Encuesta_load.obtenerEncuestasConEstado(id_user);
     }
 
     async crearHorario(date: iHorario) {
@@ -186,19 +209,25 @@ export default class Cl_mMUserController {
         const deletAnuncio = await this._anuncios_load.delectAnuncio(id);
         return deletAnuncio;
     }
-    async deletePost(estado:boolean,id: string) {
-        const deletePost = await this._postLoad.preparadoDeletePost(estado,id);
-        
+    async deletePost(estado: boolean, id: string) {
+        const deletePost = await this._postLoad.preparadoDeletePost(estado, id);
+
     }
-    async loadDocument(document:iRecursos,file:File){
-        const documento = await this._newDocument.NewDocument(document,file)
+    async loadDocument(document: iRecursos, file: File) {
+        const documento = await this._newDocument.NewDocument(document, file);
+        return documento;
     }
-    
-    async cargaDocument():Promise<any>{
-        const document = await this._loadDocument.loadDocument()
-        return document
+
+    async cargaDocument(): Promise<any> {
+        const document = await this._loadDocument.loadDocument();
+        return document;
     }
-    
+
+    async deleteDocument(id: string): Promise<any> {
+        const deleted = await this._loadDocument.deleteDocument(id);
+        return deleted;
+    }
+
 
     // ==========================================
     // SECCIÓN ADMINISTRACIÓN (Cargos, Programas, Usuarios)
@@ -234,5 +263,9 @@ export default class Cl_mMUserController {
 
     async actualizarUsuario(idUser: string, datos: { nombre?: string; especializacion?: string; fk_programas?: string; fk_cargo?: string; estatus?: boolean; password?: string }): Promise<any> {
         return await this._User_Controller.actualizarUsuario(idUser, datos);
+    }
+
+    async actualizarFotoPerfil(idUser: string, file: File): Promise<string> {
+        return await this._storageFotoPerfil.uploadFotoPerfil(file, idUser);
     }
 }

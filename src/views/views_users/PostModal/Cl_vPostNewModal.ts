@@ -24,22 +24,56 @@ export default class Cl_PostNewModal {
 
             this.inicializarEventos();
         }
-        this.form?.addEventListener("submit", e => {
+        this.form?.addEventListener("submit", async e => {
             e.preventDefault();
-            if (this.inputFileInput) {
-                this.newPost()
-                this.modalSeccion?.classList.add("hidden");
-               
-              
-                    this.limpiarPreview();
-              
-                setTimeout(() => {
-                    this.controlador?.actualizarPost()
-                }, 1500);
+            const contenido = (this.form!.elements.namedItem("contenido") as HTMLInputElement)?.value?.trim() || "";
+            const file = this.fileObjet();
+
+            if (!contenido && !file) {
+                alert("⚠️ Por favor escribe un mensaje o adjunta una imagen para tu publicación.");
+                return;
             }
 
+            if (file && file.size > 10 * 1024 * 1024) {
+                alert("⚠️ El archivo adjunto no debe superar los 10MB.");
+                return;
+            }
 
-        })
+            const userId = this.controlador?.UsermMController.fk_user;
+            if (!userId || userId === "Error") {
+                alert("⚠️ Debes tener una sesión activa para poder publicar.");
+                return;
+            }
+
+            const submitBtn = this.form?.querySelector('button[type="submit"]') as HTMLButtonElement | null;
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.textContent = "Publicando...";
+            }
+
+            try {
+                const date: iPostNew = {
+                    fk_user: userId,
+                    contenido: contenido,
+                    fechaCreacion: new Date().toISOString()
+                };
+                await this.controlador?.newPost(date, file!);
+                this.modalSeccion?.classList.add("hidden");
+                this.form?.reset();
+                this.limpiarPreview();
+                setTimeout(() => {
+                    this.controlador?.actualizarPost();
+                }, 1000);
+            } catch (err) {
+                console.error("Error al publicar post:", err);
+                alert("❌ No se pudo crear la publicación. Inténtalo de nuevo.");
+            } finally {
+                if (submitBtn) {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = "Publicar";
+                }
+            }
+        });
     }
     private newPost() {
         const contenido = this.form!.elements.namedItem("contenido") as HTMLInputElement;

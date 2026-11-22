@@ -203,54 +203,20 @@
                 </div>
                 <!-- CSS Grid Responsivo para las Publicaciones -->
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-6" id="PostResponse">
-
-                    <!-- Tarjeta de Publicación 1 -->
-
-
-                    <!-- Tarjeta de Publicación 2 -->
-                    <div
-                        class="bg-white rounded-xl shadow-md border border-gray-200 p-5 sm:p-6 flex flex-col justify-between space-y-4">
-                        <div class="space-y-4">
-                            <div class="flex items-center space-x-3">
-                                <div
-                                    class="h-10 w-10 rounded-full bg-gray-200 overflow-hidden border border-gray-300 flex items-center justify-center shrink-0">
-                                    <span class="text-xs text-gray-500 font-semibold">U2</span>
-                                </div>
-                                <div>
-                                    <h3 class="text-sm font-semibold text-gray-800">Usuario 2</h3>
-                                    <p class="text-xs text-gray-500">Hace 4 horas</p>
-                                </div>
-                            </div>
-                            <p class="text-sm text-gray-700">
-                                Segundo cuadro demostrando la consistencia visual y la adaptación del grid en
-                                dispositivos móviles y de escritorio.
-                            </p>
-                            <div
-                                class="rounded-lg overflow-hidden border border-gray-200 bg-gray-100 h-48 flex items-center justify-center">
-                                <span class="text-sm text-gray-400">Imagen de publicación 2</span>
+                    <div class="bg-white rounded-2xl border border-gray-100 p-6 space-y-4 animate-pulse">
+                        <div class="flex items-center space-x-3">
+                            <div class="h-11 w-11 rounded-full bg-gray-200"></div>
+                            <div class="space-y-2 flex-1">
+                                <div class="h-3.5 bg-gray-200 rounded-lg w-1/3"></div>
+                                <div class="h-2.5 bg-gray-100 rounded-lg w-1/4"></div>
                             </div>
                         </div>
-
-                        <div class="border-t border-gray-100 pt-4 space-y-3">
-                            <div class="flex justify-between text-xs text-gray-500 px-1">
-                                <span>8 Me gusta</span>
-                                <span>1 comentario</span>
-                            </div>
-                            <div class="grid grid-cols-2 gap-2 border-y border-gray-100 py-1.5">
-                                <button
-                                    class="w-full py-1.5 bg-gray-50 hover:bg-gray-100 text-gray-700 font-medium text-xs rounded-lg transition-colors flex items-center justify-center space-x-1.5 cursor-pointer">
-                                    <i class="ph ph-heart text-base text-red-500"></i>
-                                    <span>Me gusta</span>
-                                </button>
-                                <button
-                                    class="w-full py-1.5 bg-gray-50 hover:bg-gray-100 text-gray-700 font-medium text-xs rounded-lg transition-colors flex items-center justify-center space-x-1.5 cursor-pointer">
-                                    <i class="ph ph-chat-teardrop-text text-base text-blue-500"></i>
-                                    <span>Comentar</span>
-                                </button>
-                            </div>
+                        <div class="space-y-2">
+                            <div class="h-3 bg-gray-200 rounded-lg w-full"></div>
+                            <div class="h-3 bg-gray-100 rounded-lg w-4/5"></div>
                         </div>
+                        <div class="h-40 bg-gray-100 rounded-xl"></div>
                     </div>
-
                 </div>
             </section>
 
@@ -396,383 +362,16 @@
                         <div>
                             <h3 id="tituloEncuestaRespuestas" class="text-lg font-bold text-gray-800">Respuestas
                                 Recibidas</h3>
-                            <p class="text-xs text-gray-500 mt-0.5">Respuestas enviadas por los usuarios (14 registros)
-                            </p>
+                            <p id="subtituloRespuestas" class="text-xs text-gray-500 mt-0.5">Respuestas enviadas por los usuarios</p>
                         </div>
                         <button id="btnCerrarRespuestas"
-                            class="text-gray-400 hover:text-gray-600 text-xl font-bold">&times;</button>
+                            class="text-gray-400 hover:text-gray-600 text-xl font-bold cursor-pointer">&times;</button>
                     </div>
 
-                    <!-- Contenedor de Respuestas (Scroll vertical con los 14 usuarios) -->
+                    <!-- Contenedor de Respuestas Dinámicas -->
                     <div id="contenedorRespuestas" class="max-h-[60vh] overflow-y-auto space-y-4 pr-2">
-
-                        <!-- Usuario #1024 -->
-                        <div class="p-4 bg-gray-50 rounded-xl border border-gray-200/80 space-y-3">
-                            <div
-                                class="flex justify-between items-center text-xs text-gray-500 border-b border-gray-200/50 pb-2">
-                                <span class="font-semibold text-indigo-600">Usuario #1024</span>
-                                <span>Hace 15 min</span>
-                            </div>
-                            <div class="space-y-2 text-sm text-gray-700">
-                                <div>
-                                    <p class="font-semibold text-xs uppercase tracking-wider text-gray-500">¿Cómo
-                                        calificarías la atención?</p>
-                                    <p
-                                        class="mt-1 bg-white p-3 rounded-lg border border-gray-200/60 text-gray-600 whitespace-normal break-words">
-                                        Excelente atención en general. Me ayudaron a resolver mis dudas con mucha
-                                        paciencia.</p>
-                                </div>
-                                <div>
-                                    <p class="font-semibold text-xs uppercase tracking-wider text-gray-500">¿Qué
-                                        mejorarías?</p>
-                                    <p
-                                        class="mt-1 bg-white p-3 rounded-lg border border-gray-200/60 text-gray-600 whitespace-normal break-words">
-                                        Me gustaría un canal de chat en vivo integrado.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Usuario #1025 -->
-                        <div class="p-4 bg-gray-50 rounded-xl border border-gray-200/80 space-y-3">
-                            <div
-                                class="flex justify-between items-center text-xs text-gray-500 border-b border-gray-200/50 pb-2">
-                                <span class="font-semibold text-indigo-600">Usuario #1025</span>
-                                <span>Hace 1 hora</span>
-                            </div>
-                            <div class="space-y-2 text-sm text-gray-700">
-                                <div>
-                                    <p class="font-semibold text-xs uppercase tracking-wider text-gray-500">¿Cómo
-                                        calificarías la atención?</p>
-                                    <p
-                                        class="mt-1 bg-white p-3 rounded-lg border border-gray-200/60 text-gray-600 whitespace-normal break-words">
-                                        Buena, pero demoraron un poco en contestar.</p>
-                                </div>
-                                <div>
-                                    <p class="font-semibold text-xs uppercase tracking-wider text-gray-500">¿Qué
-                                        mejorarías?</p>
-                                    <p
-                                        class="mt-1 bg-white p-3 rounded-lg border border-gray-200/60 text-gray-600 whitespace-normal break-words">
-                                        Nada, todo correcto.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Usuario #1026 (Respuesta Larga) -->
-                        <div class="p-4 bg-gray-50 rounded-xl border border-gray-200/80 space-y-3">
-                            <div
-                                class="flex justify-between items-center text-xs text-gray-500 border-b border-gray-200/50 pb-2">
-                                <span class="font-semibold text-indigo-600">Usuario #1026</span>
-                                <span>Hace 3 horas</span>
-                            </div>
-                            <div class="space-y-2 text-sm text-gray-700">
-                                <div>
-                                    <p class="font-semibold text-xs uppercase tracking-wider text-gray-500">¿Cómo
-                                        calificarías la atención?</p>
-                                    <p
-                                        class="mt-1 bg-white p-3 rounded-lg border border-gray-200/60 text-gray-600 whitespace-normal break-words">
-                                        El soporte técnico fue increíblemente resolutivo. Tuve un problema complejo con
-                                        la configuración inicial de la plataforma y el agente que me atendió se quedó
-                                        conmigo por más de 45 minutos en una videollamada compartiendo pantalla hasta
-                                        dejar todo funcionando al 100%. ¡Muy agradecido con el servicio prestado!</p>
-                                </div>
-                                <div>
-                                    <p class="font-semibold text-xs uppercase tracking-wider text-gray-500">¿Qué
-                                        mejorarías?</p>
-                                    <p
-                                        class="mt-1 bg-white p-3 rounded-lg border border-gray-200/60 text-gray-600 whitespace-normal break-words">
-                                        Deberían crear una sección de base de conocimientos o tutoriales en video más
-                                        detallados dentro del mismo panel de control para no tener que depender siempre
-                                        del soporte humano en cosas básicas.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Usuario #1027 -->
-                        <div class="p-4 bg-gray-50 rounded-xl border border-gray-200/80 space-y-3">
-                            <div
-                                class="flex justify-between items-center text-xs text-gray-500 border-b border-gray-200/50 pb-2">
-                                <span class="font-semibold text-indigo-600">Usuario #1027</span>
-                                <span>Hace 5 horas</span>
-                            </div>
-                            <div class="space-y-2 text-sm text-gray-700">
-                                <div>
-                                    <p class="font-semibold text-xs uppercase tracking-wider text-gray-500">¿Cómo
-                                        calificarías la atención?</p>
-                                    <p
-                                        class="mt-1 bg-white p-3 rounded-lg border border-gray-200/60 text-gray-600 whitespace-normal break-words">
-                                        Regular. Me pasaron con tres personas diferentes antes de solucionar mi
-                                        problema.</p>
-                                </div>
-                                <div>
-                                    <p class="font-semibold text-xs uppercase tracking-wider text-gray-500">¿Qué
-                                        mejorarías?</p>
-                                    <p
-                                        class="mt-1 bg-white p-3 rounded-lg border border-gray-200/60 text-gray-600 whitespace-normal break-words">
-                                        Mejorar la comunicación interna entre departamentos.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Usuario #1028 -->
-                        <div class="p-4 bg-gray-50 rounded-xl border border-gray-200/80 space-y-3">
-                            <div
-                                class="flex justify-between items-center text-xs text-gray-500 border-b border-gray-200/50 pb-2">
-                                <span class="font-semibold text-indigo-600">Usuario #1028</span>
-                                <span>Hace 6 horas</span>
-                            </div>
-                            <div class="space-y-2 text-sm text-gray-700">
-                                <div>
-                                    <p class="font-semibold text-xs uppercase tracking-wider text-gray-500">¿Cómo
-                                        calificarías la atención?</p>
-                                    <p
-                                        class="mt-1 bg-white p-3 rounded-lg border border-gray-200/60 text-gray-600 whitespace-normal break-words">
-                                        Muy rápida y eficiente.</p>
-                                </div>
-                                <div>
-                                    <p class="font-semibold text-xs uppercase tracking-wider text-gray-500">¿Qué
-                                        mejorarías?</p>
-                                    <p
-                                        class="mt-1 bg-white p-3 rounded-lg border border-gray-200/60 text-gray-600 whitespace-normal break-words">
-                                        El diseño de la interfaz en dispositivos móviles.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Usuario #1029 -->
-                        <div class="p-4 bg-gray-50 rounded-xl border border-gray-200/80 space-y-3">
-                            <div
-                                class="flex justify-between items-center text-xs text-gray-500 border-b border-gray-200/50 pb-2">
-                                <span class="font-semibold text-indigo-600">Usuario #1029</span>
-                                <span>Hace 8 horas</span>
-                            </div>
-                            <div class="space-y-2 text-sm text-gray-700">
-                                <div>
-                                    <p class="font-semibold text-xs uppercase tracking-wider text-gray-500">¿Cómo
-                                        calificarías la atención?</p>
-                                    <p
-                                        class="mt-1 bg-white p-3 rounded-lg border border-gray-200/60 text-gray-600 whitespace-normal break-words">
-                                        Excepcional. Muy amables desde el primer momento.</p>
-                                </div>
-                                <div>
-                                    <p class="font-semibold text-xs uppercase tracking-wider text-gray-500">¿Qué
-                                        mejorarías?</p>
-                                    <p
-                                        class="mt-1 bg-white p-3 rounded-lg border border-gray-200/60 text-gray-600 whitespace-normal break-words">
-                                        Que amplíen el horario de atención los fines de semana.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Usuario #1030 -->
-                        <div class="p-4 bg-gray-50 rounded-xl border border-gray-200/80 space-y-3">
-                            <div
-                                class="flex justify-between items-center text-xs text-gray-500 border-b border-gray-200/50 pb-2">
-                                <span class="font-semibold text-indigo-600">Usuario #1030</span>
-                                <span>Hace 10 horas</span>
-                            </div>
-                            <div class="space-y-2 text-sm text-gray-700">
-                                <div>
-                                    <p class="font-semibold text-xs uppercase tracking-wider text-gray-500">¿Cómo
-                                        calificarías la atención?</p>
-                                    <p
-                                        class="mt-1 bg-white p-3 rounded-lg border border-gray-200/60 text-gray-600 whitespace-normal break-words">
-                                        No quedé muy satisfecho, la respuesta tardó más de 24 horas y el problema
-                                        principal no quedó del todo claro.</p>
-                                </div>
-                                <div>
-                                    <p class="font-semibold text-xs uppercase tracking-wider text-gray-500">¿Qué
-                                        mejorarías?</p>
-                                    <p
-                                        class="mt-1 bg-white p-3 rounded-lg border border-gray-200/60 text-gray-600 whitespace-normal break-words">
-                                        Los tiempos de respuesta por correo electrónico y tener notificaciones push en
-                                        la app.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Usuario #1031 -->
-                        <div class="p-4 bg-gray-50 rounded-xl border border-gray-200/80 space-y-3">
-                            <div
-                                class="flex justify-between items-center text-xs text-gray-500 border-b border-gray-200/50 pb-2">
-                                <span class="font-semibold text-indigo-600">Usuario #1031</span>
-                                <span>Ayer</span>
-                            </div>
-                            <div class="space-y-2 text-sm text-gray-700">
-                                <div>
-                                    <p class="font-semibold text-xs uppercase tracking-wider text-gray-500">¿Cómo
-                                        calificarías la atención?</p>
-                                    <p
-                                        class="mt-1 bg-white p-3 rounded-lg border border-gray-200/60 text-gray-600 whitespace-normal break-words">
-                                        Todo excelente.</p>
-                                </div>
-                                <div>
-                                    <p class="font-semibold text-xs uppercase tracking-wider text-gray-500">¿Qué
-                                        mejorarías?</p>
-                                    <p
-                                        class="mt-1 bg-white p-3 rounded-lg border border-gray-200/60 text-gray-600 whitespace-normal break-words">
-                                        Sigan así.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Usuario #1032 -->
-                        <div class="p-4 bg-gray-50 rounded-xl border border-gray-200/80 space-y-3">
-                            <div
-                                class="flex justify-between items-center text-xs text-gray-500 border-b border-gray-200/50 pb-2">
-                                <span class="font-semibold text-indigo-600">Usuario #1032</span>
-                                <span>Ayer</span>
-                            </div>
-                            <div class="space-y-2 text-sm text-gray-700">
-                                <div>
-                                    <p class="font-semibold text-xs uppercase tracking-wider text-gray-500">¿Cómo
-                                        calificarías la atención?</p>
-                                    <p
-                                        class="mt-1 bg-white p-3 rounded-lg border border-gray-200/60 text-gray-600 whitespace-normal break-words">
-                                        Muy buena predisposición por parte del equipo técnico.</p>
-                                </div>
-                                <div>
-                                    <p class="font-semibold text-xs uppercase tracking-wider text-gray-500">¿Qué
-                                        mejorarías?</p>
-                                    <p
-                                        class="mt-1 bg-white p-3 rounded-lg border border-gray-200/60 text-gray-600 whitespace-normal break-words">
-                                        Más opciones de exportación de datos a Excel o PDF.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Usuario #1033 -->
-                        <div class="p-4 bg-gray-50 rounded-xl border border-gray-200/80 space-y-3">
-                            <div
-                                class="flex justify-between items-center text-xs text-gray-500 border-b border-gray-200/50 pb-2">
-                                <span class="font-semibold text-indigo-600">Usuario #1033</span>
-                                <span>Ayer</span>
-                            </div>
-                            <div class="space-y-2 text-sm text-gray-700">
-                                <div>
-                                    <p class="font-semibold text-xs uppercase tracking-wider text-gray-500">¿Cómo
-                                        calificarías la atención?</p>
-                                    <p
-                                        class="mt-1 bg-white p-3 rounded-lg border border-gray-200/60 text-gray-600 whitespace-normal break-words">
-                                        Fantástica.</p>
-                                </div>
-                                <div>
-                                    <p class="font-semibold text-xs uppercase tracking-wider text-gray-500">¿Qué
-                                        mejorarías?</p>
-                                    <p
-                                        class="mt-1 bg-white p-3 rounded-lg border border-gray-200/60 text-gray-600 whitespace-normal break-words">
-                                        Ninguna queja.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Usuario #1034 (Respuesta Larga) -->
-                        <div class="p-4 bg-gray-50 rounded-xl border border-gray-200/80 space-y-3">
-                            <div
-                                class="flex justify-between items-center text-xs text-gray-500 border-b border-gray-200/50 pb-2">
-                                <span class="font-semibold text-indigo-600">Usuario #1034</span>
-                                <span>Hace 2 días</span>
-                            </div>
-                            <div class="space-y-2 text-sm text-gray-700">
-                                <div>
-                                    <p class="font-semibold text-xs uppercase tracking-wider text-gray-500">¿Cómo
-                                        calificarías la atención?</p>
-                                    <p
-                                        class="mt-1 bg-white p-3 rounded-lg border border-gray-200/60 text-gray-600 whitespace-normal break-words">
-                                        La atención telefónica fue un poco confusa al principio porque la línea se
-                                        escuchaba con interferencia, pero el asesor tuvo la amabilidad de colgar y
-                                        llamarme por otro medio para continuar la asistencia sin perder el hilo de lo
-                                        que estábamos conversando.</p>
-                                </div>
-                                <div>
-                                    <p class="font-semibold text-xs uppercase tracking-wider text-gray-500">¿Qué
-                                        mejorarías?</p>
-                                    <p
-                                        class="mt-1 bg-white p-3 rounded-lg border border-gray-200/60 text-gray-600 whitespace-normal break-words">
-                                        Actualizar sus equipos de comunicación o implementar llamadas directamente
-                                        mediante VoIP a través del navegador web.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Usuario #1035 -->
-                        <div class="p-4 bg-gray-50 rounded-xl border border-gray-200/80 space-y-3">
-                            <div
-                                class="flex justify-between items-center text-xs text-gray-500 border-b border-gray-200/50 pb-2">
-                                <span class="font-semibold text-indigo-600">Usuario #1035</span>
-                                <span>Hace 2 días</span>
-                            </div>
-                            <div class="space-y-2 text-sm text-gray-700">
-                                <div>
-                                    <p class="font-semibold text-xs uppercase tracking-wider text-gray-500">¿Cómo
-                                        calificarías la atención?</p>
-                                    <p
-                                        class="mt-1 bg-white p-3 rounded-lg border border-gray-200/60 text-gray-600 whitespace-normal break-words">
-                                        Correcta y profesional.</p>
-                                </div>
-                                <div>
-                                    <p class="font-semibold text-xs uppercase tracking-wider text-gray-500">¿Qué
-                                        mejorarías?</p>
-                                    <p
-                                        class="mt-1 bg-white p-3 rounded-lg border border-gray-200/60 text-gray-600 whitespace-normal break-words">
-                                        Nada que agregar.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Usuario #1036 -->
-                        <div class="p-4 bg-gray-50 rounded-xl border border-gray-200/80 space-y-3">
-                            <div
-                                class="flex justify-between items-center text-xs text-gray-500 border-b border-gray-200/50 pb-2">
-                                <span class="font-semibold text-indigo-600">Usuario #1036</span>
-                                <span>Hace 3 días</span>
-                            </div>
-                            <div class="space-y-2 text-sm text-gray-700">
-                                <div>
-                                    <p class="font-semibold text-xs uppercase tracking-wider text-gray-500">¿Cómo
-                                        calificarías la atención?</p>
-                                    <p
-                                        class="mt-1 bg-white p-3 rounded-lg border border-gray-200/60 text-gray-600 whitespace-normal break-words">
-                                        Muy buena.</p>
-                                </div>
-                                <div>
-                                    <p class="font-semibold text-xs uppercase tracking-wider text-gray-500">¿Qué
-                                        mejorarías?</p>
-                                    <p
-                                        class="mt-1 bg-white p-3 rounded-lg border border-gray-200/60 text-gray-600 whitespace-normal break-words">
-                                        Mayor velocidad en la carga general del sistema.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Usuario #1037 -->
-                        <div class="p-4 bg-gray-50 rounded-xl border border-gray-200/80 space-y-3">
-                            <div
-                                class="flex justify-between items-center text-xs text-gray-500 border-b border-gray-200/50 pb-2">
-                                <span class="font-semibold text-indigo-600">Usuario #1037</span>
-                                <span>Hace 3 días</span>
-                            </div>
-                            <div class="space-y-2 text-sm text-gray-700">
-                                <div>
-                                    <p class="font-semibold text-xs uppercase tracking-wider text-gray-500">¿Cómo
-                                        calificarías la atención?</p>
-                                    <p
-                                        class="mt-1 bg-white p-3 rounded-lg border border-gray-200/60 text-gray-600 whitespace-normal break-words">
-                                        Superaron mis expectativas por completo. Me resolvieron una urgencia un domingo
-                                        por la noche.</p>
-                                </div>
-                                <div>
-                                    <p class="font-semibold text-xs uppercase tracking-wider text-gray-500">¿Qué
-                                        mejorarías?</p>
-                                    <p
-                                        class="mt-1 bg-white p-3 rounded-lg border border-gray-200/60 text-gray-600 whitespace-normal break-words">
-                                        Poner un botón visible para calificar la atención justo al terminar el chat.</p>
-                                </div>
-                            </div>
-                        </div>
-
                     </div>
-
-                    <!-- Pie de la Modal -->
+                <!-- Pie de la Modal -->
                     <div class="flex justify-end pt-3 border-t border-gray-100">
                         <button type="button" id="btnCerrarRespuestasFooter"
                             class="px-5 py-2.5 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-xl text-xs font-semibold transition-colors">
@@ -965,387 +564,299 @@
 
                 <!-- Contenedor / Tarjeta de Recursos -->
                 <div class="bg-white rounded-xl shadow-md border border-gray-200 p-6 space-y-6">
-                    <div>
-                        <span
-                            class="text-xs font-semibold text-blue-600 bg-blue-50 px-2.5 py-1 rounded-full uppercase tracking-wider">Biblioteca
-                            digital</span>
-                        <h2 class="text-lg font-semibold text-gray-800 mt-2">Material de Estudio y Guías</h2>
-                        <p class="text-sm text-gray-500 mt-1">Explora nuestra colección de libros, documentos y guías
-                            recomendadas para tu aprendizaje.</p>
+                    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                        <div>
+                            <span
+                                class="text-xs font-semibold text-[#1d3854] bg-[#b8e1f1] border border-[#80c8e4] px-2.5 py-1 rounded-full uppercase tracking-wider">Biblioteca
+                                digital</span>
+                            <h2 class="text-lg font-semibold text-gray-800 mt-2">Material de Estudio y Guías</h2>
+                            <p class="text-sm text-gray-500 mt-1">Explora y gestiona la colección de libros, documentos y guías
+                                para la comunidad HoopPeru.</p>
+                        </div>
+                        <button type="button" id="NewArchivo"
+                            class="px-4 py-2.5 bg-[#006eae] hover:bg-[#1d3854] text-white font-medium text-xs rounded-xl shadow-xs transition-colors flex items-center gap-2 cursor-pointer self-start sm:self-auto shrink-0">
+                            <i class="ph ph-plus-circle text-base"></i>
+                            <span>Subir Documento</span>
+                        </button>
                     </div>
 
                     <!-- Grid de Recursos (Libros / Archivos) -->
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" id="docuemtsLoad">
-
-                        <!-- Recurso 1: Libro -->
-
-
-                        <!-- Recurso 2: Documento -->
-                        <div
-                            class="border border-gray-200 rounded-lg p-4 flex flex-col justify-between space-y-4 hover:border-gray-300 transition-colors">
-                            <div class="space-y-2">
-                                <div
-                                    class="h-10 w-10 rounded-lg bg-green-50 text-green-600 flex items-center justify-center">
-                                    <i class="ph ph-file-text text-xl"></i>
-                                </div>
-                                <h3 class="text-sm font-semibold text-gray-800">Manual de Buenas Prácticas Frontend</h3>
-                                <p class="text-xs text-gray-500 line-clamp-2">Estándares de código, arquitectura de
-                                    componentes y tokens de diseño.</p>
-                            </div>
-                            <button
-                                class="w-full py-1.5 bg-gray-50 hover:bg-gray-100 text-gray-700 font-medium text-xs rounded-lg transition-colors flex items-center justify-center space-x-1.5 border border-gray-200">
-                                <i class="ph ph-download-simple text-sm"></i>
-                                <span>Descargar PDF</span>
-                            </button>
-                        </div>
-
-                        <!-- Recurso 3: Enlace / Libro -->
-                        <div
-                            class="border border-gray-200 rounded-lg p-4 flex flex-col justify-between space-y-4 hover:border-gray-300 transition-colors">
-                            <div class="space-y-2">
-                                <div
-                                    class="h-10 w-10 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center">
-                                    <i class="ph ph-books text-xl"></i>
-                                </div>
-                                <h3 class="text-sm font-semibold text-gray-800">Patrones de Diseño UI/UX</h3>
-                                <p class="text-xs text-gray-500 line-clamp-2">Catálogo de referencias visuales para la
-                                    creación de paneles de administración.</p>
-                            </div>
-                            <button
-                                class="w-full py-1.5 bg-gray-50 hover:bg-gray-100 text-gray-700 font-medium text-xs rounded-lg transition-colors flex items-center justify-center space-x-1.5 border border-gray-200">
-                                <i class="ph ph-download-simple text-sm"></i>
-                                <span>Descargar PDF</span>
-                            </button>
-                        </div>
-                        <div id="NewArchivo"
-                            class="border-2 border-dashed border-gray-300 rounded-lg p-4 flex flex-col justify-between space-y-4 hover:border-blue-500 hover:bg-blue-50/20 transition-all group">
-                            <div class="space-y-2 text-center flex flex-col items-center">
-                                <div
-                                    class="h-10 w-10 rounded-lg bg-gray-100 group-hover:bg-blue-50 text-gray-500 group-hover:text-blue-600 flex items-center justify-center transition-colors">
-                                    <i class="ph ph-plus text-xl"></i>
-                                </div>
-                                <h3
-                                    class="text-sm font-semibold text-gray-700 group-hover:text-blue-600 transition-colors">
-                                    Agregar nuevo archivo</h3>
-                                <p class="text-xs text-gray-400 line-clamp-2">Sube un nuevo PDF o documento al sistema
-                                </p>
-                            </div>
-                            <dialog id="modalNewDocument"
-                                class="p-0 rounded-2xl shadow-2xl backdrop:bg-black/60 backdrop:backdrop-blur-sm w-full max-w-xl m-auto max-h-[90vh] overflow-hidden open:animate-fade-in border-0">
-                                <form method="dialog" id="formNewDocument" (ngSubmit)="onSubmit()"
-                                    class="bg-white p-6 sm:p-8 flex flex-col gap-6 max-h-[90vh] overflow-y-auto">
-
-                                    <!-- Cabecera del Modal -->
-                                    <div
-                                        class="flex items-center justify-between border-b border-gray-100 pb-4 sticky top-0 bg-white z-10">
-                                        <div class="flex items-center gap-3">
-                                            <div
-                                                class="p-3 bg-indigo-50 text-indigo-600 rounded-2xl flex items-center justify-center shadow-inner">
-                                                <i class="ph ph-file-plus text-2xl"></i>
-                                            </div>
-                                            <div>
-                                                <h2 class="text-xl font-bold text-gray-900 tracking-tight">Nuevo
-                                                    Documento</h2>
-                                                <p class="text-xs sm:text-sm text-gray-500">Completa los datos y adjunta
-                                                    tu archivo.</p>
-                                            </div>
-                                        </div>
-                                        <button type="button" (click)="closeModal()"
-                                            class="text-gray-400 hover:text-gray-700 p-2 rounded-xl hover:bg-gray-100 transition-colors cursor-pointer">
-                                            <i class="ph ph-x text-xl"></i>
-                                        </button>
-                                    </div>
-
-                                    <!-- Campos del Formulario (Grid Layout) -->
-                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-
-                                        <!-- Nombre del Archivo -->
-                                        <div class="flex flex-col gap-1.5">
-                                            <label for="nameFiles"
-                                                class="text-sm font-semibold text-gray-700 flex items-center gap-1.5">
-                                                <i class="ph ph-file-text text-indigo-500 text-base"></i> Nombre del
-                                                Archivo
-                                            </label>
-                                            <input type="text" id="nameFiles" name="nameFiles" [(ngModel)]="_nameFiles"
-                                                placeholder="Ej. Reporte_Financiero" required
-                                                class="w-full px-4 py-3 bg-gray-50/50 border border-gray-200 rounded-xl text-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 focus:bg-white transition-all shadow-sm" />
-                                        </div>
-
-                                        <!-- Programa -->
-                                        <div class="flex flex-col gap-1.5">
-                                            <label for="programa"
-                                                class="text-sm font-semibold text-gray-700 flex items-center gap-1.5">
-                                                <i class="ph ph-app-window text-indigo-500 text-base"></i> Programa
-                                            </label>
-                                            <input type="text" id="programa" name="programa" [(ngModel)]="_programa"
-                                                placeholder="Ej. Contabilidad"
-                                                class="w-full px-4 py-3 bg-gray-50/50 border border-gray-200 rounded-xl text-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 focus:bg-white transition-all shadow-sm" />
-                                        </div>
-
-                                        <!-- Descripción (Ocupa todo el ancho) -->
-                                        <div class="flex flex-col gap-1.5 sm:col-span-2">
-                                            <label for="description"
-                                                class="text-sm font-semibold text-gray-700 flex items-center gap-1.5">
-                                                <i class="ph ph-text-align-left text-indigo-500 text-base"></i>
-                                                Descripción
-                                            </label>
-                                            <textarea id="description" name="description" [(ngModel)]="_description"
-                                                placeholder="Escribe una breve descripción del documento..." rows="2.5"
-                                                class="w-full p-3.5 bg-gray-50/50 border border-gray-200 rounded-xl text-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 focus:bg-white transition-all resize-none shadow-sm">
-        </textarea>
-                                        </div>
-
-                                        <!-- Subir Archivo (Ocupa todo el ancho) -->
-                                        <div class="flex flex-col gap-1.5 sm:col-span-2">
-                                            <label
-                                                class="text-sm font-semibold text-gray-700 flex items-center gap-1.5">
-                                                <i class="ph ph-paperclip text-indigo-500 text-base"></i> Archivo
-                                                Adjunto
-                                            </label>
-                                            <label for="documentDirecciontion"
-                                                class="group flex flex-col items-center justify-center w-full h-28 border-2 border-dashed border-gray-300 rounded-2xl cursor-pointer bg-gray-50/50 hover:bg-indigo-50/30 hover:border-indigo-400 transition-all shadow-sm">
-                                                <div class="flex items-center justify-center gap-3 px-4 text-center">
-                                                    <div
-                                                        class="p-2.5 rounded-full bg-white shadow-sm text-indigo-600 group-hover:scale-110 transition-transform">
-                                                        <i class="ph ph-cloud-arrow-up text-xl"></i>
-                                                    </div>
-                                                    <div class="text-left">
-                                                        <p class="text-sm text-gray-600">
-                                                            <span class="font-semibold text-indigo-600">Haz clic para
-                                                                cargar</span> o arrastra tu archivo
-                                                        </p>
-                                                        <p class="text-xs text-gray-400 truncate max-w-[280px] sm:max-w-md"
-                                                            *ngIf="!_documentDirecciontion">PDF, DOCX, XLSX (Máx. 25MB)
-                                                        </p>
-                                                        <p class="text-xs font-medium text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-md mt-1 inline-flex items-center gap-1 truncate max-w-[320px]"
-                                                            *ngIf="_documentDirecciontion">
-                                                            <i class="ph ph-check-circle text-sm"></i> {{
-                                                            _documentDirecciontion }}
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                                <!-- Input oculto pero vinculado -->
-                                                <input type="file" id="documentDirecciontion"
-                                                    name="documentDirecciontion" (change)="onFileSelected($event)"
-                                                    class="hidden" />
-                                            </label>
-                                        </div>
-
-                                    </div>
-
-                                    <!-- Botones de Acción -->
-                                    <div
-                                        class="flex items-center justify-end gap-3 pt-4 border-t border-gray-100 sticky bottom-0 bg-white z-10">
-                                        <button type="button" (click)="closeModal()"
-                                            class="px-5 py-2.5 text-sm font-medium text-gray-600 bg-gray-100 hover:bg-gray-200 rounded-xl transition-colors cursor-pointer">
-                                            Cancelar
-                                        </button>
-                                        <button type="submit"
-                                            class="px-6 py-2.5 text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 active:scale-[0.98] rounded-xl shadow-lg shadow-indigo-600/25 transition-all flex items-center gap-2 cursor-pointer">
-                                            <i class="ph ph-check text-lg"></i>
-                                            Guardar Documento
-                                        </button>
-                                    </div>
-
-                                </form>
-                            </dialog>
-
-
-                        </div>
-
                     </div>
                 </div>
+
+                <!-- Modal para Nuevo Documento -->
+                <dialog id="modalNewDocument"
+                    class="p-0 rounded-2xl shadow-2xl backdrop:bg-black/60 backdrop:backdrop-blur-sm w-full max-w-xl m-auto max-h-[90vh] overflow-hidden border-0">
+                    <form method="dialog" id="formNewDocument"
+                        class="bg-white p-6 sm:p-8 flex flex-col gap-6 max-h-[90vh] overflow-y-auto">
+
+                        <!-- Cabecera del Modal -->
+                        <div class="flex items-center justify-between border-b border-gray-100 pb-4 sticky top-0 bg-white z-10">
+                            <div class="flex items-center gap-3">
+                                <div class="p-3 bg-[#b8e1f1]/50 text-[#006eae] rounded-2xl flex items-center justify-center">
+                                    <i class="ph ph-file-plus text-2xl"></i>
+                                </div>
+                                <div>
+                                    <h2 class="text-xl font-bold text-[#1d3854] tracking-tight">Nuevo Documento</h2>
+                                    <p class="text-xs sm:text-sm text-gray-500">Completa los datos y adjunta tu archivo a la plataforma.</p>
+                                </div>
+                            </div>
+                            <button type="button" id="btnCerrarModalDoc"
+                                class="text-gray-400 hover:text-gray-700 p-2 rounded-xl hover:bg-gray-100 transition-colors cursor-pointer">
+                                <i class="ph ph-x text-xl"></i>
+                            </button>
+                        </div>
+
+                        <!-- Campos del Formulario -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <!-- Nombre del Archivo -->
+                            <div class="flex flex-col gap-1.5">
+                                <label for="nameFiles" class="text-sm font-semibold text-gray-700 flex items-center gap-1.5">
+                                    <i class="ph ph-file-text text-[#006eae] text-base"></i> Nombre del Archivo
+                                </label>
+                                <input type="text" id="nameFiles" name="nameFiles"
+                                    placeholder="Ej. Guía Institucional 2026" required
+                                    class="w-full px-4 py-3 bg-gray-50/50 border border-gray-200 rounded-xl text-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-[#299ad3] focus:border-[#006eae] focus:bg-white transition-all shadow-sm" />
+                            </div>
+
+                            <!-- Programa -->
+                            <div class="flex flex-col gap-1.5">
+                                <label for="selectProgramaDoc" class="text-sm font-semibold text-gray-700 flex items-center gap-1.5">
+                                    <i class="ph ph-app-window text-[#006eae] text-base"></i> Programa / Área
+                                </label>
+                                <select id="selectProgramaDoc" name="programa" required
+                                    class="w-full px-4 py-3 bg-gray-50/50 border border-gray-200 rounded-xl text-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-[#299ad3] focus:border-[#006eae] focus:bg-white transition-all shadow-sm cursor-pointer">
+                                    <option value="" disabled selected>-- Selecciona un programa --</option>
+                                </select>
+                            </div>
+
+                            <!-- Descripción -->
+                            <div class="flex flex-col gap-1.5 sm:col-span-2">
+                                <label for="description" class="text-sm font-semibold text-gray-700 flex items-center gap-1.5">
+                                    <i class="ph ph-text-align-left text-[#006eae] text-base"></i> Descripción
+                                </label>
+                                <textarea id="description" name="description"
+                                    placeholder="Escribe una breve descripción del documento..." rows="2.5"
+                                    class="w-full p-3.5 bg-gray-50/50 border border-gray-200 rounded-xl text-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-[#299ad3] focus:border-[#006eae] focus:bg-white transition-all resize-none shadow-sm"></textarea>
+                            </div>
+
+                            <!-- Subir Archivo -->
+                            <div class="flex flex-col gap-1.5 sm:col-span-2">
+                                <label class="text-sm font-semibold text-gray-700 flex items-center gap-1.5">
+                                    <i class="ph ph-paperclip text-[#006eae] text-base"></i> Archivo Adjunto
+                                </label>
+                                <label for="documentDirecciontion"
+                                    class="group flex flex-col items-center justify-center w-full h-28 border-2 border-dashed border-gray-300 rounded-2xl cursor-pointer bg-gray-50/50 hover:bg-[#b8e1f1]/10 hover:border-[#006eae] transition-all shadow-sm">
+                                    <div class="flex items-center justify-center gap-3 px-4 text-center">
+                                        <div class="p-2.5 rounded-full bg-white shadow-sm text-[#006eae] group-hover:scale-110 transition-transform">
+                                            <i class="ph ph-cloud-arrow-up text-xl"></i>
+                                        </div>
+                                        <div class="text-left">
+                                            <p class="text-sm text-gray-600">
+                                                <span class="font-semibold text-[#006eae]">Haz clic para cargar</span> o arrastra tu archivo
+                                            </p>
+                                            <p class="text-xs text-gray-400">PDF, DOCX, XLSX (Máx. 25MB)</p>
+                                            <p id="selectedFileName" class="text-xs font-semibold text-[#146460] bg-[#dbf5f0] px-2 py-0.5 rounded-md mt-1 inline-flex items-center gap-1 truncate max-w-[280px]"></p>
+                                        </div>
+                                    </div>
+                                    <input type="file" id="documentDirecciontion" name="documentDirecciontion" class="hidden" required />
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Botones de Acción -->
+                        <div class="flex items-center justify-end gap-3 pt-4 border-t border-gray-100 sticky bottom-0 bg-white z-10">
+                            <button type="button" id="btnCancelarModalDoc"
+                                class="px-5 py-2.5 text-sm font-medium text-gray-600 bg-gray-100 hover:bg-gray-200 rounded-xl transition-colors cursor-pointer">
+                                Cancelar
+                            </button>
+                            <button type="submit"
+                                class="px-6 py-2.5 text-sm font-medium text-white bg-[#006eae] hover:bg-[#1d3854] active:scale-[0.98] rounded-xl shadow-md shadow-[#006eae]/20 transition-all flex items-center gap-2 cursor-pointer">
+                                <i class="ph ph-check text-lg"></i>
+                                Guardar Documento
+                            </button>
+                        </div>
+                    </form>
+                </dialog>
             </section>
             <section id="Perfiles" class="space-y-6">
-                <!-- Título de la sección -->
+                <!-- Título de la sección con estilo corporativo -->
                 <div class="flex justify-between items-center">
-                    <h1 class="text-xl sm:text-2xl font-bold text-gray-800">Administración de Usuarios</h1>
+                    <div>
+                        <h1 class="text-xl sm:text-2xl font-bold text-[#1d3854]">Administración de Usuarios y Catálogos</h1>
+                        <p class="text-xs text-gray-500 mt-0.5">Gestiona las cuentas de usuario, asignación de programas, cargos y credenciales.</p>
+                    </div>
                 </div>
 
-                <!-- Contenedor / Tarjeta del Formulario -->
+                <!-- Contenedor del Formulario y Catálogos -->
                 <div class="space-y-8">
 
                     <!-- 1. SECCIÓN PRINCIPAL: Actualizar Datos de Usuario -->
-                    <div class="bg-white rounded-xl shadow-md border border-gray-200 p-6 space-y-6">
-                        <div>
-                            <span
-                                class="text-xs font-semibold text-blue-600 bg-blue-50 px-2.5 py-1 rounded-full uppercase tracking-wider">Panel
-                                de control</span>
-                            <h2 class="text-lg font-semibold text-gray-800 mt-2">Actualizar Datos de Usuario</h2>
-                            <p class="text-sm text-gray-500 mt-1">Modifica los detalles del usuario, su rol, programa y
-                                estatus en el sistema.</p>
+                    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 sm:p-7 space-y-6">
+                        <div class="flex items-center justify-between border-b border-gray-100 pb-4">
+                            <div>
+                                <span class="text-xs font-semibold text-[#006eae] bg-[#b8e1f1]/40 border border-[#80c8e4]/50 px-2.5 py-1 rounded-full uppercase tracking-wider">
+                                    Panel de Control
+                                </span>
+                                <h2 class="text-lg font-bold text-[#1d3854] mt-2">Gestión de Perfil de Usuario</h2>
+                                <p class="text-xs text-gray-500 mt-0.5">Selecciona un usuario registrado para editar su información, estatus o resetear su clave.</p>
+                            </div>
                         </div>
 
-                        <form class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <!-- Selector de Usuario Activo -->
+                        <div class="bg-gradient-to-r from-blue-50/60 via-slate-50 to-white p-4.5 rounded-2xl border border-blue-100/80 shadow-xs">
+                            <label for="selectUsuarioAdmin" class="block text-xs font-bold text-[#1d3854] uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                                <i class="ph ph-user-circle text-base text-[#006eae]"></i> Seleccionar Usuario para Administrar:
+                            </label>
+                            <select id="selectUsuarioAdmin" class="w-full px-4 py-2.5 bg-white border border-gray-200 rounded-xl text-sm font-medium text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#299ad3] focus:border-[#006eae] shadow-xs cursor-pointer">
+                                <option value="" disabled selected>-- Cargando lista de usuarios... --</option>
+                            </select>
+                        </div>
+
+                        <!-- Formulario de Edición -->
+                        <form id="formActualizarUsuario" class="grid grid-cols-1 sm:grid-cols-2 gap-4.5 pt-2">
 
                             <!-- Nombre user -->
                             <div class="space-y-1.5">
-                                <label for="nombre"
-                                    class="block text-xs font-semibold text-gray-700 uppercase tracking-wider">Nombre
-                                    user</label>
+                                <label for="nombre" class="block text-xs font-semibold text-gray-700 uppercase tracking-wider flex items-center gap-1">
+                                    <i class="ph ph-user text-sm text-[#006eae]"></i> Nombre Completo
+                                </label>
                                 <input type="text" id="nombre" name="nombre" placeholder="Ej. Ana Pérez" required
-                                    class="w-full px-3.5 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors bg-gray-50/50">
+                                    class="w-full px-3.5 py-2.5 text-sm border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#299ad3] focus:border-[#006eae] transition-all bg-gray-50/50 text-gray-800 font-medium">
                             </div>
 
                             <!-- Especialización -->
                             <div class="space-y-1.5">
-                                <label for="especializacion"
-                                    class="block text-xs font-semibold text-gray-700 uppercase tracking-wider">Especialización</label>
-                                <input type="text" id="especializacion" name="especializacion"
-                                    placeholder="Ej. Desarrollo Web"
-                                    class="w-full px-3.5 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors bg-gray-50/50">
+                                <label for="especializacion" class="block text-xs font-semibold text-gray-700 uppercase tracking-wider flex items-center gap-1">
+                                    <i class="ph ph-briefcase text-sm text-[#006eae]"></i> Especialización / Área
+                                </label>
+                                <input type="text" id="especializacion" name="especializacion" placeholder="Ej. Desarrollo Web, Entrenador"
+                                    class="w-full px-3.5 py-2.5 text-sm border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#299ad3] focus:border-[#006eae] transition-all bg-gray-50/50 text-gray-800">
                             </div>
 
                             <!-- Programa (Cargado dinámicamente) -->
                             <div class="space-y-1.5">
-                                <label for="programa"
-                                    class="block text-xs font-semibold text-gray-700 uppercase tracking-wider">Programa</label>
+                                <label for="programa" class="block text-xs font-semibold text-gray-700 uppercase tracking-wider flex items-center gap-1">
+                                    <i class="ph ph-graduation-cap text-sm text-[#006eae]"></i> Programa Asignado
+                                </label>
                                 <select id="programa" name="programa" required
-                                    class="w-full px-3.5 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors bg-gray-50/50 text-gray-700">
+                                    class="w-full px-3.5 py-2.5 text-sm border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#299ad3] focus:border-[#006eae] transition-all bg-gray-50/50 text-gray-700 cursor-pointer">
                                     <option value="" disabled selected>Seleccione un programa</option>
-                                    <option value="ingenieria">Ingeniería de Software</option>
-                                    <option value="diseno">Diseño Gráfico</option>
-                                    <option value="marketing">Marketing Digital</option>
                                 </select>
                             </div>
 
                             <!-- Cargo (Cargado dinámicamente) -->
                             <div class="space-y-1.5">
-                                <label for="cargo"
-                                    class="block text-xs font-semibold text-gray-700 uppercase tracking-wider">Cargo</label>
+                                <label for="cargo" class="block text-xs font-semibold text-gray-700 uppercase tracking-wider flex items-center gap-1">
+                                    <i class="ph ph-identification-badge text-sm text-[#006eae]"></i> Cargo / Rol
+                                </label>
                                 <select id="cargo" name="cargo" required
-                                    class="w-full px-3.5 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors bg-gray-50/50 text-gray-700">
+                                    class="w-full px-3.5 py-2.5 text-sm border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#299ad3] focus:border-[#006eae] transition-all bg-gray-50/50 text-gray-700 cursor-pointer">
                                     <option value="" disabled selected>Seleccione un cargo</option>
-                                    <option value="administrador">Administrador</option>
-                                    <option value="docente">Docente / Tutor</option>
-                                    <option value="estudiante">Estudiante</option>
                                 </select>
                             </div>
 
-                            <!-- Estatus -->
-                            <div class="space-y-1.5 sm:col-span-2">
-                                <label for="estatus"
-                                    class="block text-xs font-semibold text-gray-700 uppercase tracking-wider">Estatus</label>
+                            <!-- Estatus de Cuenta -->
+                            <div class="space-y-1.5">
+                                <label for="estatus" class="block text-xs font-semibold text-gray-700 uppercase tracking-wider flex items-center gap-1">
+                                    <i class="ph ph-shield-check text-sm text-[#00aea5]"></i> Estado de la Cuenta
+                                </label>
                                 <select id="estatus" name="estatus" required
-                                    class="w-full px-3.5 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors bg-gray-50/50 text-gray-700">
-                                    <option value="" disabled selected>Seleccione el estatus</option>
-                                    <option value="activo">Activo</option>
-                                    <option value="inactivo">Inactivo</option>
-                                    <option value="suspendido">Suspendido</option>
+                                    class="w-full px-3.5 py-2.5 text-sm border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#00aea5] focus:border-[#00aea5] transition-all bg-gray-50/50 text-gray-700 cursor-pointer">
+                                    <option value="Activo">Activo (Habilitado)</option>
+                                    <option value="Inactivo">Inactivo</option>
+                                    <option value="Suspendido">Suspendido</option>
                                 </select>
+                            </div>
+
+                            <!-- Opción para Cambiar la Clave / Contraseña del Usuario -->
+                            <div class="space-y-1.5">
+                                <label for="passwordUsuario" class="block text-xs font-semibold text-gray-700 uppercase tracking-wider flex items-center gap-1">
+                                    <i class="ph ph-key text-sm text-[#af3a91]"></i> Cambiar Contraseña del Usuario
+                                </label>
+                                <input type="password" id="passwordUsuario" name="passwordUsuario" placeholder="Escribe nueva clave (mín. 6 caracteres)"
+                                    class="w-full px-3.5 py-2.5 text-sm border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#af3a91] focus:border-[#9f1074] transition-all bg-gray-50/50 text-gray-800 placeholder:text-gray-400">
+                                <span class="text-[11px] text-gray-400 block">Dejar en blanco si no deseas cambiar la clave actual.</span>
                             </div>
 
                             <!-- Botón de Actualizar -->
-                            <div class="sm:col-span-2 pt-2 flex justify-end">
+                            <div class="sm:col-span-2 pt-3 flex justify-end border-t border-gray-100">
                                 <button type="submit"
-                                    class="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-medium text-xs rounded-lg transition-colors flex items-center justify-center space-x-1.5 shadow-sm active:scale-[0.98]">
-                                    <i class="ph ph-check text-sm"></i>
-                                    <span>Actualizar</span>
+                                    class="px-6 py-2.5 bg-[#006eae] hover:bg-[#1d3854] text-white font-semibold text-xs rounded-xl transition-all flex items-center justify-center space-x-2 shadow-md shadow-[#006eae]/20 active:scale-[0.98] cursor-pointer">
+                                    <i class="ph ph-check-circle text-base"></i>
+                                    <span>Actualizar Datos</span>
                                 </button>
                             </div>
 
                         </form>
                     </div>
 
-                    <!-- 2. SUBSECCIONES DE GESTIÓN DE CATÁLOGOS -->
+                    <!-- 2. SUBSECCIONES DE GESTIÓN DE CATÁLOGOS (Programas y Cargos) -->
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
                         <!-- Gestión de Programas -->
-                        <div class="bg-white rounded-xl shadow-md border border-gray-200 p-6 space-y-4">
-                            <div>
-                                <span
-                                    class="text-xs font-semibold text-purple-600 bg-purple-50 px-2.5 py-1 rounded-full uppercase tracking-wider">Catálogo</span>
-                                <h3 class="text-base font-semibold text-gray-800 mt-2">Gestionar Programas</h3>
-                                <p class="text-xs text-gray-500 mt-0.5">Agrega o elimina los programas disponibles en
-                                    los selectores.</p>
+                        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 space-y-4">
+                            <div class="flex items-center justify-between border-b border-gray-100 pb-3">
+                                <div>
+                                    <span class="text-[11px] font-bold text-[#751c5a] bg-[#e6cbe1]/40 border border-[#d392c6]/50 px-2.5 py-0.5 rounded-full uppercase tracking-wider">
+                                        Catálogo
+                                    </span>
+                                    <h3 class="text-base font-bold text-[#1d3854] mt-1.5">Gestionar Programas</h3>
+                                    <p class="text-xs text-gray-500">Agrega o elimina los programas institucionales.</p>
+                                </div>
                             </div>
 
-                            <!-- Input para agregar -->
-                            <form class="flex gap-2">
-                                <input type="text" placeholder="Nuevo programa..." required
-                                    class="w-full px-3.5 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-colors bg-gray-50/50">
+                            <!-- Formulario nuevo programa -->
+                            <form id="formNuevoPrograma" class="flex gap-2">
+                                <input type="text" id="inputNuevoPrograma" placeholder="Nombre del nuevo programa..." required
+                                    class="w-full px-3.5 py-2.5 text-sm border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#299ad3] focus:border-[#006eae] transition-all bg-gray-50/50 text-gray-800 placeholder:text-gray-400">
                                 <button type="submit"
-                                    class="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white font-medium text-xs rounded-lg transition-colors whitespace-nowrap shadow-sm">
-                                    Agregar
+                                    class="px-4 py-2.5 bg-[#006eae] hover:bg-[#1d3854] text-white font-semibold text-xs rounded-xl transition-all whitespace-nowrap shadow-xs cursor-pointer flex items-center gap-1.5">
+                                    <i class="ph ph-plus-bold"></i>
+                                    <span>Agregar</span>
                                 </button>
                             </form>
 
-                            <!-- Lista de existentes con opción de borrar -->
-                            <div
-                                class="border border-gray-100 rounded-lg divide-y divide-gray-100 max-h-48 overflow-y-auto">
-                                <div
-                                    class="flex items-center justify-between px-3.5 py-2.5 text-sm text-gray-700 hover:bg-gray-50">
-                                    <span>Ingeniería de Software</span>
-                                    <button type="button" class="text-gray-400 hover:text-red-600 transition-colors"
-                                        title="Eliminar">
-                                        <i class="ph ph-trash text-base"></i>
-                                    </button>
-                                </div>
-                                <div
-                                    class="flex items-center justify-between px-3.5 py-2.5 text-sm text-gray-700 hover:bg-gray-50">
-                                    <span>Diseño Gráfico</span>
-                                    <button type="button" class="text-gray-400 hover:text-red-600 transition-colors"
-                                        title="Eliminar">
-                                        <i class="ph ph-trash text-base"></i>
-                                    </button>
-                                </div>
-                                <div
-                                    class="flex items-center justify-between px-3.5 py-2.5 text-sm text-gray-700 hover:bg-gray-50">
-                                    <span>Marketing Digital</span>
-                                    <button type="button" class="text-gray-400 hover:text-red-600 transition-colors"
-                                        title="Eliminar">
-                                        <i class="ph ph-trash text-base"></i>
-                                    </button>
+                            <!-- Lista de programas existentes -->
+                            <div class="border border-gray-200/80 rounded-xl overflow-hidden shadow-2xs">
+                                <div id="listaProgramasAdmin" class="divide-y divide-gray-100 max-h-52 overflow-y-auto">
+                                    <div class="px-3.5 py-3 text-center text-xs text-gray-400">
+                                        <i class="ph ph-spinner animate-spin mr-1"></i> Cargando programas...
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
                         <!-- Gestión de Cargos -->
-                        <div class="bg-white rounded-xl shadow-md border border-gray-200 p-6 space-y-4">
-                            <div>
-                                <span
-                                    class="text-xs font-semibold text-amber-600 bg-amber-50 px-2.5 py-1 rounded-full uppercase tracking-wider">Catálogo</span>
-                                <h3 class="text-base font-semibold text-gray-800 mt-2">Gestionar Cargos</h3>
-                                <p class="text-xs text-gray-500 mt-0.5">Agrega o elimina los cargos disponibles en el
-                                    sistema.</p>
+                        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 space-y-4">
+                            <div class="flex items-center justify-between border-b border-gray-100 pb-3">
+                                <div>
+                                    <span class="text-[11px] font-bold text-[#146460] bg-[#dbf5f0] border border-[#b5f4eb] px-2.5 py-0.5 rounded-full uppercase tracking-wider">
+                                        Catálogo
+                                    </span>
+                                    <h3 class="text-base font-bold text-[#1d3854] mt-1.5">Gestionar Cargos</h3>
+                                    <p class="text-xs text-gray-500">Agrega o elimina los roles / cargos de usuarios.</p>
+                                </div>
                             </div>
 
-                            <!-- Input para agregar -->
-                            <form class="flex gap-2">
-                                <input type="text" placeholder="Nuevo cargo..." required
-                                    class="w-full px-3.5 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-colors bg-gray-50/50">
+                            <!-- Formulario nuevo cargo -->
+                            <form id="formNuevoCargo" class="flex gap-2">
+                                <input type="text" id="inputNuevoCargo" placeholder="Nombre del nuevo cargo..." required
+                                    class="w-full px-3.5 py-2.5 text-sm border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#00aea5] focus:border-[#00aea5] transition-all bg-gray-50/50 text-gray-800 placeholder:text-gray-400">
                                 <button type="submit"
-                                    class="px-4 py-2 bg-amber-600 hover:bg-amber-700 text-white font-medium text-xs rounded-lg transition-colors whitespace-nowrap shadow-sm">
-                                    Agregar
+                                    class="px-4 py-2.5 bg-[#00aea5] hover:bg-[#146460] text-white font-semibold text-xs rounded-xl transition-all whitespace-nowrap shadow-xs cursor-pointer flex items-center gap-1.5">
+                                    <i class="ph ph-plus-bold"></i>
+                                    <span>Agregar</span>
                                 </button>
                             </form>
 
-                            <!-- Lista de existentes con opción de borrar -->
-                            <div
-                                class="border border-gray-100 rounded-lg divide-y divide-gray-100 max-h-48 overflow-y-auto">
-                                <div
-                                    class="flex items-center justify-between px-3.5 py-2.5 text-sm text-gray-700 hover:bg-gray-50">
-                                    <span>Administrador</span>
-                                    <button type="button" class="text-gray-400 hover:text-red-600 transition-colors"
-                                        title="Eliminar">
-                                        <i class="ph ph-trash text-base"></i>
-                                    </button>
-                                </div>
-                                <div
-                                    class="flex items-center justify-between px-3.5 py-2.5 text-sm text-gray-700 hover:bg-gray-50">
-                                    <span>Docente / Tutor</span>
-                                    <button type="button" class="text-gray-400 hover:text-red-600 transition-colors"
-                                        title="Eliminar">
-                                        <i class="ph ph-trash text-base"></i>
-                                    </button>
-                                </div>
-                                <div
-                                    class="flex items-center justify-between px-3.5 py-2.5 text-sm text-gray-700 hover:bg-gray-50">
-                                    <span>Estudiante</span>
-                                    <button type="button" class="text-gray-400 hover:text-red-600 transition-colors"
-                                        title="Eliminar">
-                                        <i class="ph ph-trash text-base"></i>
-                                    </button>
+                            <!-- Lista de cargos existentes -->
+                            <div class="border border-gray-200/80 rounded-xl overflow-hidden shadow-2xs">
+                                <div id="listaCargosAdmin" class="divide-y divide-gray-100 max-h-52 overflow-y-auto">
+                                    <div class="px-3.5 py-3 text-center text-xs text-gray-400">
+                                        <i class="ph ph-spinner animate-spin mr-1"></i> Cargando cargos...
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -1354,8 +865,7 @@
 
                 </div>
             </section>
-
-        </main>
+            </main>
 
     </div>
 
@@ -1382,34 +892,7 @@
         }
     </script>
 
-    <!-- Script: Control de modales de encuestas -->
-    <script>
-        const modalCrear = document.getElementById('modalCrearEncuesta');
-        const btnAbrirCrear = document.getElementById('btnAbrirModalCrear');
-        const btnCerrarCrear = document.getElementById('btnCerrarCrear');
-        const btnCancelarCrear = document.getElementById('btnCancelarCrear');
-
-        const toggleModalCrear = () => modalCrear.classList.toggle('hidden');
-
-        btnAbrirCrear.addEventListener('click', toggleModalCrear);
-        btnCerrarCrear.addEventListener('click', toggleModalCrear);
-        btnCancelarCrear.addEventListener('click', toggleModalCrear);
-
-        const modalRespuestas = document.getElementById('modalVerRespuestas');
-        const btnCerrarRespuestas = document.getElementById('btnCerrarRespuestas');
-        const btnCerrarRespuestasFooter = document.getElementById('btnCerrarRespuestasFooter');
-
-        const toggleModalRespuestas = () => modalRespuestas.classList.toggle('hidden');
-
-        btnCerrarRespuestas.addEventListener('click', toggleModalRespuestas);
-        btnCerrarRespuestasFooter.addEventListener('click', toggleModalRespuestas);
-
-        document.addEventListener('click', (e) => {
-            if (e.target.classList.contains('btn-ver-respuestas')) {
-                toggleModalRespuestas();
-            }
-        });
-    </script>
+    <!-- Modales de encuestas gestionados por Cl_vSeccionEncuestas.ts -->
 
     <!-- Script: Bundle principal de la aplicación -->
     <script src="../dist/bundle.js"></script>

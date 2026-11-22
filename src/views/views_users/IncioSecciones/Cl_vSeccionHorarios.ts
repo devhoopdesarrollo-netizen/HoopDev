@@ -1,6 +1,7 @@
 
 import Controller from "../../../controllers/Controller.js";
 import { iHorario, iUserList } from "../../../types/types.js";
+import modal_confirmacion from "../../views_resours/modal_confirmacion.js";
 
 export default class Cl_vSeccionHorarios {
     public controller: Controller;
@@ -104,17 +105,16 @@ export default class Cl_vSeccionHorarios {
             });
 
             data.forEach((element: iHorario, index: number) => {
-                const btnDelete = document.getElementById(`btn_Delete_${index}`) as HTMLButtonElement;
-                btnDelete.addEventListener("click", e => {
+                const btnDelete = document.getElementById(`btn_Delete_${index}`) as HTMLButtonElement | null;
+                btnDelete?.addEventListener("click", async () => {
                     if (element.id_horarios) {
-                        this.controller.deleteDay(element.id_horarios)
+                        const confirmado = await modal_confirmacion.confirmar(`¿Estás seguro de que deseas eliminar el horario asignado para el día ${element.dia}?`);
+                        if (confirmado) {
+                            await this.controller.deleteDay(element.id_horarios);
+                            this.buttonUserList.click();
+                        }
                     }
-                    setTimeout(() => {
-                        this.buttonUserList.click()
-                    }, 1500);
-                })
-
-
+                });
             });
 
 
@@ -137,11 +137,32 @@ export default class Cl_vSeccionHorarios {
 
 
     async crearRegistro() {
-        const valorCompleto = this.userList.value
+        const valorCompleto = this.userList.value;
+        if (!valorCompleto) {
+            alert("Por favor, selecciona un usuario primero.");
+            return;
+        }
         const [idUser, fkPrograma] = valorCompleto.split("_");
-        const dia = this.SeleccionDia.value
-        const horaInicial = this.horainicio.value
-        const horafinal = this.horafinal.value
+
+        // Validar que el usuario tenga un programa asignado (UUID válido)
+        if (!fkPrograma || fkPrograma === "undefined" || fkPrograma === "null" || fkPrograma.length < 10) {
+            alert("Este usuario no tiene un programa asignado. Asígnale un programa desde la sección de Perfiles antes de crear un horario.");
+            return;
+        }
+
+        const dia = this.SeleccionDia.value;
+        if (!dia) {
+            alert("Por favor, selecciona un día.");
+            return;
+        }
+
+        const horaInicial = this.horainicio.value;
+        const horafinal = this.horafinal.value;
+
+        if (!horaInicial || !horafinal) {
+            alert("Por favor, completa la hora de inicio y la hora final.");
+            return;
+        }
 
         const data: iHorario = {
             fk_user: idUser,
@@ -149,13 +170,9 @@ export default class Cl_vSeccionHorarios {
             dia: dia,
             horainicio: horaInicial,
             horafinal: horafinal,
-        }
-        if (dia) {
-            this.controller.crearHorario(data)
-        }
+        };
 
-
-
+        await this.controller.crearHorario(data);
     }
 
 

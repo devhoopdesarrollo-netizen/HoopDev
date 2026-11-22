@@ -150,8 +150,16 @@ export default class Cl_vUserInicio {
         await this.cargarHorariosUsuario();
         // Cargar anuncios generales
         await this.cargarAnunciosUsuario();
+        // Cargar notificaciones de reuniones
+        await this.cargarNotificacionesReuniones();
         // Poblar perfil del usuario
         this.poblarPerfilUsuario();
+
+        // Asignar recarga al presionar la campana de notificaciones
+        const btnCampana = document.getElementById("btnCampanaNotificaciones");
+        btnCampana?.addEventListener("click", () => {
+            this.cargarNotificacionesReuniones();
+        });
     }
 
     /**
@@ -247,6 +255,79 @@ export default class Cl_vUserInicio {
     }
 
     /**
+     * Carga las notificaciones de reuniones dinámicamente y las depura si tienen > 3 días
+     */
+    private async cargarNotificacionesReuniones(): Promise<void> {
+        const contenedor = document.getElementById("contenedorNotificacionesUsuario");
+        const badge = document.getElementById("badgeNotificaciones");
+        if (!contenedor) return;
+
+        try {
+            const reuniones = await this.controlador.loadAnuncio();
+            contenedor.innerHTML = "";
+
+            if (!reuniones || reuniones.length === 0) {
+                if (badge) badge.classList.add("hidden");
+                contenedor.innerHTML = `
+                    <div class="py-8 px-4 text-center text-gray-400">
+                        <div class="h-12 w-12 rounded-2xl bg-gray-100 text-gray-400 flex items-center justify-center mx-auto mb-3">
+                            <i class="ph ph-bell-slash text-2xl"></i>
+                        </div>
+                        <h4 class="text-sm font-bold text-gray-700">Sin avisos pendientes</h4>
+                        <p class="text-xs text-gray-400 mt-1">No hay convocatorias ni reuniones programadas en este momento.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            if (badge) badge.classList.remove("hidden");
+
+            reuniones.forEach((reu: iAnuncios) => {
+                const horaInicio = this.tools.ConversorTimes(reu.hora_inicio || "00:00");
+                const horaFinal = this.tools.ConversorTimes(reu.hora_final || "00:00");
+
+                contenedor.innerHTML += `
+                    <div class="bg-gradient-to-br from-[#b8e1f1]/30 via-white to-gray-50 border border-[#80c8e4]/40 rounded-2xl p-4.5 space-y-3 shadow-xs hover:border-[#006eae] transition-all">
+                        <div class="flex items-center justify-between">
+                            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-[#b8e1f1] text-[#1d3854]">
+                                <span class="w-1.5 h-1.5 rounded-full bg-[#006eae]"></span>
+                                Convocatoria Oficial
+                            </span>
+                            <span class="text-xs font-mono font-medium text-gray-500 flex items-center gap-1">
+                                <i class="ph ph-calendar text-sm text-[#006eae]"></i>
+                                ${reu.fecha}
+                            </span>
+                        </div>
+
+                        <div>
+                            <h4 class="text-base font-bold text-[#1d3854]">${reu.anuncio}</h4>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-2 pt-2 border-t border-[#80c8e4]/30 text-xs">
+                            <div class="bg-white p-2.5 rounded-xl border border-gray-100">
+                                <span class="text-gray-400 block text-[11px]">Hora de Inicio:</span>
+                                <span class="font-bold text-[#1d3854] font-mono text-sm">${horaInicio}</span>
+                            </div>
+                            <div class="bg-white p-2.5 rounded-xl border border-gray-100">
+                                <span class="text-gray-400 block text-[11px]">Hora Final:</span>
+                                <span class="font-bold text-[#1d3854] font-mono text-sm">${horaFinal}</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+        } catch (err) {
+            console.error("Error al cargar notificaciones de reuniones:", err);
+            contenedor.innerHTML = `
+                <div class="py-6 text-center text-xs text-red-500">
+                    <i class="ph ph-warning-circle text-lg block mb-1"></i>
+                    No se pudieron cargar las reuniones.
+                </div>
+            `;
+        }
+    }
+
+    /**
      * Pobla la sección de "Mi Perfil" con los datos del usuario desde localStorage y base de datos
      */
     private async poblarPerfilUsuario(): Promise<void> {
@@ -266,13 +347,99 @@ export default class Cl_vUserInicio {
         const programaDescEl = document.getElementById("perfilProgramaDesc");
         const paisEl = document.getElementById("perfilPais");
         const avatarEl = document.getElementById("perfilAvatar");
+        const avatarImgEl = document.getElementById("perfilAvatarImg") as HTMLImageElement | null;
+        const headerAvatarImg = document.getElementById("headerAvatarImg") as HTMLImageElement | null;
+        const headerAvatarInitial = document.getElementById("headerAvatarInitial");
+        const btnTextoFoto = document.getElementById("btnTextoFotoPerfil");
 
         const nombre = this.userSeccion.nombre || "Usuario";
         if (nombreEl) nombreEl.textContent = nombre;
-        if (avatarEl) {
+
+        // Gestión de Foto de Perfil / Avatar
+        if (this.userSeccion.img_direccion) {
+            if (avatarImgEl) {
+                avatarImgEl.src = this.userSeccion.img_direccion;
+                avatarImgEl.classList.remove("hidden");
+            }
+            if (avatarEl) avatarEl.classList.add("hidden");
+
+            if (headerAvatarImg) {
+                headerAvatarImg.src = this.userSeccion.img_direccion;
+                headerAvatarImg.classList.remove("hidden");
+            }
+            if (headerAvatarInitial) headerAvatarInitial.classList.add("hidden");
+            if (btnTextoFoto) btnTextoFoto.textContent = "Cambiar foto de perfil";
+        } else {
             const initials = nombre.split(" ").map((n: string) => n[0]).join("").substring(0, 2).toUpperCase();
-            avatarEl.textContent = initials || "U";
+            if (avatarEl) {
+                avatarEl.textContent = initials || "U";
+                avatarEl.classList.remove("hidden");
+            }
+            if (avatarImgEl) avatarImgEl.classList.add("hidden");
+
+            if (headerAvatarInitial) {
+                headerAvatarInitial.textContent = initials || "U";
+                headerAvatarInitial.classList.remove("hidden");
+            }
+            if (headerAvatarImg) headerAvatarImg.classList.add("hidden");
+            if (btnTextoFoto) btnTextoFoto.textContent = "Subir foto de perfil";
         }
+
+        // Asignar evento de cambio de foto de perfil
+        const inputFoto = document.getElementById("inputFotoPerfil") as HTMLInputElement | null;
+        if (inputFoto && !inputFoto.dataset.listenerAttached) {
+            inputFoto.dataset.listenerAttached = "true";
+            inputFoto.addEventListener("change", async () => {
+                const file = inputFoto.files?.[0];
+                if (!file) return;
+
+                if (!file.type.startsWith("image/")) {
+                    alert("⚠️ Por favor selecciona un archivo de imagen válido (PNG, JPG, WEBP).");
+                    inputFoto.value = "";
+                    return;
+                }
+
+                if (file.size > 5 * 1024 * 1024) {
+                    alert("⚠️ La imagen seleccionada no debe superar los 5MB.");
+                    inputFoto.value = "";
+                    return;
+                }
+
+                const btnTexto = document.getElementById("btnTextoFotoPerfil");
+                if (btnTexto) btnTexto.textContent = "Subiendo imagen...";
+
+                try {
+                    const idUser = this.userSeccion?.id_user || this.userId;
+                    if (!idUser) throw new Error("No se pudo identificar al usuario.");
+
+                    const url = await this.controlador.actualizarFotoPerfil(idUser, file);
+                    this.userSeccion.img_direccion = url;
+
+                    // Actualizar vista inmediatamente
+                    if (avatarImgEl) {
+                        avatarImgEl.src = url;
+                        avatarImgEl.classList.remove("hidden");
+                    }
+                    if (avatarEl) avatarEl.classList.add("hidden");
+
+                    if (headerAvatarImg) {
+                        headerAvatarImg.src = url;
+                        headerAvatarImg.classList.remove("hidden");
+                    }
+                    if (headerAvatarInitial) headerAvatarInitial.classList.add("hidden");
+
+                    if (btnTexto) btnTexto.textContent = "Cambiar foto de perfil";
+                    alert("✅ ¡Foto de perfil actualizada correctamente!");
+                } catch (err) {
+                    console.error("Error al subir foto de perfil:", err);
+                    alert("❌ No se pudo actualizar la foto de perfil. Revisa la consola o permisos.");
+                    if (btnTexto) btnTexto.textContent = this.userSeccion?.img_direccion ? "Cambiar foto de perfil" : "Subir foto de perfil";
+                } finally {
+                    inputFoto.value = "";
+                }
+            });
+        }
+
         if (correoEl) correoEl.textContent = this.userSeccion.correo_electronico || "—";
         if (estadoEl) estadoEl.textContent = "ACTIVO";
         if (rolEl) rolEl.textContent = this.userSeccion.cargo || "Usuario";
@@ -350,12 +517,18 @@ export default class Cl_vUserInicio {
                 break;
             case "encuestas":
                 this.seccionEncuestas?.classList.remove("hidden");
+                if (this.isUsuarioPage) {
+                    this.vEncuestas?.mostrarEncuestasUsuario();
+                } else {
+                    this.vEncuestas?.mostrarEncuestasAdmin();
+                }
                 break;
             case "horarios":
                 this.seccionHorarios?.classList.remove("hidden");
                 break;
             case "recursos":
                 this.seccionRecursos?.classList.remove("hidden");
+                this.vRecursos?.listFilesLoad();
                 break;
             case "perfiles":
                 this.seccionPerfiles?.classList.remove("hidden");
@@ -442,9 +615,7 @@ export default class Cl_vUserInicio {
                 <div class="border-t border-gray-100 pt-3.5 space-y-2.5">
                     <div class="flex items-center text-xs text-gray-500 px-1">
                         <div class="flex items-center space-x-1.5">
-                            <span class="inline-flex items-center justify-center h-5 w-5 rounded-full bg-gradient-to-br from-red-400 to-pink-500">
-                                <i class="ph ph-heart-fill text-[9px] text-white"></i>
-                            </span>
+                            <i class="ph-fill ph-heart text-base text-red-500"></i>
                             <span class="font-semibold_${index} font-medium">${element.likes ?? 0} Me gusta</span>
                         </div>
                     </div>
@@ -452,7 +623,7 @@ export default class Cl_vUserInicio {
                     <div class="grid grid-cols-1 gap-2">
                        <button class="btnLikePost flex-1 py-2 bg-gray-50 hover:bg-gradient-to-r hover:from-red-50 hover:to-pink-50 text-gray-600 hover:text-red-600 font-semibold text-xs rounded-xl transition-all flex items-center justify-center space-x-2 cursor-pointer active:scale-[0.98]"
         data-idpost="${element.id_post}" data-index="${index}">
-        <i class="hear-icono ph ph-heart ${element.user_liked ? 'ph-fill' : ''} text-base text-red-500"></i>
+        <i class="hear-icono ph ph-heart ${element.user_liked ? 'ph-fill text-red-500' : 'text-gray-500'} text-base"></i>
         <span class="btn-like-text">${element.user_liked ? 'Te gusta' : 'Me gusta'}</span>
     </button>
 
@@ -506,16 +677,14 @@ export default class Cl_vUserInicio {
                 <div class="border-t border-gray-100 pt-3.5 space-y-2.5">
                     <div class="flex items-center text-xs text-gray-500 px-1">
                         <div class="flex items-center space-x-1.5">
-                            <span class="inline-flex items-center justify-center h-5 w-5 rounded-full bg-gradient-to-br from-red-400 to-pink-500">
-                                <i class="ph ph-heart-fill text-[9px] text-white"></i>
-                            </span>
+                            <i class="ph-fill ph-heart text-base text-red-500"></i>
                             <span class="font-semibold_${index} font-medium">${element.likes ?? 0} Me gusta</span>
                         </div>
                     </div>
                     <div class="grid grid-cols-1 gap-2">
                         <button class="btnLikePost w-full py-2 bg-gray-50 hover:bg-gradient-to-r hover:from-red-50 hover:to-pink-50 text-gray-600 hover:text-red-600 font-semibold text-xs rounded-xl transition-all flex items-center justify-center space-x-2 cursor-pointer active:scale-[0.98]"
                             data-idpost="${element.id_post}" data-index="${index}">
-                            <i class="hear-icono ph ph-heart ${element.user_liked ? 'ph-fill' : ''} text-base text-red-500"></i>
+                            <i class="hear-icono ph ph-heart ${element.user_liked ? 'ph-fill text-red-500' : 'text-gray-500'} text-base"></i>
                             <span class="btn-like-text">${element.user_liked ? 'Te gusta' : 'Me gusta'}</span>
                         </button>
                         
@@ -535,16 +704,12 @@ export default class Cl_vUserInicio {
         data.forEach((element: iPostResponse, index: number) => {
             const btnDeletePost = this.seccionPost_publicacion?.querySelector(`.btnDeletePost[data-index_clean="${index}"]`) as HTMLButtonElement | null;
             btnDeletePost?.addEventListener("click", async () => {
-                this.modalConfirmacion.modalConfirmacionAction()
-                
-                setTimeout(() => {
-                     this.controlador.deletePost(this.modalConfirmacion.estadoElecion(),element.id_post)
-                     if(this.modalConfirmacion.estadoElecion()){
-                        const postCard = btnDeletePost.closest('.bg-white.rounded-2xl');
-                        postCard?.remove()
-                     }
-                }, 1500);
-               
+                const confirmado = await this.modalConfirmacion.modalConfirmacionAction("¿Estás seguro de que deseas eliminar esta publicación?");
+                if (confirmado) {
+                    await this.controlador.deletePost(true, element.id_post);
+                    const postCard = btnDeletePost.closest('.bg-white.rounded-2xl');
+                    postCard?.remove();
+                }
             });
         });
         // Asignar eventos de likes
@@ -557,6 +722,13 @@ export default class Cl_vUserInicio {
 
                 if (heartIcon && likesElement) {
                     const isNowLiked = heartIcon.classList.toggle("ph-fill");
+                    if (isNowLiked) {
+                        heartIcon.classList.add("text-red-500");
+                        heartIcon.classList.remove("text-gray-500");
+                    } else {
+                        heartIcon.classList.remove("text-red-500");
+                        heartIcon.classList.add("text-gray-500");
+                    }
                     if (textSpan) {
                         textSpan.textContent = isNowLiked ? "Te gusta" : "Me gusta";
                     }

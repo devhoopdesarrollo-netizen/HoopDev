@@ -28,7 +28,7 @@ export default class MD_UserLogin {
             }
 
             if (!usuario) {
-                return { exito: false, mensaje: "Correo o contraseña incorrectos." };
+                return { exito: false, mensaje: "Correo electrónico o clave de acceso incorrectos." };
             }
 
             const validacionCredenciales = await Cl_UtilidadesLogin.compararPassword(
@@ -36,7 +36,7 @@ export default class MD_UserLogin {
                 usuario.password
             );
             if (!validacionCredenciales) {
-                return { exito: false, mensaje: "Correo o contraseña incorrectos." };
+                return { exito: false, mensaje: "Correo electrónico o clave de acceso incorrectos." };
             }
 
             // Validar que el usuario esté activo
@@ -85,7 +85,8 @@ export default class MD_UserLogin {
                     correo_electronico: usuario.correo_electronico,
                     especializacion: usuario.especializacion || "",
                     pais: usuario.pais || "",
-                    cargo: Name_cargo || "Usuario"
+                    cargo: Name_cargo || "Usuario",
+                    img_direccion: usuario.img_direccion || null
                 })
             );
 

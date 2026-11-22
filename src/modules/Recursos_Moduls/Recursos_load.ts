@@ -18,19 +18,20 @@ export default class Recursos_laod {
                     description,
                     fk_programa,
                     documentdirecciontion,
-                    fecha_load
+                    fecha_load,
+                    Programas ( nombre )
                 `)
                 .order("fecha_load", { ascending: false });
 
             if (error) {
                 throw error;
             }
-            console.log(data)
-            const recursos: iRecursos[] = (data ?? []).map((item) => ({
+            console.log(data);
+            const recursos: iRecursos[] = (data ?? []).map((item: any) => ({
                 id: item.id_docs,
                 nameFiles: item.namefiles,
                 description: item.description,
-                programa: item.fk_programa,
+                programa: item.Programas?.nombre || item.fk_programa || "General",
                 documentDirecciontion: item.documentdirecciontion,
                 fecha_load: item.fecha_load,
             }));
@@ -38,6 +39,25 @@ export default class Recursos_laod {
             return recursos;
         } catch (error) {
             console.error("Error al cargar documentos:", error);
+            throw error;
+        }
+    }
+
+    async deleteDocument(id: string): Promise<any> {
+        try {
+            const token = localStorage.getItem("user_token");
+            const client = token ? supabaseService.UserAuntentiked_Token(token) : supabaseService.client;
+            const { data, error } = await client
+                .from("documentdireccion")
+                .delete()
+                .eq("id_docs", id);
+
+            if (error) {
+                throw error;
+            }
+            return data;
+        } catch (error) {
+            console.error("Error al eliminar documento:", error);
             throw error;
         }
     }

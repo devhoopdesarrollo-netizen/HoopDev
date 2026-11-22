@@ -46,7 +46,13 @@ export default class Cl_vLogingUser {
         const password = (formDat.get("login-pass") as string || "").trim();
 
         if (!correo || !password) {
-            this.mostrarError("Por favor ingresa tu correo y contraseña.");
+            this.mostrarError("Por favor ingresa tu correo electrónico y clave de acceso.");
+            return;
+        }
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(correo)) {
+            this.mostrarError("Por favor ingresa un correo electrónico válido (ejemplo: usuario@correo.com).");
             return;
         }
 

@@ -76,20 +76,40 @@ export default class Controller {
     //Secciones 
     //Documento
     async loadDocument(informacion:iRecursos,document:File){
-        const documento = await this.UsermMController.loadDocument(informacion,document)
+        const documento = await this.UsermMController.loadDocument(informacion,document);
+        return documento;
     }
     async cargaDocument():Promise<any>{
         const document = await this.UsermMController.cargaDocument()
-       return document
+        return document
+    }
+    async deleteDocument(id: string): Promise<any> {
+        const deleted = await this.UsermMController.deleteDocument(id);
+        return deleted;
     }
 
     //Encuestas
     async crearEncuetas(Tematica:iEncuesta,preguntas:iPreguntas[]){
-       await this.UsermMController.newEncuetas(Tematica,preguntas)
+       return await this.UsermMController.newEncuetas(Tematica,preguntas)
     }
     async cargarEncuetas():Promise<any>{
        const EncuetasExistentes = await this.UsermMController.cargarEncuetas_name();
        return EncuetasExistentes
+    }
+    async guardarRespuestas(respuestas: Array<{ fk_pregunta: string, fk_user: string, respuesta: string, descripcion_reporte?: string }>): Promise<boolean> {
+        return await this.UsermMController.guardarRespuestasEncuesta(respuestas);
+    }
+    async eliminarEncuesta(id_tematica: string): Promise<boolean> {
+        return await this.UsermMController.eliminarEncuesta(id_tematica);
+    }
+    async cargarPreguntasEncuesta(id_tematica: string): Promise<iPreguntas[]> {
+        return await this.UsermMController.cargarPreguntasEncuesta(id_tematica);
+    }
+    async cargarRespuestasPorTematica(id_tematica: string): Promise<{ preguntas: any[]; reportes: any[] }> {
+        return await this.UsermMController.cargarRespuestasPorTematica(id_tematica);
+    }
+    async obtenerEncuestasConEstado(id_user: string): Promise<Array<iEncuesta & { respondida: boolean }>> {
+        return await this.UsermMController.obtenerEncuestasConEstado(id_user);
     }
     //Secciones Horarios
      async crearHorario(date:iHorario){
@@ -146,5 +166,9 @@ export default class Controller {
     }
     async actualizarUsuario(idUser: string, datos: { nombre?: string; especializacion?: string; fk_programas?: string; fk_cargo?: string; estatus?: boolean; password?: string }): Promise<any> {
         return await this.UsermMController.actualizarUsuario(idUser, datos);
+    }
+
+    async actualizarFotoPerfil(idUser: string, file: File): Promise<string> {
+        return await this.UsermMController.actualizarFotoPerfil(idUser, file);
     }
 }

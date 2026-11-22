@@ -50,10 +50,31 @@ export interface user {
 export interface iEncuesta {
     id_tematica?: string;
     nombre_tematica: string;
-
+    fecha_creacion?: string;
+    respondida?: boolean;
 }
 export interface iPreguntas {
+    id_pregunta?: string;
+    fk_tematica?: string;
     texto_pregunta: string;
+}
+export interface iReporteDetallado {
+    id_report?: string;
+    fk_pregunta: string;
+    fk_user: string;
+    respuesta: string;
+    descripcion_reporte: string;
+    fecha_reporte?: string;
+    User?: {
+        id_user: string;
+        nombre: string;
+        correo_electronico?: string;
+    };
+    preguntas?: {
+        id_pregunta: string;
+        fk_tematica: string;
+        texto_pregunta: string;
+    };
 }
 export interface iTemplateCargo_Programa{
     id?:string;

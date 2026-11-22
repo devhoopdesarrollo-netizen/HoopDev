@@ -1,5 +1,6 @@
 import Controller from "../../../controllers/Controller.js";
 import { iTemplateCargo_Programa } from "../../../types/types.js";
+import modal_confirmacion from "../../views_resours/modal_confirmacion.js";
 
 export default class Cl_vSeccionesAdministracion {
     public controlador: Controller;
@@ -9,6 +10,7 @@ export default class Cl_vSeccionesAdministracion {
     private selectUsuarioAdmin: HTMLSelectElement | null;
     private inputNombre: HTMLInputElement | null;
     private inputEspecializacion: HTMLInputElement | null;
+    private inputPasswordUsuario: HTMLInputElement | null;
     private selectPrograma: HTMLSelectElement | null;
     private selectCargo: HTMLSelectElement | null;
     private selectEstatus: HTMLSelectElement | null;
@@ -33,6 +35,7 @@ export default class Cl_vSeccionesAdministracion {
         this.selectUsuarioAdmin = document.getElementById("selectUsuarioAdmin") as HTMLSelectElement | null;
         this.inputNombre = document.getElementById("nombre") as HTMLInputElement | null;
         this.inputEspecializacion = document.getElementById("especializacion") as HTMLInputElement | null;
+        this.inputPasswordUsuario = document.getElementById("passwordUsuario") as HTMLInputElement | null;
         this.selectPrograma = document.getElementById("programa") as HTMLSelectElement | null;
         this.selectCargo = document.getElementById("cargo") as HTMLSelectElement | null;
         this.selectEstatus = document.getElementById("estatus") as HTMLSelectElement | null;
@@ -155,7 +158,8 @@ export default class Cl_vSeccionesAdministracion {
                             alert("⚠️ Error: No se pudo identificar el ID del programa a eliminar.");
                             return;
                         }
-                        if (confirm("¿Estás seguro de eliminar este programa?")) {
+                        const confirmado = await modal_confirmacion.confirmar("¿Estás seguro de que deseas eliminar este programa?");
+                        if (confirmado) {
                             const exito = await this.controlador.deletePrograma(id);
                             if (exito) {
                                 await this.cargarProgramas();
@@ -248,7 +252,8 @@ export default class Cl_vSeccionesAdministracion {
                             alert("⚠️ Error: No se pudo identificar el ID del cargo a eliminar.");
                             return;
                         }
-                        if (confirm("¿Estás seguro de eliminar este cargo?")) {
+                        const confirmado = await modal_confirmacion.confirmar("¿Estás seguro de que deseas eliminar este cargo?");
+                        if (confirmado) {
                             const exito = await this.controlador.deleteCargo(id);
                             if (exito) {
                                 await this.cargarCargos();
@@ -317,6 +322,9 @@ export default class Cl_vSeccionesAdministracion {
         if (this.inputEspecializacion) {
             this.inputEspecializacion.value = usuario.especializacion || "";
         }
+        if (this.inputPasswordUsuario) {
+            this.inputPasswordUsuario.value = "";
+        }
         if (this.selectPrograma && usuario.fk_programas) {
             this.selectPrograma.value = usuario.fk_programas;
         }
@@ -368,6 +376,15 @@ export default class Cl_vSeccionesAdministracion {
         if (fk_programas) datosActualizar.fk_programas = fk_programas;
         if (fk_cargo) datosActualizar.fk_cargo = fk_cargo;
 
+        const password = this.inputPasswordUsuario?.value.trim() || "";
+        if (password) {
+            if (password.length < 6) {
+                alert("⚠️ La nueva contraseña debe tener al menos 6 caracteres.");
+                return;
+            }
+            datosActualizar.password = password;
+        }
+
         const submitBtn = this.formActualizarUsuario?.querySelector('button[type="submit"]') as HTMLButtonElement | null;
         if (submitBtn) {
             submitBtn.disabled = true;
@@ -381,6 +398,9 @@ export default class Cl_vSeccionesAdministracion {
             const resp = await this.controlador.actualizarUsuario(userId, datosActualizar);
             if (resp && resp.exito) {
                 alert("✅ ¡Datos del usuario actualizados exitosamente!");
+                if (this.inputPasswordUsuario) {
+                    this.inputPasswordUsuario.value = "";
+                }
                 await this.cargarUsuarios();
                 if (this.selectUsuarioAdmin) {
                     this.selectUsuarioAdmin.value = userId;

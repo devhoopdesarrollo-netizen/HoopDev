@@ -63,6 +63,12 @@ export default class Cl_vRegisterUser {
             return;
         }
 
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(correo)) {
+            this.mostrarMensaje("Por favor ingresa un correo electrónico con formato válido.", "warning");
+            return;
+        }
+
         if (password.length < 6) {
             this.mostrarMensaje("La contraseña debe tener al menos 6 caracteres.", "warning");
             return;

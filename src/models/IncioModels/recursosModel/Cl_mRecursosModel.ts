@@ -27,7 +27,7 @@ export default class Cl_mRecursosModel {
         return this._description
     }
     set programa(programa: string) {
-        this._programa = programa.trim().toLocaleUpperCase()
+        this._programa = programa.trim()
 
     }
     get programa(): string {

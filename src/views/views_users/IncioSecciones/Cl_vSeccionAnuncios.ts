@@ -1,6 +1,7 @@
 import Controller from "../../../controllers/Controller.js";
 import Cl_Tools from "../../../models/Utils/Cl_Tools.js";
 import { iAnuncios } from "../../../types/types.js";
+import modal_confirmacion from "../../views_resours/modal_confirmacion.js";
 
 export default class Cl_vSeccionAnuncios {
     public controlador: Controller;
@@ -18,12 +19,9 @@ export default class Cl_vSeccionAnuncios {
         }
 
         if (this.formAnuncio) {
-            this.formAnuncio.addEventListener("submit", e => {
+            this.formAnuncio.addEventListener("submit", async e => {
                 e.preventDefault();
-                this.obtenerInformacionAnucion();
-                setTimeout(() => {
-                    this.cargarInformacionUser();
-                }, 2000);
+                await this.obtenerInformacionAnucion();
             });
         }
 
@@ -52,15 +50,17 @@ export default class Cl_vSeccionAnuncios {
             
         });
 
-        dat.forEach((element:iAnuncios, index:number) => {
-            const buttonElemento = document.getElementById(`button_${index}_anuncio`) as HTMLButtonElement;
-            buttonElemento.addEventListener(("click"),e =>{
-                if(element.id_reunion)
-                    this.controlador.deletAnuncio(element.id_reunion)
-                setTimeout(() => {
-                    this.cargarInformacionUser()
-                }, 1500);
-            })
+        dat.forEach((element: iAnuncios, index: number) => {
+            const buttonElemento = document.getElementById(`button_${index}_anuncio`) as HTMLButtonElement | null;
+            buttonElemento?.addEventListener("click", async () => {
+                if (element.id_reunion) {
+                    const confirmado = await modal_confirmacion.confirmar(`¿Estás seguro de que deseas eliminar el anuncio "${element.anuncio}"?`);
+                    if (confirmado) {
+                        await this.controlador.deletAnuncio(element.id_reunion);
+                        this.cargarInformacionUser();
+                    }
+                }
+            });
         });
 
       
@@ -68,21 +68,50 @@ export default class Cl_vSeccionAnuncios {
         
     }
 
-    obtenerInformacionAnucion() {
+    async obtenerInformacionAnucion(): Promise<void> {
+        if (!this.formAnuncio) return;
         const datos = new FormData(this.formAnuncio);
-        const fecha = datos.get('fecha_reunion');
-        const titulo = datos.get('titulo_reunion');
-        const horaInicio = datos.get('hora_inicio_reunion');
-        const horaFinal = datos.get('hora_final_reunion');
+        const fecha = (datos.get('fecha_reunion') as string || '').trim();
+        const titulo = (datos.get('titulo_reunion') as string || '').trim();
+        const horaInicio = (datos.get('hora_inicio_reunion') as string || '').trim();
+        const horaFinal = (datos.get('hora_final_reunion') as string || '').trim();
+
+        if (!fecha || !titulo || !horaInicio || !horaFinal) {
+            alert("⚠️ Por favor completa todos los campos del anuncio (fecha, título, hora de inicio y hora final).");
+            return;
+        }
+
+        if (horaInicio >= horaFinal) {
+            alert("⚠️ La hora de inicio debe ser anterior a la hora final.");
+            return;
+        }
 
         const datAnuncio: iAnuncios = {
-            fecha: (fecha) ? String(fecha) : "",
-            anuncio: (titulo) ? String(titulo) : "",
-            hora_inicio: (horaInicio) ? String(horaInicio) : "",
-            hora_final: (horaFinal) ? String(horaFinal) : "",
+            fecha: fecha,
+            anuncio: titulo,
+            hora_inicio: horaInicio,
+            hora_final: horaFinal,
+        };
+
+        const submitBtn = this.formAnuncio.querySelector('button[type="submit"]') as HTMLButtonElement | null;
+        if (submitBtn) {
+            submitBtn.disabled = true;
+            submitBtn.textContent = "Guardando...";
         }
-        this.controlador.newAnuncio(datAnuncio)
 
-
+        try {
+            await this.controlador.newAnuncio(datAnuncio);
+            this.formAnuncio.reset();
+            alert("✅ Anuncio de fecha específica guardado exitosamente.");
+            await this.cargarInformacionUser();
+        } catch (err) {
+            console.error("Error al registrar anuncio:", err);
+            alert("❌ Ocurrió un error al guardar el anuncio.");
+        } finally {
+            if (submitBtn) {
+                submitBtn.disabled = false;
+                submitBtn.textContent = "Guardar Anuncio E específico";
+            }
+        }
     }
 }
