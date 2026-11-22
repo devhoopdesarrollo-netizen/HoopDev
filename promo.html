@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hoop Perú Web - Crecemos Juntos (Video Promocional)</title>
+    <title>Hoop Perú Web - Crecemos Juntos (Spot Rápido & Responsive)</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Phosphor Icons v2 -->
@@ -22,7 +22,7 @@
 
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #070e17;
+            background-color: #04080e;
             color: #ffffff;
             margin: 0;
             padding: 0;
@@ -41,8 +41,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: radial-gradient(circle at 50% 15%, #182e46 0%, #0c1824 60%, #050b11 100%);
-            perspective: 1800px;
+            background: radial-gradient(circle at 50% 15%, #15273b 0%, #09131c 60%, #020508 100%);
+            perspective: 2000px;
             overflow: hidden;
             position: relative;
         }
@@ -53,12 +53,12 @@
             height: min(56.25vw, 100vh - 64px);
             position: relative;
             overflow: hidden;
-            box-shadow: 0 40px 100px -25px rgba(0, 0, 0, 0.95), 0 0 0 1px rgba(255, 255, 255, 0.12);
+            box-shadow: 0 45px 120px -30px rgba(0, 0, 0, 0.98), 0 0 0 1px rgba(255, 255, 255, 0.12);
             background: #f1f5f9;
             border-radius: 20px;
         }
 
-        /* Cámara Virtual Cinematográfica */
+        /* Cámara Virtual Cinematográfica con Transiciones Rápidas */
         #camera-viewport {
             width: 100%;
             height: 100%;
@@ -66,7 +66,7 @@
             top: 0;
             left: 0;
             transform-origin: center center;
-            transition: transform 1.1s cubic-bezier(0.2, 0.8, 0.25, 1);
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         /* Malla luminosa sutil en colores Hoop */
@@ -74,84 +74,86 @@
             position: absolute;
             inset: -30%;
             background: 
-                radial-gradient(circle at 20% 20%, rgba(0, 110, 174, 0.35) 0%, transparent 40%),
-                radial-gradient(circle at 80% 80%, rgba(159, 16, 116, 0.25) 0%, transparent 40%),
-                radial-gradient(circle at 75% 20%, rgba(0, 174, 165, 0.25) 0%, transparent 35%);
+                radial-gradient(circle at 20% 20%, rgba(0, 110, 174, 0.45) 0%, transparent 40%),
+                radial-gradient(circle at 80% 80%, rgba(159, 16, 116, 0.35) 0%, transparent 40%),
+                radial-gradient(circle at 75% 20%, rgba(0, 174, 165, 0.35) 0%, transparent 35%);
             filter: blur(70px);
             pointer-events: none;
             z-index: 1;
         }
 
-        /* Banner de Frases Emocionales de Impacto */
+        /* Banner de Frases Emocionales Flotante */
         #quote-overlay {
             position: absolute;
-            top: 24px;
+            top: 18px;
             left: 50%;
             transform: translateX(-50%) translateY(0);
             z-index: 100;
-            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
             pointer-events: none;
         }
 
         .quote-badge {
-            background: rgba(13, 27, 42, 0.88);
+            background: rgba(13, 27, 42, 0.94);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 25px rgba(0, 174, 165, 0.25);
-            padding: 10px 24px;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 25px rgba(0, 174, 165, 0.3);
+            padding: 8px 22px;
             border-radius: 9999px;
             display: inline-flex;
             align-items: center;
             gap: 10px;
             color: #ffffff;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 700;
             letter-spacing: -0.01em;
+            transform: scale(1);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        /* Cursor interactivo simulado */
+        /* Cursor interactivo ultra rápido */
         #virtual-mouse {
             position: absolute;
-            width: 26px;
-            height: 26px;
+            width: 24px;
+            height: 24px;
             pointer-events: none;
             z-index: 200;
-            transition: all 0.75s cubic-bezier(0.2, 0.9, 0.3, 1);
+            transition: left 0.35s cubic-bezier(0.16, 1, 0.3, 1), top 0.35s cubic-bezier(0.16, 1, 0.3, 1), transform 0.12s ease;
             opacity: 0;
-            filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.45));
+            filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.5));
         }
 
         #virtual-mouse.click-down {
-            transform: scale(0.82);
+            transform: scale(0.78);
         }
 
         /* Animación de latido y ráfaga de corazones */
         @keyframes heartPulse {
             0% { transform: scale(1); }
-            25% { transform: scale(1.5) rotate(-6deg); }
-            50% { transform: scale(1.15) rotate(3deg); }
-            75% { transform: scale(1.3) rotate(-2deg); }
+            25% { transform: scale(1.6) rotate(-8deg); }
+            50% { transform: scale(1.2) rotate(4deg); }
+            75% { transform: scale(1.4) rotate(-3deg); }
             100% { transform: scale(1); }
         }
 
         .pop-heart {
-            animation: heartPulse 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            animation: heartPulse 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         .floating-heart {
             position: absolute;
             pointer-events: none;
             color: #ef4444;
-            animation: floatUpBurst 1.3s ease-out forwards;
-            font-size: 18px;
+            animation: floatUpBurst 0.9s cubic-bezier(0.1, 0.8, 0.2, 1) forwards;
+            font-size: 20px;
             z-index: 150;
         }
 
         @keyframes floatUpBurst {
             0% { transform: translate(0, 0) scale(0.4); opacity: 1; }
-            50% { opacity: 0.9; }
-            100% { transform: translate(var(--tx, 15px), -90px) scale(1.4); opacity: 0; }
+            40% { opacity: 1; }
+            100% { transform: translate(var(--tx, 15px), -100px) scale(1.5); opacity: 0; }
         }
 
         /* Barra de progreso inferior */
@@ -162,18 +164,50 @@
             transition: width 0.1s linear;
         }
 
-        /* Transiciones de secciones del dashboard */
+        /* Transiciones ágiles de vistas */
         .app-view {
             display: none;
             opacity: 0;
-            transform: translateY(12px);
-            transition: opacity 0.4s ease, transform 0.4s ease;
+            transform: translateY(10px) scale(0.98);
+            transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .app-view.active-view {
             display: block;
             opacity: 1;
-            transform: translateY(0);
+            transform: translateY(0) scale(1);
+        }
+
+        /* Mockup 3D de Smartphone Responsive */
+        .phone-mockup {
+            width: 250px;
+            height: 500px;
+            background: #ffffff;
+            border-radius: 36px;
+            border: 8px solid #1e293b;
+            box-shadow: 0 35px 80px -15px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.2);
+            overflow: hidden;
+            display: flex;
+            flex-col: column;
+            position: relative;
+            transform: rotateY(-8deg) rotateX(4deg);
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .phone-mockup:hover {
+            transform: rotateY(0deg) rotateX(0deg);
+        }
+
+        .phone-notch {
+            position: absolute;
+            top: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90px;
+            height: 16px;
+            background: #1e293b;
+            border-radius: 20px;
+            z-index: 40;
         }
     </style>
 </head>
@@ -184,41 +218,47 @@
         <div class="flex items-center space-x-3">
             <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-[#006eae] to-[#00aea5] p-0.5 flex items-center justify-center shadow-lg shadow-cyan-500/20">
                 <div class="w-full h-full bg-slate-900 rounded-[10px] flex items-center justify-center text-white">
-                    <i class="ph-bold ph-video-camera text-lg text-[#57ddcd]"></i>
+                    <i class="ph-bold ph-lightning text-lg text-[#57ddcd] animate-pulse"></i>
                 </div>
             </div>
             <div>
                 <h1 class="font-extrabold text-white text-sm sm:text-base tracking-tight flex items-center space-x-2">
                     <span>Hoop Perú</span>
-                    <span class="px-2 py-0.5 rounded-full bg-[#006eae]/20 text-[#80c8e4] text-[10px] font-bold uppercase">Spot "Crecemos Juntos"</span>
+                    <span class="px-2 py-0.5 rounded-full bg-[#006eae]/20 text-[#80c8e4] text-[10px] font-bold uppercase">Spot Rápido & Responsive</span>
                 </h1>
-                <p class="text-xs text-slate-400">Demostración en vivo de la aplicación web oficial</p>
+                <p class="text-xs text-slate-400">Multi-pantalla (Desktop + Móvil) • 28s</p>
             </div>
         </div>
 
-        <!-- Controles de Audio, Play/Pausa y Grabación -->
-        <div class="flex items-center space-x-3">
+        <!-- Controles de Audio, Velocidad y Grabación -->
+        <div class="flex items-center space-x-2.5">
+            <!-- Selector de Velocidad -->
+            <button id="btnSpeed" class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-[#57ddcd] font-bold text-xs flex items-center space-x-1 transition-all border border-slate-700">
+                <i class="ph-bold ph-gauge"></i>
+                <span id="speedText">1.0x</span>
+            </button>
+
             <!-- Audio ON/OFF -->
-            <button id="btnToggleAudio" class="px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-medium flex items-center space-x-1.5 transition-all">
+            <button id="btnToggleAudio" class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-medium flex items-center space-x-1.5 transition-all">
                 <i id="audioIcon" class="ph-bold ph-speaker-high"></i>
-                <span id="audioText" class="hidden md:inline">Efectos ON</span>
+                <span id="audioText" class="hidden md:inline">Audio ON</span>
             </button>
 
             <!-- Play / Pause -->
-            <button id="btnPlayPause" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-medium flex items-center space-x-2 transition-all">
+            <button id="btnPlayPause" class="px-3.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-medium flex items-center space-x-1.5 transition-all">
                 <i id="playIcon" class="ph-fill ph-pause"></i>
                 <span id="playText" class="hidden sm:inline">Pausar</span>
             </button>
 
             <!-- Reiniciar -->
-            <button id="btnRestart" class="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-medium transition-all" title="Reiniciar Video">
+            <button id="btnRestart" class="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-medium transition-all" title="Reiniciar">
                 <i class="ph-bold ph-arrow-counter-clockwise"></i>
             </button>
 
             <!-- BOTÓN DE GRABACIÓN DIRECTA A VIDEO (MP4/WEBM) -->
-            <button id="btnRecord" class="px-5 py-2 rounded-xl bg-gradient-to-r from-red-600 via-rose-600 to-red-600 hover:from-red-500 hover:to-rose-500 text-white font-bold flex items-center space-x-2.5 shadow-xl shadow-red-600/30 transition-all active:scale-95">
-                <span class="w-3 h-3 rounded-full bg-white animate-pulse"></span>
-                <span id="recordText">Grabar en Video (MP4)</span>
+            <button id="btnRecord" class="px-4 py-1.5 rounded-xl bg-gradient-to-r from-red-600 via-rose-600 to-red-600 hover:from-red-500 hover:to-rose-500 text-white font-bold flex items-center space-x-2 shadow-xl shadow-red-600/30 transition-all active:scale-95 text-xs">
+                <span class="w-2.5 h-2.5 rounded-full bg-white animate-pulse"></span>
+                <span id="recordText">Grabar en MP4</span>
             </button>
         </div>
     </header>
@@ -248,38 +288,36 @@
             <div id="camera-viewport">
 
                 <!-- ========================================================================= -->
-                <!-- PANTALLA 1: PANTALLA DE LOGIN REAL (0s - 7s) -->
+                <!-- PANTALLA 1: PANTALLA DE LOGIN REAL (0s - 3.5s) -->
                 <!-- ========================================================================= -->
-                <div id="screen-login" class="absolute inset-0 bg-[#006eae] flex items-center justify-center p-6 transition-all duration-700">
-                    <div class="bg-white rounded-3xl shadow-2xl p-8 w-full max-w-md border border-white/20 relative overflow-hidden">
-                        <!-- Logo y Encabezado del Login -->
-                        <div class="text-center mb-6">
-                            <div class="w-24 h-24 mx-auto mb-3 flex items-center justify-center p-2 rounded-2xl bg-slate-50 border border-slate-100 shadow-sm">
+                <div id="screen-login" class="absolute inset-0 bg-[#006eae] flex items-center justify-center p-6 transition-all duration-500">
+                    <div class="bg-white rounded-3xl shadow-2xl p-7 w-full max-w-sm border border-white/20 relative overflow-hidden transform hover:scale-[1.01] transition-transform">
+                        <div class="text-center mb-5">
+                            <div class="w-20 h-20 mx-auto mb-2 flex items-center justify-center p-2 rounded-2xl bg-slate-50 border border-slate-100 shadow-sm">
                                 <img src="./resources/navbar-logo.webp" alt="Hoop Perú" class="max-w-full max-h-full object-contain">
                             </div>
-                            <h2 class="text-2xl font-black text-[#1d3854]">Iniciar Sesión</h2>
-                            <p class="text-xs text-slate-500 mt-1">Plataforma de Voluntariado Hoop Perú</p>
+                            <h2 class="text-xl font-black text-[#1d3854]">Iniciar Sesión</h2>
+                            <p class="text-[11px] text-slate-500 mt-0.5">Plataforma de Voluntariado Hoop Perú</p>
                         </div>
 
-                        <!-- Formulario de Acceso -->
-                        <div class="space-y-4">
+                        <div class="space-y-3">
                             <div>
-                                <label class="block text-xs font-bold text-slate-700 mb-1">Correo electrónico</label>
+                                <label class="block text-[11px] font-bold text-slate-700 mb-1">Correo electrónico</label>
                                 <div class="relative">
-                                    <input id="demo-login-email" type="text" readonly value="" placeholder="ej: voluntario@hoop.org" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-xs text-slate-800 bg-slate-50 focus:bg-white focus:outline-none">
-                                    <i class="ph ph-envelope text-slate-400 absolute right-3 top-3 text-sm"></i>
+                                    <input id="demo-login-email" type="text" readonly value="" placeholder="ej: voluntario@hoop.org" class="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-xs text-slate-800 bg-slate-50 focus:bg-white focus:outline-none">
+                                    <i class="ph ph-envelope text-slate-400 absolute right-3 top-2.5 text-sm"></i>
                                 </div>
                             </div>
 
                             <div>
-                                <label class="block text-xs font-bold text-slate-700 mb-1">Clave de acceso</label>
+                                <label class="block text-[11px] font-bold text-slate-700 mb-1">Clave de acceso</label>
                                 <div class="relative">
-                                    <input id="demo-login-pass" type="password" readonly value="" placeholder="••••••••" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-xs text-slate-800 bg-slate-50 focus:bg-white focus:outline-none">
-                                    <i class="ph ph-lock-key text-slate-400 absolute right-3 top-3 text-sm"></i>
+                                    <input id="demo-login-pass" type="password" readonly value="" placeholder="••••••••" class="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-xs text-slate-800 bg-slate-50 focus:bg-white focus:outline-none">
+                                    <i class="ph ph-lock-key text-slate-400 absolute right-3 top-2.5 text-sm"></i>
                                 </div>
                             </div>
 
-                            <button id="demo-login-btn" class="w-full py-3 rounded-xl bg-[#006eae] hover:bg-[#005a8e] text-white font-bold text-xs uppercase tracking-wider transition-all shadow-lg shadow-blue-500/25 flex items-center justify-center space-x-2">
+                            <button id="demo-login-btn" class="w-full py-2.5 rounded-xl bg-[#006eae] hover:bg-[#005a8e] text-white font-bold text-xs uppercase tracking-wider transition-all shadow-lg shadow-blue-500/25 flex items-center justify-center space-x-2">
                                 <span>Ingresar al Portal</span>
                                 <i class="ph-bold ph-arrow-right"></i>
                             </button>
@@ -289,9 +327,9 @@
 
 
                 <!-- ========================================================================= -->
-                <!-- PANTALLA 2: DASHBOARD COMPLETO (7s - 45s) -->
+                <!-- PANTALLA 2: DASHBOARD COMPLETO (3.5s - 17.5s) -->
                 <!-- ========================================================================= -->
-                <div id="screen-dashboard" class="absolute inset-0 bg-[#f8fafc] flex flex-col opacity-0 pointer-events-none transition-opacity duration-700">
+                <div id="screen-dashboard" class="absolute inset-0 bg-[#f8fafc] flex flex-col opacity-0 pointer-events-none transition-opacity duration-500">
                     
                     <!-- NAVBAR OFICIAL DEL APLICATIVO -->
                     <header class="h-14 bg-white border-b border-gray-200 px-6 flex items-center justify-between shadow-xs shrink-0 z-20">
@@ -331,7 +369,7 @@
                     <div class="flex-1 flex overflow-hidden">
                         
                         <!-- ASIDE IZQUIERDO DE NAVEGACIÓN -->
-                        <aside class="w-56 bg-white border-r border-gray-200 p-4 flex flex-col justify-between shrink-0">
+                        <aside class="w-52 bg-white border-r border-gray-200 p-3.5 flex flex-col justify-between shrink-0">
                             <div>
                                 <span class="text-[10px] font-bold text-gray-400 uppercase tracking-wider block px-3 mb-2">Menú Principal</span>
                                 <nav class="space-y-1">
@@ -358,7 +396,6 @@
                                 </nav>
                             </div>
 
-                            <!-- Badge de impacto inferior -->
                             <div class="p-3 rounded-2xl bg-gradient-to-br from-[#00aea5]/10 to-[#006eae]/10 border border-[#00aea5]/20">
                                 <div class="text-[10px] font-bold text-[#006eae] uppercase">Comunidad Hoop</div>
                                 <div class="text-xs text-slate-700 font-semibold mt-0.5">Creciendo juntos día a día 🇵🇪</div>
@@ -366,28 +403,22 @@
                         </aside>
 
                         <!-- ÁREA DINÁMICA DE CONTENIDO -->
-                        <div class="flex-1 p-6 overflow-y-auto bg-slate-50 relative">
+                        <div class="flex-1 p-5 overflow-y-auto bg-slate-50 relative">
 
-                            <!-- ============================================================== -->
                             <!-- VISTA 1: FEED DE PUBLICACIONES (INICIO) -->
-                            <!-- ============================================================== -->
-                            <div id="view-inicio" class="app-view active-view space-y-5 max-w-2xl mx-auto">
-                                
-                                <!-- Card de Crear Publicación -->
-                                <div class="bg-white rounded-2xl shadow-sm border border-gray-200 p-4 flex items-center space-x-3">
-                                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&auto=format&fit=crop" class="w-9 h-9 rounded-full object-cover">
-                                    <div class="flex-1 bg-slate-100 hover:bg-slate-200/80 rounded-xl px-4 py-2 text-xs text-slate-400 cursor-pointer">
+                            <div id="view-inicio" class="app-view active-view space-y-4 max-w-xl mx-auto">
+                                <div class="bg-white rounded-2xl shadow-sm border border-gray-200 p-3.5 flex items-center space-x-3">
+                                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&auto=format&fit=crop" class="w-8 h-8 rounded-full object-cover">
+                                    <div class="flex-1 bg-slate-100 rounded-xl px-3 py-2 text-xs text-slate-400">
                                         Comparte una novedad con el equipo de voluntarios...
                                     </div>
-                                    <button class="p-2 rounded-xl bg-blue-50 text-[#006eae] hover:bg-blue-100"><i class="ph-bold ph-image text-base"></i></button>
+                                    <button class="p-2 rounded-xl bg-blue-50 text-[#006eae]"><i class="ph-bold ph-image text-base"></i></button>
                                 </div>
 
-                                <!-- Publicación Real de Alto Impacto -->
-                                <div class="bg-white rounded-2xl shadow-sm border border-gray-200 p-5 space-y-3 relative">
-                                    <!-- Autor -->
+                                <div class="bg-white rounded-2xl shadow-sm border border-gray-200 p-4 space-y-3 relative">
                                     <div class="flex items-center justify-between">
                                         <div class="flex items-center space-x-3">
-                                            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&auto=format&fit=crop" class="w-10 h-10 rounded-full object-cover border border-[#006eae]">
+                                            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&auto=format&fit=crop" class="w-9 h-9 rounded-full object-cover border border-[#006eae]">
                                             <div>
                                                 <div class="flex items-center space-x-2">
                                                     <h3 class="text-xs font-bold text-gray-900">Duval Pérez</h3>
@@ -399,28 +430,25 @@
                                         <i class="ph ph-dots-three-vertical text-gray-400"></i>
                                     </div>
 
-                                    <!-- Contenido -->
                                     <p class="text-xs text-gray-800 leading-relaxed font-normal">
-                                        ¡Hermoso inicio de semana en el aula comunitaria! Los niños completaron sus primeras lecturas y talleres prácticos. Gracias a cada voluntario por poner el corazón en cada minuto. ¡Crecemos juntos! 🇵🇪✨📚
+                                        ¡Hermoso inicio de semana en el aula comunitaria! Los niños completaron sus primeras lecturas y talleres prácticos. ¡Crecemos juntos! 🇵🇪✨📚
                                     </p>
 
-                                    <!-- FOTO REALISTA DE ALTA RESOLUCIÓN DE VOLUNTARIADO INFANTIL -->
-                                    <div class="relative rounded-2xl overflow-hidden border border-gray-100 bg-gray-900 h-64 flex items-center justify-center shadow-inner">
+                                    <div class="relative rounded-2xl overflow-hidden border border-gray-100 bg-gray-900 h-60 flex items-center justify-center shadow-inner">
                                         <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?q=80&w=1200&auto=format&fit=crop" alt="Voluntarios con niños" class="w-full h-full object-cover">
-                                        <div class="absolute bottom-2.5 right-2.5 bg-black/70 backdrop-blur-md px-3 py-1 rounded-lg text-[10px] font-semibold text-white flex items-center space-x-1 shadow-md">
+                                        <div class="absolute bottom-2.5 right-2.5 bg-black/70 backdrop-blur-md px-2.5 py-1 rounded-lg text-[10px] font-semibold text-white flex items-center space-x-1 shadow-md">
                                             <i class="ph ph-camera text-[#57ddcd]"></i>
                                             <span>Sede Flora Tristán 2026</span>
                                         </div>
                                     </div>
 
-                                    <!-- Interacción de Likes -->
-                                    <div class="border-t border-gray-100 pt-3">
+                                    <div class="border-t border-gray-100 pt-2.5">
                                         <div class="flex items-center justify-between text-xs text-gray-500 mb-2">
                                             <div class="flex items-center space-x-1.5">
                                                 <i class="ph-fill ph-heart text-base text-red-500"></i>
                                                 <span id="demo-likes-val" class="font-bold text-gray-800">42 Me gusta</span>
                                             </div>
-                                            <span class="text-[11px] text-gray-400">14 comentarios • 5 compartidos</span>
+                                            <span class="text-[10px] text-gray-400">14 comentarios • 5 compartidos</span>
                                         </div>
 
                                         <div class="grid grid-cols-2 gap-2">
@@ -435,7 +463,6 @@
                                         </div>
                                     </div>
 
-                                    <!-- Toast emergente de like -->
                                     <div id="feed-like-badge" class="absolute -top-3 -right-3 px-3 py-1.5 rounded-xl bg-gradient-to-r from-red-500 to-rose-600 text-white text-xs font-bold shadow-xl opacity-0 transform translate-y-2 transition-all">
                                         ¡Te gusta esta publicación! ❤️
                                     </div>
@@ -444,61 +471,57 @@
                             </div>
 
 
-                            <!-- ============================================================== -->
                             <!-- VISTA 2: MIS HORARIOS Y REUNIONES -->
-                            <!-- ============================================================== -->
-                            <div id="view-horarios" class="app-view space-y-5 max-w-2xl mx-auto">
+                            <div id="view-horarios" class="app-view space-y-4 max-w-xl mx-auto">
                                 <div>
                                     <span class="text-[10px] font-bold text-[#146460] bg-[#dbf5f0] border border-[#b5f4eb] px-2.5 py-0.5 rounded-full uppercase tracking-wider">Tu Compromiso</span>
-                                    <h2 class="text-xl font-black text-gray-900 mt-1">Mis Horarios Asignados</h2>
-                                    <p class="text-xs text-gray-500">Consulta tus turnos semanales y las reuniones de voluntariado.</p>
+                                    <h2 class="text-lg font-black text-gray-900 mt-1">Mis Horarios Asignados</h2>
+                                    <p class="text-[11px] text-gray-500">Consulta tus turnos semanales y las reuniones de voluntariado.</p>
                                 </div>
 
-                                <!-- Alerta Notificación de Reunión -->
-                                <div id="demo-meeting-alert" class="bg-gradient-to-r from-[#006eae]/10 via-[#00aea5]/10 to-transparent border-l-4 border-l-[#006eae] p-4 rounded-2xl flex items-center justify-between shadow-xs">
+                                <div id="demo-meeting-alert" class="bg-gradient-to-r from-[#006eae]/10 via-[#00aea5]/10 to-transparent border-l-4 border-l-[#006eae] p-3.5 rounded-2xl flex items-center justify-between shadow-xs">
                                     <div class="flex items-center space-x-3">
-                                        <div class="w-9 h-9 rounded-xl bg-[#006eae] text-white flex items-center justify-center text-lg shadow-sm">
+                                        <div class="w-8 h-8 rounded-xl bg-[#006eae] text-white flex items-center justify-center text-base shadow-sm">
                                             <i class="ph-fill ph-calendar-plus"></i>
                                         </div>
                                         <div>
                                             <h4 class="text-xs font-bold text-gray-900">Reunión General de Coordinadores</h4>
-                                            <p class="text-[11px] text-gray-500">Planificación de nuevas aulas comunitarias • 18:30 hrs</p>
+                                            <p class="text-[10px] text-gray-500">Planificación de nuevas aulas comunitarias • 18:30 hrs</p>
                                         </div>
                                     </div>
-                                    <span class="px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-bold">Viernes Activo</span>
+                                    <span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-bold">Viernes Activo</span>
                                 </div>
 
-                                <!-- Tabla Real de Horarios Semanales -->
                                 <div class="bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm">
                                     <table class="w-full text-left text-xs">
                                         <thead class="bg-gray-50 border-b border-gray-200 text-gray-500 font-bold uppercase text-[10px]">
                                             <tr>
-                                                <th class="py-3 px-4">Día</th>
-                                                <th class="py-3 px-4">Horario</th>
-                                                <th class="py-3 px-4">Sede / Programa</th>
-                                                <th class="py-3 px-4 text-right">Estado</th>
+                                                <th class="py-2.5 px-4">Día</th>
+                                                <th class="py-2.5 px-4">Horario</th>
+                                                <th class="py-2.5 px-4">Sede / Programa</th>
+                                                <th class="py-2.5 px-4 text-right">Estado</th>
                                             </tr>
                                         </thead>
                                         <tbody class="divide-y divide-gray-100 text-gray-700">
                                             <tr class="hover:bg-blue-50/50 transition-colors">
-                                                <td class="py-3 px-4 font-bold text-gray-900 flex items-center space-x-2">
+                                                <td class="py-2.5 px-4 font-bold text-gray-900 flex items-center space-x-2">
                                                     <span class="w-2 h-2 rounded-full bg-blue-500"></span>
                                                     <span>Miércoles</span>
                                                 </td>
-                                                <td class="py-3 px-4 font-mono">15:00 - 18:00</td>
-                                                <td class="py-3 px-4">Flora Tristán (Refuerzo)</td>
-                                                <td class="py-3 px-4 text-right">
+                                                <td class="py-2.5 px-4 font-mono">15:00 - 18:00</td>
+                                                <td class="py-2.5 px-4">Flora Tristán (Refuerzo)</td>
+                                                <td class="py-2.5 px-4 text-right">
                                                     <span class="px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 font-bold text-[10px]">Confirmado</span>
                                                 </td>
                                             </tr>
                                             <tr class="hover:bg-blue-50/50 transition-colors">
-                                                <td class="py-3 px-4 font-bold text-gray-900 flex items-center space-x-2">
+                                                <td class="py-2.5 px-4 font-bold text-gray-900 flex items-center space-x-2">
                                                     <span class="w-2 h-2 rounded-full bg-magenta-500"></span>
                                                     <span>Sábado</span>
                                                 </td>
-                                                <td class="py-3 px-4 font-mono">09:00 - 13:00</td>
-                                                <td class="py-3 px-4">Arequipa Centro (Talleres)</td>
-                                                <td class="py-3 px-4 text-right">
+                                                <td class="py-2.5 px-4 font-mono">09:00 - 13:00</td>
+                                                <td class="py-2.5 px-4">Arequipa Centro (Talleres)</td>
+                                                <td class="py-2.5 px-4 text-right">
                                                     <span class="px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 font-bold text-[10px]">Confirmado</span>
                                                 </td>
                                             </tr>
@@ -508,21 +531,18 @@
                             </div>
 
 
-                            <!-- ============================================================== -->
                             <!-- VISTA 3: RECURSOS Y DOCUMENTOS -->
-                            <!-- ============================================================== -->
-                            <div id="view-recursos" class="app-view space-y-5 max-w-2xl mx-auto">
+                            <div id="view-recursos" class="app-view space-y-4 max-w-xl mx-auto">
                                 <div>
                                     <span class="text-[10px] font-bold text-[#1d3854] bg-[#b8e1f1] border border-[#80c8e4] px-2.5 py-0.5 rounded-full uppercase tracking-wider">Biblioteca Oficial</span>
-                                    <h2 class="text-xl font-black text-gray-900 mt-1">Guías y Material Didáctico</h2>
-                                    <p class="text-xs text-gray-500">Descarga y comparte herramientas para los talleres infantiles.</p>
+                                    <h2 class="text-lg font-black text-gray-900 mt-1">Guías y Material Didáctico</h2>
+                                    <p class="text-[11px] text-gray-500">Descarga y comparte herramientas para los talleres infantiles.</p>
                                 </div>
 
-                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                    <!-- Recurso 1 -->
-                                    <div class="bg-white p-4 rounded-2xl border border-gray-200 shadow-sm flex flex-col justify-between space-y-3">
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                                    <div class="bg-white p-3.5 rounded-2xl border border-gray-200 shadow-sm flex flex-col justify-between space-y-3">
                                         <div class="flex items-start space-x-3">
-                                            <span class="w-10 h-10 rounded-xl bg-red-100 text-red-600 flex items-center justify-center text-xl shrink-0">
+                                            <span class="w-9 h-9 rounded-xl bg-red-100 text-red-600 flex items-center justify-center text-lg shrink-0">
                                                 <i class="ph-fill ph-file-pdf"></i>
                                             </span>
                                             <div>
@@ -536,10 +556,9 @@
                                         </button>
                                     </div>
 
-                                    <!-- Recurso 2 -->
-                                    <div class="bg-white p-4 rounded-2xl border border-gray-200 shadow-sm flex flex-col justify-between space-y-3">
+                                    <div class="bg-white p-3.5 rounded-2xl border border-gray-200 shadow-sm flex flex-col justify-between space-y-3">
                                         <div class="flex items-start space-x-3">
-                                            <span class="w-10 h-10 rounded-xl bg-blue-100 text-[#006eae] flex items-center justify-center text-xl shrink-0">
+                                            <span class="w-9 h-9 rounded-xl bg-blue-100 text-[#006eae] flex items-center justify-center text-lg shrink-0">
                                                 <i class="ph-fill ph-file-doc"></i>
                                             </span>
                                             <div>
@@ -556,29 +575,26 @@
                             </div>
 
 
-                            <!-- ============================================================== -->
                             <!-- VISTA 4: ENCUESTAS Y PARTICIPACIÓN -->
-                            <!-- ============================================================== -->
-                            <div id="view-encuestas" class="app-view space-y-5 max-w-2xl mx-auto">
+                            <div id="view-encuestas" class="app-view space-y-4 max-w-xl mx-auto">
                                 <div>
                                     <span class="text-[10px] font-bold text-[#751c5a] bg-[#e6cbe1] border border-[#d392c6] px-2.5 py-0.5 rounded-full uppercase tracking-wider">Tu Opinión Cuenta</span>
-                                    <h2 class="text-xl font-black text-gray-900 mt-1">Encuestas Comunitarias</h2>
-                                    <p class="text-xs text-gray-500">Participa en la toma de decisiones para el siguiente semestre.</p>
+                                    <h2 class="text-lg font-black text-gray-900 mt-1">Encuestas Comunitarias</h2>
+                                    <p class="text-[11px] text-gray-500">Participa en la toma de decisiones para el siguiente semestre.</p>
                                 </div>
 
-                                <div class="bg-white rounded-2xl border border-gray-200 p-5 shadow-sm space-y-4">
+                                <div class="bg-white rounded-2xl border border-gray-200 p-4 shadow-sm space-y-3">
                                     <div class="flex items-center justify-between">
-                                        <h3 class="text-sm font-bold text-gray-900">¿Qué taller complementario debemos priorizar?</h3>
+                                        <h3 class="text-xs font-bold text-gray-900">¿Qué taller complementario debemos priorizar?</h3>
                                         <span class="px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 text-[10px] font-bold">Abierta</span>
                                     </div>
 
-                                    <!-- Opciones de Votación -->
-                                    <div class="space-y-2.5">
-                                        <div id="poll-opt-1" class="p-3 rounded-xl border border-gray-200 hover:border-[#006eae] bg-slate-50 flex items-center justify-between cursor-pointer transition-all">
+                                    <div class="space-y-2">
+                                        <div id="poll-opt-1" class="p-2.5 rounded-xl border border-gray-200 hover:border-[#006eae] bg-slate-50 flex items-center justify-between cursor-pointer transition-all">
                                             <span class="text-xs font-semibold text-gray-800">Robótica y Ciencia para Niños</span>
                                             <div id="poll-bar-1" class="hidden text-xs font-bold text-[#006eae]">84% (42 votos)</div>
                                         </div>
-                                        <div class="p-3 rounded-xl border border-gray-200 bg-slate-50 flex items-center justify-between text-xs text-gray-500">
+                                        <div class="p-2.5 rounded-xl border border-gray-200 bg-slate-50 flex items-center justify-between text-xs text-gray-500">
                                             <span>Música y Expresión Corporal</span>
                                             <span>16% (8 votos)</span>
                                         </div>
@@ -592,32 +608,125 @@
 
 
                 <!-- ========================================================================= -->
-                <!-- PANTALLA 3: GRAN FINAL & CIERRE "CRECEMOS JUNTOS" (45s - 52s) -->
+                <!-- PANTALLA 2.5: SHOWCASE RESPONSIVE MULTI-DISPOSITIVO (17.5s - 23s) -->
                 <!-- ========================================================================= -->
-                <div id="screen-finale" class="absolute inset-0 bg-[#09131d] flex flex-col items-center justify-center p-8 text-center opacity-0 pointer-events-none transition-opacity duration-700 z-30">
-                    <div class="w-24 h-24 rounded-3xl bg-white p-3 shadow-2xl flex items-center justify-center mx-auto mb-6 transform hover:rotate-6 transition-all border border-white/30">
+                <div id="screen-responsive" class="absolute inset-0 bg-[#0c1824] flex items-center justify-center p-8 opacity-0 pointer-events-none transition-opacity duration-600 z-25 overflow-hidden">
+                    <div class="w-full max-w-5xl flex flex-col md:flex-row items-center justify-center gap-10">
+                        
+                        <!-- Columna Izquierda: Laptop / Tablet con la App -->
+                        <div class="w-full md:w-3/5 space-y-4">
+                            <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-[#00aea5]/20 border border-[#57ddcd]/40 text-[#57ddcd] text-xs font-bold uppercase tracking-wider">
+                                <i class="ph-bold ph-device-mobile-camera text-base"></i>
+                                <span>100% Adaptable y Móvil</span>
+                            </div>
+                            <h2 class="text-2xl md:text-4xl font-black text-white leading-tight">
+                                Accede desde tu Celular, Tablet o Laptop
+                            </h2>
+                            <p class="text-xs md:text-sm text-slate-300 font-light leading-relaxed">
+                                Diseñado para que cada voluntario pueda revisar sus turnos semanales, reaccionar a las publicaciones y consultar recursos directamente desde el aula comunitaria o en el campo.
+                            </p>
+                            <div class="flex items-center space-x-3 pt-1">
+                                <span class="px-3 py-1 rounded-xl bg-white/10 text-white font-bold text-xs flex items-center space-x-1.5 border border-white/15">
+                                    <i class="ph-bold ph-check text-emerald-400"></i>
+                                    <span>Menú Táctil Rápido</span>
+                                </span>
+                                <span class="px-3 py-1 rounded-xl bg-white/10 text-white font-bold text-xs flex items-center space-x-1.5 border border-white/15">
+                                    <i class="ph-bold ph-check text-emerald-400"></i>
+                                    <span>Feed Optimizado</span>
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Columna Derecha: Mockup 3D del Teléfono Móvil -->
+                        <div class="w-full md:w-2/5 flex justify-center">
+                            <div class="phone-mockup">
+                                <div class="phone-notch"></div>
+                                
+                                <!-- Header Móvil Real (Tal como está en inicio_usuario.html) -->
+                                <div class="bg-white border-b border-gray-200 px-4 pt-8 pb-2.5 flex items-center justify-between shrink-0">
+                                    <div class="flex items-center space-x-2">
+                                        <img src="./resources/navbar-logo.webp" alt="Logo" class="h-6 object-contain">
+                                        <span class="font-extrabold text-[#1d3854] text-xs">Hoop Perú</span>
+                                    </div>
+                                    <div class="flex items-center space-x-2.5">
+                                        <div class="relative">
+                                            <i class="ph ph-bell text-base text-gray-600"></i>
+                                            <span class="absolute -top-1 -right-1 flex h-2 w-2">
+                                                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#af3a91] opacity-75"></span>
+                                                <span class="relative inline-flex rounded-full h-2 w-2 bg-[#9f1074]"></span>
+                                            </span>
+                                        </div>
+                                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop" class="w-6 h-6 rounded-full object-cover border border-blue-400">
+                                    </div>
+                                </div>
+
+                                <!-- Menú Horizontal Móvil (Scrollable exacto de inicio_usuario.html) -->
+                                <div class="bg-white border-b border-gray-200 px-3 py-2 overflow-x-auto flex space-x-2 whitespace-nowrap shrink-0 text-[10px]">
+                                    <span class="px-2.5 py-1 rounded-lg font-bold text-blue-600 bg-blue-50">Inicio</span>
+                                    <span class="px-2.5 py-1 rounded-lg font-medium text-gray-600 bg-gray-50">Horarios</span>
+                                    <span class="px-2.5 py-1 rounded-lg font-medium text-gray-600 bg-gray-50">Recursos</span>
+                                    <span class="px-2.5 py-1 rounded-lg font-medium text-gray-600 bg-gray-50">Encuestas</span>
+                                </div>
+
+                                <!-- Contenido Móvil: Feed en Teléfono -->
+                                <div class="flex-1 bg-slate-50 p-3 overflow-y-auto space-y-3 text-left">
+                                    <div class="bg-white rounded-xl p-3 border border-gray-200 shadow-xs space-y-2">
+                                        <div class="flex items-center space-x-2">
+                                            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop" class="w-7 h-7 rounded-full object-cover">
+                                            <div>
+                                                <div class="text-[11px] font-bold text-gray-900 leading-tight">Duval Pérez</div>
+                                                <div class="text-[9px] text-gray-400">Refuerzo Escolar • Hoy</div>
+                                            </div>
+                                        </div>
+                                        <p class="text-[10px] text-gray-700 leading-snug">
+                                            ¡Jornada completada con éxito en Flora Tristán! 🇵🇪✨
+                                        </p>
+                                        <div class="rounded-lg overflow-hidden h-28 bg-gray-200">
+                                            <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover">
+                                        </div>
+                                        <div class="flex items-center justify-between text-[10px] pt-1 border-t border-gray-100">
+                                            <div class="flex items-center space-x-1 text-red-500 font-bold">
+                                                <i class="ph-fill ph-heart"></i>
+                                                <span>43</span>
+                                            </div>
+                                            <span class="text-gray-400">14 comentarios</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <!-- ========================================================================= -->
+                <!-- PANTALLA 3: GRAN FINAL & CIERRE "CRECEMOS JUNTOS" (23s - 28s) -->
+                <!-- ========================================================================= -->
+                <div id="screen-finale" class="absolute inset-0 bg-[#060c14] flex flex-col items-center justify-center p-8 text-center opacity-0 pointer-events-none transition-opacity duration-500 z-30">
+                    <div class="w-20 h-20 rounded-3xl bg-white p-3 shadow-2xl flex items-center justify-center mx-auto mb-4 transform hover:rotate-6 transition-all border border-white/30">
                         <img src="./resources/navbar-logo.webp" alt="Hoop Perú" class="max-w-full max-h-full object-contain">
                     </div>
 
-                    <h2 class="text-4xl md:text-7xl font-black text-white mb-4 leading-none tracking-tight">
+                    <h2 class="text-3xl md:text-6xl font-black text-white mb-3 leading-none tracking-tight">
                         Porque crecemos juntos.<br>
                         <span class="bg-gradient-to-r from-[#57ddcd] via-[#80c8e4] to-[#d392c6] bg-clip-text text-transparent">
                             Por ellos. Por el Perú.
                         </span>
                     </h2>
 
-                    <p class="text-base md:text-xl text-slate-300 max-w-2xl mx-auto mb-8 font-light">
+                    <p class="text-xs md:text-base text-slate-300 max-w-xl mx-auto mb-6 font-light">
                         Una plataforma que une tecnología, educación comunitaria y el corazón de cada voluntario.
                     </p>
 
-                    <div class="mb-8">
-                        <a href="https://hoop-peru-web-rho.vercel.app" target="_blank" class="inline-flex items-center space-x-3 px-8 py-4 rounded-2xl bg-gradient-to-r from-[#006eae] to-[#00aea5] hover:from-[#005a8e] hover:to-[#00968f] text-white font-bold text-lg shadow-2xl shadow-cyan-500/30 transition-all transform hover:scale-105">
-                            <i class="ph-bold ph-globe text-xl"></i>
+                    <div class="mb-6">
+                        <a href="https://hoop-peru-web-rho.vercel.app" target="_blank" class="inline-flex items-center space-x-2.5 px-7 py-3 rounded-2xl bg-gradient-to-r from-[#006eae] to-[#00aea5] hover:from-[#005a8e] hover:to-[#00968f] text-white font-bold text-base shadow-2xl shadow-cyan-500/30 transition-all transform hover:scale-105">
+                            <i class="ph-bold ph-globe text-lg"></i>
                             <span>hoop-peru-web-rho.vercel.app</span>
                         </a>
                     </div>
 
-                    <div class="text-xs md:text-sm text-slate-400 font-medium">
+                    <div class="text-xs text-slate-400 font-medium">
                         Desarrollado con dedicación por <strong class="text-white">Duval Pérez</strong> • Hoop Perú © 2026
                     </div>
                 </div>
@@ -634,32 +743,33 @@
 
     <!-- SELECTOR DE ESCENAS RÁPIDO -->
     <nav class="h-10 w-full flex items-center justify-center space-x-2 bg-slate-950 border-t border-slate-900 z-50 text-xs">
-        <span class="text-slate-500 font-medium mr-2">Secuencia:</span>
+        <span class="text-slate-500 font-medium mr-2">Secuencia rápida:</span>
         <button onclick="seekTo(0)" class="px-2.5 py-1 rounded bg-slate-900 hover:bg-slate-800 text-slate-300">1. Login</button>
-        <button onclick="seekTo(7)" class="px-2.5 py-1 rounded bg-slate-900 hover:bg-slate-800 text-slate-300">2. Feed & Like Real</button>
-        <button onclick="seekTo(17)" class="px-2.5 py-1 rounded bg-slate-900 hover:bg-slate-800 text-slate-300">3. Horarios</button>
-        <button onclick="seekTo(26)" class="px-2.5 py-1 rounded bg-slate-900 hover:bg-slate-800 text-slate-300">4. Recursos</button>
-        <button onclick="seekTo(35)" class="px-2.5 py-1 rounded bg-slate-900 hover:bg-slate-800 text-slate-300">5. Encuestas</button>
-        <button onclick="seekTo(43)" class="px-2.5 py-1 rounded bg-slate-900 hover:bg-slate-800 text-slate-300">6. Cierre</button>
+        <button onclick="seekTo(3.5)" class="px-2.5 py-1 rounded bg-slate-900 hover:bg-slate-800 text-slate-300">2. Feed</button>
+        <button onclick="seekTo(8)" class="px-2.5 py-1 rounded bg-slate-900 hover:bg-slate-800 text-slate-300">3. Horarios</button>
+        <button onclick="seekTo(12.5)" class="px-2.5 py-1 rounded bg-slate-900 hover:bg-slate-800 text-slate-300">4. Recursos</button>
+        <button onclick="seekTo(17.5)" class="px-2.5 py-1 rounded bg-[#00aea5]/30 text-[#57ddcd] font-bold border border-[#00aea5]/50">5. Móvil Responsive</button>
+        <button onclick="seekTo(23)" class="px-2.5 py-1 rounded bg-slate-900 hover:bg-slate-800 text-slate-300">6. Cierre</button>
     </nav>
 
 
     <!-- SCRIPT DE COREOGRAFÍA ACTIVA, AUDIO SINTÉTICO Y GRABADOR -->
     <script>
-        const TOTAL_DURATION = 50; // 50 segundos de video fluido
+        const TOTAL_DURATION = 28; // 28 segundos de alta velocidad, dinamismo y responsive
         let isRunning = true;
         let currentTime = 0;
         let lastTimestamp = null;
         let soundEnabled = true;
+        let speedMultiplier = 1.0;
 
         // Frases inspiradoras sincronizadas con cada acto
         const QUOTES = [
             { t: 0, text: "Porque cuando nos unimos por un propósito común..." },
-            { t: 7, text: "Porque cada historia que compartimos inspira a seguir." },
-            { t: 17, text: "Porque tu tiempo es el mayor regalo para quien más lo necesita." },
-            { t: 26, text: "Porque el conocimiento compartido multiplica el impacto social." },
-            { t: 35, text: "Porque cada voz construye el camino del cambio." },
-            { t: 43, text: "Porque crecemos juntos. Por ellos. Por el Perú." }
+            { t: 3.5, text: "Porque cada historia que compartimos inspira a seguir." },
+            { t: 8, text: "Porque tu tiempo es el mayor regalo para quien más lo necesita." },
+            { t: 12.5, text: "Porque el conocimiento compartido multiplica el impacto social." },
+            { t: 17.5, text: "Disponible donde estés: en tu celular, tablet o laptop." },
+            { t: 23, text: "Porque crecemos juntos. Por ellos. Por el Perú." }
         ];
 
         // Web Audio API para efectos de sonido sintéticos
@@ -677,37 +787,37 @@
                 const osc = audioCtx.createOscillator();
                 const gain = audioCtx.createGain();
                 osc.type = 'triangle';
-                osc.frequency.setValueAtTime(800 + Math.random() * 200, audioCtx.currentTime);
+                osc.frequency.setValueAtTime(850 + Math.random() * 250, audioCtx.currentTime);
                 gain.gain.setValueAtTime(0.04, audioCtx.currentTime);
-                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.05);
+                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.04);
                 osc.connect(gain);
                 gain.connect(audioCtx.destination);
                 osc.start();
-                osc.stop(audioCtx.currentTime + 0.06);
+                osc.stop(audioCtx.currentTime + 0.045);
             } else if (type === 'pop') {
                 const osc = audioCtx.createOscillator();
                 const gain = audioCtx.createGain();
                 osc.type = 'sine';
-                osc.frequency.setValueAtTime(400, audioCtx.currentTime);
-                osc.frequency.exponentialRampToValueAtTime(850, audioCtx.currentTime + 0.14);
+                osc.frequency.setValueAtTime(450, audioCtx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(950, audioCtx.currentTime + 0.12);
                 gain.gain.setValueAtTime(0.25, audioCtx.currentTime);
-                gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.14);
+                gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.12);
                 osc.connect(gain);
                 gain.connect(audioCtx.destination);
                 osc.start();
-                osc.stop(audioCtx.currentTime + 0.15);
+                osc.stop(audioCtx.currentTime + 0.13);
             } else if (type === 'chime') {
-                [523, 659, 784, 1046].forEach((f, i) => {
+                [587, 740, 880, 1174].forEach((f, i) => {
                     const osc = audioCtx.createOscillator();
                     const gain = audioCtx.createGain();
                     osc.type = 'sine';
-                    osc.frequency.setValueAtTime(f, audioCtx.currentTime + i * 0.07);
-                    gain.gain.setValueAtTime(0.18, audioCtx.currentTime + i * 0.07);
-                    gain.gain.exponentialRampToValueAtTime(0.005, audioCtx.currentTime + i * 0.07 + 0.3);
+                    osc.frequency.setValueAtTime(f, audioCtx.currentTime + i * 0.05);
+                    gain.gain.setValueAtTime(0.18, audioCtx.currentTime + i * 0.05);
+                    gain.gain.exponentialRampToValueAtTime(0.005, audioCtx.currentTime + i * 0.05 + 0.22);
                     osc.connect(gain);
                     gain.connect(audioCtx.destination);
-                    osc.start(audioCtx.currentTime + i * 0.07);
-                    osc.stop(audioCtx.currentTime + i * 0.07 + 0.31);
+                    osc.start(audioCtx.currentTime + i * 0.05);
+                    osc.stop(audioCtx.currentTime + i * 0.05 + 0.23);
                 });
             }
         }
@@ -720,28 +830,27 @@
 
         const screenLogin = document.getElementById('screen-login');
         const screenDashboard = document.getElementById('screen-dashboard');
+        const screenResponsive = document.getElementById('screen-responsive');
         const screenFinale = document.getElementById('screen-finale');
 
         const viewInicio = document.getElementById('view-inicio');
         const viewHorarios = document.getElementById('view-horarios');
         const viewRecursos = document.getElementById('view-recursos');
-        const viewEncuestas = document.getElementById('view-encuestas');
 
         const navInicio = document.getElementById('nav-item-inicio');
         const navHorarios = document.getElementById('nav-item-horarios');
         const navRecursos = document.getElementById('nav-item-recursos');
-        const navEncuestas = document.getElementById('nav-item-encuestas');
 
         // Banderas de activación única por acto
         let actLoginDone = false;
         let actLikeDone = false;
         let actHorariosDone = false;
         let actRecursosDone = false;
-        let actEncuestasDone = false;
+        let actResponsiveDone = false;
         let actFinaleDone = false;
 
         function setNavActive(activeItem) {
-            [navInicio, navHorarios, navRecursos, navEncuestas].forEach(item => {
+            [navInicio, navHorarios, navRecursos].forEach(item => {
                 if (item === activeItem) {
                     item.className = 'flex items-center space-x-3 px-3 py-2 rounded-xl text-xs font-bold bg-[#006eae] text-white shadow-sm transition-all';
                 } else {
@@ -751,7 +860,7 @@
         }
 
         function setViewActive(activeView) {
-            [viewInicio, viewHorarios, viewRecursos, viewEncuestas].forEach(v => {
+            [viewInicio, viewHorarios, viewRecursos].forEach(v => {
                 if (v === activeView) {
                     v.classList.add('active-view');
                 } else {
@@ -760,7 +869,7 @@
             });
         }
 
-        // MOVIMIENTO DEL CURSOR SIMULADO
+        // MOVIMIENTO DEL CURSOR SIMULADO DE ALTA VELOCIDAD
         function moveMouseTo(targetEl, callback, click = true) {
             if (!targetEl) return;
             const r = targetEl.getBoundingClientRect();
@@ -776,17 +885,17 @@
                     setTimeout(() => {
                         mouse.classList.remove('click-down');
                         if (callback) callback();
-                    }, 180);
+                    }, 120);
                 } else {
                     if (callback) callback();
                 }
-            }, 600);
+            }, 350 / speedMultiplier);
         }
 
-        // Bucle Principal
+        // Bucle Principal de Alta Velocidad
         function animateFrame(timestamp) {
             if (!lastTimestamp) lastTimestamp = timestamp;
-            const dt = (timestamp - lastTimestamp) / 1000;
+            const dt = ((timestamp - lastTimestamp) / 1000) * speedMultiplier;
             lastTimestamp = timestamp;
 
             if (isRunning) {
@@ -803,14 +912,15 @@
                 }
 
                 // ==============================================================
-                // ACTO 1: LOGIN SIMULADO (0s - 7s)
+                // ACTO 1: LOGIN ULTRA RÁPIDO (0s - 3.5s)
                 // ==============================================================
-                if (currentTime < 7) {
+                if (currentTime < 3.5) {
                     if (!actLoginDone) {
                         actLoginDone = true;
                         screenLogin.style.opacity = '1';
                         screenDashboard.style.opacity = '0';
                         screenDashboard.style.pointerEvents = 'none';
+                        screenResponsive.style.opacity = '0';
                         screenFinale.style.opacity = '0';
                         camera.style.transform = 'scale(1) translate3d(0, 0, 0)';
 
@@ -818,7 +928,6 @@
                         const passInput = document.getElementById('demo-login-pass');
                         const btn = document.getElementById('demo-login-btn');
 
-                        // Simular escritura de credenciales
                         setTimeout(() => {
                             let str = "voluntario@hoop.org";
                             let idx = 0;
@@ -826,34 +935,34 @@
                                 if (idx < str.length) {
                                     emailInput.value += str[idx];
                                     playSound('type');
-                                    idx++;
+                                    idx += 2;
                                 } else {
+                                    emailInput.value = "voluntario@hoop.org";
                                     clearInterval(tInt);
                                     passInput.value = "••••••••";
-                                    // Mover cursor al botón y hacer clic
                                     moveMouseTo(btn, () => {
                                         playSound('chime');
                                     });
                                 }
-                            }, 80);
-                        }, 800);
+                            }, 35 / speedMultiplier);
+                        }, 250 / speedMultiplier);
                     }
                 }
 
                 // ==============================================================
-                // ACTO 2: FEED & LIKE REAL EN VIVO (7s - 17s)
+                // ACTO 2: FEED & LIKE REAL EN VIVO (3.5s - 8s)
                 // ==============================================================
-                else if (currentTime >= 7 && currentTime < 17) {
+                else if (currentTime >= 3.5 && currentTime < 8) {
                     if (!actLikeDone) {
                         actLikeDone = true;
                         screenLogin.style.opacity = '0';
                         screenDashboard.style.opacity = '1';
                         screenDashboard.style.pointerEvents = 'auto';
+                        screenResponsive.style.opacity = '0';
                         setNavActive(navInicio);
                         setViewActive(viewInicio);
 
-                        // Zoom suave sobre el post
-                        camera.style.transform = 'scale(1.05) translate3d(-10px, -20px, 0)';
+                        camera.style.transform = 'scale(1.05) translate3d(-10px, -15px, 0)';
 
                         const likeBtn = document.getElementById('feed-like-action');
                         const heartIco = document.getElementById('feed-heart-ico');
@@ -873,7 +982,6 @@
                                 badge.style.opacity = '1';
                                 badge.style.transform = 'translateY(0)';
 
-                                // Ráfaga de corazones
                                 const r = likeBtn.getBoundingClientRect();
                                 const canvasR = document.getElementById('video-canvas').getBoundingClientRect();
                                 for (let k = 0; k < 6; k++) {
@@ -883,22 +991,21 @@
                                     h.style.top = `${r.top - canvasR.top}px`;
                                     h.style.setProperty('--tx', `${(Math.random() * 60 - 30)}px`);
                                     burst.appendChild(h);
-                                    setTimeout(() => h.remove(), 1300);
+                                    setTimeout(() => h.remove(), 900);
                                 }
                             });
-                        }, 1200);
+                        }, 450 / speedMultiplier);
                     }
                 }
 
                 // ==============================================================
-                // ACTO 3: NAVEGAR A HORARIOS & ALERTA REUNIÓN (17s - 26s)
+                // ACTO 3: NAVEGAR A HORARIOS & ALERTA REUNIÓN (8s - 12.5s)
                 // ==============================================================
-                else if (currentTime >= 17 && currentTime < 26) {
+                else if (currentTime >= 8 && currentTime < 12.5) {
                     if (!actHorariosDone) {
                         actHorariosDone = true;
                         camera.style.transform = 'scale(1) translate3d(0, 0, 0)';
 
-                        // Cursor se desplaza al menú de Horarios
                         moveMouseTo(navHorarios, () => {
                             playSound('chime');
                             setNavActive(navHorarios);
@@ -908,65 +1015,56 @@
                 }
 
                 // ==============================================================
-                // ACTO 4: RECURSOS Y DESCARGA DE GUÍAS (26s - 35s)
+                // ACTO 4: RECURSOS Y DESCARGA DE GUÍAS (12.5s - 17.5s)
                 // ==============================================================
-                else if (currentTime >= 26 && currentTime < 35) {
+                else if (currentTime >= 12.5 && currentTime < 17.5) {
                     if (!actRecursosDone) {
                         actRecursosDone = true;
-                        camera.style.transform = 'scale(1.03) translate3d(-15px, -10px, 0)';
+                        camera.style.transform = 'scale(1.04) translate3d(-15px, -10px, 0)';
 
                         moveMouseTo(navRecursos, () => {
                             playSound('chime');
                             setNavActive(navRecursos);
                             setViewActive(viewRecursos);
 
-                            // Simular descarga del primer documento
                             const dlBtn = document.getElementById('btn-demo-download-1');
                             setTimeout(() => {
                                 moveMouseTo(dlBtn, () => {
                                     playSound('pop');
                                     dlBtn.innerHTML = '<i class="ph-bold ph-check text-emerald-600"></i><span class="text-emerald-700">¡Descargado!</span>';
                                 });
-                            }, 1000);
+                            }, 450 / speedMultiplier);
                         });
                     }
                 }
 
                 // ==============================================================
-                // ACTO 5: ENCUESTAS Y PARTICIPACIÓN COMUNITARIA (35s - 43s)
+                // ACTO 5: SHOWCASE RESPONSIVE MÓVIL EN VIVO (17.5s - 23s)
                 // ==============================================================
-                else if (currentTime >= 35 && currentTime < 43) {
-                    if (!actEncuestasDone) {
-                        actEncuestasDone = true;
+                else if (currentTime >= 17.5 && currentTime < 23) {
+                    if (!actResponsiveDone) {
+                        actResponsiveDone = true;
+                        mouse.style.opacity = '0';
                         camera.style.transform = 'scale(1) translate3d(0, 0, 0)';
+                        
+                        screenDashboard.style.opacity = '0';
+                        screenDashboard.style.pointerEvents = 'none';
+                        screenResponsive.style.opacity = '1';
+                        screenResponsive.style.pointerEvents = 'auto';
 
-                        moveMouseTo(navEncuestas, () => {
-                            playSound('chime');
-                            setNavActive(navEncuestas);
-                            setViewActive(viewEncuestas);
-
-                            // Votar en la encuesta
-                            const opt1 = document.getElementById('poll-opt-1');
-                            const bar1 = document.getElementById('poll-bar-1');
-                            setTimeout(() => {
-                                moveMouseTo(opt1, () => {
-                                    playSound('pop');
-                                    opt1.className = 'p-3 rounded-xl border border-emerald-400 bg-emerald-50/70 flex items-center justify-between text-xs font-bold text-emerald-900 shadow-sm';
-                                    bar1.classList.remove('hidden');
-                                });
-                            }, 1000);
-                        });
+                        playSound('chime');
                     }
                 }
 
                 // ==============================================================
-                // ACTO 6: CIERRE CRECEMOS JUNTOS & CONFETI (43s - 50s)
+                // ACTO 6: CIERRE CRECEMOS JUNTOS & CONFETI (23s - 28s)
                 // ==============================================================
-                else if (currentTime >= 43) {
+                else if (currentTime >= 23) {
                     if (!actFinaleDone) {
                         actFinaleDone = true;
                         mouse.style.opacity = '0';
                         camera.style.transform = 'scale(1) translate3d(0, 0, 0)';
+                        screenResponsive.style.opacity = '0';
                         screenFinale.style.opacity = '1';
                         screenFinale.style.pointerEvents = 'auto';
 
@@ -982,7 +1080,6 @@
                     }
 
                     if (currentTime >= TOTAL_DURATION) {
-                        // Loop reiniciar
                         seekTo(0);
                     }
                 }
@@ -1002,7 +1099,7 @@
             actLikeDone = false;
             actHorariosDone = false;
             actRecursosDone = false;
-            actEncuestasDone = false;
+            actResponsiveDone = false;
             actFinaleDone = false;
 
             const emailInput = document.getElementById('demo-login-email');
@@ -1015,6 +1112,20 @@
                 passInput.value = "";
             }
         }
+
+        // Selector de Velocidad (1.0x -> 1.25x -> 1.5x)
+        const btnSpeed = document.getElementById('btnSpeed');
+        const speedText = document.getElementById('speedText');
+        btnSpeed.addEventListener('click', () => {
+            if (speedMultiplier === 1.0) {
+                speedMultiplier = 1.25;
+            } else if (speedMultiplier === 1.25) {
+                speedMultiplier = 1.5;
+            } else {
+                speedMultiplier = 1.0;
+            }
+            speedText.textContent = `${speedMultiplier.toFixed(2).replace(/\.00$/, '.0')}x`;
+        });
 
         // Botones de Play / Pause / Restart
         const btnPlayPause = document.getElementById('btnPlayPause');
@@ -1042,7 +1153,7 @@
         btnToggleAudio.addEventListener('click', () => {
             soundEnabled = !soundEnabled;
             audioIcon.className = soundEnabled ? 'ph-bold ph-speaker-high' : 'ph-bold ph-speaker-slash';
-            audioText.textContent = soundEnabled ? 'Efectos ON' : 'Efectos OFF';
+            audioText.textContent = soundEnabled ? 'Audio ON' : 'Audio OFF';
         });
 
         // =========================================================================
@@ -1095,7 +1206,7 @@
                         setTimeout(() => URL.revokeObjectURL(link), 200);
 
                         stream.getTracks().forEach(t => t.stop());
-                        recordText.textContent = 'Grabar en Video (MP4)';
+                        recordText.textContent = 'Grabar en MP4';
                         btnRecord.classList.remove('bg-emerald-600');
                         isRecording = false;
                     };
@@ -1112,7 +1223,7 @@
                     };
 
                 } catch (e) {
-                    console.error("Error al iniciar grabación:", e);
+                    console.error("Error al grabar:", e);
                     alert("Selecciona la pestaña del navegador para capturar el video en alta resolución.");
                 }
             }
