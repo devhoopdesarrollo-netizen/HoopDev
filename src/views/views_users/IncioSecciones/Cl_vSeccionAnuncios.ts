@@ -19,6 +19,13 @@ export default class Cl_vSeccionAnuncios {
         }
 
         if (this.formAnuncio) {
+            const inputFecha = this.formAnuncio.querySelector('#fechaEvent') as HTMLInputElement | null;
+            if (inputFecha) {
+                const hoy = new Date().toISOString().split("T")[0];
+                inputFecha.value = hoy;
+                inputFecha.min = hoy;
+            }
+
             this.formAnuncio.addEventListener("submit", async e => {
                 e.preventDefault();
                 await this.obtenerInformacionAnucion();
@@ -33,7 +40,12 @@ export default class Cl_vSeccionAnuncios {
     async cargarInformacionUser(){
         this.contAnuncios.innerHTML = ""
 
-        const dat = await this.controlador.loadAnuncio()
+        const dat = await this.controlador.loadAnuncio();
+        if (!dat || dat.length === 0) {
+            this.contAnuncios.innerHTML = `<tr><td colspan="4" class="py-4 text-center text-xs text-gray-400">No hay anuncios registrados actualmente.</td></tr>`;
+            return;
+        }
+
         dat.forEach((elemento:iAnuncios,index:number) => {
             this.contAnuncios.innerHTML += ` <tr class="hover:bg-gray-50/80 transition-colors">
                                             <td class="py-2.5 px-3 font-medium text-gray-800">${elemento.fecha}</td>
@@ -45,9 +57,6 @@ export default class Cl_vSeccionAnuncios {
                                                     class="text-red-600 hover:text-red-700 font-medium bg-red-50 hover:bg-red-100 px-2.5 py-1 rounded-lg transition-colors">Borrar</button>
                                             </td>
                                         </tr>`
-                                        
-
-            
         });
 
         dat.forEach((element: iAnuncios, index: number) => {

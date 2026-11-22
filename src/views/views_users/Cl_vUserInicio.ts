@@ -167,42 +167,94 @@ export default class Cl_vUserInicio {
      */
     private async cargarHorariosUsuario(): Promise<void> {
         const tablaHorarios = document.getElementById("seccionHoariosActivo") as HTMLElement | null;
-        if (!tablaHorarios || !this.userSeccion?.id_user) return;
+        const contenedorMovil = document.getElementById("seccionHorariosMovil") as HTMLElement | null;
+        if (!tablaHorarios && !contenedorMovil) return;
+        if (!this.userSeccion?.id_user) return;
 
         try {
             const data = await this.controlador.informacionHorarios(this.userSeccion.id_user);
-            tablaHorarios.innerHTML = "";
+            if (tablaHorarios) tablaHorarios.innerHTML = "";
+            if (contenedorMovil) contenedorMovil.innerHTML = "";
 
             if (!data || data.length === 0) {
-                tablaHorarios.innerHTML = `
-                    <tr>
-                        <td colspan="4" class="py-6 px-4 text-center text-sm text-gray-400">
-                            <i class="ph ph-calendar-x text-2xl block mb-1"></i>
+                if (tablaHorarios) {
+                    tablaHorarios.innerHTML = `
+                        <tr>
+                            <td colspan="4" class="py-6 px-4 text-center text-sm text-gray-400">
+                                <i class="ph ph-calendar-x text-2xl block mb-1"></i>
+                                No tienes horarios asignados por el momento.
+                            </td>
+                        </tr>`;
+                }
+                if (contenedorMovil) {
+                    contenedorMovil.innerHTML = `
+                        <div class="p-5 text-center text-xs text-gray-400 bg-white rounded-2xl border border-gray-100 shadow-xs">
+                            <i class="ph ph-calendar-x text-2xl text-gray-300 block mb-1"></i>
                             No tienes horarios asignados por el momento.
-                        </td>
-                    </tr>`;
+                        </div>`;
+                }
                 return;
             }
 
             data.forEach((element: iHorario) => {
-                tablaHorarios.innerHTML += `
-                    <tr class="hover:bg-gray-50/80 transition-colors">
-                        <td class="py-3 px-4 font-medium text-gray-900">${element.dia}</td>
-                        <td class="py-3 px-4 font-mono text-gray-600">${element.horainicio} - ${element.horafinal}</td>
-                        <td class="py-3 px-4 text-gray-500">—</td>
-                        <td class="py-3 px-4 text-right">
-                            <span class="px-2 py-0.5 text-[11px] font-semibold bg-green-50 text-green-700 rounded-full">Confirmado</span>
-                        </td>
-                    </tr>`;
+                // Vista desktop (Tabla)
+                if (tablaHorarios) {
+                    tablaHorarios.innerHTML += `
+                        <tr class="hover:bg-gray-50/80 transition-colors">
+                            <td class="py-3 px-4 font-medium text-gray-900 flex items-center gap-2">
+                                <span class="w-2 h-2 rounded-full bg-[#006eae]"></span>
+                                <span>${element.dia}</span>
+                            </td>
+                            <td class="py-3 px-4 font-mono text-gray-700">
+                                <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-gray-100 font-medium text-xs">
+                                    <i class="ph ph-clock text-xs text-gray-400"></i>
+                                    ${element.horainicio} - ${element.horafinal}
+                                </span>
+                            </td>
+                            <td class="py-3 px-4 text-gray-500 text-xs">Sede Oficial</td>
+                            <td class="py-3 px-4 text-right">
+                                <span class="px-2.5 py-1 text-[11px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200 rounded-full">Asignado</span>
+                            </td>
+                        </tr>`;
+                }
+
+                // Vista móvil (Tarjetas táctiles)
+                if (contenedorMovil) {
+                    const diaCorto = (element.dia || "").substring(0, 3).toUpperCase();
+                    contenedorMovil.innerHTML += `
+                        <div class="bg-white p-3.5 rounded-2xl border border-gray-200 shadow-xs flex items-center justify-between">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-10 h-10 rounded-xl bg-blue-50 border border-blue-100 text-[#006eae] font-bold text-xs flex flex-col items-center justify-center shrink-0">
+                                    <span class="text-[10px] font-extrabold">${diaCorto}</span>
+                                </div>
+                                <div>
+                                    <h4 class="text-xs font-bold text-gray-900">${element.dia}</h4>
+                                    <div class="text-[11px] font-mono text-gray-500 flex items-center space-x-1 mt-0.5">
+                                        <i class="ph ph-clock text-xs text-[#00aea5]"></i>
+                                        <span>${element.horainicio} - ${element.horafinal}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <span class="inline-flex items-center gap-1 px-2.5 py-1 text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200 rounded-full">
+                                <i class="ph-bold ph-check text-[10px]"></i>
+                                <span>Asignado</span>
+                            </span>
+                        </div>`;
+                }
             });
         } catch (err) {
             console.error("Error cargando horarios del usuario:", err);
-            tablaHorarios.innerHTML = `
-                <tr>
-                    <td colspan="4" class="py-4 px-4 text-center text-xs text-red-400">
-                        Error al cargar horarios.
-                    </td>
-                </tr>`;
+            if (tablaHorarios) {
+                tablaHorarios.innerHTML = `
+                    <tr>
+                        <td colspan="4" class="py-4 px-4 text-center text-xs text-red-400">
+                            Error al cargar horarios.
+                        </td>
+                    </tr>`;
+            }
+            if (contenedorMovil) {
+                contenedorMovil.innerHTML = `<div class="p-3 text-center text-xs text-red-400">Error al cargar horarios.</div>`;
+            }
         }
     }
 

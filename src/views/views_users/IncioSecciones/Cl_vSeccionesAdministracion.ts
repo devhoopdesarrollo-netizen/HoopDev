@@ -402,6 +402,10 @@ export default class Cl_vSeccionesAdministracion {
                     this.inputPasswordUsuario.value = "";
                 }
                 await this.cargarUsuarios();
+                // Sincronizar inmediatamente la lista de usuarios en la sección de Horarios
+                if ((this.controlador as any)?.UserInicio?.vHorarios?.cargarlistUser) {
+                    await (this.controlador as any).UserInicio.vHorarios.cargarlistUser();
+                }
                 if (this.selectUsuarioAdmin) {
                     this.selectUsuarioAdmin.value = userId;
                 }

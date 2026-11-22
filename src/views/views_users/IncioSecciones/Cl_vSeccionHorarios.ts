@@ -1,4 +1,5 @@
 
+import supabaseService from "../../../config/supabase.js";
 import Controller from "../../../controllers/Controller.js";
 import { iHorario, iUserList } from "../../../types/types.js";
 import modal_confirmacion from "../../views_resours/modal_confirmacion.js";
@@ -60,12 +61,15 @@ export default class Cl_vSeccionHorarios {
         }
     }
 
-    async cargarlistUser() {
-        this.userList.innerHTML = ` <option value="" disabled>-- Seleccione un usuario --</option>`
-        const datUser = await this.controller.listUser()
+    async cargarlistUser(idSeleccionado?: string) {
+        const valorPrevio = idSeleccionado || this.userList.value;
+        this.userList.innerHTML = ` <option value="" disabled selected>-- Seleccione un usuario --</option>`;
+        const datUser = await this.controller.listUser();
 
         datUser.forEach((element: iUserList) => {
-            this.userList.innerHTML += ` <option value="${element.id_user}_${element.fk_programas}" >${element.nombre}</option>`
+            const val = `${element.id_user}_${element.fk_programas || ''}`;
+            const isSelected = valorPrevio && valorPrevio.startsWith(element.id_user);
+            this.userList.innerHTML += ` <option value="${val}" ${isSelected ? 'selected' : ''}>${element.nombre}</option>`;
         });
     }
     async buscarInformacionUser(id: string) {
@@ -142,11 +146,31 @@ export default class Cl_vSeccionHorarios {
             alert("Por favor, selecciona un usuario primero.");
             return;
         }
-        const [idUser, fkPrograma] = valorCompleto.split("_");
+        let [idUser, fkPrograma] = valorCompleto.split("_");
+
+        // Si el select contenía datos previos o faltaba el programa, verificar en vivo en la base de datos
+        if (!fkPrograma || fkPrograma === "undefined" || fkPrograma === "null" || fkPrograma.length < 10) {
+            try {
+                const { data: usuarioDb, error: errUser } = await supabaseService.client
+                    .from("User")
+                    .select("fk_programas")
+                    .eq("id_user", idUser)
+                    .maybeSingle();
+
+                if (!errUser && usuarioDb && usuarioDb.fk_programas) {
+                    fkPrograma = usuarioDb.fk_programas;
+                    // Sincronizar el select para que quede actualizado
+                    const opt = this.userList.options[this.userList.selectedIndex];
+                    if (opt) opt.value = `${idUser}_${fkPrograma}`;
+                }
+            } catch (errCheck) {
+                console.warn("No se pudo verificar programa en vivo:", errCheck);
+            }
+        }
 
         // Validar que el usuario tenga un programa asignado (UUID válido)
         if (!fkPrograma || fkPrograma === "undefined" || fkPrograma === "null" || fkPrograma.length < 10) {
-            alert("Este usuario no tiene un programa asignado. Asígnale un programa desde la sección de Perfiles antes de crear un horario.");
+            alert("Este usuario aún no tiene un programa asignado. Asígnale un programa desde la sección de Perfiles antes de crear un horario.");
             return;
         }
 
