@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hoop Perú Web - Video Promocional Oficial</title>
+    <title>Hoop Perú Web - Crecemos Juntos (Video Promocional)</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Phosphor Icons v2 -->
@@ -22,7 +22,7 @@
 
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #060b11;
+            background-color: #070e17;
             color: #ffffff;
             margin: 0;
             padding: 0;
@@ -34,17 +34,17 @@
             font-family: 'Outfit', sans-serif;
         }
 
-        /* Lienzo 16:9 de Producción (Escenario Cinematográfico) */
-        #stage-container {
+        /* Lienzo 16:9 Cinematográfico de Alta Definición */
+        #stage-wrap {
             width: 100vw;
             height: calc(100vh - 64px);
             display: flex;
             align-items: center;
             justify-content: center;
-            position: relative;
-            background: radial-gradient(circle at 50% 20%, #152638 0%, #080f18 60%, #03060a 100%);
-            perspective: 1600px;
+            background: radial-gradient(circle at 50% 15%, #182e46 0%, #0c1824 60%, #050b11 100%);
+            perspective: 1800px;
             overflow: hidden;
+            position: relative;
         }
 
         #video-canvas {
@@ -53,141 +53,133 @@
             height: min(56.25vw, 100vh - 64px);
             position: relative;
             overflow: hidden;
-            box-shadow: 0 35px 80px -20px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(255, 255, 255, 0.1);
-            background: #09131d;
+            box-shadow: 0 40px 100px -25px rgba(0, 0, 0, 0.95), 0 0 0 1px rgba(255, 255, 255, 0.12);
+            background: #f1f5f9;
             border-radius: 20px;
         }
 
-        /* Malla luminosa animada de fondo */
+        /* Cámara Virtual Cinematográfica */
+        #camera-viewport {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transform-origin: center center;
+            transition: transform 1.1s cubic-bezier(0.2, 0.8, 0.25, 1);
+        }
+
+        /* Malla luminosa sutil en colores Hoop */
         .ambient-mesh {
             position: absolute;
-            inset: -40%;
+            inset: -30%;
             background: 
-                radial-gradient(circle at 25% 25%, rgba(0, 110, 174, 0.45) 0%, transparent 45%),
-                radial-gradient(circle at 75% 75%, rgba(159, 16, 116, 0.35) 0%, transparent 45%),
-                radial-gradient(circle at 70% 20%, rgba(0, 174, 165, 0.3) 0%, transparent 40%),
-                radial-gradient(circle at 30% 80%, rgba(41, 154, 211, 0.25) 0%, transparent 40%);
-            filter: blur(80px);
-            animation: meshFloat 18s ease-in-out infinite alternate;
+                radial-gradient(circle at 20% 20%, rgba(0, 110, 174, 0.35) 0%, transparent 40%),
+                radial-gradient(circle at 80% 80%, rgba(159, 16, 116, 0.25) 0%, transparent 40%),
+                radial-gradient(circle at 75% 20%, rgba(0, 174, 165, 0.25) 0%, transparent 35%);
+            filter: blur(70px);
             pointer-events: none;
             z-index: 1;
         }
 
-        @keyframes meshFloat {
-            0% { transform: scale(1) rotate(0deg); }
-            50% { transform: scale(1.15) rotate(4deg); }
-            100% { transform: scale(0.95) rotate(-3deg); }
-        }
-
-        /* Escenas y Transiciones 3D */
-        .promo-scene {
+        /* Banner de Frases Emocionales de Impacto */
+        #quote-overlay {
             position: absolute;
-            inset: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
+            top: 24px;
+            left: 50%;
+            transform: translateX(-50%) translateY(0);
+            z-index: 100;
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
             pointer-events: none;
-            transform: scale(0.92) translateZ(-60px);
-            transition: all 0.9s cubic-bezier(0.16, 1, 0.3, 1);
-            z-index: 10;
         }
 
-        .promo-scene.active {
-            opacity: 1;
-            pointer-events: auto;
-            transform: scale(1) translateZ(0);
+        .quote-badge {
+            background: rgba(13, 27, 42, 0.88);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 25px rgba(0, 174, 165, 0.25);
+            padding: 10px 24px;
+            border-radius: 9999px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: #ffffff;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: -0.01em;
         }
 
-        .promo-scene.exit {
+        /* Cursor interactivo simulado */
+        #virtual-mouse {
+            position: absolute;
+            width: 26px;
+            height: 26px;
+            pointer-events: none;
+            z-index: 200;
+            transition: all 0.75s cubic-bezier(0.2, 0.9, 0.3, 1);
             opacity: 0;
-            transform: scale(1.08) translateZ(60px);
+            filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.45));
         }
 
-        /* Estilos de Vidrio Esmerilado Premium */
-        .glass-panel {
-            background: rgba(18, 32, 49, 0.75);
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        #virtual-mouse.click-down {
+            transform: scale(0.82);
         }
 
-        .app-window {
-            background: #ffffff;
-            border-radius: 18px;
-            box-shadow: 0 30px 80px -15px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.2);
-            color: #1e293b;
-            overflow: hidden;
-        }
-
-        /* Floating 3D Tilt Effect */
-        .tilt-card {
-            transform: rotateY(-6deg) rotateX(4deg);
-            transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
-        }
-
-        .tilt-card:hover {
-            transform: rotateY(0deg) rotateX(0deg);
-        }
-
-        /* Animación de Latido de Corazón */
-        @keyframes heartPop {
+        /* Animación de latido y ráfaga de corazones */
+        @keyframes heartPulse {
             0% { transform: scale(1); }
-            25% { transform: scale(1.5) rotate(-8deg); }
-            50% { transform: scale(1.2) rotate(4deg); }
-            75% { transform: scale(1.35) rotate(-2deg); }
-            100% { transform: scale(1) rotate(0deg); }
+            25% { transform: scale(1.5) rotate(-6deg); }
+            50% { transform: scale(1.15) rotate(3deg); }
+            75% { transform: scale(1.3) rotate(-2deg); }
+            100% { transform: scale(1); }
         }
 
         .pop-heart {
-            animation: heartPop 0.65s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            animation: heartPulse 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        /* Corazones flotantes que suben al dar like */
         .floating-heart {
             position: absolute;
             pointer-events: none;
             color: #ef4444;
-            animation: floatUpBurst 1.4s ease-out forwards;
-            font-size: 20px;
-            z-index: 50;
+            animation: floatUpBurst 1.3s ease-out forwards;
+            font-size: 18px;
+            z-index: 150;
         }
 
         @keyframes floatUpBurst {
-            0% { transform: translate(0, 0) scale(0.5); opacity: 1; }
+            0% { transform: translate(0, 0) scale(0.4); opacity: 1; }
             50% { opacity: 0.9; }
-            100% { transform: translate(var(--tx, 15px), -100px) scale(1.4); opacity: 0; }
-        }
-
-        /* Cursor interactivo simulado */
-        #virtual-pointer {
-            position: absolute;
-            width: 28px;
-            height: 28px;
-            pointer-events: none;
-            z-index: 100;
-            transition: all 0.7s cubic-bezier(0.25, 1, 0.5, 1);
-            opacity: 0;
-            filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.5));
-        }
-
-        #virtual-pointer.clicked {
-            transform: scale(0.85);
+            100% { transform: translate(var(--tx, 15px), -90px) scale(1.4); opacity: 0; }
         }
 
         /* Barra de progreso inferior */
-        .progress-indicator {
+        .progress-bar-fill {
             height: 4px;
             background: linear-gradient(90deg, #00aea5, #006eae, #9f1074, #57ddcd);
             width: 0%;
             transition: width 0.1s linear;
         }
+
+        /* Transiciones de secciones del dashboard */
+        .app-view {
+            display: none;
+            opacity: 0;
+            transform: translateY(12px);
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+
+        .app-view.active-view {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
     </style>
 </head>
 <body class="flex flex-col min-h-screen">
 
-    <!-- BARRA SUPERIOR DE CONTROL & EXPORTACIÓN -->
+    <!-- BARRA SUPERIOR DE HERRAMIENTAS Y CONTROL -->
     <header class="h-16 w-full flex items-center justify-between px-6 bg-slate-900/95 backdrop-blur-md border-b border-slate-800 z-50 text-xs sm:text-sm">
         <div class="flex items-center space-x-3">
             <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-[#006eae] to-[#00aea5] p-0.5 flex items-center justify-center shadow-lg shadow-cyan-500/20">
@@ -197,16 +189,16 @@
             </div>
             <div>
                 <h1 class="font-extrabold text-white text-sm sm:text-base tracking-tight flex items-center space-x-2">
-                    <span>Hoop Perú Web</span>
-                    <span class="px-2 py-0.5 rounded-full bg-[#006eae]/30 text-[#80c8e4] text-[10px] font-bold uppercase">Spot Promocional</span>
+                    <span>Hoop Perú</span>
+                    <span class="px-2 py-0.5 rounded-full bg-[#006eae]/20 text-[#80c8e4] text-[10px] font-bold uppercase">Spot "Crecemos Juntos"</span>
                 </h1>
-                <p class="text-xs text-slate-400">Desarrollado por <strong>Duval Pérez</strong> • Calidad 1080p 60fps</p>
+                <p class="text-xs text-slate-400">Demostración en vivo de la aplicación web oficial</p>
             </div>
         </div>
 
-        <!-- Controles de Audio, Reproducción y Grabación -->
+        <!-- Controles de Audio, Play/Pausa y Grabación -->
         <div class="flex items-center space-x-3">
-            <!-- Interruptor de Sonido -->
+            <!-- Audio ON/OFF -->
             <button id="btnToggleAudio" class="px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-medium flex items-center space-x-1.5 transition-all">
                 <i id="audioIcon" class="ph-bold ph-speaker-high"></i>
                 <span id="audioText" class="hidden md:inline">Efectos ON</span>
@@ -223,7 +215,7 @@
                 <i class="ph-bold ph-arrow-counter-clockwise"></i>
             </button>
 
-            <!-- BOTÓN MAESTRO DE GRABACIÓN A MP4/WEBM -->
+            <!-- BOTÓN DE GRABACIÓN DIRECTA A VIDEO (MP4/WEBM) -->
             <button id="btnRecord" class="px-5 py-2 rounded-xl bg-gradient-to-r from-red-600 via-rose-600 to-red-600 hover:from-red-500 hover:to-rose-500 text-white font-bold flex items-center space-x-2.5 shadow-xl shadow-red-600/30 transition-all active:scale-95">
                 <span class="w-3 h-3 rounded-full bg-white animate-pulse"></span>
                 <span id="recordText">Grabar en Video (MP4)</span>
@@ -232,648 +224,799 @@
     </header>
 
 
-    <!-- ESCENARIO PRINCIPAL -->
-    <main id="stage-container">
+    <!-- ESCENARIO PRINCIPAL 16:9 -->
+    <main id="stage-wrap">
         <div id="video-canvas" class="relative">
             <!-- Malla luminosa de fondo -->
             <div class="ambient-mesh"></div>
 
-            <!-- Cursor virtual para simulaciones dentro del canvas -->
-            <svg id="virtual-pointer" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- BANNER DE FRASES EMOCIONALES FLOTANTE -->
+            <div id="quote-overlay">
+                <div class="quote-badge">
+                    <span id="quote-icon" class="w-2 h-2 rounded-full bg-[#57ddcd] animate-ping"></span>
+                    <span id="quote-text" class="text-xs md:text-sm">Porque cuando nos unimos por la educación...</span>
+                </div>
+            </div>
+
+            <!-- CURSOR VIRTUAL PARA NAVEGAR LA APP -->
+            <svg id="virtual-mouse" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M5.65 12.36H5.46L5.31 12.49L0.5 16.88V1.19L11.78 12.36H5.65Z" fill="#ffffff" stroke="#1d3854" stroke-width="1.8"/>
                 <path d="M12.28 12.87L8.03 21.37L4.63 19.67L8.88 11.17L12.28 12.87Z" fill="#ffffff" stroke="#1d3854" stroke-width="1.8"/>
             </svg>
 
-            <!-- ========================================================================= -->
-            <!-- ESCENA 1: INTRODUCCIÓN IMPACTANTE & BRANDING (0s - 7s) -->
-            <!-- ========================================================================= -->
-            <section id="scene-1" class="promo-scene active flex-col text-center p-8 md:p-14">
-                <div class="relative mb-6">
-                    <!-- Glow Anillo -->
-                    <div class="absolute -inset-6 rounded-full bg-gradient-to-r from-[#00aea5] via-[#006eae] to-[#9f1074] opacity-75 blur-2xl animate-pulse"></div>
-                    <div class="relative w-36 h-36 md:w-44 md:h-44 rounded-3xl bg-white p-5 shadow-2xl flex items-center justify-center mx-auto transform transition-all hover:scale-105 border border-white/40">
-                        <img src="./resources/navbar-logo.webp" alt="Hoop Perú" class="max-w-full max-h-full object-contain filter drop-shadow">
+            <!-- CONTENEDOR DE CÁMARA VIRTUAL -->
+            <div id="camera-viewport">
+
+                <!-- ========================================================================= -->
+                <!-- PANTALLA 1: PANTALLA DE LOGIN REAL (0s - 7s) -->
+                <!-- ========================================================================= -->
+                <div id="screen-login" class="absolute inset-0 bg-[#006eae] flex items-center justify-center p-6 transition-all duration-700">
+                    <div class="bg-white rounded-3xl shadow-2xl p-8 w-full max-w-md border border-white/20 relative overflow-hidden">
+                        <!-- Logo y Encabezado del Login -->
+                        <div class="text-center mb-6">
+                            <div class="w-24 h-24 mx-auto mb-3 flex items-center justify-center p-2 rounded-2xl bg-slate-50 border border-slate-100 shadow-sm">
+                                <img src="./resources/navbar-logo.webp" alt="Hoop Perú" class="max-w-full max-h-full object-contain">
+                            </div>
+                            <h2 class="text-2xl font-black text-[#1d3854]">Iniciar Sesión</h2>
+                            <p class="text-xs text-slate-500 mt-1">Plataforma de Voluntariado Hoop Perú</p>
+                        </div>
+
+                        <!-- Formulario de Acceso -->
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 mb-1">Correo electrónico</label>
+                                <div class="relative">
+                                    <input id="demo-login-email" type="text" readonly value="" placeholder="ej: voluntario@hoop.org" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-xs text-slate-800 bg-slate-50 focus:bg-white focus:outline-none">
+                                    <i class="ph ph-envelope text-slate-400 absolute right-3 top-3 text-sm"></i>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 mb-1">Clave de acceso</label>
+                                <div class="relative">
+                                    <input id="demo-login-pass" type="password" readonly value="" placeholder="••••••••" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-xs text-slate-800 bg-slate-50 focus:bg-white focus:outline-none">
+                                    <i class="ph ph-lock-key text-slate-400 absolute right-3 top-3 text-sm"></i>
+                                </div>
+                            </div>
+
+                            <button id="demo-login-btn" class="w-full py-3 rounded-xl bg-[#006eae] hover:bg-[#005a8e] text-white font-bold text-xs uppercase tracking-wider transition-all shadow-lg shadow-blue-500/25 flex items-center justify-center space-x-2">
+                                <span>Ingresar al Portal</span>
+                                <i class="ph-bold ph-arrow-right"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
 
-                <div class="inline-flex items-center space-x-2.5 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-[#57ddcd] text-xs md:text-sm font-bold tracking-wider uppercase mb-5">
-                    <i class="ph-fill ph-sparkle text-base"></i>
-                    <span>La Nueva Plataforma Digital</span>
-                </div>
 
-                <h1 class="text-4xl md:text-7xl font-black text-white mb-4 tracking-tight leading-none">
-                    Transformando el Voluntariado con<br>
-                    <span class="bg-gradient-to-r from-[#57ddcd] via-[#80c8e4] to-[#d392c6] bg-clip-text text-transparent">
-                        Tecnología e Impacto Social
-                    </span>
-                </h1>
-
-                <p class="text-base md:text-xl text-slate-300 max-w-3xl mx-auto mb-8 font-light leading-relaxed">
-                    Comunidad viva, horarios semanales, gestión de programas y recursos en la nube para Hoop Perú.
-                </p>
-
-                <div class="inline-flex items-center space-x-3 px-6 py-2.5 rounded-2xl bg-white/5 backdrop-blur border border-white/10 shadow-lg">
-                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
-                    <span class="text-xs md:text-sm text-slate-200">Desarrollado y optimizado por <strong class="text-white font-bold">Duval Pérez</strong></span>
-                </div>
-            </section>
-
-
-            <!-- ========================================================================= -->
-            <!-- ESCENA 2: MOCKUP REAL DE LA APP & PUBLICACIÓN VIBRANTE (7s - 15s) -->
-            <!-- ========================================================================= -->
-            <section id="scene-2" class="promo-scene flex-col items-center justify-center p-6 md:p-10">
-                <!-- Ventana estilo MacBook/Browser con la Interfaz Real -->
-                <div class="app-window w-full max-w-4xl h-[88%] flex flex-col shadow-2xl border border-slate-700/30">
-                    <!-- Barra de Título del Navegador -->
-                    <div class="bg-slate-100 px-4 py-2.5 flex items-center justify-between border-b border-slate-200">
-                        <div class="flex items-center space-x-2">
-                            <span class="w-3 h-3 rounded-full bg-red-400"></span>
-                            <span class="w-3 h-3 rounded-full bg-amber-400"></span>
-                            <span class="w-3 h-3 rounded-full bg-emerald-400"></span>
-                        </div>
-                        <div class="px-6 py-1 rounded-lg bg-white border border-slate-200 text-xs text-slate-500 font-mono flex items-center space-x-2">
-                            <i class="ph-bold ph-lock-key text-emerald-600 text-xs"></i>
-                            <span>https://hoop-peru-web-rho.vercel.app/ventanas/inicio_usuario.html</span>
-                        </div>
-                        <div class="w-12"></div>
-                    </div>
-
-                    <!-- Cabecera de la App Hoop Perú -->
-                    <div class="bg-white border-b border-gray-200 px-6 py-3 flex items-center justify-between">
+                <!-- ========================================================================= -->
+                <!-- PANTALLA 2: DASHBOARD COMPLETO (7s - 45s) -->
+                <!-- ========================================================================= -->
+                <div id="screen-dashboard" class="absolute inset-0 bg-[#f8fafc] flex flex-col opacity-0 pointer-events-none transition-opacity duration-700">
+                    
+                    <!-- NAVBAR OFICIAL DEL APLICATIVO -->
+                    <header class="h-14 bg-white border-b border-gray-200 px-6 flex items-center justify-between shadow-xs shrink-0 z-20">
                         <div class="flex items-center space-x-3">
-                            <img src="./resources/navbar-logo.webp" alt="Logo" class="h-8 object-contain">
-                            <span class="font-bold text-slate-900 text-base hidden sm:inline">Hoop Perú</span>
+                            <img src="./resources/navbar-logo.webp" alt="Hoop Perú" class="h-8 object-contain">
+                            <span class="font-extrabold text-[#1d3854] text-base">Hoop Perú</span>
+                            <span class="hidden md:inline px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 text-[10px] font-bold">Portal Activo</span>
                         </div>
+
+                        <!-- Barra de Búsqueda Simulada -->
+                        <div class="hidden sm:flex items-center px-3 py-1.5 rounded-xl bg-slate-100 text-slate-400 text-xs w-64 border border-slate-200/80">
+                            <i class="ph ph-magnifying-glass mr-2"></i>
+                            <span>Buscar publicaciones, programas...</span>
+                        </div>
+
+                        <!-- Usuario & Notificaciones -->
                         <div class="flex items-center space-x-4">
-                            <div class="relative">
-                                <i class="ph ph-bell text-xl text-gray-500"></i>
+                            <div class="relative cursor-pointer">
+                                <i class="ph ph-bell text-xl text-gray-600"></i>
                                 <span class="absolute -top-1 -right-1 flex h-2.5 w-2.5">
                                     <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#af3a91] opacity-75"></span>
                                     <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#9f1074]"></span>
                                 </span>
                             </div>
-                            <div class="flex items-center space-x-2">
-                                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&auto=format&fit=crop" class="w-8 h-8 rounded-full object-cover border border-blue-300">
-                                <span class="text-xs font-bold text-slate-700">Duval Pérez</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Contenido Central: FEED REAL CON FOTO GENUINA -->
-                    <div class="flex-1 bg-slate-50 p-4 sm:p-6 overflow-y-auto flex items-center justify-center">
-                        <div id="real-post-card" class="bg-white rounded-2xl shadow-sm border border-gray-200 p-5 w-full max-w-xl transition-all relative">
-                            <!-- Autor del Post -->
-                            <div class="flex items-center justify-between mb-3">
-                                <div class="flex items-center space-x-3">
-                                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&auto=format&fit=crop" class="w-10 h-10 rounded-full object-cover border border-blue-400 shadow-sm">
-                                    <div>
-                                        <div class="flex items-center space-x-2">
-                                            <h3 class="text-sm font-bold text-gray-900">Duval Pérez</h3>
-                                            <span class="px-2 py-0.5 rounded-full bg-blue-50 text-[#006eae] text-[10px] font-bold">Coordinador</span>
-                                        </div>
-                                        <p class="text-[11px] text-gray-400 flex items-center space-x-1">
-                                            <i class="ph ph-clock text-xs"></i>
-                                            <span>Hace 15 minutos • Programa Refuerzo Escolar</span>
-                                        </p>
-                                    </div>
-                                </div>
-                                <span class="text-xs text-gray-400 hover:text-gray-600"><i class="ph ph-dots-three-vertical text-lg"></i></span>
-                            </div>
-
-                            <!-- Texto del Post -->
-                            <p class="text-sm text-gray-800 leading-relaxed mb-3">
-                                ¡Gran jornada de talleres con los niños en Arequipa! Completamos las dinámicas de lectura y robótica con el equipo de voluntarios. ¡Orgullosos del impacto que estamos logrando juntos! 🇵🇪✨📚
-                            </p>
-
-                            <!-- FOTO REALISTA DE VOLUNTARIADO Y EDUCACIÓN INFANTIL -->
-                            <div class="relative rounded-xl overflow-hidden border border-gray-100 bg-gray-900 h-52 sm:h-60 flex items-center justify-center group shadow-inner">
-                                <img id="post-hero-image" 
-                                     src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?q=80&w=1200&auto=format&fit=crop" 
-                                     alt="Voluntariado con Niños" 
-                                     class="w-full h-full object-cover transition-transform duration-500 hover:scale-105">
-                                <div class="absolute bottom-2.5 right-2.5 bg-black/70 backdrop-blur-md px-3 py-1 rounded-lg text-[11px] font-medium text-white flex items-center space-x-1 shadow-md">
-                                    <i class="ph ph-camera text-blue-300"></i>
-                                    <span>Taller Comunitario 2026</span>
+                            <div class="h-5 w-px bg-gray-200"></div>
+                            <div class="flex items-center space-x-2.5">
+                                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&auto=format&fit=crop" class="w-8 h-8 rounded-full object-cover border border-[#006eae]/40">
+                                <div class="hidden sm:block text-left">
+                                    <div class="text-xs font-bold text-gray-900 leading-tight">Duval Pérez</div>
+                                    <div class="text-[10px] text-gray-500 leading-tight">Voluntario Coordinador</div>
                                 </div>
                             </div>
-
-                            <!-- Barra de Interacción (Like, Contador y Acciones) -->
-                            <div class="border-t border-gray-100 pt-3 mt-3">
-                                <div class="flex items-center justify-between text-xs text-gray-500 mb-2">
-                                    <div class="flex items-center space-x-1.5">
-                                        <i class="ph-fill ph-heart text-base text-red-500"></i>
-                                        <span id="live-likes-counter" class="font-bold text-gray-800">38 Me gusta</span>
-                                    </div>
-                                    <span>12 comentarios • 4 compartidos</span>
-                                </div>
-
-                                <div class="grid grid-cols-2 gap-2">
-                                    <button id="btnRealLike" class="py-2 px-4 rounded-xl bg-gray-50 hover:bg-red-50 text-gray-600 font-semibold text-xs transition-all flex items-center justify-center space-x-2 border border-gray-100">
-                                        <i id="real-heart-icon" class="ph ph-heart text-base text-gray-500"></i>
-                                        <span id="real-like-text">Me gusta</span>
-                                    </button>
-                                    <button class="py-2 px-4 rounded-xl bg-gray-50 hover:bg-gray-100 text-gray-600 font-semibold text-xs transition-all flex items-center justify-center space-x-2 border border-gray-100">
-                                        <i class="ph ph-chat-circle text-base"></i>
-                                        <span>Comentar</span>
-                                    </button>
-                                </div>
-                            </div>
-
-                            <!-- Toast Dinámico de Confirmación -->
-                            <div id="live-like-toast" class="absolute -top-3 -right-3 px-3 py-1.5 rounded-xl bg-gradient-to-r from-red-500 to-rose-600 text-white text-xs font-bold shadow-xl opacity-0 transform translate-y-2 transition-all">
-                                ¡Te gusta esta publicación! ❤️
-                            </div>
-
-                            <!-- Contenedor de corazones flotantes -->
-                            <div id="hearts-burst-container"></div>
                         </div>
-                    </div>
-                </div>
-            </section>
+                    </header>
 
-
-            <!-- ========================================================================= -->
-            <!-- ESCENA 3: HORARIOS SEMANALES & AUTO-LIMPIEZA DE 3 DÍAS (15s - 23s) -->
-            <!-- ========================================================================= -->
-            <section id="scene-3" class="promo-scene flex-col lg:flex-row items-center justify-between p-8 md:p-14 gap-8">
-                <div class="w-full lg:w-1/2 text-left space-y-5">
-                    <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-[#00aea5]/20 border border-[#57ddcd]/40 text-[#57ddcd] text-xs font-bold uppercase tracking-wider">
-                        <i class="ph-bold ph-calendar-check text-sm"></i>
-                        <span>Organización & Eficiencia</span>
-                    </div>
-                    <h2 class="text-3xl md:text-5xl font-black text-white leading-tight">
-                        Gestión de Horarios y Anuncios Dinámicos
-                    </h2>
-                    <p class="text-base text-slate-300 font-light leading-relaxed">
-                        Control riguroso de asistencia semanal por programa. Las reuniones caducadas con más de 3 días se purgan automáticamente de Supabase para evitar acumulación de registros innecesarios.
-                    </p>
-                    <div class="grid grid-cols-2 gap-4 pt-2">
-                        <div class="glass-panel p-4 rounded-2xl">
-                            <div class="text-2xl font-black text-[#57ddcd] mb-1 font-heading">Lunes a Sábado</div>
-                            <div class="text-xs text-slate-300 font-medium">Turnos de Voluntariado</div>
-                        </div>
-                        <div class="glass-panel p-4 rounded-2xl">
-                            <div class="text-2xl font-black text-[#d392c6] mb-1 font-heading">3 Días</div>
-                            <div class="text-xs text-slate-300 font-medium">Auto-limpieza en Backend</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Showcase de Horarios y Notificaciones -->
-                <div class="w-full lg:w-1/2 flex flex-col space-y-4 max-w-md">
-                    <!-- Tarjeta de Anuncio Destacado -->
-                    <div class="glass-panel p-5 rounded-3xl border-l-4 border-l-[#00aea5] shadow-2xl relative overflow-hidden">
-                        <div class="flex items-center justify-between mb-3">
-                            <div class="flex items-center space-x-2 text-[#57ddcd]">
-                                <i class="ph-fill ph-bell-ringing text-lg"></i>
-                                <span class="text-xs font-bold uppercase tracking-wider">Próxima Reunión</span>
-                            </div>
-                            <span class="px-2.5 py-0.5 rounded-full bg-[#00aea5]/20 text-[#57ddcd] text-[10px] font-bold">Activa</span>
-                        </div>
-                        <h4 class="text-white font-bold text-base mb-1">Capacitación de Nuevos Voluntarios</h4>
-                        <p class="text-xs text-slate-300 mb-4">Revisión de protocolos didácticos y distribución de aulas comunitarias.</p>
-                        <div class="flex items-center justify-between text-xs text-slate-400 pt-3 border-t border-white/10">
-                            <span class="flex items-center"><i class="ph ph-clock mr-1 text-[#80c8e4]"></i> 18:30 - 20:00</span>
-                            <span class="flex items-center"><i class="ph ph-calendar mr-1 text-[#80c8e4]"></i> Viernes 27</span>
-                        </div>
-                    </div>
-
-                    <!-- Días Asignados en la Semana -->
-                    <div class="glass-panel p-5 rounded-3xl space-y-3">
-                        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Tus Días Asignados</span>
+                    <!-- CUERPO PRINCIPAL DEL DASHBOARD: ASIDE + CONTENIDO -->
+                    <div class="flex-1 flex overflow-hidden">
                         
-                        <div class="flex items-center justify-between p-3 rounded-2xl bg-white/5 border border-white/10">
-                            <div class="flex items-center space-x-3">
-                                <span class="w-9 h-9 rounded-xl bg-[#006eae]/30 text-[#80c8e4] flex items-center justify-center font-bold text-xs">MIE</span>
-                                <div>
-                                    <div class="text-xs font-bold text-white">Miércoles (15:00 - 18:00)</div>
-                                    <div class="text-[10px] text-slate-400">Refuerzo Educativo Primaria</div>
-                                </div>
-                            </div>
-                            <i class="ph-bold ph-check-circle text-emerald-400 text-lg"></i>
-                        </div>
-
-                        <div class="flex items-center justify-between p-3 rounded-2xl bg-white/5 border border-white/10">
-                            <div class="flex items-center space-x-3">
-                                <span class="w-9 h-9 rounded-xl bg-[#9f1074]/30 text-[#d392c6] flex items-center justify-center font-bold text-xs">SAB</span>
-                                <div>
-                                    <div class="text-xs font-bold text-white">Sábado (09:00 - 13:00)</div>
-                                    <div class="text-[10px] text-slate-400">Talleres Recreativos y Arte</div>
-                                </div>
-                            </div>
-                            <i class="ph-bold ph-check-circle text-emerald-400 text-lg"></i>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-
-            <!-- ========================================================================= -->
-            <!-- ESCENA 4: RECURSOS, ROLES Y PANEL ADMINISTRATIVO (23s - 31s) -->
-            <!-- ========================================================================= -->
-            <section id="scene-4" class="promo-scene flex-col lg:flex-row-reverse items-center justify-between p-8 md:p-14 gap-8">
-                <div class="w-full lg:w-1/2 text-left space-y-5">
-                    <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-[#9f1074]/20 border border-[#d392c6]/40 text-[#d392c6] text-xs font-bold uppercase tracking-wider">
-                        <i class="ph-bold ph-shield-check text-sm"></i>
-                        <span>Administración Total</span>
-                    </div>
-                    <h2 class="text-3xl md:text-5xl font-black text-white leading-tight">
-                        Recursos en la Nube y Control de Perfiles
-                    </h2>
-                    <p class="text-base text-slate-300 font-light leading-relaxed">
-                        Carga y descarga de guías por programa, creación de cargos, actualización de contraseñas y asignación de permisos con confirmaciones de seguridad modales.
-                    </p>
-                    <div class="flex flex-wrap gap-2.5 pt-2">
-                        <span class="px-3.5 py-1.5 rounded-xl bg-white/10 border border-white/15 text-xs text-slate-200">
-                            📄 Supabase Storage
-                        </span>
-                        <span class="px-3.5 py-1.5 rounded-xl bg-white/10 border border-white/15 text-xs text-slate-200">
-                            🔒 Cambio de Claves
-                        </span>
-                        <span class="px-3.5 py-1.5 rounded-xl bg-white/10 border border-white/15 text-xs text-slate-200">
-                            👥 Gestión de Cargos
-                        </span>
-                    </div>
-                </div>
-
-                <!-- Showcase de Documentos y Panel de Control -->
-                <div class="w-full lg:w-1/2 flex flex-col space-y-4 max-w-md">
-                    <!-- Tarjeta de Recursos -->
-                    <div class="app-window p-5 rounded-3xl shadow-2xl space-y-3">
-                        <div class="flex items-center justify-between pb-2 border-b border-gray-100">
-                            <span class="text-xs font-bold text-gray-800 uppercase">Biblioteca de Documentos</span>
-                            <span class="text-xs text-[#006eae] font-bold">Oficial 2026</span>
-                        </div>
-
-                        <div class="flex items-center justify-between p-3 rounded-2xl bg-gray-50 border border-gray-200/70">
-                            <div class="flex items-center space-x-3">
-                                <span class="w-10 h-10 rounded-xl bg-red-100 text-red-600 flex items-center justify-center text-xl font-bold">
-                                    <i class="ph-fill ph-file-pdf"></i>
-                                </span>
-                                <div>
-                                    <div class="text-xs font-bold text-gray-900">Manual_Pedagogico_Hoop.pdf</div>
-                                    <div class="text-[10px] text-gray-500">Refuerzo Escolar • 3.2 MB</div>
-                                </div>
-                            </div>
-                            <span class="p-2 rounded-xl bg-white text-gray-600 shadow-sm border border-gray-200"><i class="ph-bold ph-download-simple"></i></span>
-                        </div>
-
-                        <div class="flex items-center justify-between p-3 rounded-2xl bg-gray-50 border border-gray-200/70">
-                            <div class="flex items-center space-x-3">
-                                <span class="w-10 h-10 rounded-xl bg-blue-100 text-[#006eae] flex items-center justify-center text-xl font-bold">
-                                    <i class="ph-fill ph-file-text"></i>
-                                </span>
-                                <div>
-                                    <div class="text-xs font-bold text-gray-900">Reglamento_Voluntariado.docx</div>
-                                    <div class="text-[10px] text-gray-500">Administración • 1.5 MB</div>
-                                </div>
-                            </div>
-                            <span class="p-2 rounded-xl bg-white text-gray-600 shadow-sm border border-gray-200"><i class="ph-bold ph-download-simple"></i></span>
-                        </div>
-                    </div>
-
-                    <!-- Panel Admin Status -->
-                    <div class="glass-panel p-4 rounded-2xl flex items-center justify-between">
-                        <div class="flex items-center space-x-3">
-                            <span class="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-xl">
-                                <i class="ph-bold ph-user-gear"></i>
-                            </span>
+                        <!-- ASIDE IZQUIERDO DE NAVEGACIÓN -->
+                        <aside class="w-56 bg-white border-r border-gray-200 p-4 flex flex-col justify-between shrink-0">
                             <div>
-                                <div class="text-xs font-bold text-white">Panel de Administración</div>
-                                <div class="text-[10px] text-slate-400">Control de usuarios y programas activos</div>
+                                <span class="text-[10px] font-bold text-gray-400 uppercase tracking-wider block px-3 mb-2">Menú Principal</span>
+                                <nav class="space-y-1">
+                                    <div id="nav-item-inicio" class="flex items-center space-x-3 px-3 py-2 rounded-xl text-xs font-bold bg-[#006eae] text-white transition-all shadow-sm">
+                                        <i class="ph-bold ph-house text-base"></i>
+                                        <span>Inicio (Feed)</span>
+                                    </div>
+                                    <div id="nav-item-horarios" class="flex items-center space-x-3 px-3 py-2 rounded-xl text-xs font-semibold text-gray-600 hover:bg-gray-100 transition-all cursor-pointer">
+                                        <i class="ph-bold ph-calendar text-base"></i>
+                                        <span>Mis Horarios</span>
+                                    </div>
+                                    <div id="nav-item-recursos" class="flex items-center space-x-3 px-3 py-2 rounded-xl text-xs font-semibold text-gray-600 hover:bg-gray-100 transition-all cursor-pointer">
+                                        <i class="ph-bold ph-folder-open text-base"></i>
+                                        <span>Recursos</span>
+                                    </div>
+                                    <div id="nav-item-encuestas" class="flex items-center space-x-3 px-3 py-2 rounded-xl text-xs font-semibold text-gray-600 hover:bg-gray-100 transition-all cursor-pointer">
+                                        <i class="ph-bold ph-clipboard-text text-base"></i>
+                                        <span>Encuestas</span>
+                                    </div>
+                                    <div id="nav-item-perfil" class="flex items-center space-x-3 px-3 py-2 rounded-xl text-xs font-semibold text-gray-600 hover:bg-gray-100 transition-all cursor-pointer">
+                                        <i class="ph-bold ph-user text-base"></i>
+                                        <span>Mi Perfil</span>
+                                    </div>
+                                </nav>
                             </div>
+
+                            <!-- Badge de impacto inferior -->
+                            <div class="p-3 rounded-2xl bg-gradient-to-br from-[#00aea5]/10 to-[#006eae]/10 border border-[#00aea5]/20">
+                                <div class="text-[10px] font-bold text-[#006eae] uppercase">Comunidad Hoop</div>
+                                <div class="text-xs text-slate-700 font-semibold mt-0.5">Creciendo juntos día a día 🇵🇪</div>
+                            </div>
+                        </aside>
+
+                        <!-- ÁREA DINÁMICA DE CONTENIDO -->
+                        <div class="flex-1 p-6 overflow-y-auto bg-slate-50 relative">
+
+                            <!-- ============================================================== -->
+                            <!-- VISTA 1: FEED DE PUBLICACIONES (INICIO) -->
+                            <!-- ============================================================== -->
+                            <div id="view-inicio" class="app-view active-view space-y-5 max-w-2xl mx-auto">
+                                
+                                <!-- Card de Crear Publicación -->
+                                <div class="bg-white rounded-2xl shadow-sm border border-gray-200 p-4 flex items-center space-x-3">
+                                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&auto=format&fit=crop" class="w-9 h-9 rounded-full object-cover">
+                                    <div class="flex-1 bg-slate-100 hover:bg-slate-200/80 rounded-xl px-4 py-2 text-xs text-slate-400 cursor-pointer">
+                                        Comparte una novedad con el equipo de voluntarios...
+                                    </div>
+                                    <button class="p-2 rounded-xl bg-blue-50 text-[#006eae] hover:bg-blue-100"><i class="ph-bold ph-image text-base"></i></button>
+                                </div>
+
+                                <!-- Publicación Real de Alto Impacto -->
+                                <div class="bg-white rounded-2xl shadow-sm border border-gray-200 p-5 space-y-3 relative">
+                                    <!-- Autor -->
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center space-x-3">
+                                            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&auto=format&fit=crop" class="w-10 h-10 rounded-full object-cover border border-[#006eae]">
+                                            <div>
+                                                <div class="flex items-center space-x-2">
+                                                    <h3 class="text-xs font-bold text-gray-900">Duval Pérez</h3>
+                                                    <span class="px-2 py-0.5 rounded-full bg-blue-50 text-[#006eae] text-[10px] font-bold">Refuerzo Escolar</span>
+                                                </div>
+                                                <p class="text-[10px] text-gray-400">Hace 20 min • Arequipa, Perú</p>
+                                            </div>
+                                        </div>
+                                        <i class="ph ph-dots-three-vertical text-gray-400"></i>
+                                    </div>
+
+                                    <!-- Contenido -->
+                                    <p class="text-xs text-gray-800 leading-relaxed font-normal">
+                                        ¡Hermoso inicio de semana en el aula comunitaria! Los niños completaron sus primeras lecturas y talleres prácticos. Gracias a cada voluntario por poner el corazón en cada minuto. ¡Crecemos juntos! 🇵🇪✨📚
+                                    </p>
+
+                                    <!-- FOTO REALISTA DE ALTA RESOLUCIÓN DE VOLUNTARIADO INFANTIL -->
+                                    <div class="relative rounded-2xl overflow-hidden border border-gray-100 bg-gray-900 h-64 flex items-center justify-center shadow-inner">
+                                        <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?q=80&w=1200&auto=format&fit=crop" alt="Voluntarios con niños" class="w-full h-full object-cover">
+                                        <div class="absolute bottom-2.5 right-2.5 bg-black/70 backdrop-blur-md px-3 py-1 rounded-lg text-[10px] font-semibold text-white flex items-center space-x-1 shadow-md">
+                                            <i class="ph ph-camera text-[#57ddcd]"></i>
+                                            <span>Sede Flora Tristán 2026</span>
+                                        </div>
+                                    </div>
+
+                                    <!-- Interacción de Likes -->
+                                    <div class="border-t border-gray-100 pt-3">
+                                        <div class="flex items-center justify-between text-xs text-gray-500 mb-2">
+                                            <div class="flex items-center space-x-1.5">
+                                                <i class="ph-fill ph-heart text-base text-red-500"></i>
+                                                <span id="demo-likes-val" class="font-bold text-gray-800">42 Me gusta</span>
+                                            </div>
+                                            <span class="text-[11px] text-gray-400">14 comentarios • 5 compartidos</span>
+                                        </div>
+
+                                        <div class="grid grid-cols-2 gap-2">
+                                            <button id="feed-like-action" class="py-2 rounded-xl bg-gray-50 hover:bg-red-50 text-gray-600 font-semibold text-xs transition-all flex items-center justify-center space-x-2 border border-gray-100">
+                                                <i id="feed-heart-ico" class="ph ph-heart text-base text-gray-400"></i>
+                                                <span id="feed-like-label">Me gusta</span>
+                                            </button>
+                                            <button class="py-2 rounded-xl bg-gray-50 hover:bg-gray-100 text-gray-600 font-semibold text-xs transition-all flex items-center justify-center space-x-2 border border-gray-100">
+                                                <i class="ph ph-chat-circle text-base"></i>
+                                                <span>Comentar</span>
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <!-- Toast emergente de like -->
+                                    <div id="feed-like-badge" class="absolute -top-3 -right-3 px-3 py-1.5 rounded-xl bg-gradient-to-r from-red-500 to-rose-600 text-white text-xs font-bold shadow-xl opacity-0 transform translate-y-2 transition-all">
+                                        ¡Te gusta esta publicación! ❤️
+                                    </div>
+                                    <div id="feed-burst-box"></div>
+                                </div>
+                            </div>
+
+
+                            <!-- ============================================================== -->
+                            <!-- VISTA 2: MIS HORARIOS Y REUNIONES -->
+                            <!-- ============================================================== -->
+                            <div id="view-horarios" class="app-view space-y-5 max-w-2xl mx-auto">
+                                <div>
+                                    <span class="text-[10px] font-bold text-[#146460] bg-[#dbf5f0] border border-[#b5f4eb] px-2.5 py-0.5 rounded-full uppercase tracking-wider">Tu Compromiso</span>
+                                    <h2 class="text-xl font-black text-gray-900 mt-1">Mis Horarios Asignados</h2>
+                                    <p class="text-xs text-gray-500">Consulta tus turnos semanales y las reuniones de voluntariado.</p>
+                                </div>
+
+                                <!-- Alerta Notificación de Reunión -->
+                                <div id="demo-meeting-alert" class="bg-gradient-to-r from-[#006eae]/10 via-[#00aea5]/10 to-transparent border-l-4 border-l-[#006eae] p-4 rounded-2xl flex items-center justify-between shadow-xs">
+                                    <div class="flex items-center space-x-3">
+                                        <div class="w-9 h-9 rounded-xl bg-[#006eae] text-white flex items-center justify-center text-lg shadow-sm">
+                                            <i class="ph-fill ph-calendar-plus"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="text-xs font-bold text-gray-900">Reunión General de Coordinadores</h4>
+                                            <p class="text-[11px] text-gray-500">Planificación de nuevas aulas comunitarias • 18:30 hrs</p>
+                                        </div>
+                                    </div>
+                                    <span class="px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-bold">Viernes Activo</span>
+                                </div>
+
+                                <!-- Tabla Real de Horarios Semanales -->
+                                <div class="bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm">
+                                    <table class="w-full text-left text-xs">
+                                        <thead class="bg-gray-50 border-b border-gray-200 text-gray-500 font-bold uppercase text-[10px]">
+                                            <tr>
+                                                <th class="py-3 px-4">Día</th>
+                                                <th class="py-3 px-4">Horario</th>
+                                                <th class="py-3 px-4">Sede / Programa</th>
+                                                <th class="py-3 px-4 text-right">Estado</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="divide-y divide-gray-100 text-gray-700">
+                                            <tr class="hover:bg-blue-50/50 transition-colors">
+                                                <td class="py-3 px-4 font-bold text-gray-900 flex items-center space-x-2">
+                                                    <span class="w-2 h-2 rounded-full bg-blue-500"></span>
+                                                    <span>Miércoles</span>
+                                                </td>
+                                                <td class="py-3 px-4 font-mono">15:00 - 18:00</td>
+                                                <td class="py-3 px-4">Flora Tristán (Refuerzo)</td>
+                                                <td class="py-3 px-4 text-right">
+                                                    <span class="px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 font-bold text-[10px]">Confirmado</span>
+                                                </td>
+                                            </tr>
+                                            <tr class="hover:bg-blue-50/50 transition-colors">
+                                                <td class="py-3 px-4 font-bold text-gray-900 flex items-center space-x-2">
+                                                    <span class="w-2 h-2 rounded-full bg-magenta-500"></span>
+                                                    <span>Sábado</span>
+                                                </td>
+                                                <td class="py-3 px-4 font-mono">09:00 - 13:00</td>
+                                                <td class="py-3 px-4">Arequipa Centro (Talleres)</td>
+                                                <td class="py-3 px-4 text-right">
+                                                    <span class="px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 font-bold text-[10px]">Confirmado</span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+
+                            <!-- ============================================================== -->
+                            <!-- VISTA 3: RECURSOS Y DOCUMENTOS -->
+                            <!-- ============================================================== -->
+                            <div id="view-recursos" class="app-view space-y-5 max-w-2xl mx-auto">
+                                <div>
+                                    <span class="text-[10px] font-bold text-[#1d3854] bg-[#b8e1f1] border border-[#80c8e4] px-2.5 py-0.5 rounded-full uppercase tracking-wider">Biblioteca Oficial</span>
+                                    <h2 class="text-xl font-black text-gray-900 mt-1">Guías y Material Didáctico</h2>
+                                    <p class="text-xs text-gray-500">Descarga y comparte herramientas para los talleres infantiles.</p>
+                                </div>
+
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                    <!-- Recurso 1 -->
+                                    <div class="bg-white p-4 rounded-2xl border border-gray-200 shadow-sm flex flex-col justify-between space-y-3">
+                                        <div class="flex items-start space-x-3">
+                                            <span class="w-10 h-10 rounded-xl bg-red-100 text-red-600 flex items-center justify-center text-xl shrink-0">
+                                                <i class="ph-fill ph-file-pdf"></i>
+                                            </span>
+                                            <div>
+                                                <h4 class="text-xs font-bold text-gray-900 leading-tight">Guía_Pedagógica_2026.pdf</h4>
+                                                <p class="text-[10px] text-gray-500 mt-0.5">Refuerzo Escolar • 2.8 MB</p>
+                                            </div>
+                                        </div>
+                                        <button id="btn-demo-download-1" class="w-full py-2 rounded-xl bg-slate-50 hover:bg-slate-100 text-[#006eae] font-bold text-xs flex items-center justify-center space-x-1.5 border border-slate-200 transition-all">
+                                            <i class="ph-bold ph-download-simple"></i>
+                                            <span>Descargar Material</span>
+                                        </button>
+                                    </div>
+
+                                    <!-- Recurso 2 -->
+                                    <div class="bg-white p-4 rounded-2xl border border-gray-200 shadow-sm flex flex-col justify-between space-y-3">
+                                        <div class="flex items-start space-x-3">
+                                            <span class="w-10 h-10 rounded-xl bg-blue-100 text-[#006eae] flex items-center justify-center text-xl shrink-0">
+                                                <i class="ph-fill ph-file-doc"></i>
+                                            </span>
+                                            <div>
+                                                <h4 class="text-xs font-bold text-gray-900 leading-tight">Plan_Curricular_Ingles.docx</h4>
+                                                <p class="text-[10px] text-gray-500 mt-0.5">Idiomas y Arte • 1.4 MB</p>
+                                            </div>
+                                        </div>
+                                        <button class="w-full py-2 rounded-xl bg-slate-50 hover:bg-slate-100 text-[#006eae] font-bold text-xs flex items-center justify-center space-x-1.5 border border-slate-200 transition-all">
+                                            <i class="ph-bold ph-download-simple"></i>
+                                            <span>Descargar Material</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <!-- ============================================================== -->
+                            <!-- VISTA 4: ENCUESTAS Y PARTICIPACIÓN -->
+                            <!-- ============================================================== -->
+                            <div id="view-encuestas" class="app-view space-y-5 max-w-2xl mx-auto">
+                                <div>
+                                    <span class="text-[10px] font-bold text-[#751c5a] bg-[#e6cbe1] border border-[#d392c6] px-2.5 py-0.5 rounded-full uppercase tracking-wider">Tu Opinión Cuenta</span>
+                                    <h2 class="text-xl font-black text-gray-900 mt-1">Encuestas Comunitarias</h2>
+                                    <p class="text-xs text-gray-500">Participa en la toma de decisiones para el siguiente semestre.</p>
+                                </div>
+
+                                <div class="bg-white rounded-2xl border border-gray-200 p-5 shadow-sm space-y-4">
+                                    <div class="flex items-center justify-between">
+                                        <h3 class="text-sm font-bold text-gray-900">¿Qué taller complementario debemos priorizar?</h3>
+                                        <span class="px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 text-[10px] font-bold">Abierta</span>
+                                    </div>
+
+                                    <!-- Opciones de Votación -->
+                                    <div class="space-y-2.5">
+                                        <div id="poll-opt-1" class="p-3 rounded-xl border border-gray-200 hover:border-[#006eae] bg-slate-50 flex items-center justify-between cursor-pointer transition-all">
+                                            <span class="text-xs font-semibold text-gray-800">Robótica y Ciencia para Niños</span>
+                                            <div id="poll-bar-1" class="hidden text-xs font-bold text-[#006eae]">84% (42 votos)</div>
+                                        </div>
+                                        <div class="p-3 rounded-xl border border-gray-200 bg-slate-50 flex items-center justify-between text-xs text-gray-500">
+                                            <span>Música y Expresión Corporal</span>
+                                            <span>16% (8 votos)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
-                        <span class="px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-400 text-xs font-bold">Online</span>
                     </div>
                 </div>
-            </section>
 
 
-            <!-- ========================================================================= -->
-            <!-- ESCENA 5: MÉTRICAS DE IMPACTO & KEEP-ALIVE SUPABASE (31s - 38s) -->
-            <!-- ========================================================================= -->
-            <section id="scene-5" class="promo-scene flex-col text-center p-8 md:p-14">
-                <div class="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-emerald-500/20 border border-emerald-400/40 text-emerald-400 text-xs font-bold uppercase tracking-wider mb-5">
-                    <i class="ph-fill ph-chart-line-up"></i>
-                    <span>Métricas y Disponibilidad Continua</span>
-                </div>
-
-                <h2 class="text-3xl md:text-6xl font-black text-white mb-10 tracking-tight">
-                    Conexión Continua, Cero Caídas
-                </h2>
-
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 w-full max-w-5xl mx-auto">
-                    <div class="glass-panel p-6 rounded-3xl border border-white/10 hover:border-[#57ddcd]/50 transition-all">
-                        <div id="stat-voluntarios" class="text-4xl md:text-6xl font-black text-[#57ddcd] mb-2 font-heading">0</div>
-                        <div class="text-sm font-bold text-white">Voluntarios Activos</div>
-                        <div class="text-xs text-slate-400 mt-1">Arequipa y Lima</div>
+                <!-- ========================================================================= -->
+                <!-- PANTALLA 3: GRAN FINAL & CIERRE "CRECEMOS JUNTOS" (45s - 52s) -->
+                <!-- ========================================================================= -->
+                <div id="screen-finale" class="absolute inset-0 bg-[#09131d] flex flex-col items-center justify-center p-8 text-center opacity-0 pointer-events-none transition-opacity duration-700 z-30">
+                    <div class="w-24 h-24 rounded-3xl bg-white p-3 shadow-2xl flex items-center justify-center mx-auto mb-6 transform hover:rotate-6 transition-all border border-white/30">
+                        <img src="./resources/navbar-logo.webp" alt="Hoop Perú" class="max-w-full max-h-full object-contain">
                     </div>
 
-                    <div class="glass-panel p-6 rounded-3xl border border-white/10 hover:border-[#80c8e4]/50 transition-all">
-                        <div id="stat-horas" class="text-4xl md:text-6xl font-black text-[#80c8e4] mb-2 font-heading">0</div>
-                        <div class="text-sm font-bold text-white">Horas de Clase</div>
-                        <div class="text-xs text-slate-400 mt-1">Educación comunitaria</div>
+                    <h2 class="text-4xl md:text-7xl font-black text-white mb-4 leading-none tracking-tight">
+                        Porque crecemos juntos.<br>
+                        <span class="bg-gradient-to-r from-[#57ddcd] via-[#80c8e4] to-[#d392c6] bg-clip-text text-transparent">
+                            Por ellos. Por el Perú.
+                        </span>
+                    </h2>
+
+                    <p class="text-base md:text-xl text-slate-300 max-w-2xl mx-auto mb-8 font-light">
+                        Una plataforma que une tecnología, educación comunitaria y el corazón de cada voluntario.
+                    </p>
+
+                    <div class="mb-8">
+                        <a href="https://hoop-peru-web-rho.vercel.app" target="_blank" class="inline-flex items-center space-x-3 px-8 py-4 rounded-2xl bg-gradient-to-r from-[#006eae] to-[#00aea5] hover:from-[#005a8e] hover:to-[#00968f] text-white font-bold text-lg shadow-2xl shadow-cyan-500/30 transition-all transform hover:scale-105">
+                            <i class="ph-bold ph-globe text-xl"></i>
+                            <span>hoop-peru-web-rho.vercel.app</span>
+                        </a>
                     </div>
 
-                    <div class="glass-panel p-6 rounded-3xl border border-white/10 hover:border-[#d392c6]/50 transition-all">
-                        <div id="stat-programas" class="text-4xl md:text-6xl font-black text-[#d392c6] mb-2 font-heading">0</div>
-                        <div class="text-sm font-bold text-white">Programas Sociales</div>
-                        <div class="text-xs text-slate-400 mt-1">Refuerzo, Arte y Salud</div>
-                    </div>
-
-                    <div class="glass-panel p-6 rounded-3xl border border-white/10 hover:border-emerald-400/50 transition-all">
-                        <div id="stat-disponibilidad" class="text-4xl md:text-6xl font-black text-emerald-400 mb-2 font-heading">0%</div>
-                        <div class="text-sm font-bold text-white">Keep-Alive Cloud</div>
-                        <div class="text-xs text-slate-400 mt-1">Base de datos siempre activa</div>
+                    <div class="text-xs md:text-sm text-slate-400 font-medium">
+                        Desarrollado con dedicación por <strong class="text-white">Duval Pérez</strong> • Hoop Perú © 2026
                     </div>
                 </div>
-            </section>
 
+            </div>
 
-            <!-- ========================================================================= -->
-            <!-- ESCENA 6: CIERRE CINEMATOGRÁFICO & LLAMADO A LA ACCIÓN (38s - 45s) -->
-            <!-- ========================================================================= -->
-            <section id="scene-6" class="promo-scene flex-col text-center p-8 md:p-14">
-                <div class="w-24 h-24 rounded-3xl bg-white p-3 shadow-2xl flex items-center justify-center mx-auto mb-6 transform hover:rotate-6 transition-all border border-white/30">
-                    <img src="./resources/navbar-logo.webp" alt="Logo" class="max-w-full max-h-full object-contain">
-                </div>
-
-                <h2 class="text-4xl md:text-7xl font-black text-white mb-4 leading-none tracking-tight">
-                    Construyendo un futuro mejor,<br>
-                    <span class="bg-gradient-to-r from-[#57ddcd] via-[#80c8e4] to-[#d392c6] bg-clip-text text-transparent">
-                        una oportunidad a la vez.
-                    </span>
-                </h2>
-
-                <p class="text-lg md:text-2xl text-slate-300 max-w-2xl mx-auto mb-8 font-light">
-                    Plataforma web disponible para toda la comunidad de Hoop Perú.
-                </p>
-
-                <div class="mb-8">
-                    <a href="https://hoop-peru-web-rho.vercel.app" target="_blank" class="inline-flex items-center space-x-3 px-8 py-4 rounded-2xl bg-gradient-to-r from-[#006eae] to-[#00aea5] hover:from-[#005a8e] hover:to-[#00968f] text-white font-bold text-lg shadow-2xl shadow-cyan-500/30 transition-all transform hover:scale-105">
-                        <i class="ph-bold ph-globe text-xl"></i>
-                        <span>hoop-peru-web-rho.vercel.app</span>
-                    </a>
-                </div>
-
-                <div class="text-xs md:text-sm text-slate-400 font-medium">
-                    Desarrollado con dedicación por <strong class="text-white">Duval Pérez</strong> • Hoop Perú © 2026 • Todos los derechos reservados.
-                </div>
-            </section>
-
-            <!-- Barra de Progreso Inferior -->
-            <div class="absolute bottom-0 left-0 right-0 h-1 bg-slate-800/80 z-30">
-                <div id="videoProgressBar" class="progress-indicator"></div>
+            <!-- BARRA DE PROGRESO DE LA LÍNEA DE TIEMPO -->
+            <div class="absolute bottom-0 left-0 right-0 h-1 bg-slate-800/80 z-50">
+                <div id="progressBar" class="progress-bar-fill"></div>
             </div>
         </div>
     </main>
 
 
-    <!-- SELECTOR RÁPIDO DE ESCENAS -->
+    <!-- SELECTOR DE ESCENAS RÁPIDO -->
     <nav class="h-10 w-full flex items-center justify-center space-x-2 bg-slate-950 border-t border-slate-900 z-50 text-xs">
-        <span class="text-slate-500 font-medium mr-2">Saltar a:</span>
-        <button onclick="jumpTo(1)" class="px-2.5 py-1 rounded bg-slate-900 hover:bg-slate-800 text-slate-300">1. Intro</button>
-        <button onclick="jumpTo(2)" class="px-2.5 py-1 rounded bg-slate-900 hover:bg-slate-800 text-slate-300">2. Feed & Like Real</button>
-        <button onclick="jumpTo(3)" class="px-2.5 py-1 rounded bg-slate-900 hover:bg-slate-800 text-slate-300">3. Horarios</button>
-        <button onclick="jumpTo(4)" class="px-2.5 py-1 rounded bg-slate-900 hover:bg-slate-800 text-slate-300">4. Recursos</button>
-        <button onclick="jumpTo(5)" class="px-2.5 py-1 rounded bg-slate-900 hover:bg-slate-800 text-slate-300">5. Métricas</button>
-        <button onclick="jumpTo(6)" class="px-2.5 py-1 rounded bg-slate-900 hover:bg-slate-800 text-slate-300">6. Cierre</button>
+        <span class="text-slate-500 font-medium mr-2">Secuencia:</span>
+        <button onclick="seekTo(0)" class="px-2.5 py-1 rounded bg-slate-900 hover:bg-slate-800 text-slate-300">1. Login</button>
+        <button onclick="seekTo(7)" class="px-2.5 py-1 rounded bg-slate-900 hover:bg-slate-800 text-slate-300">2. Feed & Like Real</button>
+        <button onclick="seekTo(17)" class="px-2.5 py-1 rounded bg-slate-900 hover:bg-slate-800 text-slate-300">3. Horarios</button>
+        <button onclick="seekTo(26)" class="px-2.5 py-1 rounded bg-slate-900 hover:bg-slate-800 text-slate-300">4. Recursos</button>
+        <button onclick="seekTo(35)" class="px-2.5 py-1 rounded bg-slate-900 hover:bg-slate-800 text-slate-300">5. Encuestas</button>
+        <button onclick="seekTo(43)" class="px-2.5 py-1 rounded bg-slate-900 hover:bg-slate-800 text-slate-300">6. Cierre</button>
     </nav>
 
 
-    <!-- SCRIPT DE COREOGRAFÍA, EFECTOS DE AUDIO SINTÉTICO Y GRABACIÓN -->
+    <!-- SCRIPT DE COREOGRAFÍA ACTIVA, AUDIO SINTÉTICO Y GRABADOR -->
     <script>
-        // Duración de cada escena en segundos (Total: 45s)
-        const DURATIONS = [7, 8, 8, 8, 7, 7];
-        const TOTAL_TIME = DURATIONS.reduce((a, b) => a + b, 0); // 45s
-
-        let sceneIdx = 1;
+        const TOTAL_DURATION = 50; // 50 segundos de video fluido
         let isRunning = true;
-        let elapsed = 0;
-        let lastT = null;
+        let currentTime = 0;
+        let lastTimestamp = null;
         let soundEnabled = true;
 
-        // Web Audio API para efectos sintéticos sin dependencias
+        // Frases inspiradoras sincronizadas con cada acto
+        const QUOTES = [
+            { t: 0, text: "Porque cuando nos unimos por un propósito común..." },
+            { t: 7, text: "Porque cada historia que compartimos inspira a seguir." },
+            { t: 17, text: "Porque tu tiempo es el mayor regalo para quien más lo necesita." },
+            { t: 26, text: "Porque el conocimiento compartido multiplica el impacto social." },
+            { t: 35, text: "Porque cada voz construye el camino del cambio." },
+            { t: 43, text: "Porque crecemos juntos. Por ellos. Por el Perú." }
+        ];
+
+        // Web Audio API para efectos de sonido sintéticos
         let audioCtx = null;
         function initAudio() {
-            if (!audioCtx) {
-                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-            }
+            if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
         }
 
-        function playPopSound() {
+        function playSound(type) {
             if (!soundEnabled) return;
             initAudio();
             if (audioCtx.state === 'suspended') audioCtx.resume();
-            const osc = audioCtx.createOscillator();
-            const gain = audioCtx.createGain();
-            osc.type = 'sine';
-            osc.frequency.setValueAtTime(450, audioCtx.currentTime);
-            osc.frequency.exponentialRampToValueAtTime(800, audioCtx.currentTime + 0.15);
-            gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
-            gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.15);
-            osc.connect(gain);
-            gain.connect(audioCtx.destination);
-            osc.start();
-            osc.stop(audioCtx.currentTime + 0.16);
-        }
 
-        function playChimeSound() {
-            if (!soundEnabled) return;
-            initAudio();
-            if (audioCtx.state === 'suspended') audioCtx.resume();
-            [523.25, 659.25, 783.99].forEach((freq, i) => {
+            if (type === 'type') {
                 const osc = audioCtx.createOscillator();
                 const gain = audioCtx.createGain();
                 osc.type = 'triangle';
-                osc.frequency.setValueAtTime(freq, audioCtx.currentTime + i * 0.08);
-                gain.gain.setValueAtTime(0.2, audioCtx.currentTime + i * 0.08);
-                gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + i * 0.08 + 0.35);
+                osc.frequency.setValueAtTime(800 + Math.random() * 200, audioCtx.currentTime);
+                gain.gain.setValueAtTime(0.04, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.05);
                 osc.connect(gain);
                 gain.connect(audioCtx.destination);
-                osc.start(audioCtx.currentTime + i * 0.08);
-                osc.stop(audioCtx.currentTime + i * 0.08 + 0.36);
-            });
-        }
-
-        const sceneEls = [
-            document.getElementById('scene-1'),
-            document.getElementById('scene-2'),
-            document.getElementById('scene-3'),
-            document.getElementById('scene-4'),
-            document.getElementById('scene-5'),
-            document.getElementById('scene-6')
-        ];
-
-        const pointer = document.getElementById('virtual-pointer');
-        const progressBar = document.getElementById('videoProgressBar');
-
-        function switchScene(num) {
-            sceneEls.forEach((el, i) => {
-                if (i + 1 === num) {
-                    el.classList.remove('exit');
-                    el.classList.add('active');
-                } else if (i + 1 < num) {
-                    el.classList.remove('active');
-                    el.classList.add('exit');
-                } else {
-                    el.classList.remove('active', 'exit');
-                }
-            });
-            handleSceneAction(num);
-        }
-
-        function handleSceneAction(num) {
-            if (num === 2) {
-                runInteractivePostDemo();
-            } else if (num === 5) {
-                runMetricsCounters();
-            } else if (num === 6) {
-                launchCelebrationConfetti();
-            } else {
-                pointer.style.opacity = '0';
-            }
-        }
-
-        // Simulación fiel de interacción en el Feed
-        function runInteractivePostDemo() {
-            const btnLike = document.getElementById('btnRealLike');
-            const heartIcon = document.getElementById('real-heart-icon');
-            const counter = document.getElementById('live-likes-counter');
-            const toast = document.getElementById('live-like-toast');
-            const burstBox = document.getElementById('hearts-burst-container');
-
-            // Reset
-            heartIcon.className = 'ph ph-heart text-base text-gray-500';
-            counter.textContent = '38 Me gusta';
-            counter.className = 'font-bold text-gray-800';
-            toast.style.opacity = '0';
-            toast.style.transform = 'translateY(10px)';
-            burstBox.innerHTML = '';
-
-            setTimeout(() => {
-                const btnRect = btnLike.getBoundingClientRect();
-                const canvasRect = document.getElementById('video-canvas').getBoundingClientRect();
-
-                // Mover cursor suavemente hacia el botón Me Gusta
-                pointer.style.opacity = '1';
-                pointer.style.left = `${btnRect.left - canvasRect.left + btnRect.width / 2}px`;
-                pointer.style.top = `${btnRect.top - canvasRect.top + btnRect.height / 2}px`;
-
-                setTimeout(() => {
-                    pointer.classList.add('clicked');
-                    playPopSound();
-
-                    setTimeout(() => {
-                        pointer.classList.remove('clicked');
-
-                        // Efecto de Corazón Rojo Vivo & Animación Pop
-                        heartIcon.className = 'ph-fill ph-heart text-base text-red-500 pop-heart';
-                        counter.textContent = '39 Me gusta';
-                        counter.className = 'font-black text-red-600 transition-colors';
-                        toast.style.opacity = '1';
-                        toast.style.transform = 'translateY(0px)';
-
-                        // Lluvia de corazones flotantes hacia arriba
-                        for (let k = 0; k < 6; k++) {
-                            const h = document.createElement('i');
-                            h.className = 'ph-fill ph-heart floating-heart';
-                            h.style.left = `${btnRect.left - canvasRect.left + btnRect.width / 2 + (Math.random() * 40 - 20)}px`;
-                            h.style.top = `${btnRect.top - canvasRect.top}px`;
-                            h.style.setProperty('--tx', `${(Math.random() * 60 - 30)}px`);
-                            burstBox.appendChild(h);
-                            setTimeout(() => h.remove(), 1400);
-                        }
-
-                        setTimeout(() => {
-                            pointer.style.opacity = '0';
-                        }, 1200);
-                    }, 200);
-                }, 900);
-            }, 600);
-        }
-
-        // Animación de Métricas Numéricas
-        function runMetricsCounters() {
-            playChimeSound();
-            countUp("stat-voluntarios", 0, 520, 2000, "+");
-            countUp("stat-horas", 0, 1250, 2000, "+");
-            countUp("stat-programas", 0, 8, 1600, "");
-            countUp("stat-disponibilidad", 0, 100, 2000, "%");
-        }
-
-        function countUp(id, start, end, duration, suffix = "") {
-            const el = document.getElementById(id);
-            let startT = null;
-            function step(t) {
-                if (!startT) startT = t;
-                const p = Math.min((t - startT) / duration, 1);
-                const val = Math.floor(p * (end - start) + start);
-                el.textContent = `${val.toLocaleString()}${suffix}`;
-                if (p < 1) requestAnimationFrame(step);
-            }
-            requestAnimationFrame(step);
-        }
-
-        // Lluvia de Confeti
-        function launchCelebrationConfetti() {
-            playChimeSound();
-            if (typeof confetti === 'function') {
-                confetti({
-                    particleCount: 150,
-                    spread: 90,
-                    origin: { y: 0.65 },
-                    colors: ['#006eae', '#00aea5', '#9f1074', '#57ddcd', '#ffd166', '#ffffff']
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.06);
+            } else if (type === 'pop') {
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(400, audioCtx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(850, audioCtx.currentTime + 0.14);
+                gain.gain.setValueAtTime(0.25, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.14);
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.15);
+            } else if (type === 'chime') {
+                [523, 659, 784, 1046].forEach((f, i) => {
+                    const osc = audioCtx.createOscillator();
+                    const gain = audioCtx.createGain();
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(f, audioCtx.currentTime + i * 0.07);
+                    gain.gain.setValueAtTime(0.18, audioCtx.currentTime + i * 0.07);
+                    gain.gain.exponentialRampToValueAtTime(0.005, audioCtx.currentTime + i * 0.07 + 0.3);
+                    osc.connect(gain);
+                    gain.connect(audioCtx.destination);
+                    osc.start(audioCtx.currentTime + i * 0.07);
+                    osc.stop(audioCtx.currentTime + i * 0.07 + 0.31);
                 });
             }
         }
 
-        // Bucle Principal de Tiempos
-        function loop(timestamp) {
-            if (!lastT) lastT = timestamp;
-            const dt = (timestamp - lastT) / 1000;
-            lastT = timestamp;
+        // Elementos DOM
+        const camera = document.getElementById('camera-viewport');
+        const mouse = document.getElementById('virtual-mouse');
+        const quoteText = document.getElementById('quote-text');
+        const progressBar = document.getElementById('progressBar');
+
+        const screenLogin = document.getElementById('screen-login');
+        const screenDashboard = document.getElementById('screen-dashboard');
+        const screenFinale = document.getElementById('screen-finale');
+
+        const viewInicio = document.getElementById('view-inicio');
+        const viewHorarios = document.getElementById('view-horarios');
+        const viewRecursos = document.getElementById('view-recursos');
+        const viewEncuestas = document.getElementById('view-encuestas');
+
+        const navInicio = document.getElementById('nav-item-inicio');
+        const navHorarios = document.getElementById('nav-item-horarios');
+        const navRecursos = document.getElementById('nav-item-recursos');
+        const navEncuestas = document.getElementById('nav-item-encuestas');
+
+        // Banderas de activación única por acto
+        let actLoginDone = false;
+        let actLikeDone = false;
+        let actHorariosDone = false;
+        let actRecursosDone = false;
+        let actEncuestasDone = false;
+        let actFinaleDone = false;
+
+        function setNavActive(activeItem) {
+            [navInicio, navHorarios, navRecursos, navEncuestas].forEach(item => {
+                if (item === activeItem) {
+                    item.className = 'flex items-center space-x-3 px-3 py-2 rounded-xl text-xs font-bold bg-[#006eae] text-white shadow-sm transition-all';
+                } else {
+                    item.className = 'flex items-center space-x-3 px-3 py-2 rounded-xl text-xs font-semibold text-gray-600 hover:bg-gray-100 transition-all cursor-pointer';
+                }
+            });
+        }
+
+        function setViewActive(activeView) {
+            [viewInicio, viewHorarios, viewRecursos, viewEncuestas].forEach(v => {
+                if (v === activeView) {
+                    v.classList.add('active-view');
+                } else {
+                    v.classList.remove('active-view');
+                }
+            });
+        }
+
+        // MOVIMIENTO DEL CURSOR SIMULADO
+        function moveMouseTo(targetEl, callback, click = true) {
+            if (!targetEl) return;
+            const r = targetEl.getBoundingClientRect();
+            const canvasR = document.getElementById('video-canvas').getBoundingClientRect();
+            
+            mouse.style.opacity = '1';
+            mouse.style.left = `${r.left - canvasR.left + r.width / 2}px`;
+            mouse.style.top = `${r.top - canvasR.top + r.height / 2}px`;
+
+            setTimeout(() => {
+                if (click) {
+                    mouse.classList.add('click-down');
+                    setTimeout(() => {
+                        mouse.classList.remove('click-down');
+                        if (callback) callback();
+                    }, 180);
+                } else {
+                    if (callback) callback();
+                }
+            }, 600);
+        }
+
+        // Bucle Principal
+        function animateFrame(timestamp) {
+            if (!lastTimestamp) lastTimestamp = timestamp;
+            const dt = (timestamp - lastTimestamp) / 1000;
+            lastTimestamp = timestamp;
 
             if (isRunning) {
-                elapsed += dt;
+                currentTime += dt;
 
-                if (elapsed >= TOTAL_TIME) {
-                    elapsed = 0;
-                    jumpTo(1);
-                } else {
-                    let acc = 0;
-                    for (let i = 0; i < DURATIONS.length; i++) {
-                        acc += DURATIONS[i];
-                        if (elapsed < acc) {
-                            if (sceneIdx !== i + 1) {
-                                sceneIdx = i + 1;
-                                switchScene(sceneIdx);
-                            }
-                            break;
+                // Actualizar Frase según el tiempo
+                for (let i = QUOTES.length - 1; i >= 0; i--) {
+                    if (currentTime >= QUOTES[i].t) {
+                        if (quoteText.textContent !== QUOTES[i].text) {
+                            quoteText.textContent = QUOTES[i].text;
                         }
+                        break;
                     }
                 }
 
-                const pct = (elapsed / TOTAL_TIME) * 100;
+                // ==============================================================
+                // ACTO 1: LOGIN SIMULADO (0s - 7s)
+                // ==============================================================
+                if (currentTime < 7) {
+                    if (!actLoginDone) {
+                        actLoginDone = true;
+                        screenLogin.style.opacity = '1';
+                        screenDashboard.style.opacity = '0';
+                        screenDashboard.style.pointerEvents = 'none';
+                        screenFinale.style.opacity = '0';
+                        camera.style.transform = 'scale(1) translate3d(0, 0, 0)';
+
+                        const emailInput = document.getElementById('demo-login-email');
+                        const passInput = document.getElementById('demo-login-pass');
+                        const btn = document.getElementById('demo-login-btn');
+
+                        // Simular escritura de credenciales
+                        setTimeout(() => {
+                            let str = "voluntario@hoop.org";
+                            let idx = 0;
+                            const tInt = setInterval(() => {
+                                if (idx < str.length) {
+                                    emailInput.value += str[idx];
+                                    playSound('type');
+                                    idx++;
+                                } else {
+                                    clearInterval(tInt);
+                                    passInput.value = "••••••••";
+                                    // Mover cursor al botón y hacer clic
+                                    moveMouseTo(btn, () => {
+                                        playSound('chime');
+                                    });
+                                }
+                            }, 80);
+                        }, 800);
+                    }
+                }
+
+                // ==============================================================
+                // ACTO 2: FEED & LIKE REAL EN VIVO (7s - 17s)
+                // ==============================================================
+                else if (currentTime >= 7 && currentTime < 17) {
+                    if (!actLikeDone) {
+                        actLikeDone = true;
+                        screenLogin.style.opacity = '0';
+                        screenDashboard.style.opacity = '1';
+                        screenDashboard.style.pointerEvents = 'auto';
+                        setNavActive(navInicio);
+                        setViewActive(viewInicio);
+
+                        // Zoom suave sobre el post
+                        camera.style.transform = 'scale(1.05) translate3d(-10px, -20px, 0)';
+
+                        const likeBtn = document.getElementById('feed-like-action');
+                        const heartIco = document.getElementById('feed-heart-ico');
+                        const likeLabel = document.getElementById('feed-like-label');
+                        const likesVal = document.getElementById('demo-likes-val');
+                        const badge = document.getElementById('feed-like-badge');
+                        const burst = document.getElementById('feed-burst-box');
+
+                        setTimeout(() => {
+                            moveMouseTo(likeBtn, () => {
+                                playSound('pop');
+                                heartIco.className = 'ph-fill ph-heart text-base text-red-500 pop-heart';
+                                likeLabel.textContent = 'Te gusta';
+                                likeLabel.className = 'text-red-600 font-bold';
+                                likesVal.textContent = '43 Me gusta';
+                                likesVal.className = 'font-black text-red-600';
+                                badge.style.opacity = '1';
+                                badge.style.transform = 'translateY(0)';
+
+                                // Ráfaga de corazones
+                                const r = likeBtn.getBoundingClientRect();
+                                const canvasR = document.getElementById('video-canvas').getBoundingClientRect();
+                                for (let k = 0; k < 6; k++) {
+                                    const h = document.createElement('i');
+                                    h.className = 'ph-fill ph-heart floating-heart';
+                                    h.style.left = `${r.left - canvasR.left + r.width / 2 + (Math.random() * 30 - 15)}px`;
+                                    h.style.top = `${r.top - canvasR.top}px`;
+                                    h.style.setProperty('--tx', `${(Math.random() * 60 - 30)}px`);
+                                    burst.appendChild(h);
+                                    setTimeout(() => h.remove(), 1300);
+                                }
+                            });
+                        }, 1200);
+                    }
+                }
+
+                // ==============================================================
+                // ACTO 3: NAVEGAR A HORARIOS & ALERTA REUNIÓN (17s - 26s)
+                // ==============================================================
+                else if (currentTime >= 17 && currentTime < 26) {
+                    if (!actHorariosDone) {
+                        actHorariosDone = true;
+                        camera.style.transform = 'scale(1) translate3d(0, 0, 0)';
+
+                        // Cursor se desplaza al menú de Horarios
+                        moveMouseTo(navHorarios, () => {
+                            playSound('chime');
+                            setNavActive(navHorarios);
+                            setViewActive(viewHorarios);
+                        });
+                    }
+                }
+
+                // ==============================================================
+                // ACTO 4: RECURSOS Y DESCARGA DE GUÍAS (26s - 35s)
+                // ==============================================================
+                else if (currentTime >= 26 && currentTime < 35) {
+                    if (!actRecursosDone) {
+                        actRecursosDone = true;
+                        camera.style.transform = 'scale(1.03) translate3d(-15px, -10px, 0)';
+
+                        moveMouseTo(navRecursos, () => {
+                            playSound('chime');
+                            setNavActive(navRecursos);
+                            setViewActive(viewRecursos);
+
+                            // Simular descarga del primer documento
+                            const dlBtn = document.getElementById('btn-demo-download-1');
+                            setTimeout(() => {
+                                moveMouseTo(dlBtn, () => {
+                                    playSound('pop');
+                                    dlBtn.innerHTML = '<i class="ph-bold ph-check text-emerald-600"></i><span class="text-emerald-700">¡Descargado!</span>';
+                                });
+                            }, 1000);
+                        });
+                    }
+                }
+
+                // ==============================================================
+                // ACTO 5: ENCUESTAS Y PARTICIPACIÓN COMUNITARIA (35s - 43s)
+                // ==============================================================
+                else if (currentTime >= 35 && currentTime < 43) {
+                    if (!actEncuestasDone) {
+                        actEncuestasDone = true;
+                        camera.style.transform = 'scale(1) translate3d(0, 0, 0)';
+
+                        moveMouseTo(navEncuestas, () => {
+                            playSound('chime');
+                            setNavActive(navEncuestas);
+                            setViewActive(viewEncuestas);
+
+                            // Votar en la encuesta
+                            const opt1 = document.getElementById('poll-opt-1');
+                            const bar1 = document.getElementById('poll-bar-1');
+                            setTimeout(() => {
+                                moveMouseTo(opt1, () => {
+                                    playSound('pop');
+                                    opt1.className = 'p-3 rounded-xl border border-emerald-400 bg-emerald-50/70 flex items-center justify-between text-xs font-bold text-emerald-900 shadow-sm';
+                                    bar1.classList.remove('hidden');
+                                });
+                            }, 1000);
+                        });
+                    }
+                }
+
+                // ==============================================================
+                // ACTO 6: CIERRE CRECEMOS JUNTOS & CONFETI (43s - 50s)
+                // ==============================================================
+                else if (currentTime >= 43) {
+                    if (!actFinaleDone) {
+                        actFinaleDone = true;
+                        mouse.style.opacity = '0';
+                        camera.style.transform = 'scale(1) translate3d(0, 0, 0)';
+                        screenFinale.style.opacity = '1';
+                        screenFinale.style.pointerEvents = 'auto';
+
+                        playSound('chime');
+                        if (typeof confetti === 'function') {
+                            confetti({
+                                particleCount: 160,
+                                spread: 100,
+                                origin: { y: 0.65 },
+                                colors: ['#006eae', '#00aea5', '#9f1074', '#57ddcd', '#ffd166', '#ffffff']
+                            });
+                        }
+                    }
+
+                    if (currentTime >= TOTAL_DURATION) {
+                        // Loop reiniciar
+                        seekTo(0);
+                    }
+                }
+
+                // Barra de progreso
+                const pct = Math.min((currentTime / TOTAL_DURATION) * 100, 100);
                 progressBar.style.width = `${pct}%`;
             }
 
-            requestAnimationFrame(loop);
+            requestAnimationFrame(animateFrame);
         }
 
-        function jumpTo(sceneNum) {
-            let t = 0;
-            for (let i = 0; i < sceneNum - 1; i++) {
-                t += DURATIONS[i];
+        // Salto manual
+        function seekTo(targetSeconds) {
+            currentTime = targetSeconds;
+            actLoginDone = false;
+            actLikeDone = false;
+            actHorariosDone = false;
+            actRecursosDone = false;
+            actEncuestasDone = false;
+            actFinaleDone = false;
+
+            const emailInput = document.getElementById('demo-login-email');
+            const passInput = document.getElementById('demo-login-pass');
+            if (targetSeconds > 0) {
+                emailInput.value = "voluntario@hoop.org";
+                passInput.value = "••••••••";
+            } else {
+                emailInput.value = "";
+                passInput.value = "";
             }
-            elapsed = t;
-            sceneIdx = sceneNum;
-            switchScene(sceneIdx);
-            progressBar.style.width = `${(elapsed / TOTAL_TIME) * 100}%`;
         }
 
-        // Controles de Play / Pause
+        // Botones de Play / Pause / Restart
         const btnPlayPause = document.getElementById('btnPlayPause');
         const playIcon = document.getElementById('playIcon');
         const playText = document.getElementById('playText');
@@ -886,13 +1029,13 @@
         });
 
         btnRestart.addEventListener('click', () => {
-            jumpTo(1);
+            seekTo(0);
             isRunning = true;
             playIcon.className = 'ph-fill ph-pause';
             playText.textContent = 'Pausar';
         });
 
-        // Control de Sonido
+        // Toggle Audio
         const btnToggleAudio = document.getElementById('btnToggleAudio');
         const audioIcon = document.getElementById('audioIcon');
         const audioText = document.getElementById('audioText');
@@ -903,16 +1046,16 @@
         });
 
         // =========================================================================
-        // GRABADOR DIRECTO A MP4 / WEBM (MediaRecorder API)
+        // GRABADOR DIRECTO A MP4 / WEBM (MediaRecorder API a 60 FPS)
         // =========================================================================
         const btnRecord = document.getElementById('btnRecord');
         const recordText = document.getElementById('recordText');
         let recorder = null;
         let chunks = [];
-        let recordingState = false;
+        let isRecording = false;
 
         btnRecord.addEventListener('click', async () => {
-            if (recordingState) {
+            if (isRecording) {
                 if (recorder && recorder.state !== 'inactive') recorder.stop();
             } else {
                 try {
@@ -936,7 +1079,7 @@
 
                     recorder = new MediaRecorder(stream, {
                         mimeType: chosenMime,
-                        videoBitsPerSecond: 10000000 // 10 Mbps para máxima nitidez
+                        videoBitsPerSecond: 10000000 // 10 Mbps
                     });
 
                     chunks = [];
@@ -947,35 +1090,35 @@
                         const link = URL.createObjectURL(blob);
                         const a = document.createElement('a');
                         a.href = link;
-                        a.download = `HoopPeru_Promocional_${Date.now()}.${ext}`;
+                        a.download = `HoopPeru_CrecemosJuntos_${Date.now()}.${ext}`;
                         a.click();
                         setTimeout(() => URL.revokeObjectURL(link), 200);
 
                         stream.getTracks().forEach(t => t.stop());
                         recordText.textContent = 'Grabar en Video (MP4)';
                         btnRecord.classList.remove('bg-emerald-600');
-                        recordingState = false;
+                        isRecording = false;
                     };
 
-                    jumpTo(1);
+                    seekTo(0);
                     isRunning = true;
                     recorder.start();
-                    recordingState = true;
+                    isRecording = true;
                     recordText.textContent = 'Detener y Guardar';
                     btnRecord.classList.add('bg-emerald-600');
 
                     stream.getVideoTracks()[0].onended = () => {
-                        if (recordingState && recorder.state !== 'inactive') recorder.stop();
+                        if (isRecording && recorder.state !== 'inactive') recorder.stop();
                     };
 
                 } catch (e) {
-                    console.error("Error al grabar:", e);
+                    console.error("Error al iniciar grabación:", e);
                     alert("Selecciona la pestaña del navegador para capturar el video en alta resolución.");
                 }
             }
         });
 
-        requestAnimationFrame(loop);
+        requestAnimationFrame(animateFrame);
     </script>
 </body>
 </html>
