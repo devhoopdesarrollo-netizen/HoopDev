@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hoop Perú Web - Video Promocional</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
+    <!-- Canvas Confetti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+    <!-- Hoop Theme -->
+    <link rel="stylesheet" href="./resources/hoop-theme.css">
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@400;600;700;800;900&display=swap');
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #0d1722;
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            user-select: none;
+        }
+
+        h1, h2, h3, .font-heading {
+            font-family: 'Outfit', sans-serif;
+        }
+
+        /* Lienzo 16:9 cinematográfico */
+        #video-canvas {
+            aspect-ratio: 16 / 9;
+            width: 100vw;
+            max-width: 1920px;
+            max-height: 1080px;
+            height: auto;
+            position: relative;
+            overflow: hidden;
+            background: radial-gradient(circle at 50% 30%, #1d3854 0%, #0c1824 70%, #060c12 100%);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+        }
+
+        /* Malla de gradientes animados */
+        .mesh-gradient {
+            position: absolute;
+            width: 150%;
+            height: 150%;
+            top: -25%;
+            left: -25%;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(0, 110, 174, 0.35) 0%, transparent 40%),
+                radial-gradient(circle at 80% 80%, rgba(159, 16, 116, 0.3) 0%, transparent 45%),
+                radial-gradient(circle at 70% 20%, rgba(0, 174, 165, 0.25) 0%, transparent 35%),
+                radial-gradient(circle at 30% 80%, rgba(41, 154, 211, 0.25) 0%, transparent 40%);
+            filter: blur(60px);
+            animation: rotateMesh 20s ease-in-out infinite alternate;
+            z-index: 1;
+        }
+
+        @keyframes rotateMesh {
+            0% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(10deg) scale(1.1); }
+            100% { transform: rotate(-5deg) scale(0.95); }
+        }
+
+        /* Glassmorphism cinematográfico */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.07);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        }
+
+        .glass-card-bright {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: #1e293b;
+            box-shadow: 0 35px 70px -15px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Control de Escenas */
+        .scene {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4rem;
+            opacity: 0;
+            pointer-events: none;
+            transform: scale(0.95) translateY(20px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            z-index: 10;
+        }
+
+        .scene.active {
+            opacity: 1;
+            pointer-events: auto;
+            transform: scale(1) translateY(0);
+        }
+
+        .scene.exit-left {
+            opacity: 0;
+            transform: scale(0.9) translateX(-100px);
+        }
+
+        /* Animaciones personalizadas */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-12px) rotate(1deg); }
+        }
+
+        .animate-float {
+            animation: float 5s ease-in-out infinite;
+        }
+
+        @keyframes heartPulse {
+            0% { transform: scale(1); }
+            30% { transform: scale(1.4); }
+            50% { transform: scale(1.15); }
+            70% { transform: scale(1.3); }
+            100% { transform: scale(1); }
+        }
+
+        .animate-pulse-heart {
+            animation: heartPulse 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes glow {
+            0%, 100% { opacity: 0.5; filter: drop-shadow(0 0 15px rgba(0, 174, 165, 0.6)); }
+            50% { opacity: 1; filter: drop-shadow(0 0 35px rgba(0, 110, 174, 0.9)); }
+        }
+
+        .glow-effect {
+            animation: glow 3s infinite alternate;
+        }
+
+        /* Cursor virtual para demostración */
+        #virtual-cursor {
+            position: absolute;
+            width: 28px;
+            height: 28px;
+            pointer-events: none;
+            z-index: 100;
+            transition: all 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+            opacity: 0;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.4));
+        }
+
+        #virtual-cursor.click {
+            transform: scale(0.85);
+        }
+
+        /* Barra de progreso inferior */
+        .timeline-bar {
+            height: 5px;
+            background: linear-gradient(90deg, #00aea5, #006eae, #9f1074);
+            width: 0%;
+            transition: width 0.1s linear;
+        }
+
+        /* Partículas flotantes de fondo */
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0.3;
+            animation: particleFloat 12s infinite linear;
+        }
+
+        @keyframes particleFloat {
+            0% { transform: translateY(100vh) scale(0.5); opacity: 0; }
+            30% { opacity: 0.4; }
+            70% { opacity: 0.4; }
+            100% { transform: translateY(-20vh) scale(1.2); opacity: 0; }
+        }
+    </style>
+</head>
+<body class="flex flex-col items-center justify-center min-h-screen p-0 md:p-4 bg-slate-950">
+
+    <!-- BARRA SUPERIOR DE HERRAMIENTAS Y GRABACIÓN -->
+    <header class="w-full max-w-[1920px] flex items-center justify-between px-6 py-3 bg-slate-900/80 backdrop-blur border-b border-slate-800 z-50 text-xs sm:text-sm">
+        <div class="flex items-center space-x-3">
+            <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-[#006eae]/20 text-[#299ad3] font-bold">
+                <i class="ph-bold ph-video-camera text-lg"></i>
+            </span>
+            <div>
+                <h1 class="font-bold text-white text-sm">Hoop Perú Web Promo</h1>
+                <p class="text-xs text-slate-400">Creado para conversión a video MP4 / Redes Sociales</p>
+            </div>
+        </div>
+
+        <!-- Controles de Reproducción y Grabación -->
+        <div class="flex items-center space-x-3">
+            <button id="btnPlayPause" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-medium flex items-center space-x-2 transition-all">
+                <i id="playIcon" class="ph-fill ph-pause"></i>
+                <span id="playText">Pausar</span>
+            </button>
+            <button id="btnRestart" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-medium flex items-center space-x-2 transition-all">
+                <i class="ph-bold ph-arrow-counter-clockwise"></i>
+                <span>Reiniciar</span>
+            </button>
+            
+            <!-- Botón de Grabación a MP4/WebM nativo -->
+            <button id="btnRecord" class="px-5 py-2 rounded-xl bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-500 hover:to-rose-500 text-white font-bold flex items-center space-x-2 shadow-lg shadow-red-600/30 transition-all active:scale-95">
+                <span class="w-3 h-3 rounded-full bg-white animate-pulse"></span>
+                <span id="recordText">Grabar en Video (MP4)</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- LIENZO 16:9 PRINCIPAL (ÁREA DE GRABACIÓN) -->
+    <main id="video-canvas" class="relative flex items-center justify-center shadow-2xl">
+        <!-- Malla de gradientes y partículas -->
+        <div class="mesh-gradient"></div>
+        <div id="particles-container"></div>
+
+        <!-- Cursor animado para simulaciones -->
+        <svg id="virtual-cursor" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M5.65376 12.3673H5.46026L5.31717 12.4976L0.500002 16.8829L0.500002 1.19841L11.7841 12.3673H5.65376Z" fill="#ffffff" stroke="#1d3854" stroke-width="1.5"/>
+            <path d="M12.28 12.87L8.03 21.37L4.63 19.67L8.88 11.17L12.28 12.87Z" fill="#ffffff" stroke="#1d3854" stroke-width="1.5"/>
+        </svg>
+
+        <!-- ========================================================================= -->
+        <!-- ESCENA 1: INTRODUCCIÓN & BRANDING (0s - 6s) -->
+        <!-- ========================================================================= -->
+        <section id="scene-1" class="scene active flex-col text-center">
+            <div class="relative mb-6">
+                <div class="absolute -inset-4 rounded-full bg-gradient-to-r from-[#00aea5] via-[#006eae] to-[#9f1074] opacity-75 blur-xl glow-effect"></div>
+                <div class="relative w-32 h-32 md:w-40 md:h-40 rounded-3xl bg-white p-4 shadow-2xl flex items-center justify-center mx-auto transform transition-transform hover:scale-105">
+                    <img src="./resources/navbar-logo.webp" alt="Hoop Perú Logo" class="max-w-full max-h-full object-contain">
+                </div>
+            </div>
+
+            <div class="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur border border-white/20 text-[#57ddcd] text-sm font-semibold tracking-wider uppercase mb-4">
+                <i class="ph-fill ph-sparkle"></i>
+                <span>Plataforma Oficial de Gestión & Voluntariado</span>
+            </div>
+
+            <h1 class="text-4xl md:text-7xl font-extrabold tracking-tight text-white mb-4 leading-tight">
+                Impulsando el Impacto Social<br>
+                <span class="bg-gradient-to-r from-[#57ddcd] via-[#80c8e4] to-[#d392c6] bg-clip-text text-transparent">
+                    En Tiempo Real con Hoop Perú
+                </span>
+            </h1>
+
+            <p class="text-lg md:text-2xl text-slate-300 max-w-3xl mx-auto mb-8 font-light">
+                Conectando voluntarios, programas comunitarios y educación a través de una experiencia moderna, segura y colaborativa.
+            </p>
+
+            <div class="inline-flex items-center space-x-3 px-6 py-2.5 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10">
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
+                <span class="text-sm font-medium text-slate-200">Desarrollado con dedicación por <strong class="text-white font-bold">Duval Pérez</strong></span>
+            </div>
+        </section>
+
+
+        <!-- ========================================================================= -->
+        <!-- ESCENA 2: FEED DE LA COMUNIDAD & LIKES INTERACTIVOS (6s - 13s) -->
+        <!-- ========================================================================= -->
+        <section id="scene-2" class="scene flex-col lg:flex-row items-center justify-between gap-12">
+            <!-- Columna de texto explicativo -->
+            <div class="w-full lg:w-1/2 text-left space-y-6">
+                <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-[#006eae]/20 border border-[#299ad3]/40 text-[#299ad3] text-xs font-bold uppercase tracking-wider">
+                    <i class="ph-bold ph-newspaper"></i>
+                    <span>Comunidad Viva</span>
+                </div>
+                <h2 class="text-3xl md:text-5xl font-extrabold leading-tight text-white">
+                    Publicaciones, Novedades e Interacción Continua
+                </h2>
+                <p class="text-base md:text-lg text-slate-300 leading-relaxed font-light">
+                    Los voluntarios y coordinadores comparten historias, logros de las jornadas educativas y actividades diarias. Con un sistema dinámico de reacciones en vivo y almacenamiento optimizado en la nube.
+                </p>
+                <div class="flex items-center space-x-4">
+                    <div class="flex items-center space-x-2 text-sm text-[#57ddcd]">
+                        <i class="ph-fill ph-check-circle text-lg"></i>
+                        <span>Reacciones instantáneas</span>
+                    </div>
+                    <div class="flex items-center space-x-2 text-sm text-[#80c8e4]">
+                        <i class="ph-fill ph-check-circle text-lg"></i>
+                        <span>Galería con Lightbox 4K</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mockup interactivo del Post -->
+            <div class="w-full lg:w-1/2 flex justify-center">
+                <div id="mockup-post" class="glass-card-bright w-full max-w-md rounded-3xl p-6 shadow-2xl relative transition-transform">
+                    <!-- Cabecera del Post -->
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-12 h-12 rounded-full bg-gradient-to-tr from-[#006eae] to-[#00aea5] p-0.5">
+                                <div class="w-full h-full rounded-full bg-white flex items-center justify-center font-bold text-[#006eae]">
+                                    DP
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-900 text-sm">Duval Pérez</h4>
+                                <p class="text-xs text-slate-500">Coordinador de Voluntariado • Hace 10 min</p>
+                            </div>
+                        </div>
+                        <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs font-bold">
+                            Oficial
+                        </span>
+                    </div>
+
+                    <!-- Contenido del Post -->
+                    <p class="text-sm text-slate-700 mb-4 leading-relaxed">
+                        ¡Gran jornada de refuerzo escolar en Arequipa! Los niños completaron los talleres de lectura y matemáticas. ¡Gracias a todo el equipo de voluntarios! 🎉📚
+                    </p>
+
+                    <!-- Imagen del Post -->
+                    <div class="relative w-full h-48 rounded-2xl overflow-hidden mb-4 bg-gradient-to-br from-slate-200 to-slate-300 flex items-center justify-center shadow-inner">
+                        <img src="./resources/navbar-logo.webp" alt="Foto de Actividad" class="w-32 h-32 object-contain opacity-80 filter drop-shadow">
+                        <div class="absolute bottom-2 right-2 px-2 py-1 rounded-md bg-black/60 text-[10px] text-white backdrop-blur">
+                            Refuerzo Escolar 2026
+                        </div>
+                    </div>
+
+                    <!-- Botón de Like interactivo (Simulado) -->
+                    <div class="flex items-center justify-between pt-3 border-t border-slate-100">
+                        <button id="demo-like-btn" class="flex items-center space-x-2 px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-600 transition-all font-semibold text-xs">
+                            <i id="demo-heart-icon" class="ph ph-heart text-base text-gray-500"></i>
+                            <span id="demo-like-count">24 Me gusta</span>
+                        </button>
+                        <span class="text-xs text-slate-400">8 comentarios</span>
+                    </div>
+
+                    <!-- Badge flotante de confirmación -->
+                    <div id="demo-like-toast" class="absolute -top-3 -right-3 px-3 py-1.5 rounded-xl bg-gradient-to-r from-red-500 to-rose-600 text-white text-xs font-bold shadow-lg opacity-0 transform translate-y-2 transition-all">
+                        +1 ¡Te gusta esto! ❤️
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ========================================================================= -->
+        <!-- ESCENA 3: HORARIOS, ANUNCIOS Y LIMPIEZA INTELIGENTE (13s - 20s) -->
+        <!-- ========================================================================= -->
+        <section id="scene-3" class="scene flex-col lg:flex-row-reverse items-center justify-between gap-12">
+            <!-- Columna de texto -->
+            <div class="w-full lg:w-1/2 text-left space-y-6">
+                <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-[#00aea5]/20 border border-[#57ddcd]/40 text-[#57ddcd] text-xs font-bold uppercase tracking-wider">
+                    <i class="ph-bold ph-calendar-check"></i>
+                    <span>Organización Precisa</span>
+                </div>
+                <h2 class="text-3xl md:text-5xl font-extrabold leading-tight text-white">
+                    Horarios Semanales y Anuncios Dinámicos
+                </h2>
+                <p class="text-base md:text-lg text-slate-300 leading-relaxed font-light">
+                    Asignación de turnos por programa educativo. Las reuniones caducadas con más de 3 días se limpian automáticamente de la base de datos para mantener el sistema ágil y libre de datos obsoletos.
+                </p>
+                <div class="grid grid-cols-2 gap-4 pt-2">
+                    <div class="glass-card p-4 rounded-2xl">
+                        <div class="text-2xl font-bold text-[#57ddcd] mb-1">Lunes a Sábado</div>
+                        <div class="text-xs text-slate-400">Turnos Mañana y Tarde</div>
+                    </div>
+                    <div class="glass-card p-4 rounded-2xl">
+                        <div class="text-2xl font-bold text-[#d392c6] mb-1">Auto-Clean</div>
+                        <div class="text-xs text-slate-400">Purga automática de 3 días</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tarjetas de Horarios y Anuncios -->
+            <div class="w-full lg:w-1/2 flex flex-col space-y-4 max-w-md">
+                <!-- Notificación destacada -->
+                <div id="demo-anuncio-card" class="glass-card p-5 rounded-3xl border-l-4 border-l-[#57ddcd] shadow-xl transform transition-transform">
+                    <div class="flex items-center justify-between mb-2">
+                        <div class="flex items-center space-x-2 text-[#57ddcd]">
+                            <i class="ph-fill ph-bell-ringing text-lg"></i>
+                            <span class="text-xs font-bold tracking-wider uppercase">Reunión de Coordinación</span>
+                        </div>
+                        <span class="px-2 py-0.5 rounded-full bg-[#57ddcd]/20 text-[#57ddcd] text-[10px] font-bold">Activa</span>
+                    </div>
+                    <h4 class="text-white font-bold text-base mb-1">Planificación Semanal de Talleres</h4>
+                    <p class="text-xs text-slate-300 mb-3">Revisión de asistencia y preparación de material didáctico para los voluntarios.</p>
+                    <div class="flex items-center justify-between text-xs text-slate-400 pt-2 border-t border-white/10">
+                        <span><i class="ph ph-clock mr-1"></i> 18:00 - 19:30</span>
+                        <span><i class="ph ph-calendar mr-1"></i> Este Viernes</span>
+                    </div>
+                </div>
+
+                <!-- Lista de días asignados -->
+                <div class="glass-card p-5 rounded-3xl shadow-xl space-y-3">
+                    <div class="text-xs font-bold text-slate-400 uppercase tracking-wider">Tus Días Asignados</div>
+                    <div class="flex items-center justify-between p-3 rounded-xl bg-white/5 border border-white/10">
+                        <div class="flex items-center space-x-3">
+                            <span class="w-8 h-8 rounded-lg bg-[#006eae]/30 text-[#80c8e4] flex items-center justify-center font-bold text-xs">MIE</span>
+                            <div>
+                                <div class="text-xs font-bold text-white">Miércoles (15:00 - 18:00)</div>
+                                <div class="text-[10px] text-slate-400">Programa: Refuerzo Educativo</div>
+                            </div>
+                        </div>
+                        <i class="ph-bold ph-check text-emerald-400"></i>
+                    </div>
+                    <div class="flex items-center justify-between p-3 rounded-xl bg-white/5 border border-white/10">
+                        <div class="flex items-center space-x-3">
+                            <span class="w-8 h-8 rounded-lg bg-[#9f1074]/30 text-[#d392c6] flex items-center justify-center font-bold text-xs">SAB</span>
+                            <div>
+                                <div class="text-xs font-bold text-white">Sábado (09:00 - 13:00)</div>
+                                <div class="text-[10px] text-slate-400">Programa: Deporte y Recreación</div>
+                            </div>
+                        </div>
+                        <i class="ph-bold ph-check text-emerald-400"></i>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ========================================================================= -->
+        <!-- ESCENA 4: RECURSOS, MANUALES Y CONTROL ADMINISTRATIVO (20s - 27s) -->
+        <!-- ========================================================================= -->
+        <section id="scene-4" class="scene flex-col lg:flex-row items-center justify-between gap-12">
+            <!-- Columna de texto -->
+            <div class="w-full lg:w-1/2 text-left space-y-6">
+                <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-[#9f1074]/20 border border-[#d392c6]/40 text-[#d392c6] text-xs font-bold uppercase tracking-wider">
+                    <i class="ph-bold ph-folder-open"></i>
+                    <span>Recursos & Administración</span>
+                </div>
+                <h2 class="text-3xl md:text-5xl font-extrabold leading-tight text-white">
+                    Documentación Centralizada y Gestión de Roles
+                </h2>
+                <p class="text-base md:text-lg text-slate-300 leading-relaxed font-light">
+                    Guías didácticas, manuales y planificaciones disponibles en todo momento. En el panel administrativo se gestionan programas, cargos y accesos con validaciones de seguridad completas.
+                </p>
+                <div class="flex flex-wrap gap-3">
+                    <span class="px-3 py-1.5 rounded-xl bg-white/10 border border-white/15 text-xs text-slate-200">
+                        📂 Filtros por Programa
+                    </span>
+                    <span class="px-3 py-1.5 rounded-xl bg-white/10 border border-white/15 text-xs text-slate-200">
+                        🔒 Cambio de Clave Seguro
+                    </span>
+                    <span class="px-3 py-1.5 rounded-xl bg-white/10 border border-white/15 text-xs text-slate-200">
+                        ⚡ Supabase Storage
+                    </span>
+                </div>
+            </div>
+
+            <!-- Vitrina de Documentos y Roles -->
+            <div class="w-full lg:w-1/2 flex flex-col space-y-4 max-w-md">
+                <div class="glass-card-bright p-5 rounded-3xl shadow-2xl space-y-3">
+                    <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+                        <span class="text-xs font-bold text-slate-800 uppercase">Biblioteca de Recursos</span>
+                        <span class="text-xs text-emerald-600 font-bold">PDF / Docs</span>
+                    </div>
+
+                    <!-- Archivo 1 -->
+                    <div class="flex items-center justify-between p-3 rounded-2xl bg-slate-50 hover:bg-slate-100 transition-all border border-slate-200/60">
+                        <div class="flex items-center space-x-3">
+                            <span class="w-10 h-10 rounded-xl bg-red-100 text-red-600 flex items-center justify-center text-xl font-bold">
+                                <i class="ph-fill ph-file-pdf"></i>
+                            </span>
+                            <div>
+                                <div class="text-xs font-bold text-slate-800">Guía del Voluntario 2026.pdf</div>
+                                <div class="text-[10px] text-slate-500">Programa: Inducción General • 2.4 MB</div>
+                            </div>
+                        </div>
+                        <i class="ph-bold ph-download-simple text-slate-600"></i>
+                    </div>
+
+                    <!-- Archivo 2 -->
+                    <div class="flex items-center justify-between p-3 rounded-2xl bg-slate-50 hover:bg-slate-100 transition-all border border-slate-200/60">
+                        <div class="flex items-center space-x-3">
+                            <span class="w-10 h-10 rounded-xl bg-blue-100 text-[#006eae] flex items-center justify-center text-xl font-bold">
+                                <i class="ph-fill ph-file-text"></i>
+                            </span>
+                            <div>
+                                <div class="text-xs font-bold text-slate-800">Plan Curricular Inglés.docx</div>
+                                <div class="text-[10px] text-slate-500">Programa: Idiomas • 1.1 MB</div>
+                            </div>
+                        </div>
+                        <i class="ph-bold ph-download-simple text-slate-600"></i>
+                    </div>
+                </div>
+
+                <!-- Tarjeta de Control Administrativo -->
+                <div class="glass-card p-4 rounded-2xl flex items-center justify-between">
+                    <div class="flex items-center space-x-3">
+                        <span class="w-9 h-9 rounded-xl bg-[#00aea5]/20 text-[#57ddcd] flex items-center justify-center">
+                            <i class="ph-bold ph-shield-check text-lg"></i>
+                        </span>
+                        <div>
+                            <div class="text-xs font-bold text-white">Panel de Administración</div>
+                            <div class="text-[10px] text-slate-400">Control de Cargos, Programas y Usuarios</div>
+                        </div>
+                    </div>
+                    <span class="px-2.5 py-1 rounded-lg bg-white/10 text-xs text-slate-200 font-semibold">
+                        Activo
+                    </span>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ========================================================================= -->
+        <!-- ESCENA 5: MÉTRICAS DE IMPACTO & ALTA DISPONIBILIDAD (27s - 34s) -->
+        <!-- ========================================================================= -->
+        <section id="scene-5" class="scene flex-col text-center">
+            <div class="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-emerald-500/20 border border-emerald-400/40 text-emerald-400 text-xs font-bold uppercase tracking-wider mb-6">
+                <i class="ph-fill ph-chart-line-up"></i>
+                <span>Rendimiento & Alcance</span>
+            </div>
+
+            <h2 class="text-3xl md:text-6xl font-extrabold text-white mb-12">
+                Impacto Cuantificable y Conexión Permanente
+            </h2>
+
+            <!-- Grid de 4 Contadores -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 w-full max-w-5xl">
+                <div class="glass-card p-6 rounded-3xl border border-white/10 transform hover:scale-105 transition-all">
+                    <div id="stat-1" class="text-4xl md:text-6xl font-black text-[#57ddcd] mb-2 font-heading">0</div>
+                    <div class="text-sm font-semibold text-white">Voluntarios Activos</div>
+                    <div class="text-xs text-slate-400 mt-1">Conectados en Arequipa</div>
+                </div>
+
+                <div class="glass-card p-6 rounded-3xl border border-white/10 transform hover:scale-105 transition-all">
+                    <div id="stat-2" class="text-4xl md:text-6xl font-black text-[#80c8e4] mb-2 font-heading">0</div>
+                    <div class="text-sm font-semibold text-white">Horas de Clase</div>
+                    <div class="text-xs text-slate-400 mt-1">Educación comunitaria</div>
+                </div>
+
+                <div class="glass-card p-6 rounded-3xl border border-white/10 transform hover:scale-105 transition-all">
+                    <div id="stat-3" class="text-4xl md:text-6xl font-black text-[#d392c6] mb-2 font-heading">0</div>
+                    <div class="text-sm font-semibold text-white">Programas Sociales</div>
+                    <div class="text-xs text-slate-400 mt-1">Niños y adolescentes</div>
+                </div>
+
+                <div class="glass-card p-6 rounded-3xl border border-white/10 transform hover:scale-105 transition-all">
+                    <div id="stat-4" class="text-4xl md:text-6xl font-black text-emerald-400 mb-2 font-heading">0%</div>
+                    <div class="text-sm font-semibold text-white">Disponibilidad Nube</div>
+                    <div class="text-xs text-slate-400 mt-1">Keep-Alive Supabase</div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ========================================================================= -->
+        <!-- ESCENA 6: CIERRE CINEMATOGRÁFICO & CALL TO ACTION (34s - 40s) -->
+        <!-- ========================================================================= -->
+        <section id="scene-6" class="scene flex-col text-center">
+            <div class="w-24 h-24 rounded-3xl bg-white p-3 shadow-2xl flex items-center justify-center mx-auto mb-6 transform hover:rotate-6 transition-all">
+                <img src="./resources/navbar-logo.webp" alt="Hoop Perú Logo" class="max-w-full max-h-full object-contain">
+            </div>
+
+            <h2 class="text-4xl md:text-7xl font-black text-white mb-4 leading-tight">
+                Construyendo un futuro mejor,<br>
+                <span class="bg-gradient-to-r from-[#57ddcd] via-[#80c8e4] to-[#d392c6] bg-clip-text text-transparent">
+                    una oportunidad a la vez.
+                </span>
+            </h2>
+
+            <p class="text-lg md:text-2xl text-slate-300 max-w-2xl mx-auto mb-8 font-light">
+                Únete a la plataforma y sé parte del cambio con Hoop Perú.
+            </p>
+
+            <div class="inline-flex flex-col sm:flex-row items-center gap-4 mb-8">
+                <a href="https://hoop-peru-web-rho.vercel.app" target="_blank" class="px-8 py-4 rounded-2xl bg-gradient-to-r from-[#006eae] to-[#00aea5] hover:from-[#005a8e] hover:to-[#00968f] text-white font-bold text-lg shadow-xl shadow-cyan-500/25 transition-all transform hover:scale-105 flex items-center space-x-3">
+                    <i class="ph-bold ph-globe"></i>
+                    <span>hoop-peru-web-rho.vercel.app</span>
+                </a>
+            </div>
+
+            <div class="text-xs text-slate-400 font-medium">
+                Desarrollado por <strong class="text-white">Duval Pérez</strong> • Hoop Perú © 2026 • Todos los derechos reservados.
+            </div>
+        </section>
+
+        <!-- Barra de progreso del video -->
+        <div class="absolute bottom-0 left-0 right-0 h-1.5 bg-slate-800/60 z-30">
+            <div id="timelineProgress" class="timeline-bar"></div>
+        </div>
+    </main>
+
+    <!-- SELECTOR RÁPIDO DE ESCENAS -->
+    <nav class="w-full max-w-[1920px] flex items-center justify-center space-x-2 py-3 bg-slate-900/60 backdrop-blur z-50 text-xs">
+        <span class="text-slate-400 font-semibold mr-2">Saltar a escena:</span>
+        <button onclick="goToScene(1)" class="scene-pill px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 font-medium">1. Intro</button>
+        <button onclick="goToScene(2)" class="scene-pill px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 font-medium">2. Feed & Likes</button>
+        <button onclick="goToScene(3)" class="scene-pill px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 font-medium">3. Horarios</button>
+        <button onclick="goToScene(4)" class="scene-pill px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 font-medium">4. Recursos</button>
+        <button onclick="goToScene(5)" class="scene-pill px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 font-medium">5. Métricas</button>
+        <button onclick="goToScene(6)" class="scene-pill px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 font-medium">6. Cierre</button>
+    </nav>
+
+
+    <!-- ========================================================================= -->
+    <!-- SCRIPT DE CONTROL, COREOGRAFÍA DE ANIMACIÓN Y GRABADOR DE VIDEO -->
+    <!-- ========================================================================= -->
+    <script>
+        // Duración total de cada escena en segundos
+        const SCENE_DURATIONS = [6, 7, 7, 7, 7, 6]; 
+        const TOTAL_DURATION = SCENE_DURATIONS.reduce((a, b) => a + b, 0); // 40s
+        
+        let currentScene = 1;
+        let isPlaying = true;
+        let currentTime = 0; // en segundos
+        let animationFrameId = null;
+        let lastTimestamp = null;
+
+        // Grabador nativo MediaRecorder
+        let mediaRecorder = null;
+        let recordedChunks = [];
+        let isRecording = false;
+
+        const scenes = [
+            document.getElementById('scene-1'),
+            document.getElementById('scene-2'),
+            document.getElementById('scene-3'),
+            document.getElementById('scene-4'),
+            document.getElementById('scene-5'),
+            document.getElementById('scene-6')
+        ];
+
+        const timelineProgress = document.getElementById('timelineProgress');
+        const virtualCursor = document.getElementById('virtual-cursor');
+
+        // Generar partículas ambientales
+        function createParticles() {
+            const container = document.getElementById('particles-container');
+            for (let i = 0; i < 35; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                const size = Math.random() * 8 + 3;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.animationDelay = `${Math.random() * 10}s`;
+                particle.style.animationDuration = `${Math.random() * 8 + 8}s`;
+                const colors = ['#006eae', '#00aea5', '#9f1074', '#57ddcd', '#80c8e4'];
+                particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                container.appendChild(particle);
+            }
+        }
+
+        // Cambio de Escena
+        function showScene(sceneIndex) {
+            scenes.forEach((s, idx) => {
+                if (idx + 1 === sceneIndex) {
+                    s.classList.remove('exit-left');
+                    s.classList.add('active');
+                } else if (idx + 1 < sceneIndex) {
+                    s.classList.remove('active');
+                    s.classList.add('exit-left');
+                } else {
+                    s.classList.remove('active', 'exit-left');
+                }
+            });
+
+            // Disparar acciones específicas de cada escena
+            onEnterScene(sceneIndex);
+        }
+
+        function onEnterScene(index) {
+            if (index === 2) {
+                // Simulación de interacción con el botón de Like
+                simulateLikeInteraction();
+            } else if (index === 5) {
+                // Animar contadores numéricos
+                animateCounters();
+            } else if (index === 6) {
+                // Fuegos artificiales de confeti
+                triggerConfetti();
+            } else {
+                virtualCursor.style.opacity = '0';
+            }
+        }
+
+        // Simulación del cursor y clic en el Me Gusta
+        function simulateLikeInteraction() {
+            const btn = document.getElementById('demo-like-btn');
+            const heart = document.getElementById('demo-heart-icon');
+            const count = document.getElementById('demo-like-count');
+            const toast = document.getElementById('demo-like-toast');
+            
+            // Restablecer estados
+            heart.className = 'ph ph-heart text-base text-gray-500';
+            count.textContent = '24 Me gusta';
+            toast.style.opacity = '0';
+            toast.style.transform = 'translateY(10px)';
+
+            setTimeout(() => {
+                const rect = btn.getBoundingClientRect();
+                const canvasRect = document.getElementById('video-canvas').getBoundingClientRect();
+                
+                virtualCursor.style.opacity = '1';
+                virtualCursor.style.left = `${rect.left - canvasRect.left + rect.width / 2}px`;
+                virtualCursor.style.top = `${rect.top - canvasRect.top + rect.height / 2}px`;
+
+                setTimeout(() => {
+                    virtualCursor.classList.add('click');
+                    setTimeout(() => {
+                        virtualCursor.classList.remove('click');
+                        
+                        // Efecto de Like
+                        heart.className = 'ph-fill ph-heart text-base text-red-500 animate-pulse-heart';
+                        count.textContent = '25 Me gusta';
+                        count.className = 'text-red-600 font-bold';
+                        
+                        toast.style.opacity = '1';
+                        toast.style.transform = 'translateY(0px)';
+
+                        setTimeout(() => {
+                            virtualCursor.style.opacity = '0';
+                        }, 1200);
+                    }, 250);
+                }, 1000);
+            }, 800);
+        }
+
+        // Animar contadores de estadísticas
+        function animateCounters() {
+            animateValue("stat-1", 0, 520, 2000, "+");
+            animateValue("stat-2", 0, 1250, 2000, "+");
+            animateValue("stat-3", 0, 8, 1500, "");
+            animateValue("stat-4", 0, 100, 2000, "%");
+        }
+
+        function animateValue(id, start, end, duration, suffix = "") {
+            const obj = document.getElementById(id);
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                const current = Math.floor(progress * (end - start) + start);
+                obj.innerHTML = `${current.toLocaleString()}${suffix}`;
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+
+        // Confeti de celebración
+        function triggerConfetti() {
+            if (typeof confetti === 'function') {
+                confetti({
+                    particleCount: 120,
+                    spread: 80,
+                    origin: { y: 0.6 },
+                    colors: ['#006eae', '#00aea5', '#9f1074', '#57ddcd', '#ffd166']
+                });
+            }
+        }
+
+        // Bucle Principal de Tiempo y Animación
+        function tick(timestamp) {
+            if (!lastTimestamp) lastTimestamp = timestamp;
+            const deltaTime = (timestamp - lastTimestamp) / 1000;
+            lastTimestamp = timestamp;
+
+            if (isPlaying) {
+                currentTime += deltaTime;
+
+                if (currentTime >= TOTAL_DURATION) {
+                    // Loop continuo
+                    currentTime = 0;
+                    goToScene(1);
+                } else {
+                    // Determinar en qué escena estamos
+                    let accumulated = 0;
+                    for (let i = 0; i < SCENE_DURATIONS.length; i++) {
+                        accumulated += SCENE_DURATIONS[i];
+                        if (currentTime < accumulated) {
+                            if (currentScene !== i + 1) {
+                                currentScene = i + 1;
+                                showScene(currentScene);
+                            }
+                            break;
+                        }
+                    }
+                }
+
+                // Actualizar barra de progreso
+                const progress = (currentTime / TOTAL_DURATION) * 100;
+                timelineProgress.style.width = `${progress}%`;
+            }
+
+            animationFrameId = requestAnimationFrame(tick);
+        }
+
+        // Navegación manual a escena
+        function goToScene(sceneNumber) {
+            let targetTime = 0;
+            for (let i = 0; i < sceneNumber - 1; i++) {
+                targetTime += SCENE_DURATIONS[i];
+            }
+            currentTime = targetTime;
+            currentScene = sceneNumber;
+            showScene(currentScene);
+            const progress = (currentTime / TOTAL_DURATION) * 100;
+            timelineProgress.style.width = `${progress}%`;
+        }
+
+        // Botones de control Play / Pausa / Reinicio
+        const btnPlayPause = document.getElementById('btnPlayPause');
+        const playIcon = document.getElementById('playIcon');
+        const playText = document.getElementById('playText');
+        const btnRestart = document.getElementById('btnRestart');
+
+        btnPlayPause.addEventListener('click', () => {
+            isPlaying = !isPlaying;
+            if (isPlaying) {
+                playIcon.className = 'ph-fill ph-pause';
+                playText.textContent = 'Pausar';
+            } else {
+                playIcon.className = 'ph-fill ph-play';
+                playText.textContent = 'Reproducir';
+            }
+        });
+
+        btnRestart.addEventListener('click', () => {
+            goToScene(1);
+            isPlaying = true;
+            playIcon.className = 'ph-fill ph-pause';
+            playText.textContent = 'Pausar';
+        });
+
+        // =========================================================================
+        // GRABADOR DE VIDEO AUTOMÁTICO (Exportar a MP4 / WebM)
+        // =========================================================================
+        const btnRecord = document.getElementById('btnRecord');
+        const recordText = document.getElementById('recordText');
+
+        btnRecord.addEventListener('click', async () => {
+            if (isRecording) {
+                stopRecording();
+            } else {
+                startRecording();
+            }
+        });
+
+        async function startRecording() {
+            try {
+                // Solicitar captura de pantalla/pestaña al usuario en alta definición
+                const stream = await navigator.mediaDevices.getDisplayMedia({
+                    video: {
+                        displaySurface: "browser",
+                        frameRate: 60,
+                        width: { ideal: 1920 },
+                        height: { ideal: 1080 }
+                    },
+                    audio: false
+                });
+
+                // Seleccionar códec compatible (mp4 o webm)
+                const mimeTypes = [
+                    'video/mp4;codecs=avc1',
+                    'video/mp4',
+                    'video/webm;codecs=vp9',
+                    'video/webm;codecs=vp8',
+                    'video/webm'
+                ];
+                let selectedMime = mimeTypes.find(mime => MediaRecorder.isTypeSupported(mime)) || 'video/webm';
+
+                mediaRecorder = new MediaRecorder(stream, {
+                    mimeType: selectedMime,
+                    videoBitsPerSecond: 8000000 // 8 Mbps para calidad nítida
+                });
+
+                recordedChunks = [];
+
+                mediaRecorder.ondataavailable = (event) => {
+                    if (event.data.size > 0) {
+                        recordedChunks.push(event.data);
+                    }
+                };
+
+                mediaRecorder.onstop = () => {
+                    const ext = selectedMime.includes('mp4') ? 'mp4' : 'webm';
+                    const blob = new Blob(recordedChunks, { type: selectedMime });
+                    const url = URL.createObjectURL(blob);
+                    
+                    // Descargar automáticamente el video generado
+                    const a = document.createElement('a');
+                    a.style.display = 'none';
+                    a.href = url;
+                    a.download = `HoopPeru_Promocional_${Date.now()}.${ext}`;
+                    document.body.appendChild(a);
+                    a.click();
+                    setTimeout(() => {
+                        document.body.removeChild(a);
+                        window.URL.revokeObjectURL(url);
+                    }, 100);
+
+                    // Detener todos los tracks de la pantalla
+                    stream.getTracks().forEach(track => track.stop());
+                    
+                    recordText.textContent = 'Grabar en Video (MP4)';
+                    btnRecord.classList.remove('bg-emerald-600', 'hover:bg-emerald-500');
+                    btnRecord.classList.add('bg-gradient-to-r', 'from-red-600', 'to-rose-600');
+                    isRecording = false;
+                };
+
+                // Comenzar desde la Escena 1 y reproducir completo
+                goToScene(1);
+                isPlaying = true;
+                mediaRecorder.start();
+                isRecording = true;
+
+                recordText.textContent = 'Detener y Guardar';
+                btnRecord.classList.remove('from-red-600', 'to-rose-600');
+                btnRecord.classList.add('bg-emerald-600', 'hover:bg-emerald-500');
+
+                // Si el usuario cancela la captura desde el navegador
+                stream.getVideoTracks()[0].onended = () => {
+                    if (isRecording) stopRecording();
+                };
+
+            } catch (err) {
+                console.error("Error al iniciar grabación:", err);
+                alert("Para grabar el video promocional, selecciona la pestaña actual cuando el navegador te lo solicite.");
+            }
+        }
+
+        function stopRecording() {
+            if (mediaRecorder && mediaRecorder.state !== 'inactive') {
+                mediaRecorder.stop();
+            }
+        }
+
+        // Iniciar partículas y loop
+        createParticles();
+        requestAnimationFrame(tick);
+    </script>
+</body>
+</html>
